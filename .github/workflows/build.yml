@@ -1,0 +1,60 @@
+name: Build Project w/ PROS
+
+on:
+  push:
+    branches: '*'
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    name: PROS CI Test
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Get short SHA
+        uses: benjlevesque/short-sha@v2.2
+        id: short-sha
+        with:
+          length: 6
+      
+      - name: Set short SHA
+        run: echo $SHA
+        env:
+          SHA: ${{ steps.short-sha.outputs.sha }}
+    
+      # - name: Install ARM Toolchain
+      #   uses: fiam/arm-none-eabi-gcc@v1.0.4
+      #   with:
+      #     release: "10-2020-q4"
+
+      # - name: Setup Python
+      #   uses: actions/setup-python@v2
+      #   with:
+      #     python-version: 3.9
+  
+      # - name: PIP Installer
+      #   uses: BSFishy/pip-action@v1
+      #   with:
+      #     packages: pros-cli
+  
+      # - name: Testing PROS Install 
+      #   run: pros --version
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # - name: Tempfix for outdated toolchain
+      #   run: sed -i 's/ --no-warn-rwx-segments//g' "common.mk"
+
+      # - name: Build PROS Project  
+      #   run: make -j
+
+      - name: Run LemLib/pros-build
+        id: test
+        uses: LemLib/pros-build@v4.0.0
