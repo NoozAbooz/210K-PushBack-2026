@@ -27,8 +27,10 @@ void driveForward() {
     chassis.moveToPoint(0, 5, 1000);
 }
 
-rd::Selector gui_selector({
+rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
     {"SAWP", sawp, "", 0},
+    {"Left Half-AWP", left_half, "", 0},
+    {"Right Half-AWP", right_half, "", 0},
 
     {"Skills", skills, "", 100},
 
