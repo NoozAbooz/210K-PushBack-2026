@@ -5,7 +5,7 @@ void sawp() {
 // Starting point: (-58.48 in, 15.34 in)
     chassis.moveToPoint(0.00, 0.00, 1000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 1
     chassis.moveToPoint(-0.00, 30.26, 1000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 2
-    chassis.turnToheading(270, 1000);
+    chassis.turnToHeading(270, 1000);
     chassis.moveToPoint(31.55, 30.26, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 3
     chassis.moveToPoint(36.05, 7.08, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 4
     chassis.moveToPoint(48.93, -6.44, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 5
