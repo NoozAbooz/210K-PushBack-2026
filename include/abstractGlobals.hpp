@@ -26,4 +26,6 @@ void arcadeDrive();
 
 /* Autons */
 void sawp();
+void left_half();
+void right_half();
 void skills();
