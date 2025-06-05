@@ -55,7 +55,7 @@ inline lemlib::ControllerSettings angularController(2.5, // proportional gain (k
                                               100, // small error range timeout, in milliseconds
                                               3, // large error range, in inches
                                               500, // large error range timeout, in milliseconds
-                                              10 // maximum acceleration (slew)
+                                              0 // maximum acceleration (slew)
 );
 // sensors for odometry
 // note that in this example we use internal motor encoders, so we don't pass vertical tracking wheels
