@@ -22,6 +22,8 @@ extern void competitionTelemtryRefresh();
 // DT
 void arcadeDrive();
 
+void refreshIntake();
+
 
 
 /* Autons */
