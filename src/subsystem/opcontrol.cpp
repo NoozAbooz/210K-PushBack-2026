@@ -10,18 +10,19 @@ void refreshIntake() {
 			intake.move_voltage(0);
 		}
 }
-bool level = false;
-void scorelevel() {
+
+bool liftStatus = false;
+void refreshLift() {
 	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
-	level = !level;
-		levelPiston.set_value(level);
+		liftStatus = !liftStatus;
+		liftPiston.set_value(liftStatus);
 	}
 }
 
-bool toptrap = false;
-void toptrapdoor() {
+bool trapdoorStatus = false;
+void refreshTrapdoor() {
 	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
-		toptrap = !toptrap;
-		top_trapdoor.set_value(toptrap);
+		trapdoorStatus = !trapdoorStatus;
+		trapdoorPiston.set_value(trapdoorStatus);
 	}
 }

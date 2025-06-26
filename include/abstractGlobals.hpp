@@ -23,10 +23,8 @@ extern void competitionTelemtryRefresh();
 void arcadeDrive();
 
 void refreshIntake();
-
-void scorelevel();
-
-void toptrapdoor();
+void refreshLift();
+void refreshTrapdoor();
 
 /* Autons */
 void sawp();

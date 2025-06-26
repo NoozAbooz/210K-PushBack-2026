@@ -24,8 +24,9 @@ void opcontrol() {
 
 		/* Subsystem Listeners */
 		refreshIntake();
-		scorelevel();
-		toptrapdoor();
+		refreshLift();
+		refreshTrapdoor();
+
 		// Report temperature telemetry 😭
 		double drivetrainTemps = ks::vector_average(leftDrive.get_temperature_all());
 		double theta = fmod(chassis.getPose().theta, 360); // wrap to [0, 360) for user view
