@@ -10,5 +10,18 @@ void refreshIntake() {
 			intake.move_voltage(0);
 		}
 }
+bool level = false;
+void scorelevel() {
+	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+	level = !level;
+		levelPiston.set_value(level);
+	}
+}
 
-
+bool toptrap = false;
+void toptrapdoor() {
+	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
+		toptrap = !toptrap;
+		top_trapdoor.set_value(toptrap);
+	}
+}

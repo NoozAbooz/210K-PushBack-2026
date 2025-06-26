@@ -11,10 +11,11 @@ inline pros::MotorGroup leftDrive({-18, -19, 20});
 inline pros::MotorGroup rightDrive({3, 2, -1});
 
 // Intake
-inline pros::MotorGroup intake({-10});
+inline pros::MotorGroup intake({10, 9});
 
 // Pneumatics
-inline pros::adi::Pneumatics clampPiston('A', false);
+inline pros::adi::Pneumatics levelPiston('A', false);
+inline pros::adi::Pneumatics top_trapdoor('B', false);
 
 /* Declare sensors */
 inline pros::Imu inertial1(2);

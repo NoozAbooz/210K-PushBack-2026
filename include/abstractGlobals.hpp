@@ -24,7 +24,9 @@ void arcadeDrive();
 
 void refreshIntake();
 
+void scorelevel();
 
+void toptrapdoor();
 
 /* Autons */
 void sawp();
