@@ -15,7 +15,8 @@ inline pros::MotorGroup intake({10, 9});
 
 // Pneumatics
 inline pros::adi::Pneumatics liftPiston('A', false);
-inline pros::adi::Pneumatics trapdoorPiston('B', false);
+inline pros::adi::Pneumatics loaderPiston('B', false);
+inline pros::adi::Pneumatics trapdoorPiston('C', false);
 
 /* Declare sensors */
 inline pros::Imu inertial1(2);

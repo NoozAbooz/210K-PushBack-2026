@@ -26,6 +26,7 @@ void opcontrol() {
 		refreshIntake();
 		refreshLift();
 		refreshTrapdoor();
+		refreshLoader();
 
 		// Report temperature telemetry 😭
 		double drivetrainTemps = ks::vector_average(leftDrive.get_temperature_all());

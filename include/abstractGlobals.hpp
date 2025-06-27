@@ -25,6 +25,7 @@ void arcadeDrive();
 void refreshIntake();
 void refreshLift();
 void refreshTrapdoor();
+void refreshLoader();
 
 /* Autons */
 void sawp();
