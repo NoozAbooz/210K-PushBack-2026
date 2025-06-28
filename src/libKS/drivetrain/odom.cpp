@@ -21,7 +21,7 @@ double gear_ratio = 36.0 / 48;
 // Return robot rotation in degrees, unwrapped
 double get_imu_rotation() {
 	double rotation1 = inertial1.get_rotation();
-	// double rotation2 = inertial2.get_rotation();
+	double rotation2 = inertial2.get_rotation();
 
 	// if (!isnanf(inertial2.get_rotation()) && !isinf(inertial2.get_rotation())) { // use imu 2 when available
 	// 	return (rotation1 + rotation2) / 2;
@@ -79,7 +79,7 @@ double deltaYLocal;
 
 void ks::initializeOdom() {
 	inertial1.reset();
-	// inertial2.reset();
+	inertial2.reset();
 
 	verticalEncoder.reset_position();
 	horizontalEncoder.reset_position();

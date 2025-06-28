@@ -20,10 +20,13 @@ void opcontrol() {
 
 	while (true) { // Main continuous loop
 		/* Drive */
-		ks::arcadeDrive(0, 0, 1);
+		ks::arcadeDrive(0, 0, 1.2);
 
 		/* Subsystem Listeners */
-
+		refreshIntake();
+		refreshLift();
+		refreshTrapdoor();
+		refreshLoader();
 
 		// Report temperature telemetry 😭
 		double drivetrainTemps = ks::vector_average(leftDrive.get_temperature_all());
