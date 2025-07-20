@@ -11,11 +11,11 @@ double    theta = 0; // global theta
 double gyro_scale1 = 360;
 double gyro_scale2 = 360;
 
-double vertical_wheel_diameter = 2.75;
-double vertical_wheel_offset = 0.876;
+double vertical_wheel_diameter = 2.0;
+double vertical_wheel_offset = -0.244094;
 
-double horizontal_wheel_diameter = 2.75;
-double horizontal_wheel_offset = -3.2455;
+double horizontal_wheel_diameter = 2.0;
+double horizontal_wheel_offset = 0.0;
 double gear_ratio = 36.0 / 48;
 
 // Return robot rotation in degrees, unwrapped
@@ -23,12 +23,12 @@ double get_imu_rotation() {
 	double rotation1 = inertial1.get_rotation();
 	double rotation2 = inertial2.get_rotation();
 
-	// if (!isnanf(inertial2.get_rotation()) && !isinf(inertial2.get_rotation())) { // use imu 2 when available
-	// 	return (rotation1 + rotation2) / 2;
-	// } else {
-	// 	return rotation1;
-	// }
-	return rotation1;
+	if (!isnanf(inertial2.get_rotation()) && !isinf(inertial2.get_rotation())) { // use imu 2 when available
+		return (rotation1 + rotation2) / 2;
+	} else {
+		return rotation1;
+	}
+	//return rotation1;
 }
 
 double get_vertical_distance_traveled() {
