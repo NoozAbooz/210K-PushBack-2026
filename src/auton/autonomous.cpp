@@ -41,6 +41,7 @@ rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
 
 void autonomous() {
     inertial1.tare();
+    inertial2.tare();
 
     chassis.setPose(0, 0, 0);
     field_status = "autonomous";

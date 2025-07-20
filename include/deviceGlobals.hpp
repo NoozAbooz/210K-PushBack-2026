@@ -12,6 +12,8 @@ inline pros::MotorGroup rightDrive({-18, 19, 20});
 
 // Intake
 inline pros::MotorGroup intake({10, 9});
+inline pros::Motor intakeTop(10);
+inline pros::Motor intakeBottom(9);
 
 // Pneumatics
 inline pros::adi::Pneumatics liftPiston('A', false);
@@ -26,9 +28,9 @@ inline pros::Rotation verticalEncoder(-13);
 inline pros::Rotation horizontalEncoder(1);
 //hello world it is 210K secret note iykyk :D
 // horizontal tracking wheel
-inline lemlib::TrackingWheel vertical_tracking_wheel(&verticalEncoder, lemlib::Omniwheel::NEW_275, 0.876);
+inline lemlib::TrackingWheel vertical_tracking_wheel(&verticalEncoder, lemlib::Omniwheel::NEW_2, -0.244094);
 // vertical tracking wheel
-inline lemlib::TrackingWheel horizontal_tracking_wheel(&horizontalEncoder, lemlib::Omniwheel::NEW_2, -3.2455);
+inline lemlib::TrackingWheel horizontal_tracking_wheel(&horizontalEncoder, lemlib::Omniwheel::NEW_2, 0);
 
 // drivetrain settings
 inline lemlib::Drivetrain drivetrain(&leftDrive, // left motor group
