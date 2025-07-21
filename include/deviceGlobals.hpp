@@ -18,14 +18,14 @@ inline pros::Motor intakeBottom(9);
 // Pneumatics
 inline pros::adi::Pneumatics liftPiston('A', false);
 inline pros::adi::Pneumatics loaderPiston('B', false);
-inline pros::adi::Pneumatics trapdoorPiston('C', false);
+inline pros::adi::Pneumatics trapdoorPiston('C', false); // now for ratchet
 
 /* Declare sensors */
-inline pros::Imu inertial1(2);
-inline pros::Imu inertial2(22); 
+inline pros::Imu inertial1(7);
+inline pros::Imu inertial2(11); 
 
-inline pros::Rotation verticalEncoder(-13);
-inline pros::Rotation horizontalEncoder(1);
+inline pros::Rotation verticalEncoder(-5);
+inline pros::Rotation horizontalEncoder(-6);
 //hello world it is 210K secret note iykyk :D
 // horizontal tracking wheel
 inline lemlib::TrackingWheel vertical_tracking_wheel(&verticalEncoder, lemlib::Omniwheel::NEW_2, -0.244094);

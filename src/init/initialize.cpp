@@ -1,6 +1,7 @@
 #include "main.h"
 
 std::string field_status;
+bool update_odom = false;
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -13,9 +14,9 @@ void initialize() {
     pros::delay(10);
 
     pros::Task([] {
-       chassis.calibrate();
-       //ks::initializeOdom();
-       //update_odom = true;
+    //    chassis.calibrate();
+       ks::initializeOdom();
+       update_odom = true;
     });
     
 

@@ -34,8 +34,8 @@ void opcontrol() {
     	if (theta < 0) {
        		theta += 360;
 		}
-		controller.print(0, 0, "DT%.0lf|INT%.0lf|H%.0lf  ", drivetrainTemps, intake.get_temperature(1), theta);
-		//controller.print(0, 0, "X:%.0lf Y:%.0lf T:%.0lf   ", chassis.getPose().x, chassis.getPose().y, theta);
+		//controller.print(0, 0, "DT%.0lf|INT%.0lf|T%.0lf  ", drivetrainTemps, intake.get_temperature(1), theta);
+		controller.print(0, 0, "X:%.0lf Y:%.0lf T:%.0lf   ", chassis.getPose().x, chassis.getPose().y, theta);
 
 		pros::delay(10); // Delay to save resources on brain
 	}
