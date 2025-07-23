@@ -22,10 +22,10 @@ inline pros::adi::Pneumatics trapdoorPiston('C', false); // now for ratchet
 
 /* Declare sensors */
 inline pros::Imu inertial1(7);
-inline pros::Imu inertial2(11); 
+inline pros::Imu inertial2(14); 
 
 inline pros::Rotation verticalEncoder(-5);
-inline pros::Rotation horizontalEncoder(-6);
+inline pros::Rotation horizontalEncoder(6);
 //hello world it is 210K secret note iykyk :D
 // horizontal tracking wheel
 inline lemlib::TrackingWheel vertical_tracking_wheel(&verticalEncoder, lemlib::Omniwheel::NEW_2, -0.244094);
@@ -41,9 +41,9 @@ inline lemlib::Drivetrain drivetrain(&leftDrive, // left motor group
                               2 // chase power is 2. If we had traction wheels, it would have been 8
 );
 // lateral motion controller
-inline lemlib::ControllerSettings lateralController(6, // proportional gain (kP)
-                                              0, // integral gain (kI)
-                                              8, // derivative gain (kD)
+inline lemlib::ControllerSettings lateralController(5.8, // proportional gain (kP)
+                                              0.30, // integral gain (kI)
+                                              8.6, // derivative gain (kD)
                                               3, // anti windup
                                               1, // small error range, in inches
                                               100, // small error range timeout, in milliseconds
@@ -52,9 +52,9 @@ inline lemlib::ControllerSettings lateralController(6, // proportional gain (kP)
                                               20 // maximum acceleration (slew)
 );
 // angular motion controller
-inline lemlib::ControllerSettings angularController(2.5, // proportional gain (kP)
-                                              0, // integral gain (kI)
-                                              17.4, // derivative gain (kD)
+inline lemlib::ControllerSettings angularController(2.6, // proportional gain (kP)
+                                              0.1, // integral gain (kI)
+                                              18.0, // derivative gain (kD)
                                               3, // anti windup
                                               1, // small error range, in inches
                                               100, // small error range timeout, in milliseconds

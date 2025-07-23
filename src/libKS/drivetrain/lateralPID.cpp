@@ -2,9 +2,9 @@
 
 // ks::LateralPID pid;
 
-double global_kp = 6;
-double global_ki = 0;
-double global_kd = 8;
+double global_kp = 40;
+double global_ki = 0.3;
+double global_kd = 0.8;
 double global_timeOut = 2000;
 
 void ks::LateralPID::set_lateral_constants(double kp, double ki, double kd, double timeOut) {
