@@ -17,6 +17,15 @@ void initialize() {
         // chassis.calibrate();
        ks::initializeOdom();
        update_odom = true;
+
+    //    intakeBottom.move_voltage(12000);
+    //    int timer = 0;
+    //    while (true) {
+    //        printf("%d, %d\n", timer, intakeBottom.get_voltage());
+    //        pros::delay(50);
+    //        timer += 50;
+    //        if (timer > 2000) break;
+    //    }
     });
     
     optical.set_led_pwm(100);

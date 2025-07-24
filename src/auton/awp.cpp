@@ -1,6 +1,48 @@
 #include "main.h"
 
-void sawp() 
+void sawp() {
+	// libKS MTPoint v0.1
+// Starting point: (-48.82 in, 13.41 in)
+chassis.moveToPoint(0.00, 0.00, 1000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 1
+chassis.moveToPoint(-0.64, 32.83, 1000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 2
+chassis.turnToHeading(90, 700); // Turn to 90 degrees
+liftPiston.set_value(true); // Lift piston up
+trapdoorPiston.set_value(true); // Trapdoor piston up
+
+// drive into goal #1
+chassis.moveToPoint(18.59, 33.98, 1000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 3
+pros::delay(500);
+intake.move_voltage(12000); // Spin intake
+pros::delay(900);
+chassis.moveToPoint(0.0, 33.48, 1000, {.forwards = false, .maxSpeed = 127, .minSpeed = 0}); // Point 4
+chassis.turnToHeading(135, 700); // Turn to 135 degrees
+chassis.moveToPoint(23.82, 9.70, 1000, {.forwards = true, .maxSpeed = 35, .minSpeed = 0}); // Point 5
+chassis.moveToPoint(39.92, -6.7, 1000, {.forwards = true, .maxSpeed = 90, .minSpeed = 0}); // Point 6
+pros::delay(1000);
+liftPiston.set_value(false); // Lift piston down
+pros::delay(2000);
+chassis.moveToPoint(25, 0, 1000, {.forwards = false}); // Point 7
+pros::delay(500);
+intake.move_voltage(8000);
+chassis.moveToPoint(25.04, -40.70, 2000, {.forwards = true, .maxSpeed = 60, .minSpeed = 0}); // Point 7
+chassis.turnToHeading(45, 1000); // Turn to 45 degrees
+chassis.moveToPoint(35.34, -31.06, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 8
+intake.move_voltage(-5500); // Stop intake
+// chassis.moveToPoint(2.58, -61.16, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 9
+// chassis.moveToPoint(-16.10, -61.16, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 10
+}
+
+void left_half() { // Left Side Half Solo AWP
+
+}
+
+void right_half() { // Right Side Half Solo AWP
+
+}
+
+/* LEGACY */
+
+void old_sawp() {
 // libKS MTPoint v0.1
 // Starting point: (54.83 in, 12.77 in)
 // chassis.moveToPoint(0.00, 0.00, 500, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 1
@@ -39,13 +81,5 @@ void sawp()
 // // chassis.moveToPoint(-4.51, -58.59, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 10
 // chassis.moveToPoint(7.73, -59.23, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 11
 // chassis.moveToPoint(-27.04, -59.23, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 12
-
-}
-
-void left_half() { // Left Side Half Solo AWP
-
-}
-
-void right_half() { // Right Side Half Solo AWP
 
 }
