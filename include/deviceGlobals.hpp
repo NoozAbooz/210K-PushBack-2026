@@ -42,10 +42,10 @@ inline lemlib::Drivetrain drivetrain(&leftDrive, // left motor group
                               2 // chase power is 2. If we had traction wheels, it would have been 8
 );
 // lateral motion controller
-inline lemlib::ControllerSettings lateralController(5.8, // proportional gain (kP)
-                                              0.30, // integral gain (kI)
-                                              8.6, // derivative gain (kD)
-                                              3, // anti windup
+inline lemlib::ControllerSettings lateralController(7.5, // proportional gain (kP)
+                                              0, // integral gain (kI)
+                                              35, // derivative gain (kD)
+                                              0, // anti windup
                                               1, // small error range, in inches
                                               100, // small error range timeout, in milliseconds
                                               3, // large error range, in inches
@@ -53,10 +53,10 @@ inline lemlib::ControllerSettings lateralController(5.8, // proportional gain (k
                                               20 // maximum acceleration (slew)
 );
 // angular motion controller
-inline lemlib::ControllerSettings angularController(2.6, // proportional gain (kP)
-                                              0.1, // integral gain (kI)
-                                              18.0, // derivative gain (kD)
-                                              3, // anti windup
+inline lemlib::ControllerSettings angularController(5, // proportional gain (kP)
+                                              0, // integral gain (kI)
+                                              45, // derivative gain (kD)
+                                              0, // anti windup
                                               1, // small error range, in inches
                                               100, // small error range timeout, in milliseconds
                                               3, // large error range, in inches
