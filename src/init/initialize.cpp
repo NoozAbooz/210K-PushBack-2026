@@ -14,9 +14,9 @@ void initialize() {
     pros::delay(10);
 
     pros::Task([] {
-        chassis.calibrate();
-       //ks::initializeOdom();
-       //update_odom = true;
+        // chassis.calibrate();
+       ks::initializeOdom();
+       update_odom = true;
     });
     
     optical.set_led_pwm(100);

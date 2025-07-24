@@ -69,7 +69,7 @@ inline lemlib::OdomSensors sensors(&vertical_tracking_wheel, // vertical trackin
                             nullptr, // vertical tracking wheel 2, set to nullptr as we don't have one
                             &horizontal_tracking_wheel, // horizontal tracking wheel 1
                             nullptr, // horizontal tracking wheel 2, set to nullptr as we don't have a second one
-                            &inertial2 // inertial sensor
+                            &inertial1 // inertial sensor
 );
 // create the chassis
 inline lemlib::Chassis chassis(drivetrain, lateralController, angularController, sensors);
