@@ -22,7 +22,8 @@ inline pros::adi::Pneumatics trapdoorPiston('C', false); // now for ratchet
 
 /* Declare sensors */
 inline pros::Imu inertial1(7);
-inline pros::Imu inertial2(14); 
+inline pros::Imu inertial2(14);
+inline pros::Optical optical(12);
 
 inline pros::Rotation verticalEncoder(-5);
 inline pros::Rotation horizontalEncoder(6);
@@ -68,7 +69,7 @@ inline lemlib::OdomSensors sensors(&vertical_tracking_wheel, // vertical trackin
                             nullptr, // vertical tracking wheel 2, set to nullptr as we don't have one
                             &horizontal_tracking_wheel, // horizontal tracking wheel 1
                             nullptr, // horizontal tracking wheel 2, set to nullptr as we don't have a second one
-                            &inertial1 // inertial sensor
+                            &inertial2 // inertial sensor
 );
 // create the chassis
 inline lemlib::Chassis chassis(drivetrain, lateralController, angularController, sensors);

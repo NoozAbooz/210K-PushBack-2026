@@ -22,6 +22,10 @@ void testPID() {
 void testBM() {
     chassis.moveToPose(24, 24, 90, 1500);
 }
+void testColourSort() {
+    alliance = "red"; // set alliance to red for testing
+    scoreOwnColour(5000);
+}
 
 /* Legacy Auton Routines */
 void driveForward() {
@@ -38,6 +42,7 @@ rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
     {"Move forward", driveForward, "", 0},
     { "Test PID", testPID, "", 220},
     { "Test BM", testBM, "", 220},
+        {"Test ColourSort", testColourSort, "", 220},
 });
 
 void autonomous() {

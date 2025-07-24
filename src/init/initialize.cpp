@@ -19,6 +19,8 @@ void initialize() {
        //update_odom = true;
     });
     
+    optical.set_led_pwm(100);
+    optical.set_integration_time(10);
 
     console.println("Robot initialized");
 }

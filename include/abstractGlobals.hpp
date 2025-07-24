@@ -27,6 +27,9 @@ void refreshLift();
 void refreshTrapdoor();
 void refreshLoader();
 
+/* Macros */
+void scoreOwnColour(int timeout);
+
 /* Autons */
 void sawp();
 void left_half();
