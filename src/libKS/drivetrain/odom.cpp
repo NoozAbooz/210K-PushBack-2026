@@ -111,14 +111,12 @@ void ks::initializeOdom() {
 }
 
 void ks::setOdomPosition(double x_new, double y_new, double theta_new) {
-	odom_task.suspend();
+	update_odom = false; // stop odom task loop
 	x = 0;
 	y = 0;
 
 	verticalEncoder.reset_position();
-	verticalEncoder.reset();
 	horizontalEncoder.reset_position();
-	horizontalEncoder.reset();
 
 	prev_vertical_pos = 0;
 	prev_horizontal_pos = 0;
@@ -131,7 +129,7 @@ void ks::setOdomPosition(double x_new, double y_new, double theta_new) {
 		inertial1.set_rotation(theta_new);
 		inertial2.set_rotation(theta_new);
 	}
-	odom_task.resume();
+	update_odom = true; // resume odom task loop
 }
 /* // pos reset - do not run async
 float absX = -((backwardDist.get_distance() / 25.4 + 3.9) - 72);
@@ -142,36 +140,36 @@ void ks::odomUpdate() {
 	console.printf("%.0lf, %.0lf", verticalEncoder.get_position(), get_horizontal_distance_traveled());
 
 	while (true) {
-		// printf("%f, %f\n", get_vertical_distance_traveled(), get_horizontal_distance_traveled());
-		vertical_pos = get_vertical_distance_traveled();
-		horizontal_pos = get_horizontal_distance_traveled();
-		
-		delta_vertical = (vertical_pos - prev_vertical_pos);
-		delta_horizontal = (horizontal_pos - prev_horizontal_pos);
-
-		prev_vertical_pos = vertical_pos;
-		prev_horizontal_pos = horizontal_pos;
-		
-		heading = to_rad(fmod((360 - get_imu_rotation()) + 90, 360)); // convert compass to standard position in RAD
-		delta_heading = heading - prev_heading;
-		prev_heading = heading;
-		
-		if (delta_heading == 0) {
-			deltaXLocal = delta_horizontal;
-			deltaYLocal = delta_vertical;
-		} else {
-			// LEFT_TRACKING_RADIUS is the distance from the left tracking wheel to the tracking center of the robot
-			// PERPENDICULAR_TRACKING_RADIUS is the distance from the perpendicular tracking wheel to the tracking center of the robot
-			deltaXLocal = 2 * sin(delta_heading / 2) * ((delta_horizontal / delta_heading) + horizontal_wheel_offset);
-			deltaYLocal = 2 * sin(delta_heading / 2) * ((delta_vertical / delta_heading) + vertical_wheel_offset);
-		}
-
-		avg_heading = heading - (delta_heading / 2);
-
-		x += (deltaYLocal * cos(avg_heading)) + (deltaXLocal * sin(avg_heading));
-		y += (deltaYLocal * sin(avg_heading)) - (deltaXLocal * cos(avg_heading));
-
 		if (update_odom == true) {
+			// printf("%f, %f\n", get_vertical_distance_traveled(), get_horizontal_distance_traveled());
+			vertical_pos = get_vertical_distance_traveled();
+			horizontal_pos = get_horizontal_distance_traveled();
+
+			delta_vertical = (vertical_pos - prev_vertical_pos);
+			delta_horizontal = (horizontal_pos - prev_horizontal_pos);
+
+			prev_vertical_pos = vertical_pos;
+			prev_horizontal_pos = horizontal_pos;
+
+			heading = to_rad(fmod((360 - get_imu_rotation()) + 90, 360)); // convert compass to standard position in RAD
+			delta_heading = heading - prev_heading;
+			prev_heading = heading;
+
+			if (delta_heading == 0) {
+				deltaXLocal = delta_horizontal;
+				deltaYLocal = delta_vertical;
+			} else {
+				// LEFT_TRACKING_RADIUS is the distance from the left tracking wheel to the tracking center of the robot
+				// PERPENDICULAR_TRACKING_RADIUS is the distance from the perpendicular tracking wheel to the tracking center of the robot
+				deltaXLocal = 2 * sin(delta_heading / 2) * ((delta_horizontal / delta_heading) + horizontal_wheel_offset);
+				deltaYLocal = 2 * sin(delta_heading / 2) * ((delta_vertical / delta_heading) + vertical_wheel_offset);
+			}
+
+			avg_heading = heading - (delta_heading / 2);
+
+			x += (deltaYLocal * cos(avg_heading)) + (deltaXLocal * sin(avg_heading));
+			y += (deltaYLocal * sin(avg_heading)) - (deltaXLocal * cos(avg_heading));
+
 			chassis.setPose(x, y, get_imu_rotation());
 		}
 		pros::delay(10);

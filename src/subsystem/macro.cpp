@@ -7,7 +7,7 @@ void scoreOwnColour(int timeout) { // intended to be called in auton
 	intake.move_voltage(12000);
 	trapdoorPiston.set_value(true); // disengage ratchet
 
-	if (alliance == "red") {
+	if (alliance == "red" || alliance == "na") {
 		while (!(optical.get_hue() > 200 && optical.get_hue() < 230) && timer < timeout) {
 			pros::delay(10);
 			timer += 10;

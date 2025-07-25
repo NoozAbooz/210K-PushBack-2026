@@ -20,8 +20,8 @@ void testPID() {
     // chassis.turnToHeading(180, 2000);
 }
 void testBM() {
-    pros::delay(2000);
-    ks::setOdomPosition(0, 0, 0);
+    pros::delay(3000);
+    ks::setOdomPosition(0, 0);
     //chassis.moveToPose(24, 24, 90, 1500);
 }
 void testColourSort() {
