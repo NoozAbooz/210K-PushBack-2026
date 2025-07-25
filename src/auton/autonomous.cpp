@@ -51,7 +51,9 @@ void autonomous() {
     inertial1.tare();
     inertial2.tare();
 
-    chassis.setPose(0, 0, 0);
+    ks::setOdomPosition(0, 0, 0);
+    odomLiftPiston.set_value(false);
+    
     field_status = "autonomous";
     console.println("Running auton...");
     gui_selector.run_auton();

@@ -19,6 +19,8 @@ void opcontrol() {
 	});
 	bool telemToggle = false;
 
+	odomLiftPiston.set_value(true);
+
 	while (true) { // Main continuous loop
 		/* Drive */
 		ks::arcadeDrive(0, 0, 1.2);
