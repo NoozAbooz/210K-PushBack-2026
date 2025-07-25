@@ -112,8 +112,8 @@ void ks::initializeOdom() {
 
 void ks::setOdomPosition(double x_new, double y_new, double theta_new) {
 	update_odom = false; // stop odom task loop
-	x = 0;
-	y = 0;
+	x = x_new;
+	y = y_new;
 
 	verticalEncoder.reset_position();
 	horizontalEncoder.reset_position();
