@@ -20,7 +20,10 @@ void testPID() {
     // chassis.turnToHeading(180, 2000);
 }
 void testBM() {
-    chassis.moveToPose(24, 24, 90, 1500);
+    liftPiston.set_value(true); // Lift piston up
+    trapdoorPiston.set_value(true); // ratchet piston disengage
+
+    chassis.moveToPose(15.59, 33.98, 90, 20000, {.lead = 0.7, .maxSpeed = 127, .minSpeed = 50});
 }
 void testColourSort() {
     alliance = "red"; // set alliance to red for testing

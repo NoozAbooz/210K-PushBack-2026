@@ -26,7 +26,7 @@ inline pros::Imu inertial2(14);
 inline pros::Optical optical(12);
 
 inline pros::Rotation verticalEncoder(-5);
-inline pros::Rotation horizontalEncoder(6);
+inline pros::Rotation horizontalEncoder(-6);
 //hello world it is 210K secret note iykyk :D
 // horizontal tracking wheel
 inline lemlib::TrackingWheel vertical_tracking_wheel(&verticalEncoder, lemlib::Omniwheel::NEW_2, -0.244094);
