@@ -115,22 +115,28 @@ void ks::setOdomPosition(double x_new, double y_new, double theta_new) {
 	x = 0;
 	y = 0;
 
+	verticalEncoder.reset_position();
 	verticalEncoder.reset();
+	horizontalEncoder.reset_position();
 	horizontalEncoder.reset();
 
-	vertical_pos = 0;
-	horizontal_pos = 0;
-
-	vertical_pos = 0;
-	horizontal_pos = 0;
 	prev_vertical_pos = 0;
 	prev_horizontal_pos = 0;
+	vertical_pos = 0;
+	horizontal_pos = 0;
+
 	prev_heading = 0;
 
-	inertial1.set_heading(theta_new);
-	//inertial2.set_heading(theta_new);
+	if (theta_new != 360) {
+		inertial1.set_rotation(theta_new);
+		inertial2.set_rotation(theta_new);
+	}
 	odom_task.resume();
 }
+/* // pos reset - do not run async
+float absX = -((backwardDist.get_distance() / 25.4 + 3.9) - 72);
+float absY = leftDist.get_distance() / 25.4 - 0;
+chassis.setPose(absX, absY, chassis.getPose().theta); */
 
 void ks::odomUpdate() {
 	console.printf("%.0lf, %.0lf", verticalEncoder.get_position(), get_horizontal_distance_traveled());

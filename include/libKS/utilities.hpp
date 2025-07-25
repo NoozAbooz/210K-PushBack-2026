@@ -90,6 +90,10 @@ namespace ks
 	  return(angle_rad*(180.0/M_PI));
 	}
 
+	inline double mm_to_in(double mm) {
+	  return(mm / 25.4);
+	}
+
 	inline double clamp(double input, double min, double max){
 	  if( input > max ){ return(max); }
 	  if(input < min){ return(min); }

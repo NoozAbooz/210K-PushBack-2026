@@ -24,3 +24,24 @@ void scoreOwnColour(int timeout) { // intended to be called in auton
 	pros::delay(200);
 	intake.move_voltage(0);
 }
+
+void scoreAmount(int amount, int timeout) { // intended to be called in auton
+	int timer = 0;
+	int count = 0;
+	intake.move_voltage(12000);
+	trapdoorPiston.set_value(true); // disengage ratchet
+
+	while (count < amount && timer < timeout) {
+		if (optical.get_hue() > 200 && optical.get_hue() < 230) {
+			count++;
+			pros::delay(100);
+		}
+		pros::delay(10);
+		timer += 10;
+	}
+
+	trapdoorPiston.set_value(false); // engage ratchet
+	intake.brake();
+	pros::delay(200);
+	intake.move_voltage(0);
+}

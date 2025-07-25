@@ -25,6 +25,10 @@ inline pros::Imu inertial1(7);
 inline pros::Imu inertial2(14);
 inline pros::Optical optical(12);
 
+inline pros::Distance fwdDistance(17);
+inline pros::Distance rightDistance(13);
+
+
 inline pros::Rotation verticalEncoder(-5);
 inline pros::Rotation horizontalEncoder(-6);
 //hello world it is 210K secret note iykyk :D
