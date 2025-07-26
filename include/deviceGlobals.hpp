@@ -19,7 +19,7 @@ inline pros::Motor intakeBottom(9);
 inline pros::adi::Pneumatics liftPiston('A', false);
 inline pros::adi::Pneumatics loaderPiston('B', false);
 inline pros::adi::Pneumatics trapdoorPiston('C', false); // now for ratchet
-inline pros::adi::Pneumatics odomLiftPiston('X', false);
+inline pros::adi::Pneumatics odomLiftPiston('D', false);
 
 /* Declare sensors */
 inline pros::Imu inertial1(7);
