@@ -12,9 +12,10 @@ bool update_odom = false;
  */
 void initialize() {
     rdconfig_init();
-    update_odom = true;
     pros::delay(10);
 
+    /* Configurations */
+    update_odom = true; // toggle ks::odom alg
     pros::Task([] {
         // chassis.calibrate();
        ks::initializeOdom();

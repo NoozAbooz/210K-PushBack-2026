@@ -22,7 +22,7 @@ void refreshLift() {
 	}
 }
 
-bool trapdoorStatus = false;
+bool trapdoorStatus = false; // ratchet
 void refreshTrapdoor() {
 	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
 		trapdoorStatus = !trapdoorStatus;
@@ -30,10 +30,18 @@ void refreshTrapdoor() {
 	}
 }
 
-bool loaderStatus = false;
+bool loaderStatus = false; // matchloader frame
 void refreshLoader() {
 	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
 		loaderStatus = !loaderStatus;
 		loaderPiston.set_value(loaderStatus);
+	}
+}
+
+bool odomLiftStatus = true; // should be up by default in opcontrol
+void refreshOdomLift() {
+	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+		odomLiftStatus = !odomLiftStatus;
+		odomLiftPiston.set_value(odomLiftStatus);
 	}
 }

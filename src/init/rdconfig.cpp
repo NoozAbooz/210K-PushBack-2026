@@ -201,7 +201,7 @@ void render_sensor_view() {
         sprintf(buffer, "Competition Status: %s", competition_status_str);
         lv_label_set_text(debug_line_6, buffer);
 
-        sprintf(buffer, "Distance Sensors - Fwd: %.2fin, Right: %.2fin", (float)fwdDistance.get_distance() / 25.4, (float)rightDistance.get_distance() / 25.4);
+        sprintf(buffer, "Distance Sensors - Fwd: %.2fin, Right: %.2fin", (float)(fwdDistance.get_distance() / 25.4), (float)(rightDistance.get_distance() / 25.4));
         lv_label_set_text(debug_line_7, buffer);
 
         pros::delay(500); // Update every half second
