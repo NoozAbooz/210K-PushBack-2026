@@ -1,9 +1,9 @@
 #include "main.h"
 
 rd_view_t *homeview = rd_view_create("Home");
-rd_view_t *allianceview = rd_view_create("Alliance Colour");
-//rd_view_t *sensorview = rd_view_create("Sensors");
+rd_view_t *sensorview = rd_view_create("Sensors");
 rd::Console console;
+rd_view_t *allianceview = rd_view_create("Alliance Colour");
 rd_view_t *gifview = rd_view_create("Shikanoko");
 
 // alliance select
@@ -134,8 +134,84 @@ void render_home_view() {
     }, LV_EVENT_CLICKED, NULL);
 }
 
+void render_sensor_view() {
+    lv_obj_t* parent = rd_view_obj(sensorview);
+    
+    lv_obj_t* debug_line_1 = lv_label_create(parent);
+    lv_obj_align(debug_line_1, LV_ALIGN_TOP_LEFT, 30, 50);
+    lv_label_set_text(debug_line_1, "Debug Line 1: ");
+
+    lv_obj_t* debug_line_2 = lv_label_create(parent);
+    lv_obj_align(debug_line_2, LV_ALIGN_TOP_LEFT, 30, 67);
+    lv_label_set_text(debug_line_2, "Debug Line 2: ");
+
+    lv_obj_t* debug_line_3 = lv_label_create(parent);
+    lv_obj_align(debug_line_3, LV_ALIGN_TOP_LEFT, 30, 84);
+    lv_label_set_text(debug_line_3, "Debug Line 3: ");
+
+    lv_obj_t* debug_line_4 = lv_label_create(parent);
+    lv_obj_align(debug_line_4, LV_ALIGN_TOP_LEFT, 30, 101);
+    lv_label_set_text(debug_line_4, "Debug Line 4: ");
+
+    lv_obj_t* debug_line_5 = lv_label_create(parent);
+    lv_obj_align(debug_line_5, LV_ALIGN_TOP_LEFT, 30, 118);
+    lv_label_set_text(debug_line_5, "Debug Line 5: ");
+
+    lv_obj_t* debug_line_6 = lv_label_create(parent);
+    lv_obj_align(debug_line_6, LV_ALIGN_TOP_LEFT, 30, 135);
+    lv_label_set_text(debug_line_6, "Debug Line 6: ");
+
+    lv_obj_t* debug_line_7 = lv_label_create(parent);
+    lv_obj_align(debug_line_7, LV_ALIGN_TOP_LEFT, 30, 152);
+    lv_label_set_text(debug_line_7, "Debug Line 7: ");
+
+    lv_obj_t* debug_line_8 = lv_label_create(parent);
+    lv_obj_align(debug_line_8, LV_ALIGN_TOP_LEFT, 30, 169);
+    lv_label_set_text(debug_line_8, "Debug Line 8: ");
+
+    lv_obj_t* debug_line_9 = lv_label_create(parent);
+    lv_obj_align(debug_line_9, LV_ALIGN_TOP_LEFT, 30, 186);
+    lv_label_set_text(debug_line_9, "Debug Line 9: ");
+
+    while (true) {
+        char buffer[300];
+
+        sprintf(buffer, "X: %.2f Y: %.2f HEADING: %.3f°", chassis.getPose().x, chassis.getPose().y, chassis.getPose().theta);
+        lv_label_set_text(debug_line_1, buffer);
+
+        sprintf(buffer, "TEMP - L:%.2f°C  R:%.2f°C  Batt:%.2f°C", leftDrive.get_temperature(), rightDrive.get_temperature(), pros::battery::get_temperature());
+        lv_label_set_text(debug_line_2, buffer);
+
+        auto auton = gui_selector.get_auton();
+        const char* auton_name = auton->name.c_str();
+        sprintf(buffer, "ALLIANCE: %s  AUTON:%s", alliance.c_str(), auton_name);
+        lv_label_set_text(debug_line_3, buffer);
+
+        int total_seconds = pros::millis() / 1000;
+        int minutes = total_seconds / 60;
+        int seconds = total_seconds % 60;
+        sprintf(buffer, "Time Elapsed: %d:%02d", minutes, seconds);
+        lv_label_set_text(debug_line_4, buffer);
+    
+        sprintf(buffer, "Radio Status: %s", controller.is_connected() ? "Connected" : "Disconnected");
+        lv_label_set_text(debug_line_5, buffer);
+
+        const char* competition_status_str = (pros::competition::get_status() == 7) ? "Disabled" : (pros::competition::get_status() == 6) ? "Autonomous" : (pros::competition::get_status() == 4) ? "Driver Control" : "Not Connected";
+        sprintf(buffer, "Competition Status: %s", competition_status_str);
+        lv_label_set_text(debug_line_6, buffer);
+
+        sprintf(buffer, "Distance Sensors - Fwd: %.2fin, Right: %.2fin", fwdDistance.get_distance() / 25.4, rightDistance.get_distance() / 25.4);
+        lv_label_set_text(debug_line_7, buffer);
+
+        pros::delay(500); // Update every half second
+    }
+}
+
 void rdconfig_init() {
     render_home_view();
 	render_alliance_view();
+    pros::Task([] {
+	    render_sensor_view();
+    });
 	rd_view_focus(homeview);
 }
