@@ -1,45 +1,55 @@
 #include "deviceGlobals.hpp"
 #include "libKS/drivetrain/chassis.hpp"
 #include "main.h"
+#include "pros/rtos.hpp"
 
 void sawp() {
 	// libKS MTPoint v0.1
 // Starting point: (-48.82 in, 13.41 in)
 chassis.moveToPoint(0.00, 0.00, 1000, {.forwards = true, .maxSpeed = 127, .minSpeed = 2}); // Point 1
-chassis.moveToPoint(-0, 31.53, 1000, {.forwards = true, .maxSpeed = 127, .minSpeed = 1}); // Point 2
+chassis.moveToPoint(-0, 30.03, 1000, {.forwards = true, .maxSpeed = 127, .minSpeed = 1}); // Point 2
 chassis.turnToHeading(90, 600); // Turn to 90 degrees
-liftPiston.set_value(true); // Lift piston up
-trapdoorPiston.set_value(true); // Trapdoor piston up
-
+pros::Task([] {
+	liftPiston.set_value(true); // Lift piston up
+	trapdoorPiston.set_value(true); // Trapdoor piston up
+	pros::delay(750);
+	intake.move_voltage(12000); // Spin intake
+});
 // drive into goal #1
-chassis.moveToPoint(18.39, 33.08, 1200, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 3
-pros::delay(400);
-intake.move_voltage(12000); // Spin intake
-pros::delay(400);
-chassis.moveToPoint(0.0, 33.48, 800, {.forwards = false, .maxSpeed = 127, .minSpeed = 9, .earlyExitRange = 5}); // Point 4
-chassis.turnToHeading(135, 500); // Turn to 135 degrees
+chassis.moveToPoint(18.39, 31.98, 1200, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 3
+pros::delay(100);
+chassis.moveToPoint(0.0, 32.78, 800, {.forwards = false, .maxSpeed = 127, .minSpeed = 9, .earlyExitRange = 5}); // Point 4
+
 chassis.moveToPoint(23.82, 9.70, 1000, {.forwards = true, .maxSpeed = 70, .minSpeed = 0}); // Point 5
 chassis.moveToPoint(39.92, -6.7, 1000, {.forwards = true, .maxSpeed = 40, .minSpeed = 0}); // Point 6
-pros::delay(500);
-liftPiston.set_value(false); // Lift piston down
-pros::delay(1000);
+pros::Task([] {
+	pros::delay(900);
+	liftPiston.set_value(false); // Lift piston up
+	pros::delay(1300);
+	trapdoorPiston.set_value(false); // Trapdoor piston down
+});
+pros::delay(1800);
 chassis.moveToPoint(25, 5, 1000, {.forwards = false, .minSpeed = 110, .earlyExitRange = 2}); // Point 7
-liftPiston.set_value(true); // Lift piston up
-pros::delay(50);
-trapdoorPiston.set_value(false); // Trapdoor piston down
-
-chassis.moveToPoint(27.04, -40.70, 2000, {.forwards = true, .maxSpeed = 65, .minSpeed = 0}); // Point 7
+pros::Task([] {
+	liftPiston.set_value(true); // Lift piston up
+});
+chassis.moveToPoint(27.54, -41.70, 2000, {.forwards = true, .maxSpeed = 65, .minSpeed = 0}); // Point 7
 chassis.moveToPoint(2.58, -60.16, 1500, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 9
 chassis.turnToHeading(90, 700); // Turn to 90 degrees
 chassis.moveToPoint(17.90, -60.16, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 10
+pros::Task([] {
+pros::delay(400);
 intake.move_voltage(-12000); // Spin intake
-pros::delay(200);
+pros::delay(100);
 trapdoorPiston.set_value(true); 
 intake.move_voltage(12000);// Trapdoor piston up
-pros::delay(1600);
-chassis.moveToPoint(5, -59.16, 800, {.forwards = false, .maxSpeed = 127, .minSpeed = 0}); // Point 11
+});
+pros::delay(2100);
+chassis.moveToPoint(5, -58.56, 800, {.forwards = false, .maxSpeed = 127, .minSpeed = 0}); // Point 11
 chassis.turnToHeading(270, 900);
+pros::Task([] {
 loaderPiston.set_value(true); // Loader piston up
+});
 ks::moveStraight(111, 1000, {.forwards = true, .maxSpeed = 127, .minSpeed = 127}); // Move to goal #2
 //chassis.moveToPoint(-15.10, -61.16, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 10
 }

@@ -17,17 +17,6 @@ void initialize() {
         // chassis.calibrate();
        ks::initializeOdom();
        update_odom = true;
-
-    //    intakeBottom.move_voltage(12000);
-    //    int timer = 0;
-       while (true) {
-            double theta = fmod(chassis.getPose().theta, 360); // wrap to [0, 360) for user view
-    	    if (theta < 0) {
-       	    	theta += 360;
-		    }
-            printf("X:%.0lf Y:%.0lf T:%.0lf\n", chassis.getPose().x, chassis.getPose().y, theta);
-            pros::delay(100); // Delay to save resources on brain
-       }
     });
     
     optical.set_led_pwm(100);
