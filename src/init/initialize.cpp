@@ -1,3 +1,4 @@
+#include "deviceGlobals.hpp"
 #include "main.h"
 
 std::string field_status;
@@ -21,11 +22,11 @@ void initialize() {
     
     optical.set_led_pwm(100);
     optical.set_integration_time(10);
+    odomLiftPiston.set_value(false);
 
     if (update_odom == false) {
         rd_view_alert(sensorview, "[BIG FAT WARNING] update_odom is DISABLED!! You better know what you're doing!");
     }
-
     console.println("Robot initialized");
 }
 
@@ -36,6 +37,7 @@ void initialize() {
  */
 void disabled() {
     field_status = "disabled";
+    odomLiftPiston.set_value(false);
 }
 
 /**
@@ -56,6 +58,8 @@ void competitionTelemtryRefresh() {
 void competition_initialize() {
     rd_view_focus(allianceview);
     field_status = "competition";
+    
+    odomLiftPiston.set_value(false); // we dont need odom pods for driver
 
     gui_selector.on_select([](std::optional<rd::Selector::routine_t> routine) {
         competitionTelemtryRefresh();
