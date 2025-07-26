@@ -117,6 +117,7 @@ void render_home_view() {
         if (lv_event_get_code(e) == LV_EVENT_CLICKED) {
             Gif* gif = new Gif("/usd/nokotan.gif", rd_view_obj(gifview));
 		    rd_view_focus(gifview);
+            rd_view_alert(gifview, "Shika noko tokotoko arawaru nokonoko");
 		    console.println("Running gif...");
         }
     }, LV_EVENT_CLICKED, NULL);

@@ -17,9 +17,9 @@ void opcontrol() {
 			console.println("Launching gif...");
 		}
 	});
-	bool telemToggle = false;
+	bool telemToggle = false; // for switching tele output on controller screen
 
-	odomLiftPiston.set_value(true);
+	odomLiftPiston.set_value(true); // we dont need odom pods for driver
 
 	while (true) { // Main continuous loop
 		/* Drive */

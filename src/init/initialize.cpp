@@ -33,6 +33,10 @@ void initialize() {
     optical.set_led_pwm(100);
     optical.set_integration_time(10);
 
+    if (update_odom == false) {
+        rd_view_alert(sensorview, "[BIG FAT WARNING] update_odom is DISABLED!! You better know what you're doing!");
+    }
+
     console.println("Robot initialized");
 }
 

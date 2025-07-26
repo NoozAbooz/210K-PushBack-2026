@@ -10,6 +10,7 @@ extern rd::Console console;
 extern rd_view_t *gifview;
 extern rd_view_t *allianceview;
 extern rd::Selector gui_selector;
+extern rd_view_t *sensorview;
 void rdconfig_init();
 
 extern std::string alliance;
