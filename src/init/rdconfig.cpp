@@ -175,7 +175,7 @@ void render_sensor_view() {
     lv_label_set_text(debug_line_9, "Debug Line 9: ");
 
     while (true) {
-        char buffer[300];
+        char buffer[256];
 
         sprintf(buffer, "X: %.2f Y: %.2f HEADING: %.3f°", chassis.getPose().x, chassis.getPose().y, chassis.getPose().theta);
         lv_label_set_text(debug_line_1, buffer);
@@ -201,7 +201,7 @@ void render_sensor_view() {
         sprintf(buffer, "Competition Status: %s", competition_status_str);
         lv_label_set_text(debug_line_6, buffer);
 
-        sprintf(buffer, "Distance Sensors - Fwd: %.2fin, Right: %.2fin", fwdDistance.get_distance() / 25.4, rightDistance.get_distance() / 25.4);
+        sprintf(buffer, "Distance Sensors - Fwd: %.2fin, Right: %.2fin", (float)fwdDistance.get_distance() / 25.4, (float)rightDistance.get_distance() / 25.4);
         lv_label_set_text(debug_line_7, buffer);
 
         pros::delay(500); // Update every half second
