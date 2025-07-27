@@ -17,13 +17,13 @@ void opcontrol() {
 			console.println("Launching gif...");
 		}
 	});
-	bool telemToggle = false; // for switching tele output on controller screen
+	bool telemToggle = true; // for switching tele output on controller screen
 
-	odomLiftPiston.set_value(true); // we dont need odom pods for driver
+	//odomLiftPiston.set_value(true); // we dont need odom pods for driver
 
 	while (true) { // Main continuous loop
 		/* Drive */
-		ks::arcadeDrive(0, 0, 1.2);
+		ks::arcadeDrive(0, 0, 1);
 
 		/* Subsystem Listeners */
 		refreshIntake();
