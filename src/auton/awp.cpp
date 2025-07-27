@@ -16,7 +16,7 @@ pros::Task([] {
 	intake.move_voltage(12000); // Spin intake
 });
 // drive into goal #1
-chassis.moveToPoint(18.39, 31.98, 1000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 3
+chassis.moveToPoint(18.39, 32.28, 1000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 3
 pros::delay(50);
 chassis.moveToPoint(0.0, 32.78, 800, {.forwards = false, .maxSpeed = 127, .minSpeed = 9, .earlyExitRange = 5}); // Point 4
 
@@ -35,9 +35,9 @@ pros::Task([] {
 	liftPiston.set_value(true); // Lift piston up
 });
 chassis.moveToPoint(27.74, -43.70, 2000, {.forwards = true, .maxSpeed = 85, .minSpeed = 0}); // Point 7
-chassis.moveToPoint(3.58, -61.16, 1500, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 9
+chassis.moveToPoint(3.58, -60.16, 1500, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 9
 chassis.turnToHeading(90, 700); // Turn to 90 degrees
-chassis.moveToPoint(16.50, -61.46, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 10
+chassis.moveToPoint(16.70, -60.46, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 10
 pros::Task([] {
 	pros::delay(300);
 	intake.move_voltage(-12000); // Spin intake
@@ -53,8 +53,8 @@ pros::Task([] {
 	loaderPiston.set_value(true); // dropdown match loader
 });
 chassis.turnToHeading(270, 900, {.direction = AngularDirection::CCW_COUNTERCLOCKWISE}, false);
-chassis.moveToPoint(-9.7, -61.46, 400, {.forwards = true, .maxSpeed = 127, .minSpeed = 127}); // Point 11
-ks::moveRaw(8000, 1000);
+chassis.moveToPoint(-9.7, -60.46, 300, {.forwards = true, .maxSpeed = 127, .minSpeed = 127}); // Point 11
+ks::moveStraight(30, 8000, {.forwards = false, .maxSpeed = 60, .minSpeed = 0}); // Point 12
 //chassis.moveToPoint(-10, -61.16, 800, {.forwards = true, .maxSpeed = 40, .minSpeed = 0}); // Point 12
 //ks::moveStraight(16, 500, {.forwards = true, .maxSpeed = 127, .minSpeed = 127});
 
