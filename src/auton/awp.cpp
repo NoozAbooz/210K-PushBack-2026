@@ -16,7 +16,7 @@ pros::Task([] {
 	intake.move_voltage(12000); // Spin intake
 });
 // drive into goal #1
-chassis.moveToPoint(18.39, 32.48, 1000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 3
+chassis.moveToPoint(18.39, 31.98, 1000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 3
 pros::delay(50);
 chassis.moveToPoint(0.0, 32.78, 800, {.forwards = false, .maxSpeed = 127, .minSpeed = 9, .earlyExitRange = 5}); // Point 4
 
@@ -28,7 +28,7 @@ pros::Task([] {
 	pros::delay(1650);
 	trapdoorPiston.set_value(false); // Trapdoor piston down
 });
-pros::delay(2500);
+pros::delay(2600);
 chassis.moveToPoint(29, 5, 1000, {.forwards = false, .minSpeed = 110, .earlyExitRange = 2}); // Point 7
 pros::Task([] {
 	pros::delay(400);
@@ -45,15 +45,16 @@ pros::Task([] {
 	trapdoorPiston.set_value(true);
 	intake.move_voltage(12000); // Trapdoor piston up
 });
-pros::delay(1700);
-chassis.moveToPoint(5, -61.69, 800, {.forwards = false, .maxSpeed = 127, .minSpeed = 1, .earlyExitRange = 1.5}); // Point 11
-chassis.turnToHeading(270, 900);
+pros::delay(1500);
+//chassis.moveToPoint(5, -61.69, 800, {.forwards = false, .maxSpeed = 127, .minSpeed = 1, .earlyExitRange = 1.5}); // Point 11
+ks::moveStraight(-12, 800, {.forwards = false, .maxSpeed = 127, .minSpeed = 1, .earlyExitRange = 1.5}); // Point 11
+chassis.turnToHeading(270, 900, {.direction = AngularDirection::CCW_COUNTERCLOCKWISE}, false);
 pros::Task([] {
-loaderPiston.set_value(true); // Loader piston up
+loaderPiston.set_value(true); // dropdown match loader
 });
-chassis.moveToPoint(-8, -61.59, 800, {.forwards = true, .maxSpeed = 127, .minSpeed = 127}); // Point 11
-chassis.moveToPoint(-8, -58.16, 800, {.forwards = true, .maxSpeed = 40, .minSpeed = 0}); // Point 12
-// ks::moveStraight(12, 500, {.forwards = true, .maxSpeed = 127, .minSpeed = 127});
+//chassis.moveToPoint(-10, -61.09, 800, {.forwards = true, .maxSpeed = 127, .minSpeed = 127}); // Point 11
+//chassis.moveToPoint(-10, -61.16, 800, {.forwards = true, .maxSpeed = 40, .minSpeed = 0}); // Point 12
+ks::moveStraight(16, 500, {.forwards = true, .maxSpeed = 127, .minSpeed = 127});
 // ks::moveStraight(10, 700, {.forwards = true, .maxSpeed = 50, .minSpeed = 40}); // Move to goal #2
 //chassis.moveToPoint(-15.10, -61.16, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 10
 }
