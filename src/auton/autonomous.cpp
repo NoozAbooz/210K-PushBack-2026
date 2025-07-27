@@ -13,6 +13,7 @@
  */
 
 void testPID() {
+    ks::moveStraight(24, 1500, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Move forward 24 inches
     //chassis.moveToPoint(0, 24, 1500);
     // intake.move_voltage(12000);
     chassis.turnToHeading(180, 4000);
@@ -58,7 +59,7 @@ void autonomous() {
 
     ks::setOdomPosition(0, 0, 0);
     odomLiftPiston.set_value(false);
-    
+
     field_status = "autonomous";
     console.println("Running auton...");
     gui_selector.run_auton();
