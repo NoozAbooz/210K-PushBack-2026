@@ -37,7 +37,7 @@ pros::Task([] {
 chassis.moveToPoint(27.74, -41.70, 2000, {.forwards = true, .maxSpeed = 70, .minSpeed = 0}); // Point 7
 chassis.moveToPoint(5.58, -61.16, 1500, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 9
 chassis.turnToHeading(90, 700); // Turn to 90 degrees
-chassis.moveToPoint(17.90, -61.46, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 10
+chassis.moveToPoint(16.50, -61.46, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 10
 pros::Task([] {
 	pros::delay(300);
 	intake.move_voltage(-12000); // Spin intake
@@ -48,14 +48,15 @@ pros::Task([] {
 pros::delay(1500);
 //chassis.moveToPoint(5, -61.69, 800, {.forwards = false, .maxSpeed = 127, .minSpeed = 1, .earlyExitRange = 1.5}); // Point 11
 ks::moveStraight(-12, 800, {.forwards = false, .maxSpeed = 127, .minSpeed = 1, .earlyExitRange = 1.5}); // Point 11
-chassis.turnToHeading(270, 900, {.direction = AngularDirection::CCW_COUNTERCLOCKWISE}, false);
 pros::Task([] {
-loaderPiston.set_value(true); // dropdown match loader
+	pros::delay(300);
+	loaderPiston.set_value(true); // dropdown match loader
 });
-//chassis.moveToPoint(-10, -61.09, 800, {.forwards = true, .maxSpeed = 127, .minSpeed = 127}); // Point 11
-//chassis.moveToPoint(-10, -61.16, 800, {.forwards = true, .maxSpeed = 40, .minSpeed = 0}); // Point 12
-ks::moveStraight(16, 500, {.forwards = true, .maxSpeed = 127, .minSpeed = 127});
-// ks::moveStraight(10, 700, {.forwards = true, .maxSpeed = 50, .minSpeed = 40}); // Move to goal #2
+chassis.turnToHeading(270, 900, {.direction = AngularDirection::CCW_COUNTERCLOCKWISE}, false);
+chassis.moveToPoint(-9.2, -61.46, 800, {.forwards = true, .maxSpeed = 127, .minSpeed = 127}); // Point 11
+chassis.moveToPoint(-10, -61.16, 800, {.forwards = true, .maxSpeed = 40, .minSpeed = 0}); // Point 12
+//ks::moveStraight(16, 500, {.forwards = true, .maxSpeed = 127, .minSpeed = 127});
+
 //chassis.moveToPoint(-15.10, -61.16, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 10
 }
 
