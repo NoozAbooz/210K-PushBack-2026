@@ -177,21 +177,21 @@ void render_sensor_view() {
     while (true) {
         char buffer[256];
 
-        sprintf(buffer, "X: %.2f Y: %.2f HEADING: %.3f°", chassis.getPose().x, chassis.getPose().y, chassis.getPose().theta);
+        sprintf(buffer, "X: %.2f | Y: %.2f |HEADING: %.3f°", chassis.getPose().x, chassis.getPose().y, chassis.getPose().theta);
         lv_label_set_text(debug_line_1, buffer);
 
-        sprintf(buffer, "TEMP - L:%.2f°C  R:%.2f°C  Batt:%.2f°C", leftDrive.get_temperature(), rightDrive.get_temperature(), pros::battery::get_temperature());
+        sprintf(buffer, "TEMPERATURE  L:%.2f°C | R:%.2f°C | INTAKE:%.2f°C | Batt:%.2f°C", leftDrive.get_temperature(), rightDrive.get_temperature(), intake.get_temperature(1), pros::battery::get_temperature());
         lv_label_set_text(debug_line_2, buffer);
 
         auto auton = gui_selector.get_auton();
         const char* auton_name = auton->name.c_str();
-        sprintf(buffer, "ALLIANCE: %s  AUTON:%s", alliance.c_str(), auton_name);
+        sprintf(buffer, "ALLIANCE: %s  AUTON: %s", alliance.c_str(), auton_name);
         lv_label_set_text(debug_line_3, buffer);
 
         int total_seconds = pros::millis() / 1000;
         int minutes = total_seconds / 60;
         int seconds = total_seconds % 60;
-        sprintf(buffer, "Time Elapsed: %d:%02d", minutes, seconds);
+        sprintf(buffer, "Time Elapsed (min:sec): %d:%02d", minutes, seconds);
         lv_label_set_text(debug_line_4, buffer);
     
         sprintf(buffer, "Radio Status: %s", controller.is_connected() ? "Connected" : "Disconnected");
@@ -201,10 +201,10 @@ void render_sensor_view() {
         sprintf(buffer, "Competition Status: %s", competition_status_str);
         lv_label_set_text(debug_line_6, buffer);
 
-        sprintf(buffer, "Distance Sensors - Fwd: %.2fin, Right: %.2fin", (float)(fwdDistance.get_distance() / 25.4), (float)(rightDistance.get_distance() / 25.4));
+        sprintf(buffer, "Distance Sensors  Fwd: %.2fin | Right: %.2fin", (float)(fwdDistance.get_distance() / 25.4), (float)(rightDistance.get_distance() / 25.4));
         lv_label_set_text(debug_line_7, buffer);
 
-        pros::delay(500); // Update every half second
+        pros::delay(200); // Update every 200 milliseconds
     }
 }
 
