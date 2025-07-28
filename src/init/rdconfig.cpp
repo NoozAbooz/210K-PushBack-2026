@@ -183,10 +183,10 @@ void render_sensor_view() {
         sprintf(buffer, "TEMPERATURE  L:%.2f°C | R:%.2f°C | INTAKE:%.2f°C | Batt:%.2f°C", leftDrive.get_temperature(), rightDrive.get_temperature(), intake.get_temperature(1), pros::battery::get_temperature());
         lv_label_set_text(debug_line_2, buffer);
 
-        auto auton = gui_selector.get_auton();
-        const char* auton_name = auton->name.c_str();
-        sprintf(buffer, "ALLIANCE: %s  AUTON: %s", alliance.c_str(), auton_name);
-        lv_label_set_text(debug_line_3, buffer);
+        // auto auton = gui_selector.get_auton();
+        // const char* auton_name = auton->name.c_str();
+        // sprintf(buffer, "ALLIANCE: %s | AUTON: %s", alliance.c_str(), auton_name);
+        // lv_label_set_text(debug_line_3, buffer);
 
         int total_seconds = pros::millis() / 1000;
         int minutes = total_seconds / 60;
