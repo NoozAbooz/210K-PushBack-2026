@@ -28,8 +28,9 @@ static void btn_event_cb(lv_event_t *e) {
         
         if (!next_btn) {
             next_btn = lv_btn_create(lv_obj_get_parent(btn));
-            lv_obj_set_size(next_btn, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_size(next_btn, 100, 60);
             lv_obj_align(next_btn, LV_ALIGN_BOTTOM_RIGHT, -10, -10);
+            lv_obj_set_style_bg_color(next_btn, lv_color_hex(0x3a8a3a), 0);
             lv_obj_add_event_cb(next_btn, [](lv_event_t *e) { gui_selector.focus(); }, LV_EVENT_CLICKED, NULL);
             lv_label_set_text(lv_label_create(next_btn), "Next ->");
         }
@@ -177,32 +178,35 @@ void render_sensor_view() {
     while (true) {
         char buffer[256];
 
-        sprintf(buffer, "X: %.2f | Y: %.2f |HEADING: %.3f°", chassis.getPose().x, chassis.getPose().y, chassis.getPose().theta);
+        sprintf(buffer, "X: %.2f | Y: %.2f | HEADING: %.3f°", chassis.getPose().x, chassis.getPose().y, chassis.getPose().theta);
         lv_label_set_text(debug_line_1, buffer);
 
-        sprintf(buffer, "TEMPERATURE  L:%.2f°C | R:%.2f°C | INTAKE:%.2f°C | Batt:%.2f°C", leftDrive.get_temperature(), rightDrive.get_temperature(), intake.get_temperature(1), pros::battery::get_temperature());
+        sprintf(buffer, "TEMPERATURE  L:%.2f°C | R:%.2f°C | Batt:%.2f°C", leftDrive.get_temperature(), rightDrive.get_temperature(), pros::battery::get_temperature());
         lv_label_set_text(debug_line_2, buffer);
+
+        sprintf(buffer, "INTAKE  TOP:%.2f°C | BOTTOM:%.2f°C", intakeTop.get_temperature(), intakeBottom.get_temperature());
+        lv_label_set_text(debug_line_3, buffer);
 
         auto auton = gui_selector.get_auton();
         const char* auton_name = auton->name.c_str();
         sprintf(buffer, "ALLIANCE: %s | AUTON: %s", alliance.c_str(), auton_name);
-        lv_label_set_text(debug_line_3, buffer);
+        lv_label_set_text(debug_line_4, buffer);
 
         int total_seconds = pros::millis() / 1000;
         int minutes = total_seconds / 60;
         int seconds = total_seconds % 60;
         sprintf(buffer, "Time Elapsed (min:sec): %d:%02d", minutes, seconds);
-        lv_label_set_text(debug_line_4, buffer);
+        lv_label_set_text(debug_line_5, buffer);
     
         sprintf(buffer, "Radio Status: %s", controller.is_connected() ? "Connected" : "Disconnected");
-        lv_label_set_text(debug_line_5, buffer);
+        lv_label_set_text(debug_line_6, buffer);
 
         const char* competition_status_str = (pros::competition::get_status() == 7) ? "Disabled" : (pros::competition::get_status() == 6) ? "Autonomous" : (pros::competition::get_status() == 4) ? "Driver Control" : "Not Connected";
         sprintf(buffer, "Competition Status: %s", competition_status_str);
-        lv_label_set_text(debug_line_6, buffer);
+        lv_label_set_text(debug_line_7, buffer);
 
         sprintf(buffer, "Distance Sensors  Fwd: %.2fin | Right: %.2fin", (float)(fwdDistance.get_distance() / 25.4), (float)(rightDistance.get_distance() / 25.4));
-        lv_label_set_text(debug_line_7, buffer);
+        lv_label_set_text(debug_line_8, buffer);
 
         pros::delay(200); // Update every 200 milliseconds
     }
