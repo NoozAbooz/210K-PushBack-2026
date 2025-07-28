@@ -20,8 +20,8 @@ chassis.moveToPoint(17.89, 32.28, 1000, {.forwards = true, .maxSpeed = 127, .min
 pros::delay(50);
 chassis.moveToPoint(0.0, 32.78, 800, {.forwards = false, .maxSpeed = 127, .minSpeed = 9, .earlyExitRange = 5}); // Point 4
 
-chassis.moveToPoint(24.02, 9.70, 1000, {.forwards = true, .maxSpeed = 70, .minSpeed = 0}); // Point 5
-chassis.moveToPoint(39.92, -7.7, 1000, {.forwards = true, .maxSpeed = 40, .minSpeed = 0}); // Point 6
+chassis.moveToPoint(24.02, 10.10, 1000, {.forwards = true, .maxSpeed = 70, .minSpeed = 0}); // Point 5
+chassis.moveToPoint(39.62, -7.2, 1000, {.forwards = true, .maxSpeed = 40, .minSpeed = 0}); // Point 6
 pros::Task([] {
 	pros::delay(900);
 	liftPiston.set_value(false); // Lift piston up

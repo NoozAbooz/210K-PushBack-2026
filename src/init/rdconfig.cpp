@@ -30,7 +30,7 @@ static void btn_event_cb(lv_event_t *e) {
             next_btn = lv_btn_create(lv_obj_get_parent(btn));
             lv_obj_set_size(next_btn, 100, 60);
             lv_obj_align(next_btn, LV_ALIGN_BOTTOM_RIGHT, -10, -10);
-            lv_obj_set_style_bg_color(next_btn, lv_color_hex(0x3a8a3a), 0);
+            lv_obj_set_style_bg_color(next_btn, lv_color_hex(0x64ff64), 0);
             lv_obj_add_event_cb(next_btn, [](lv_event_t *e) { gui_selector.focus(); }, LV_EVENT_CLICKED, NULL);
             lv_label_set_text(lv_label_create(next_btn), "Next ->");
         }
