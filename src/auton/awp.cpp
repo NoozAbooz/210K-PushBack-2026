@@ -16,28 +16,28 @@ pros::Task([] {
 	intake.move_voltage(12000); // Spin intake
 });
 // drive into goal #1
-chassis.moveToPoint(18.39, 32.28, 1000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 3
+chassis.moveToPoint(17.89, 32.28, 1000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 3
 pros::delay(50);
 chassis.moveToPoint(0.0, 32.78, 800, {.forwards = false, .maxSpeed = 127, .minSpeed = 9, .earlyExitRange = 5}); // Point 4
 
 chassis.moveToPoint(24.02, 9.70, 1000, {.forwards = true, .maxSpeed = 70, .minSpeed = 0}); // Point 5
-chassis.moveToPoint(39.92, -6.7, 1000, {.forwards = true, .maxSpeed = 40, .minSpeed = 0}); // Point 6
+chassis.moveToPoint(39.92, -7.7, 1000, {.forwards = true, .maxSpeed = 40, .minSpeed = 0}); // Point 6
 pros::Task([] {
 	pros::delay(900);
 	liftPiston.set_value(false); // Lift piston up
 	pros::delay(1650);
 	trapdoorPiston.set_value(false); // Trapdoor piston down
 });
-pros::delay(2600);
+pros::delay(2400);
 chassis.moveToPoint(29, 5, 1000, {.forwards = false, .minSpeed = 110, .earlyExitRange = 2}); // Point 7
 pros::Task([] {
 	pros::delay(400);
 	liftPiston.set_value(true); // Lift piston up
 });
-chassis.moveToPoint(27.74, -43.70, 2000, {.forwards = true, .maxSpeed = 85, .minSpeed = 0}); // Point 7
-chassis.moveToPoint(3.58, -60.16, 1500, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 9
+chassis.moveToPoint(27.24, -43.70, 2000, {.forwards = true, .maxSpeed = 65, .minSpeed = 0}); // Point 7
+chassis.moveToPoint(3.58, -61.36, 1500, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 9
 chassis.turnToHeading(90, 700); // Turn to 90 degrees
-chassis.moveToPoint(16.70, -60.46, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 10
+chassis.moveToPoint(16.70, -61.36, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 10
 pros::Task([] {
 	pros::delay(300);
 	intake.move_voltage(-12000); // Spin intake
@@ -50,11 +50,13 @@ pros::delay(1500);
 ks::moveStraight(-12, 800, {.forwards = false, .maxSpeed = 127, .minSpeed = 1, .earlyExitRange = 1.5}); // Point 11
 pros::Task([] {
 	pros::delay(300);
-	loaderPiston.set_value(true); // dropdown match loader
+	loaderPiston.set_value(true);
+	pros::delay(1300);
+	trapdoorPiston.set_value(false); // dropdown match loader
 });
 chassis.turnToHeading(270, 900, {.direction = AngularDirection::CCW_COUNTERCLOCKWISE}, false);
-chassis.moveToPoint(-9.7, -60.46, 300, {.forwards = true, .maxSpeed = 127, .minSpeed = 127}); // Point 11
-ks::moveStraight(30, 8000, {.forwards = false, .maxSpeed = 60, .minSpeed = 0}); // Point 12
+chassis.moveToPoint(-9.7, -61.496, 300, {.forwards = true, .maxSpeed = 127, .minSpeed = 127}); // Point 11
+ks::moveStraight(30, 1500, {.forwards = false, .maxSpeed = 40, .minSpeed = 0}); // Point 12
 //chassis.moveToPoint(-10, -61.16, 800, {.forwards = true, .maxSpeed = 40, .minSpeed = 0}); // Point 12
 //ks::moveStraight(16, 500, {.forwards = true, .maxSpeed = 127, .minSpeed = 127});
 
@@ -66,7 +68,7 @@ void left_half() { // Left Side Half Solo AWP
 }
 
 void right_half() { // Right Side Half Solo AWP
-
+	
 }
 
 /* LEGACY */

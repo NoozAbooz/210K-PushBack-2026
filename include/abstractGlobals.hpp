@@ -37,3 +37,5 @@ void sawp();
 void left_half();
 void right_half();
 void skills();
+void right_elim();
+void left_elim();
