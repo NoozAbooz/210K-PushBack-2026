@@ -12,7 +12,7 @@
   <p align="center">
     VRC 210K Kawaii Kittens
     <br/>
-    3rd year HS VRC team based in Calgary, Alberta
+    4th year HS VRC team based in Calgary, Alberta
     <br/>
     Western Mechatronics Robotics Club
     <br/>
