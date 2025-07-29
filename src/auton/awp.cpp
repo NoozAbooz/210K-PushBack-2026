@@ -37,7 +37,7 @@ pros::Task([] {
 chassis.moveToPoint(27.24, -43.70, 2000, {.forwards = true, .maxSpeed = 65, .minSpeed = 0}); // Point 7
 chassis.moveToPoint(3.58, -61.36, 1500, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 9
 chassis.turnToHeading(90, 700); // Turn to 90 degrees
-chassis.moveToPoint(16.70, -61.36, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 10
+chassis.moveToPoint(16.70, -61.76, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Point 10
 pros::Task([] {
 	pros::delay(300);
 	intake.move_voltage(-12000); // Spin intake
@@ -55,7 +55,7 @@ pros::Task([] {
 	trapdoorPiston.set_value(false); // dropdown match loader
 });
 chassis.turnToHeading(270, 900, {.direction = AngularDirection::CCW_COUNTERCLOCKWISE}, false);
-chassis.moveToPoint(-9.7, -61.496, 300, {.forwards = true, .maxSpeed = 127, .minSpeed = 127}); // Point 11
+chassis.moveToPoint(-9.7, -61.396, 300, {.forwards = true, .maxSpeed = 127, .minSpeed = 127}); // Point 11
 ks::moveStraight(30, 1500, {.forwards = false, .maxSpeed = 40, .minSpeed = 0}); // Point 12
 //chassis.moveToPoint(-10, -61.16, 800, {.forwards = true, .maxSpeed = 40, .minSpeed = 0}); // Point 12
 //ks::moveStraight(16, 500, {.forwards = true, .maxSpeed = 127, .minSpeed = 127});
@@ -68,7 +68,7 @@ void left_half() { // Left Side Half Solo AWP
 }
 
 void right_half() { // Right Side Half Solo AWP
-	
+
 }
 
 /* LEGACY */
