@@ -42,6 +42,9 @@ void driveForward() {
 
 rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
     {"SAWP", sawp, "", 0},
+
+    {"Left Side AWP", left_half, "", 0},
+    {"Right Side AWP", right_half, "", 0},
     {"Left Half-AWP", left_half, "", 0},
     {"Right Half-AWP", right_half, "", 0},
     {"Right Side Elim", right_elim, "", 0},
