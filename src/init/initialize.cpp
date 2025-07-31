@@ -25,6 +25,10 @@ void initialize() {
     optical.set_integration_time(10);
     odomLiftPiston.set_value(false);
 
+    pros::Task([] {
+
+    });
+
     if (update_odom == false) {
         rd_view_alert(sensorview, "[BIG FAT WARNING] update_odom is DISABLED!! You better know what you're doing!");
     }
