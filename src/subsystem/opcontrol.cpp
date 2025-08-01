@@ -24,7 +24,7 @@ void refreshLift() {
 
 bool trapdoorStatus = false; // ratchet
 void refreshTrapdoor() {
-	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
+	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A) || controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R1)) {
 		trapdoorStatus = !trapdoorStatus;
 		trapdoorPiston.set_value(trapdoorStatus);
 	}

@@ -19,7 +19,7 @@ void opcontrol() {
 	});
 	bool telemToggle = true; // for switching tele output on controller screen
 
-	//odomLiftPiston.set_value(true); // we dont need odom pods for driver
+	odomLiftPiston.set_value(true); // we dont need odom pods for driver
 
 	while (true) { // Main continuous loop
 		/* Drive */
