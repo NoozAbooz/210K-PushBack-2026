@@ -53,9 +53,9 @@ chassis.moveToPoint(11, 10, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed 
 
 pros::delay(1000);
 chassis.turnToHeading(90, 1000);
-chassis.moveToPoint(26, 5, 1000, {.forwards = true, .maxSpeed = 127, .minSpeed = 127}); // Point 8
+chassis.moveToPoint(20, 5, 1000, {.forwards = true, .maxSpeed = 127, .minSpeed = 127}); // Point 8
 ks::moveStraight(-0.2, 2000, {.forwards = false, .maxSpeed = 127, .minSpeed = 0});
-//chassis.turnToHeading(180, 1000);
+chassis.turnToHeading(180, 1000);
 ks::moveStraight(17, 2000, {.forwards = true, .maxSpeed = 127, .minSpeed = 127});
 pros::Task([] {
 pros::delay(200);

@@ -187,9 +187,7 @@ void render_sensor_view() {
         sprintf(buffer, "INTAKE  TOP:%.2f°C | BOTTOM:%.2f°C", intakeTop.get_temperature(), intakeBottom.get_temperature());
         lv_label_set_text(debug_line_3, buffer);
 
-        auto auton = gui_selector.get_auton();
-        const char* auton_name = auton->name.c_str();
-        sprintf(buffer, "ALLIANCE: %s | AUTON: %s", alliance.c_str(), auton_name);
+        sprintf(buffer, "ALLIANCE: %s", alliance.c_str());
         lv_label_set_text(debug_line_4, buffer);
 
         int total_seconds = pros::millis() / 1000;
