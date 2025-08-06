@@ -18,11 +18,12 @@ void initialize() {
     update_odom = true; // toggle ks::odom alg
     pros::Task([] {
         // chassis.calibrate();
-       ks::initializeOdom();
+        ks::initializeOdom();
     });
-    
-    optical.set_led_pwm(100);
+
     optical.set_integration_time(10);
+    pros::delay(20);
+    optical.set_led_pwm(100);
     odomLiftPiston.set_value(false);
 
     pros::Task([] {

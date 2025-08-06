@@ -176,7 +176,7 @@ void render_sensor_view() {
     lv_label_set_text(debug_line_9, "Debug Line 9: ");
 
     while (true) {
-        char buffer[256];
+        char buffer[300];
 
         sprintf(buffer, "X: %.2f | Y: %.2f | HEADING: %.3f°", chassis.getPose().x, chassis.getPose().y, chassis.getPose().theta);
         lv_label_set_text(debug_line_1, buffer);
@@ -187,6 +187,8 @@ void render_sensor_view() {
         sprintf(buffer, "INTAKE  TOP:%.2f°C | BOTTOM:%.2f°C", intakeTop.get_temperature(), intakeBottom.get_temperature());
         lv_label_set_text(debug_line_3, buffer);
 
+        // auto auton = gui_selector.get_auton();
+        // const char* auton_name = auton->name.c_str();
         sprintf(buffer, "ALLIANCE: %s", alliance.c_str());
         lv_label_set_text(debug_line_4, buffer);
 
