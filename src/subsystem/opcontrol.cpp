@@ -1,5 +1,16 @@
 #include "main.h"
 
+// Button L1 -> intake normal (no hoard)
+// button L2 -> Outtake
+// button right (left paddle trigger) -> toggle between going into storage/and normal intake (SET DEFAULT TO NO HOARD)
+
+// button R1 -> score on long goal (emptying hoard, scoring into top goal)
+// button R2 -> score on mid goal (empting hoard, scoring into mid goal)
+// Button Y (right paddle trigger) -> match loader
+
+// Not confirmed build
+// Button A -> hood blocker thingy
+
 // Intake (hold down button to spin motor)
 void refreshIntake() {
 		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
@@ -30,7 +41,7 @@ void refreshTrapdoor() {
 	}
 }
 
-bool loaderStatus = false; // matchloader frame
+bool loaderStatus = false; // matchloader frame/tongue mech
 void refreshLoader() {
 	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
 		loaderStatus = !loaderStatus;

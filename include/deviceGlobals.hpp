@@ -11,7 +11,7 @@ inline pros::MotorGroup leftDrive({-1, -2, 3});
 inline pros::MotorGroup rightDrive({-18, 19, 20});
 
 // Intake
-inline pros::MotorGroup intake({10, 9});
+inline pros::Motor 
 inline pros::Motor intakeTop(10);
 inline pros::Motor intakeBottom(9);
 
@@ -28,7 +28,6 @@ inline pros::Optical optical(12);
 
 inline pros::Distance fwdDistance(11);
 inline pros::Distance rightDistance(17);
-
 
 inline pros::Rotation verticalEncoder(-5);
 inline pros::Rotation horizontalEncoder(-6);
