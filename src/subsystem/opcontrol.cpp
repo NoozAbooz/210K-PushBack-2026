@@ -1,15 +1,15 @@
 #include "main.h"
 
-// Button L1 -> intake normal (no hoard)
-// button L2 -> Outtake
-// button right (left paddle trigger) -> toggle between going into storage/and normal intake (SET DEFAULT TO NO HOARD)
+// L1 Intake fast cycle (no hoard)
+// L2 Outtake
 
-// button R1 -> score on long goal (emptying hoard, scoring into top goal)
-// button R2 -> score on mid goal (empting hoard, scoring into mid goal)
-// Button Y (right paddle trigger) -> match loader
+// Left trigger (right arrow) - toggle to go hoard
 
-// Not confirmed build
-// Button A -> hood blocker thingy
+// button a, toggle for emptying hoard
+// R1 - Score on long goal (default you jsut run intake normally and lift the hood, if button A was triggered you empty hoard and score)
+// R2- score on mid(default you jsut run intake normally for mid goal, if button A was triggered you empty hoard and score)
+
+// right trigger (Y) - match load ✅
 
 // Intake (hold down button to spin motor)
 void refreshIntake() {
