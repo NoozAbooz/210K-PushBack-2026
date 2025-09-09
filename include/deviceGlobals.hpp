@@ -7,16 +7,16 @@ inline pros::Controller controller(pros::E_CONTROLLER_MASTER);
 // Drivetrain
 
 // v1
-inline pros::MotorGroup leftDrive({-1, -2, 3});
-inline pros::MotorGroup rightDrive({-18, 19, 20});
+inline pros::MotorGroup leftDrive({-11, -12, 13});
+inline pros::MotorGroup rightDrive({-16, 15, 14});
 
 // Intake
-inline pros::Motor 
-inline pros::Motor intakeTop(10);
-inline pros::Motor intakeBottom(9);
+
+inline pros::MotorGroup intake({9 ,10, 20});
+//inline pros::Motor intakeBottom(9);
 
 // Pneumatics
-inline pros::adi::Pneumatics liftPiston('A', false);
+inline pros::adi::Pneumatics liftPiston('H', false);
 inline pros::adi::Pneumatics loaderPiston('B', false);
 inline pros::adi::Pneumatics trapdoorPiston('C', false); // now for ratchet
 inline pros::adi::Pneumatics odomLiftPiston('D', false);
