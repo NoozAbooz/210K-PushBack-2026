@@ -20,7 +20,6 @@ void refreshIntake() {
 			intakeBottom.move_voltage(12000);
 			intakeMiddle.move_voltage(12000);
 		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
-			trapdoorPiston.set_value(true); // open knocker
 			intakeTop.move_voltage(-12000);
 			intakeBottom.move_voltage(12000);
 			intakeMiddle.move_voltage(12000);
