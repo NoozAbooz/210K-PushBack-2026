@@ -19,20 +19,15 @@ void opcontrol() {
 	});
 	bool telemToggle = true; // for switching tele output on controller screen
 
-	odomLiftPiston.set_value(true); // we dont need odom pods for driver
-
 	while (true) { // Main continuous loop
 		/* Drive */
 		ks::arcadeDrive(0, 0, 1);
 
 		/* Subsystem Listeners */
-	
 		refreshIntake();
 		indexintake();
-		refreshLift();
-		refreshTrapdoor();
+
 		refreshLoader();
-		refreshOdomLift();
 
 		// Report temperature telemetry 😭
 		double drivetrainTemps = ks::vector_average(leftDrive.get_temperature_all());

@@ -24,13 +24,11 @@ extern void competitionTelemtryRefresh();
 void arcadeDrive();
 
 void refreshIntake();
-void refreshLift();
-void refreshTrapdoor();
-void refreshLoader();
-void refreshOdomLift();
 void indexintake();
+void refreshLoader();
 
 /* Macros */
+extern bool intakeLock;
 void scoreOwnColour(int timeout);
 
 /* Autons */

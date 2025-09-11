@@ -12,15 +12,13 @@ inline pros::MotorGroup rightDrive({-16, 15, 14});
 
 // Intake
 
-inline pros::Motor intakeMiddle(10);
-inline pros::Motor intakeTop(20);
-inline pros::Motor intakeBottom(9);
+inline pros::Motor intakeMiddle(10); // yes
+inline pros::Motor intakeTop(20); // 11w flexwheel for goal height
+inline pros::Motor intakeBottom(9); // preroller
 
 // Pneumatics
-inline pros::adi::Pneumatics liftPiston('H', false);
-inline pros::adi::Pneumatics loaderPiston('B', false);
-inline pros::adi::Pneumatics trapdoorPiston('C', false); // now for ratchet
-inline pros::adi::Pneumatics odomLiftPiston('D', false);
+inline pros::adi::Pneumatics knockerPiston('X', false);
+inline pros::adi::Pneumatics loaderPiston('X', false); // matchloader
 
 /* Declare sensors */
 inline pros::Imu inertial1(7);

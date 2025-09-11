@@ -15,12 +15,12 @@
 // Intake Hold (no hoard) to score
 void refreshIntake() {
 		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
-			trapdoorPiston.set_value(true); // open knocker
+			knockerPiston.set_value(true); // open knocker
 			intakeTop.move_voltage(12000);
 			intakeBottom.move_voltage(12000);
 			intakeMiddle.move_voltage(12000);
 		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
-			trapdoorPiston.set_value(true); // open knocker
+			knockerPiston.set_value(true); // open knocker
 			intakeTop.move_voltage(-12000);
 			intakeBottom.move_voltage(12000);
 			intakeMiddle.move_voltage(12000);
@@ -34,7 +34,7 @@ void refreshIntake() {
 // intake index
 void indexintake() {
 	if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-			trapdoorPiston.set_value(false); // shut knocker		
+			knockerPiston.set_value(false); // shut knocker		
 			intakeTop.move_voltage(12000);
 			intakeBottom.move_voltage(12000);
 			intakeMiddle.move_voltage(12000);
@@ -49,34 +49,10 @@ void indexintake() {
 		}
 	}
 
-bool liftStatus = false;
-void refreshLift() {
-	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
-		liftStatus = !liftStatus;
-		liftPiston.set_value(liftStatus);
-	}
-}
-
-bool trapdoorStatus = false; // ratchet
-void refreshTrapdoor() {
-	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) { //|| controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R1)) {
-		trapdoorStatus = !trapdoorStatus;
-		trapdoorPiston.set_value(trapdoorStatus);
-	}
-}
-
 bool loaderStatus = false; // matchloader frame/tongue mech
 void refreshLoader() {
 	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
 		loaderStatus = !loaderStatus;
 		loaderPiston.set_value(loaderStatus);
-	}
-}
-
-bool odomLiftStatus = true; // should be up by default in opcontrol
-void refreshOdomLift() {
-	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
-		odomLiftStatus = !odomLiftStatus;
-		odomLiftPiston.set_value(odomLiftStatus);
 	}
 }
