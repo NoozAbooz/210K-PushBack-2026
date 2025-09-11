@@ -26,7 +26,9 @@ void opcontrol() {
 		ks::arcadeDrive(0, 0, 1);
 
 		/* Subsystem Listeners */
+	
 		refreshIntake();
+		indexintake();
 		refreshLift();
 		refreshTrapdoor();
 		refreshLoader();
@@ -43,7 +45,7 @@ void opcontrol() {
 			telemToggle = !telemToggle; // Toggle telemetry display
 		}
 		if(!telemToggle) {
-			controller.print(0, 0, "DT%.0lf|INT%.0lf|T%.0lf  ", drivetrainTemps, intake.get_temperature(1), theta);
+			controller.print(0, 0, "DT%.0lf|INT%.0lf|T%.0lf  ", drivetrainTemps, intakeBottom.get_temperature(1), theta);
 		} else {
 			controller.print(0, 0, "X:%.0lf Y:%.0lf T:%.0lf   ", chassis.getPose().x, chassis.getPose().y, theta);
 		}

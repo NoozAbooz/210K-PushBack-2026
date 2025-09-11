@@ -28,6 +28,7 @@ void refreshLift();
 void refreshTrapdoor();
 void refreshLoader();
 void refreshOdomLift();
+void indexintake();
 
 /* Macros */
 void scoreOwnColour(int timeout);

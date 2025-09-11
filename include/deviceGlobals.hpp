@@ -12,8 +12,9 @@ inline pros::MotorGroup rightDrive({-16, 15, 14});
 
 // Intake
 
-inline pros::MotorGroup intake({9 ,10, 20});
-//inline pros::Motor intakeBottom(9);
+inline pros::Motor intakeMiddle(10);
+inline pros::Motor intakeTop(20);
+inline pros::Motor intakeBottom(9);
 
 // Pneumatics
 inline pros::adi::Pneumatics liftPiston('H', false);
