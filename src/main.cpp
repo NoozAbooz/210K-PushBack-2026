@@ -1,4 +1,5 @@
 #include "main.h"
+#include "abstractGlobals.hpp"
 
 /**
  * Runs the operator control code. This function will be started in its own task
@@ -25,8 +26,7 @@ void opcontrol() {
 
 		/* Subsystem Listeners */
 		refreshIntake();
-		indexintake();
-
+		toggleHoard();
 		refreshLoader();
 
 		// Report temperature telemetry 😭

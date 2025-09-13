@@ -24,7 +24,7 @@ extern void competitionTelemtryRefresh();
 void arcadeDrive();
 
 void refreshIntake();
-void indexintake();
+void toggleHoard();
 void refreshLoader();
 
 /* Macros */

@@ -24,7 +24,7 @@ void initialize() {
     optical.set_integration_time(10);
     pros::delay(20);
     optical.set_led_pwm(100);
-    odomLiftPiston.set_value(false);
+    //odomLiftPiston.set_value(false);
 
     pros::Task([] {
 
@@ -43,7 +43,7 @@ void initialize() {
  */
 void disabled() {
     field_status = "disabled";
-    odomLiftPiston.set_value(false);
+   // odomLiftPiston.set_value(false);
 }
 
 /**
@@ -65,7 +65,7 @@ void competition_initialize() {
     rd_view_focus(allianceview);
     field_status = "competition";
     
-    odomLiftPiston.set_value(false); // we dont need odom pods for driver
+    //odomLiftPiston.set_value(false); // we dont need odom pods for driver
 
     gui_selector.on_select([](std::optional<rd::Selector::routine_t> routine) {
         competitionTelemtryRefresh();

@@ -12,8 +12,8 @@ inline pros::MotorGroup rightDrive({-16, 15, 14});
 
 // Intake
 
-inline pros::Motor intakeMiddle(10); // yes
-inline pros::Motor intakeTop(20); // 11w flexwheel for goal height
+inline pros::Motor intakeMiddle(8); // yes
+inline pros::Motor intakeTop(10); // 11w flexwheel for goal height
 inline pros::Motor intakeBottom(9); // preroller
 
 // Pneumatics
@@ -23,7 +23,7 @@ inline pros::adi::Pneumatics loaderPiston('X', false); // matchloader
 /* Declare sensors */
 inline pros::Imu inertial1(7);
 inline pros::Imu inertial2(14);
-inline pros::Optical optical(12);
+inline pros::Optical optical(17);
 
 inline pros::Distance fwdDistance(11);
 inline pros::Distance rightDistance(17);

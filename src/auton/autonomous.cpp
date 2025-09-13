@@ -57,7 +57,6 @@ rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
     {"Move forward", driveForward, "", 0},
     { "Test PID", testPID, "", 220},
     { "Test BM", testBM, "", 220},
-        {"Test ColourSort", testColourSort, "", 220},
 });
 
 void autonomous() {
@@ -65,7 +64,6 @@ void autonomous() {
     inertial2.tare();
 
     ks::setOdomPosition(0, 0, 0);
-    odomLiftPiston.set_value(false);
 
     field_status = "autonomous";
     console.println("Running auton...");
