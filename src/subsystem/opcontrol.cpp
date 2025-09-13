@@ -18,8 +18,10 @@ void toggleHoard() {
 		hoardStatus = !hoardStatus;
 		if (hoardStatus) {
 			console.println("Hoard mode: ON");
+			controller.rumble(".");
 		} else {
 			console.println("Hoard mode: OFF");
+			controller.rumble("..");
 		}
 	}
 }
