@@ -19,27 +19,28 @@ inline pros::Motor intakeBottom(9); // preroller
 // Pneumatics
 inline pros::adi::Pneumatics knockerPiston('X', false);
 inline pros::adi::Pneumatics loaderPiston('X', false); // matchloader
+inline pros::adi::Pneumatics intakeLiftPiston('X', false);
 
 /* Declare sensors */
 inline pros::Imu inertial1(7);
-inline pros::Imu inertial2(14);
+inline pros::Imu inertial2(19);
 inline pros::Optical optical(17);
 
 inline pros::Distance fwdDistance(11);
-inline pros::Distance rightDistance(17);
+inline pros::Distance rightDistance(18);
 
-inline pros::Rotation verticalEncoder(-5);
-inline pros::Rotation horizontalEncoder(-6);
+inline pros::Rotation verticalEncoder(5);
+inline pros::Rotation horizontalEncoder(-20);
 //hello world it is 210K secret note iykyk :D
 // horizontal tracking wheel
-inline lemlib::TrackingWheel vertical_tracking_wheel(&verticalEncoder, lemlib::Omniwheel::NEW_2, -0.244094);
+inline lemlib::TrackingWheel vertical_tracking_wheel(&verticalEncoder, lemlib::Omniwheel::NEW_2, -9.5);
 // vertical tracking wheel
-inline lemlib::TrackingWheel horizontal_tracking_wheel(&horizontalEncoder, lemlib::Omniwheel::NEW_2, 0);
+inline lemlib::TrackingWheel horizontal_tracking_wheel(&horizontalEncoder, lemlib::Omniwheel::NEW_2, 0.2);
 
 // drivetrain settings
 inline lemlib::Drivetrain drivetrain(&leftDrive, // left motor group
                               &rightDrive, // right motor group
-                              13.5, // track width
+                              11.3, // track width
                               lemlib::Omniwheel::NEW_325,
                               450, // drivetrain rpm
                               2 // chase power is 2. If we had traction wheels, it would have been 8
