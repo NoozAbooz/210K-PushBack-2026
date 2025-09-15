@@ -184,7 +184,7 @@ void render_sensor_view() {
         sprintf(buffer, "TEMPERATURE  L:%.2f°C | R:%.2f°C | Batt:%.2f°C", leftDrive.get_temperature(), rightDrive.get_temperature(), pros::battery::get_temperature());
         lv_label_set_text(debug_line_2, buffer);
 
-        sprintf(buffer, "INTAKE  TOP:%.2f°C | MID:%.2f°C | BOTTOM:%.2f°C", intakeTop.get_temperature(), intakeMiddle.get_temperature(), intakeBottom.get_temperature());
+        sprintf(buffer, "INTAKE  TOP:%.2f°C | MID:%.2f°C | BOTTOM:%.2f°C", intakeTop.get_temperature(), intakeMiddleUpper.get_temperature(), intakeMiddleLower.get_temperature(), intakeBottom.get_temperature());
         lv_label_set_text(debug_line_3, buffer);
 
         // auto auton = gui_selector.get_auton();

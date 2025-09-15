@@ -31,44 +31,51 @@ void refreshIntake() {
 		if(hoardStatus == false)
 			if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
 			knockerPiston.set_value(true); // open knocker
-			intakeTop.move_voltage(12000);
 			intakeBottom.move_voltage(12000);
-			intakeMiddle.move_voltage(12000);
+			intakeMiddleUpper.move_voltage(12000);
+			intakeMiddleLower.move_voltage(12000);
 			} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
 			intakeTop.move_voltage(-12000);
 			intakeBottom.move_voltage(12000);
-			intakeMiddle.move_voltage(12000);
+			intakeMiddleUpper.move_voltage(12000);
+			intakeMiddleLower.move_voltage(12000);
 			} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
 			knockerPiston.set_value(false); // shut knocker		
-			//intakeTop.move_voltage(12000);
 			intakeBottom.move_voltage(12000);
-			intakeMiddle.move_voltage(12000);
+			intakeMiddleUpper.move_voltage(12000);
+			intakeMiddleLower.move_voltage(12000);
 			} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
 			intakeBottom.move_voltage(-12000);
-			intakeMiddle.move_voltage(-12000);
+			intakeMiddleUpper.move_voltage(-12000);
+			intakeMiddleLower.move_voltage(-12000);
 			} else {
 			intakeTop.move_voltage(0);
 			intakeBottom.move_voltage(0);
-			intakeMiddle.move_voltage(0);
+			intakeMiddleUpper.move_voltage(0);
+			intakeMiddleLower.move_voltage(0);
 		}
 		else // hoard mode
 			if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
 			knockerPiston.set_value(true); // open knocker
 			intakeTop.move_voltage(12000);
 			intakeBottom.move_voltage(-12000);
-			intakeMiddle.move_voltage(12000);
+			intakeMiddleUpper.move_voltage(12000);
+			intakeMiddleLower.move_voltage(12000);
 			} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
 			intakeTop.move_voltage(-12000);
 			intakeBottom.move_voltage(-12000);
-			intakeMiddle.move_voltage(12000);
+			intakeMiddleUpper.move_voltage(12000);
+			intakeMiddleLower.move_voltage(12000);
 			} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
 			knockerPiston.set_value(false); // shut knocker		
 			//intakeTop.move_voltage(12000);
 			intakeBottom.move_voltage(12000);
-			intakeMiddle.move_voltage(-12000);
+			intakeMiddleUpper.move_voltage(-12000);
+			intakeMiddleLower.move_voltage(12000);
 			} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
 			intakeBottom.move_voltage(-12000);
-			intakeMiddle.move_voltage(12000);
+			intakeMiddleUpper.move_voltage(12000);
+			intakeMiddleLower.move_voltage(-12000);
 			} else {
 			intakeTop.move_voltage(0);
 			intakeBottom.move_voltage(0);
