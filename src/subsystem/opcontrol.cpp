@@ -79,7 +79,8 @@ void refreshIntake() {
 			} else {
 			intakeTop.move_voltage(0);
 			intakeBottom.move_voltage(0);
-			intakeMiddle.move_voltage(0);
+			intakeMiddleLower.move_voltage(0);
+			intakeMiddleUpper.move_voltage(0);
 		}
 	}
 
