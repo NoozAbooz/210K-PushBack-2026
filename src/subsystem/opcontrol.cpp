@@ -14,16 +14,24 @@
 
 bool hoardStatus = false; // for toggling hoard mode
 void toggleHoard() {
-	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
-		hoardStatus = !hoardStatus;
-		if (hoardStatus) {
-			console.println("Hoard mode: ON");
-			controller.rumble(".");
-		} else {
-			console.println("Hoard mode: OFF");
-			controller.rumble("..");
+	pros::Task ([] {
+		while (true) {
+			if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+				hoardStatus = !hoardStatus;
+				if (hoardStatus) {
+					console.println("Hoard mode: ON");
+					controller.rumble("..");
+					pros::delay(50);
+				} else {
+					console.println("Hoard mode: OFF");
+					controller.rumble(".");
+					pros::delay(50);
+				}
+			}
+			pros::delay(10);
 		}
-	}
+	});
+
 }
 
 // Intake Hold (no hoard) to score

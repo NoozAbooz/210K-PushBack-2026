@@ -19,30 +19,30 @@ void opcontrol() {
 		}
 	});
 	bool telemToggle = true; // for switching tele output on controller screen
+	toggleHoard();
 
 	while (true) { // Main continuous loop
 		/* Drive */
-		ks::arcadeDrive(0, 0, 1);
+		kw::arcadeDrive(0, 0, 1);
 
 		/* Subsystem Listeners */
 		refreshIntake();
-		toggleHoard();
 		refreshLoader();
 
 		// Report temperature telemetry 😭
-		double drivetrainTemps = ks::vector_average(leftDrive.get_temperature_all());
-		double theta = fmod(chassis.getPose().theta, 360); // wrap to [0, 360) for user view
-    	if (theta < 0) {
-       		theta += 360;
+		double drivetrainTemps = kw::vector_average(leftDrive.get_temperature_all());
+		double heading = fmod(chassis.getPose().theta, 360); // wrap to [0, 360) for user view
+    	if (heading < 0) {
+       		heading += 360;
 		}
 
 		if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)) {
 			telemToggle = !telemToggle; // Toggle telemetry display
 		}
 		if(!telemToggle) {
-			controller.print(0, 0, "DT%.0lf|INT%.0lf|T%.0lf  ", drivetrainTemps, intakeBottom.get_temperature(1), theta);
+			controller.print(0, 0, "DT%.0lf|INT%.0lf|T%.0lf  ", drivetrainTemps, intakeBottom.get_temperature(1), heading);
 		} else {
-			controller.print(0, 0, "X:%.0lf Y:%.0lf T:%.0lf   ", chassis.getPose().x, chassis.getPose().y, theta);
+			controller.print(0, 0, "X:%.0lf Y:%.0lf T:%.0lf   ", chassis.getPose().x, chassis.getPose().y, heading);
 		}
 
 		pros::delay(10); // Delay to save resources on brain

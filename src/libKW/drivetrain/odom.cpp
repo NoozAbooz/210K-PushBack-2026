@@ -1,7 +1,5 @@
 #include "main.h"
 
-using namespace ks;
-
 double    x = 0; // global X
 double    y = 0; // global Y
 double    theta = 0; // global theta
@@ -77,7 +75,7 @@ double avg_heading;
 double deltaXLocal;
 double deltaYLocal;
 
-void ks::initializeOdom() {
+void kw::initializeOdom() {
 	inertial1.reset();
 	inertial2.reset();
 
@@ -107,10 +105,10 @@ void ks::initializeOdom() {
 	prev_horizontal_pos = horizontal_pos;
 	prev_heading = heading;
 
-	pros::Task odom_task(ks::odomUpdate); 
+	pros::Task odom_task(kw::odomUpdate); 
 }
 
-void ks::setOdomPosition(double x_new, double y_new, double theta_new) {
+void kw::setOdomPosition(double x_new, double y_new, double theta_new) {
 	update_odom = false; // stop odom task loop
 	x = x_new;
 	y = y_new;
@@ -136,7 +134,7 @@ float absX = -((backwardDist.get_distance() / 25.4 + 3.9) - 72);
 float absY = leftDist.get_distance() / 25.4 - 0;
 chassis.setPose(absX, absY, chassis.getPose().theta); */
 
-void ks::odomUpdate() {
+void kw::odomUpdate() {
 	console.printf("%.0lf, %.0lf", verticalEncoder.get_position(), get_horizontal_distance_traveled());
 
 	while (true) {
@@ -169,8 +167,9 @@ void ks::odomUpdate() {
 
 			x += (deltaYLocal * cos(avg_heading)) + (deltaXLocal * sin(avg_heading));
 			y += (deltaYLocal * sin(avg_heading)) - (deltaXLocal * cos(avg_heading));
+			theta = get_imu_rotation();
 
-			chassis.setPose(x, y, get_imu_rotation());
+			chassis.setPose(x, y, theta);
 		}
 		pros::delay(10);
 	}

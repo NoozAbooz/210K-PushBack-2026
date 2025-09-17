@@ -7,7 +7,7 @@
 #include <deque>
 #include <cmath>
 
-namespace ks
+namespace kw
 {
 	inline double vector_average(const std::vector<double>& v) {
 	    return std::accumulate(v.begin(), v.end(), 0.0) / v.size();
@@ -23,38 +23,7 @@ namespace ks
 		return data[windowSize / 2];
 	}
 
-	// prolly dont use this 💀
-	inline double tripleIMUHeading(double heading1, double heading2, double heading3, double threshold) { 
-		// Run through median filter
-	    int windowSize = 20;
-		std::deque<double> buffer1;
-		std::deque<double> buffer2;
-		std::deque<double> buffer3;
-		heading1 = ks::median_filter(buffer1, heading1, windowSize);
-		heading2 = ks::median_filter(buffer2, heading2, windowSize);
-		heading3 = ks::median_filter(buffer3, heading3, windowSize);
-	    // Calculate the absolute differences between the headings
-	    double diff12 = std::abs(heading1 - heading2);
-	    double diff23 = std::abs(heading2 - heading3);
-	    double diff13 = std::abs(heading1 - heading3);
-	    // Check if one of the sensors is drifting
-	    if (diff12 > threshold && diff13 > threshold) {
-	        // Sensor 1 is drifting, return mean of sensor 2 and 3
-	        return (heading2 + heading3) / 2.0;
-	    } else if (diff12 > threshold && diff23 > threshold) {
-	        // Sensor 2 is drifting, return mean of sensor 1 and 3
-	        return (heading1 + heading3) / 2.0;
-	    } else if (diff23 > threshold && diff13 > threshold) {
-	        // Sensor 3 is drifting, return mean of sensor 1 and 2
-	        return (heading1 + heading2) / 2.0;
-	    } else {
-	        // No sensor is drifting, return mean of all sensors 
-			// (or all of them are drifing and we just gotta pray 💀)
-	        return (heading1 + heading2 + heading3) / 3.0;
-	    }
-	}
-
-	inline bool isDriverControl() {
+	inline bool is_driver_control() {
 		return pros::competition::is_connected() && !pros::competition::is_autonomous() && !pros::competition::is_disabled();
 	}
 
@@ -94,15 +63,19 @@ namespace ks
 	  return(mm / 25.4);
 	}
 
+	inline double get_radius(double x, double y, double x1, double y1, double angle) {
+	  double delta_x = x1 - x;
+	  double delta_y = y1 - y;
+	  if((2 * delta_y * sin(to_rad(90 - angle))) == 0) {
+	    return 999;
+	  }
+	  return (delta_x * delta_x + delta_y * delta_y) / (2 * delta_y * sin(to_rad(90 - angle)));
+	}
+
 	inline double clamp(double input, double min, double max){
 	  if( input > max ){ return(max); }
 	  if(input < min){ return(min); }
 	  return(input);
-	}
-
-	inline bool isReversed(double input){
-	  if(input<0) return(true);
-	  return(false);
 	}
 
   	inline float to_milivolt(float input){

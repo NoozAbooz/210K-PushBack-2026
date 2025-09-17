@@ -1,7 +1,7 @@
 #pragma once
 #include "main.h"
 
-namespace ks
+namespace kw
 {
 	class Position{
         public:

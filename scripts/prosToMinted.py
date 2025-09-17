@@ -59,7 +59,7 @@ def main():
             '''
             if(not 'src' in components
             or ('src' and 'auton') in components
-            or ('src' and 'libKS') in components):
+            or ('src' and 'libKW') in components):
                 continue
 
             # Build a relative unix path for Overleaf to find the source files
@@ -107,7 +107,7 @@ def main():
 
         # Recursively search the entire project for any relevant libstrait files
         f.write("%%---------------------\n")
-        f.write("\\section{libKS}\n\n")
+        f.write("\\section{libKW}\n\n")
         for source in root.cwd().glob('**/*.c*'):
             # break source into components starting from the root
             components = source.parts[ROOT_START:]
@@ -117,7 +117,7 @@ def main():
                 PROS projects may contain .c image arrays or .csv files but
                 those should be organized outside of src directory
             '''
-            if(not 'libKS' in components
+            if(not 'libKW' in components
             or '.d' in components
             or 'bin' in components):
                 continue
@@ -146,7 +146,7 @@ def main():
             # It is good convention to keep all your header files in include/
             # Sub directories within include/ will still be found
             if('api.h' in components
-            or ('include' and 'libKS') in components
+            or ('include' and 'libKW') in components
             or ('include' and 'main.h') in components
             or ('include' and 'liblvgl') in components
             or ('include' and 'display') in components
@@ -220,7 +220,7 @@ def main():
 \predate{\begin{center}}
     \postdate{\par\end{center}}
 
-\title{\textbf{210K Programming Documentation (libKS)}}
+\title{\textbf{210K Programming Documentation (libKW)}}
 \author{Michael Z and Brandon K\thanks{with support from WestMech and VTOW}}
 \date{\today}
 

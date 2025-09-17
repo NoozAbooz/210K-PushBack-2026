@@ -1,7 +1,7 @@
 #pragma once
 #include "main.h"
 
-namespace ks {
+namespace kw {
     void moveRaw(int voltage, int time);
     void moveStraight(float length, int timeout, lemlib::MoveToPointParams params);
     double driveCurve(double input, double curve);
