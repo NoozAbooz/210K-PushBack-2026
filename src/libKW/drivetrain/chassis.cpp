@@ -1,22 +1,10 @@
 #include "main.h"
 
-void kw::moveRaw(int voltage, int time) {
-	leftDrive.move_voltage(voltage);
-	rightDrive.move_voltage(voltage);
-
-	pros::delay(time);
-
-	leftDrive.move_voltage(0);
-	rightDrive.move_voltage(0);
-}
-
-void kw::moveStraight(float length, int timeout, lemlib::MoveToPointParams params) {
-    if (chassis.isInMotion()) chassis.waitUntilDone();
-    params.forwards = length > 0;
-    lemlib::Pose pose = chassis.getPose();
-    chassis.moveToPoint(pose.x + length * sin(lemlib::degToRad(pose.theta)),
-                           pose.y + length * cos(lemlib::degToRad(pose.theta)), timeout, params);
-}
+// ============================================================================
+// INTERNAL STATE (DO NOT CHANGE)
+// ============================================================================
+bool is_turning = false;
+double prev_left_output = 0, prev_right_output = 0;
 
 // opcontrol
 double kw::driveCurve(double input, double curve) {
@@ -40,3 +28,12 @@ void kw::arcadeDrive(int linCurve, int rotCurve, double turnScale) {
     leftDrive.move_voltage((power + rawTurn * turnScale) * (12000.0 / 127));
     rightDrive.move_voltage((power - rawTurn * turnScale) * (12000.0 / 127));
 }
+
+void kw::moveStraight(float length, int timeout, lemlib::MoveToPointParams params) {
+    if (chassis.isInMotion()) chassis.waitUntilDone();
+    params.forwards = length > 0;
+    lemlib::Pose pose = chassis.getPose();
+    chassis.moveToPoint(pose.x + length * sin(lemlib::degToRad(pose.theta)),
+                           pose.y + length * cos(lemlib::degToRad(pose.theta)), timeout, params);
+}
+

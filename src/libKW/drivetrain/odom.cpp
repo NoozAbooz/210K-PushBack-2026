@@ -1,5 +1,11 @@
 #include "main.h"
 
+double kw::x_pos = 0; // global X
+double kw::y_pos = 0; // global Y
+double kw::theta = 0; // global theta [0, 359]
+
+double kw::correct_angle = 0; // normalized
+
 double    x = 0; // global X
 double    y = 0; // global Y
 double    theta = 0; // global theta

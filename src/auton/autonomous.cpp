@@ -14,13 +14,9 @@
 
 void testPID() {
     kw::moveStraight(24, 1500, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Move forward 24 inches
-    //chassis.moveToPoint(0, 24, 1500);
-    // intake.move_voltage(12000);
-    chassis.turnToHeading(180, 4000);
-    // chassis.moveToPoint(24, 24, 1000);
-    // chassis.turnToHeading(180, 2000);
+
 }
-void testBM() {
+void testDistReset() {
     kw::moveRaw(12000, 2000); //blocking
     pros::delay(500);
 
@@ -37,7 +33,7 @@ void testColourSort() {
 
 /* Legacy Auton Routines */
 void driveForward() {
-    chassis.moveToPoint(0, 5, 1000);
+
 }
 
 rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)

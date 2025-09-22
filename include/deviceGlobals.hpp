@@ -32,48 +32,58 @@ inline pros::Distance rightDistance(18);
 inline pros::Rotation verticalEncoder(5);
 inline pros::Rotation horizontalEncoder(-20);
 //hello world it is 210K secret note iykyk :D
-// horizontal tracking wheel
-inline lemlib::TrackingWheel vertical_tracking_wheel(&verticalEncoder, lemlib::Omniwheel::NEW_2, -9.5);
-// vertical tracking wheel
-inline lemlib::TrackingWheel horizontal_tracking_wheel(&horizontalEncoder, lemlib::Omniwheel::NEW_2, 0.2);
 
-// drivetrain settings
-inline lemlib::Drivetrain drivetrain(&leftDrive, // left motor group
-                              &rightDrive, // right motor group
-                              11.3, // track width
-                              lemlib::Omniwheel::NEW_325,
-                              450, // drivetrain rpm
-                              2 // chase power is 2. If we had traction wheels, it would have been 8
-);
-// lateral motion controller
-inline lemlib::ControllerSettings lateralController(7.5, // proportional gain (kP)
-                                              0, // integral gain (kI)
-                                              35, // derivative gain (kD)
-                                              0, // anti windup
-                                              1, // small error range, in inches
-                                              100, // small error range timeout, in milliseconds
-                                              3, // large error range, in inches
-                                              500, // large error range timeout, in milliseconds
-                                              7 // maximum acceleration (slew)
-);
-// angular motion controller
-inline lemlib::ControllerSettings angularController(4.5, // proportional gain (kP)
-                                              0, // integral gain (kI)
-                                              45, // derivative gain (kD)
-                                              0, // anti windup
-                                              1, // small error range, in inches
-                                              100, // small error range timeout, in milliseconds
-                                              3, // large error range, in inches
-                                              500, // large error range timeout, in milliseconds
-                                              0 // maximum acceleration (slew)
-);
-// sensors for odometry
-// note that in this example we use internal motor encoders, so we don't pass vertical tracking wheels
-inline lemlib::OdomSensors sensors(&vertical_tracking_wheel, // vertical tracking wheel 1, set to nullptr as we don't have one
-                            nullptr, // vertical tracking wheel 2, set to nullptr as we don't have one
-                            &horizontal_tracking_wheel, // horizontal tracking wheel 1
-                            nullptr, // horizontal tracking wheel 2, set to nullptr as we don't have a second one
-                            &inertial1 // inertial sensor
-);
-// create the chassis
-inline lemlib::Chassis chassis(drivetrain, lateralController, angularController, sensors);
+
+// ============================================================================
+// USER-CONFIGURABLE PARAMETERS
+// ============================================================================
+// Distance between the middles of the left and right wheels of the drive (in inches)
+inline double distance_between_wheels = 12.3;
+
+// motor to wheel gear ratio * wheel diameter (in inches) * pi
+inline double wheel_distance_in = (36.0 / 48.0) * 3.17 * M_PI;
+
+// PID Constants for movement
+// distance_* : Linear PID for straight driving
+// turn_*     : PID for turning in place
+// heading_correction_* : PID for heading correction during linear movement
+inline double distance_kp = 1.1, distance_ki = 0.1, distance_kd = 7;
+inline double turn_kp = 0.3, turn_ki = 0, turn_kd = 2.5;
+inline double heading_correction_kp = 0.6, heading_correction_ki = 0, heading_correction_kd = 4;
+
+// Enable or disable the use of tracking wheels
+inline bool using_horizontal_tracker = true;  // Set to true if a horizontal tracking wheel is installed and used for odometry
+inline bool using_vertical_tracker = true;   // Set to true if a vertical tracking wheel is installed and used for odometry
+
+// IGNORE THESE IF YOU ARE NOT USING TRACKING WHEELS
+// These comments are in the perspective of a top down view of the robot when the robot is facing upwards on your view
+
+// Horizontal distance from the center of the bot to the vertical tracking wheel (in inches, positive is when the wheel is to the right of the center)
+inline double horizontal_tracker_dist_from_center = 2.71875;
+inline double horizontal_tracker_diameter = 1.975; // Diameter of the horizontal tracker wheel (in inches)
+
+// Vertical distance from the center of the bot to the horizontal tracking wheel (in inches, positive is when the wheel is behind the center of the robot)
+inline double vertical_tracker_dist_from_center = -0.03125;
+inline double vertical_tracker_diameter = 1.975; // Diameter of the vertical tracker wheel (in inches)
+
+// ============================================================================
+// ADVANCED TUNING (OPTIONAL)
+// ============================================================================
+
+inline bool heading_correction = true; // Use heading correction when the bot is stationary
+// Set to true for more accuracy and smoothness, false for more speed
+inline bool dir_change_start = true;   // Less accel/decel due to expecting direction change at start of movement
+inline bool dir_change_end = true;     // Less accel/decel due to expecting direction change at end of movement
+
+inline double min_output = 10; // Minimum output voltage to motors while chaining movements
+
+// Maximum allowed change in voltage output per 10 msec during movement
+inline double max_slew_accel_fwd = 24;
+inline double max_slew_decel_fwd = 24;
+inline double max_slew_accel_rev = 24;
+inline double max_slew_decel_rev = 24;
+
+// Prevents too much slipping during boomerang movements
+// Decrease if there is too much drifting and inconsistency during boomerang
+// Increase for more speed during boomerang
+inline double chase_power = 2;
