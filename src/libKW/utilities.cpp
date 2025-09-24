@@ -16,7 +16,7 @@ bool kw::is_driver_control() {
 }
 
 double kw::to_rad(double angle_deg){
-  	return(angle_deg/(180.0/M_PI));
+  	return(angle_deg*(M_PI/180.0));
 }
 double kw::to_deg(double angle_rad){
   	return(angle_rad*(180.0/M_PI));

@@ -10,6 +10,8 @@ double prev_left_output = 0, prev_right_output = 0;
 // ============================================================================
 // MAIN DRIVE AND TURN FUNCTIONS
 // ============================================================================
+// Sidenote: These functions do voltage calcultions in volts, then convert to millivolts for motor commands
+// input values (such as [-127, 127]) are converted to volts internally in the functions
 
 /*
  * Turns the robot to a specified angle using PID control.
@@ -19,7 +21,7 @@ double prev_left_output = 0, prev_right_output = 0;
  * - max_output: Maximum output to motors. (0, 127]
  */
 void turnToAngle(double turn_angle, double time_limit_msec, double max_output, bool exit) {
-  max_output = kw::decivolt_to_milivolt(max_output); // convert from [-127, 127] to mv
+  max_output = max_output * (12.0 / 127.0); // convert from [-127, 127] decivolts to [-12, 12] volts
   // Prepare for turn
   kw::stop_chassis(pros::E_MOTOR_BRAKE_COAST);
   is_turning = true;
@@ -45,46 +47,49 @@ void turnToAngle(double turn_angle, double time_limit_msec, double max_output, b
     while (kw::get_imu_rotation() < turn_angle && pros::millis() - start_time <= time_limit_msec) {
       current_heading = kw::get_imu_rotation();
       output = pid.update(current_heading); // PID update for heading
-	  output = kw::volt_to_milivolt(output);
 
       previous_heading = current_heading;
       // Clamp output
       if(output < min_output) output = min_output;
       if(output > max_output) output = max_output;
       else if(output < -max_output) output = -max_output;
+
+	  output = kw::volt_to_milivolt(output); // convert PID output from [-12, 12] decivolt to to [-12000, 12000] millivolts
       kw::move_raw(output, -output); // send mv value
       pros::delay(10);
     }
   } else if(exit == false && correct_angle > turn_angle) {
     // Turn left without stopping at end
-    while (getInertialHeading() > turn_angle && Brain.timer(msec) - start_time <= time_limit_msec) {
-      current_heading = getInertialHeading();
+    while (kw::get_imu_rotation() > turn_angle && pros::millis() - start_time <= time_limit_msec) {
+      current_heading = kw::get_imu_rotation();
       output = pid.update(current_heading);
-      Brain.Screen.drawLine(index * 3, fabs(previous_heading) * draw_amplifier, (index + 1) * 3, fabs(current_heading * draw_amplifier));
-      index++;
+	  
       previous_heading = current_heading;
       if(output < min_output) output = min_output;
       if(output > max_output) output = max_output;
       else if(output < -max_output) output = -max_output;
-      driveChassis(-output, output);
-      wait(10, msec);
+      
+	  output = kw::volt_to_milivolt(output); // convert PID output from [-12, 12] decivolt to to [-12000, 12000] millivolts
+      kw::move_raw(-output, output); // send mv value
+      pros::delay(10);
     }
   } else {
     // Standard PID turn
-    while (!pid.targetArrived() && Brain.timer(msec) - start_time <= time_limit_msec) {
-      current_heading = getInertialHeading();
+    while (!pid.targetArrived() && pros::millis() - start_time <= time_limit_msec) {
+      current_heading = kw::get_imu_rotation();
       output = pid.update(current_heading);
-      Brain.Screen.drawLine(index * 3, fabs(previous_heading) * draw_amplifier, (index + 1) * 3, fabs(current_heading * draw_amplifier));
-      index++;
+
       previous_heading = current_heading;
       if(output > max_output) output = max_output;
       else if(output < -max_output) output = -max_output;
-      driveChassis(output, -output);
-      wait(10, msec);
+      
+	  output = kw::volt_to_milivolt(output); // convert PID output from [-12, 12] decivolt to to [-12000, 12000] millivolts
+      kw::move_raw(output, -output); // send mv value
+      pros::delay(10);
     }
   }
   if(exit) {
-    stopChassis(vex::hold);
+    kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
   }
   correct_angle = turn_angle;
   is_turning = false;
@@ -97,10 +102,11 @@ void turnToAngle(double turn_angle, double time_limit_msec, double max_output, b
  * - exit: If true, stops the robot at the end; if false, allows chaining.
  * - max_output: Maximum voltage output to motors.
  */
-void driveTo(double distance_in, double time_limit_msec, bool exit, double max_output) {
-  // Store initial encoder values
-  double start_left = getLeftRotationDegree(), start_right = getRightRotationDegree();
-  stopChassis(vex::brakeType::coast);
+void driveTo(double distance_in, double time_limit_msec, double max_output, bool exit) {
+  max_output = max_output * (12.0 / 127.0); // convert from [-127, 127] decivolts to [-12, 12] volts
+  // Store initial dist travelled (function comes from odom.cpp)
+  double start_vertical_pos = kw::get_vertical_distance_traveled();
+  kw::stop_chassis(pros::E_MOTOR_BRAKE_COAST); // Stop chassis before moving
   is_turning = true;
   double threshold = 0.5;
   int drive_direction = distance_in > 0 ? 1 : -1;
@@ -144,15 +150,15 @@ void driveTo(double distance_in, double time_limit_msec, bool exit, double max_o
   pid_heading.setDerivativeTolerance(0);
   pid_heading.setArrive(false);
 
-  double start_time = Brain.timer(msec);
+  double start_time = pros::millis();
   double left_output = 0, right_output = 0, correction_output = 0;
   double current_distance = 0, current_angle = 0;
 
   // Main PID loop for driving straight
-  while (((!pid_distance.targetArrived()) && Brain.timer(msec) - start_time <= time_limit_msec && exit) || (exit == false && current_distance < distance_in && Brain.timer(msec) - start_time <= time_limit_msec)) {
+  while (((!pid_distance.targetArrived()) && pros::millis() - start_time <= time_limit_msec && exit) || (exit == false && current_distance < distance_in && pros::millis() - start_time <= time_limit_msec)) {
     // Calculate current distance and heading
-    current_distance = (fabs(((getLeftRotationDegree() - start_left) / 360.0) * wheel_distance_in) + fabs(((getRightRotationDegree() - start_right) / 360.0) * wheel_distance_in)) / 2;
-    current_angle = getInertialHeading();
+    current_distance = fabs(get_vertical_distance_traveled() - start_vertical_pos);
+    current_angle = kw::get_imu_rotation();
     left_output = pid_distance.update(current_distance) * drive_direction;
     right_output = left_output;
     correction_output = pid_heading.update(current_angle);
@@ -187,13 +193,16 @@ void driveTo(double distance_in, double time_limit_msec, bool exit, double max_o
     }
     prev_left_output = left_output;
     prev_right_output = right_output;
-    driveChassis(left_output, right_output);
-    wait(10, msec);
+
+	left_output = kw::volt_to_milivolt(left_output); // convert PID output from [-12, 12] decivolt to to [-12000, 12000] millivolts
+	right_output = kw::volt_to_milivolt(right_output);
+    kw::move_raw(left_output, right_output); // send mv value
+    pros::delay(10);
   }
   if(exit) {
     prev_left_output = 0;
     prev_right_output = 0;
-    stopChassis(vex::hold);
+    kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
   }
   is_turning = false;
 }
@@ -202,29 +211,30 @@ void driveTo(double distance_in, double time_limit_msec, bool exit, double max_o
  * moveToPoint
  * Moves the robot to a specific point in the field, adjusting heading as needed.
  * - x, y: Coordinates of the target point.
- * - dir: Direction to move in (1 for forward, -1 for backward).
  * - time_limit_msec: Maximum time allowed for the move (in milliseconds).
+ * - forwards: Direction to move in (true (default) for forward, false for backward).
  * - exit: If true, stops the robot at the end; if false, allows chaining.
  * - max_output: Maximum voltage output to motors.
  * - overturn: If true, allows overturning for sharp turns.
  */
-void moveToPoint(double x, double y, int dir, double time_limit_msec, bool exit, double max_output, bool overturn) {
-  stopChassis(vex::brakeType::coast); // Stop chassis before moving
+void moveToPoint(double x, double y, double time_limit_msec, bool forwards, double max_output, bool exit, bool overturn) {
+  max_output = max_output * (12.0 / 127.0); // convert from [-127, 127] decivolts to [-12, 12] volts
+  kw::stop_chassis(pros::E_MOTOR_BRAKE_COAST); // Stop chassis before moving
   is_turning = true;                  // Set turning state
   double threshold = 0.5;
-  int add = dir > 0 ? 0 : 180;
-  double max_slew_fwd = dir > 0 ? max_slew_accel_fwd : max_slew_decel_rev;
-  double max_slew_rev = dir > 0 ? max_slew_decel_fwd : max_slew_accel_rev;
+  int add = forwards ? 0 : 180; // if driving backwards, add 180 degrees to heading
+  double max_slew_fwd = forwards ? max_slew_accel_fwd : max_slew_decel_rev; // switch slew rate used based on direction
+  double max_slew_rev = forwards ? max_slew_decel_fwd : max_slew_accel_rev;
   bool min_speed = false;
   if(!exit) {
     // Adjust slew rates and min speed for chaining
     if(!dir_change_start && dir_change_end) {
-      max_slew_fwd = dir > 0 ? 24 : max_slew_decel_rev;
-      max_slew_rev = dir > 0 ? max_slew_decel_fwd : 24;
+      max_slew_fwd = forwards ? 24 : max_slew_decel_rev;
+      max_slew_rev = forwards ? max_slew_decel_fwd : 24;
     }
     if(dir_change_start && !dir_change_end) {
-      max_slew_fwd = dir > 0 ? max_slew_accel_fwd : 24;
-      max_slew_rev = dir > 0 ? 24 : max_slew_accel_rev;
+      max_slew_fwd = forwards ? max_slew_accel_fwd : 24;
+      max_slew_rev = forwards ? 24 : max_slew_accel_rev;
       min_speed = true;
     }
     if(!dir_change_start && !dir_change_end) {
@@ -245,7 +255,7 @@ void moveToPoint(double x, double y, int dir, double time_limit_msec, bool exit,
   pid_distance.setSmallBigErrorDuration(50, 250);
   pid_distance.setDerivativeTolerance(5);
   
-  pid_heading.setTarget(normalizeTarget(radToDeg(atan2(x - x_pos, y - y_pos)) + add));
+  pid_heading.setTarget(normalizeTarget(kw::to_deg(atan2(x - x_pos, y - y_pos)) + add));
   pid_heading.setIntegralMax(0);  
   pid_heading.setIntegralRange(1);
   
@@ -255,7 +265,7 @@ void moveToPoint(double x, double y, int dir, double time_limit_msec, bool exit,
   pid_heading.setArrive(false);
 
   // Reset the chassis
-  double start_time = Brain.timer(msec);
+  double start_time = pros::millis();
   double left_output = 0, right_output = 0, correction_output = 0, prev_left_output = 0, prev_right_output = 0;
   double exittolerance = 1;
   bool perpendicular_line = false, prev_perpendicular_line = true;
@@ -264,16 +274,16 @@ void moveToPoint(double x, double y, int dir, double time_limit_msec, bool exit,
   bool ch = true;
 
   // Main PID loop for moving to point
-  while (Brain.timer(msec) - start_time <= time_limit_msec) {
+  while (pros::millis() - start_time <= time_limit_msec) {
     // Continuously update targets as robot moves
-    pid_heading.setTarget(normalizeTarget(radToDeg(atan2(x - x_pos, y - y_pos)) + add));
+    pid_heading.setTarget(normalizeTarget(kw::to_deg(atan2(x - x_pos, y - y_pos)) + add));
     pid_distance.setTarget(hypot(x - x_pos, y - y_pos));
-    current_angle = getInertialHeading();
+    current_angle = kw::get_imu_rotation();
     // Calculate drive output based on heading and distance
-    left_output = pid_distance.update(0) * cos(degToRad(atan2(x - x_pos, y - y_pos) * 180 / M_PI + add - current_angle)) * dir;
+    left_output = pid_distance.update(0) * cos(kw::to_rad(atan2(x - x_pos, y - y_pos) * 180 / M_PI + add - current_angle)) * (forwards ? 1 : -1); // multiply by -1 if driving backwards
     right_output = left_output;
     // Check if robot has crossed the perpendicular line to the target
-    perpendicular_line = ((y_pos - y) * -cos(degToRad(normalizeTarget(current_angle + add))) <= (x_pos - x) * sin(degToRad(normalizeTarget(current_angle + add))) + exittolerance);
+    perpendicular_line = ((y_pos - y) * -cos(kw::to_rad(normalizeTarget(current_angle + add))) <= (x_pos - x) * sin(kw::to_rad(normalizeTarget(current_angle + add))) + exittolerance);
     if(perpendicular_line && !prev_perpendicular_line) {
       break;
     }
@@ -324,14 +334,17 @@ void moveToPoint(double x, double y, int dir, double time_limit_msec, bool exit,
     }
     prev_left_output = left_output;
     prev_right_output = right_output;
-    driveChassis(left_output, right_output); // Apply output to chassis
-    wait(10, msec);
+
+    left_output = kw::volt_to_milivolt(left_output); // convert PID output from [-12, 12] decivolt to to [-12000, 12000] millivolts
+	right_output = kw::volt_to_milivolt(right_output);
+    kw::move_raw(left_output, right_output); // send mv value
+    pros::delay(10);
   }
   if(exit == true) {
     prev_left_output = 0;
     prev_right_output = 0;
-    stopChassis(vex::hold); // Stop at end if required
+    kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD); // Stop at end if required
   }
-  correct_angle = getInertialHeading(); // Update global heading
+  correct_angle = kw::get_imu_rotation(); // Update global heading
   is_turning = false;                   // Reset turning state
 }

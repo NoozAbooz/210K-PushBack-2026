@@ -9,7 +9,7 @@ double kw::correct_angle = 0;
 bool kw::update_odom = true;
 
 // Return robot rotation in degrees, unwrapped
-double get_imu_rotation() {
+double kw::get_imu_rotation() {
 	double rotation1 = inertial1.get_rotation();
 	double rotation2 = inertial2.get_rotation();
 
@@ -20,7 +20,7 @@ double get_imu_rotation() {
 	}
 }
 
-double get_vertical_distance_traveled() {
+double kw::get_vertical_distance_traveled() {
 	if (!isnanf(verticalEncoder.get_position()) && !std::isinf(verticalEncoder.get_position())) { // use rot sensor as priority
 		return ((verticalEncoder.get_position() / 36000.0) * M_PI * kw::vertical_tracker_diameter);
 	} else if (!isnanf(leftDrive.get_position(0)) && !std::isinf(leftDrive.get_position(0))) { // 900 is cartridge gearing, leave since its factored into rpm
@@ -33,7 +33,7 @@ double get_vertical_distance_traveled() {
 		return 0;
 	}
 }
-double get_horizontal_distance_traveled() {
+double kw::get_horizontal_distance_traveled() {
 	return ((horizontalEncoder.get_position() / 36000.0) * M_PI * kw::horizontal_tracker_diameter);
 }
 
@@ -112,9 +112,9 @@ void kw::odom_update() {
 	while (true) {
 		if (update_odom == true) {
 			// printf("%f, %f\n", get_vertical_distance_traveled(), get_horizontal_distance_traveled());
-			double heading_rad = kw::to_rad(get_imu_rotation());
-			double vertical_pos = get_vertical_distance_traveled();
-    		double horizontal_pos = get_horizontal_distance_traveled();
+			double heading_rad = kw::to_rad(kw::get_imu_rotation());
+			double vertical_pos = kw::get_vertical_distance_traveled();
+    		double horizontal_pos = kw::get_horizontal_distance_traveled();
 
     		double delta_heading_rad = heading_rad - prev_heading_rad;
 			double delta_vertical_in = (vertical_pos - prev_vertical_pos);
@@ -141,7 +141,7 @@ void kw::odom_update() {
 		
     		x_pos += polar_radius_in * cos(polar_angle_rad);
     		y_pos += polar_radius_in * sin(polar_angle_rad);
-			theta = fmod(get_imu_rotation(), 360); // wrap to [0, 360) for user view
+			theta = fmod(kw::get_imu_rotation(), 360); // wrap to [0, 360) for user view
     		if (theta < 0) theta += 360;
 		
     		prev_heading_rad = heading_rad;

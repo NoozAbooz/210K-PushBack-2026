@@ -29,8 +29,8 @@ inline pros::Optical optical(17);
 inline pros::Distance fwdDistance(11);
 inline pros::Distance rightDistance(18);
 
-inline pros::Rotation verticalEncoder(5);
 inline pros::Rotation horizontalEncoder(-20);
+inline pros::Rotation verticalEncoder(5);
 //hello world it is 210K secret note iykyk :D
 
 namespace kw {
@@ -38,7 +38,7 @@ namespace kw {
 // USER-CONFIGURABLE PARAMETERS
 // ============================================================================
 // Distance between the middles of the left and right wheels of the drive (in inches)
-inline double distance_between_wheels = 12.3;
+inline double distance_between_wheels = 11.3;
 
 // motor to wheel gear ratio * wheel diameter (in inches) * pi
 inline double wheel_distance_in = (36.0 / 48.0) * 3.17 * M_PI;
@@ -58,12 +58,12 @@ inline bool using_vertical_tracker = true;   // Set to true if a vertical tracki
 // IGNORE THESE IF YOU ARE NOT USING TRACKING WHEELS
 // These comments are in the perspective of a top down view of the robot when the robot is facing upwards on your view
 
-// Horizontal distance from the center of the bot to the vertical tracking wheel (in inches, positive is when the wheel is to the right of the center)
-inline double horizontal_tracker_dist_from_center = 2.71875;
+// Horizontal distance from the center of the bot to the vertical tracking wheel (in inches, positive is when the wheel is behind the center of the robot)
+inline double horizontal_tracker_dist_from_center = 9.5;
 inline double horizontal_tracker_diameter = 1.975; // Diameter of the horizontal tracker wheel (in inches)
 
-// Vertical distance from the center of the bot to the horizontal tracking wheel (in inches, positive is when the wheel is behind the center of the robot)
-inline double vertical_tracker_dist_from_center = -0.03125;
+// Vertical distance from the center of the bot to the horizontal tracking wheel (in inches, positive is when the wheel is to the right of the center)
+inline double vertical_tracker_dist_from_center = 0.2;
 inline double vertical_tracker_diameter = 1.975; // Diameter of the vertical tracker wheel (in inches)
 
 // ============================================================================
