@@ -11,7 +11,7 @@ inline pros::MotorGroup leftDrive({-11, -12, 13});
 inline pros::MotorGroup rightDrive({-16, 15, 14});
 
 // Intake
-inline pros::Motor intakeMiddleLower(4); // yes
+inline pros::Motor intakeMiddleLower(-4); // yes
 inline pros::Motor intakeMiddleUpper(8); // yes
 inline pros::Motor intakeTop(10); // 11w flexwheel for goal height
 inline pros::Motor intakeBottom(9); // preroller
@@ -33,7 +33,7 @@ inline pros::Rotation verticalEncoder(5);
 inline pros::Rotation horizontalEncoder(-20);
 //hello world it is 210K secret note iykyk :D
 
-
+namespace kw {
 // ============================================================================
 // USER-CONFIGURABLE PARAMETERS
 // ============================================================================
@@ -87,3 +87,4 @@ inline double max_slew_decel_rev = 24;
 // Decrease if there is too much drifting and inconsistency during boomerang
 // Increase for more speed during boomerang
 inline double chase_power = 2;
+}

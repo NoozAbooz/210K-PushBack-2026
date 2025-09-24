@@ -13,17 +13,13 @@
  */
 
 void testPID() {
-    kw::moveStraight(24, 1500, {.forwards = true, .maxSpeed = 127, .minSpeed = 0}); // Move forward 24 inches
 
 }
 void testDistReset() {
-    kw::moveRaw(12000, 2000); //blocking
-    pros::delay(500);
-
     float absX = (rightDistance.get_distance() / 25.4);
     float absY = (fwdDistance.get_distance() / 25.4);
 
-    kw::setOdomPosition(absX, absY);
+    kw::set_odom_position(absX, absY);
     //chassis.moveToPose(24, 24, 90, 1500);
 }
 void testColourSort() {
@@ -50,14 +46,14 @@ rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
 
     {"Move forward", driveForward, "", 0},
     { "Test PID", testPID, "", 220},
-    { "Test BM", testBM, "", 220},
+    { "Test BM", testDistReset, "", 220},
 });
 
 void autonomous() {
     inertial1.tare();
     inertial2.tare();
 
-    kw::setOdomPosition(0, 0, 0);
+    kw::set_odom_position(0, 0, 0);
 
     field_status = "autonomous";
     console.println("Running auton...");

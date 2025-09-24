@@ -1,10 +1,10 @@
 #pragma once
 
 // 3rd party libraries
-#include "lemlib/api.hpp"
 #include "gif-pros/gifclass.hpp"
 #include "robodash/api.h"
 #include "liblvgl/lvgl.h"
+#include "maelstrom/api.hpp"
 
 extern rd::Console console;
 extern rd_view_t *gifview;
@@ -21,7 +21,7 @@ extern void competitionTelemtryRefresh();
 
 /* Functions */
 // DT
-void arcadeDrive();
+void drive_arcade();
 
 void refreshIntake();
 void toggleHoard();

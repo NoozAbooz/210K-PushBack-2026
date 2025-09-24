@@ -1,27 +1,21 @@
 #include "main.h"
 
-// ============================================================================
-// INTERNAL STATE (DO NOT CHANGE)
-// ============================================================================
-bool is_turning = false;
-double prev_left_output = 0, prev_right_output = 0;
-
 // opcontrol
-double kw::driveCurve(double input, double curve) {
+double kw::drive_curve(double input, double curve) {
     return (std::pow(2.718, -(curve / 10)) + std::pow(2.718, (std::fabs(input) - 127) / 10) * (1 - std::pow(2.718, -(curve / 10)))) * input;
 }
 
-void kw::arcadeDrive(int linCurve, int rotCurve, double turnScale) {
+void kw::drive_arcade(int linCurve, int rotCurve, double turnScale) {
     double power = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
     double rawTurn = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
 
     if (linCurve != 0) {
-        // poll joystick input and convert to mv, then run through drivecurve function
-        power = kw::driveCurve(controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), linCurve);
+        // poll joystick input and convert to mv, then run through drive_curve function
+        power = kw::drive_curve(power, linCurve);
     }
     if (rotCurve != 0) {
-        // poll joystick input and convert to mv, then run through drivecurve function
-        rawTurn = kw::driveCurve(controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X), rotCurve);
+        // poll joystick input and convert to mv, then run through drive_curve function
+        rawTurn = kw::drive_curve(rawTurn, rotCurve);
     }
 
     // move motors based on direction (eg move left more when turn is positive)
@@ -29,11 +23,22 @@ void kw::arcadeDrive(int linCurve, int rotCurve, double turnScale) {
     rightDrive.move_voltage((power - rawTurn * turnScale) * (12000.0 / 127));
 }
 
-void kw::moveStraight(float length, int timeout, lemlib::MoveToPointParams params) {
-    if (chassis.isInMotion()) chassis.waitUntilDone();
-    params.forwards = length > 0;
-    lemlib::Pose pose = chassis.getPose();
-    chassis.moveToPoint(pose.x + length * sin(lemlib::degToRad(pose.theta)),
-                           pose.y + length * cos(lemlib::degToRad(pose.theta)), timeout, params);
+void kw::move_raw(double left, double right) { // in millivolts, non-blocking
+    leftDrive.move_voltage(left);
+    rightDrive.move_voltage(right);
 }
 
+void kw::stop_chassis(pros::motor_brake_mode_e_t mode) {
+    if (mode == pros::E_MOTOR_BRAKE_HOLD) {
+        leftDrive.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+        rightDrive.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    } else if (mode == pros::E_MOTOR_BRAKE_COAST) {
+        leftDrive.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+        rightDrive.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+    } else if (mode == pros::E_MOTOR_BRAKE_BRAKE) {
+        leftDrive.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+        rightDrive.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    }
+    leftDrive.brake();
+    rightDrive.brake();
+}

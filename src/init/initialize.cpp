@@ -18,7 +18,7 @@ void initialize() {
     update_odom = true; // toggle kw::odom alg
     pros::Task([] {
         // chassis.calibrate();
-        kw::initializeOdom();
+        kw::initialize_odom();
     });
 
     optical.set_integration_time(10);
@@ -29,6 +29,11 @@ void initialize() {
     pros::Task([] {
 
     });
+
+    std::vector<int> left_motors = {11, 12, 13};
+    std::vector<int> right_motors = {14, 15, 16};
+    maelstrom::logging::init(true, false, left_motors, right_motors, 5);
+    pros::Task error_logger(maelstrom::logging::robot_faults_log);
 
     if (update_odom == false) {
         rd_view_alert(sensorview, "[BIG FAT WARNING] update_odom is DISABLED!! You better know what you're doing!");
@@ -58,7 +63,7 @@ void disabled() {
 void competitionTelemtryRefresh() {
     auto auton = gui_selector.get_auton();
     const char* auton_name = auton->name.c_str();
-    controller.print(0, 0, "%s|%s|%.0lf   ", alliance.c_str(), auton_name, chassis.getPose().theta);
+    controller.print(0, 0, "%s|%s|%.0lf   ", alliance.c_str(), auton_name, kw::theta);
 }
 
 void competition_initialize() {
