@@ -12,23 +12,36 @@
 
 // right trigger (Y) - match load ✅
 
+bool telemToggle = true; // for switching tele output on controller screen
 bool hoardStatus = false; // for toggling hoard mode
 void toggleHoard() {
-	pros::Task ([] {
+	pros::Task([] {
 		while (true) {
+			// Report temperature telemetry 😭
+			double drivetrainTemps = kw::vector_average(leftDrive.get_temperature_all());
+			if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)) {
+				telemToggle = !telemToggle; // Toggle telemetry display
+			}
+			if(!telemToggle) {
+				controller.print(0, 0, "DT%.0lf|INT%.0lf|T%.0lf  ", drivetrainTemps, intakeBottom.get_temperature(), kw::theta);
+			} else {
+				controller.print(0, 0, "X:%.0lf Y:%.0lf T:%.0lf   ", kw::x_pos, kw::y_pos, kw::theta);
+			}
+
+			pros::delay(50);
+
 			if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
 				hoardStatus = !hoardStatus;
 				if (hoardStatus) {
 					console.println("Hoard mode: ON");
-					controller.rumble("..");
-					pros::delay(50);
+					controller.rumble(".");
+					pros::delay(100);
 				} else {
 					console.println("Hoard mode: OFF");
-					controller.rumble(".");
-					pros::delay(50);
+					controller.rumble("..");
+					pros::delay(100);
 				}
 			}
-			pros::delay(10);
 		}
 	});
 
@@ -40,6 +53,7 @@ void refreshIntake() {
 			if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
 			knockerPiston.set_value(true); // open knocker
 			intakeBottom.move_voltage(12000);
+			intakeTop.move_voltage(12000);
 			intakeMiddleUpper.move_voltage(12000);
 			intakeMiddleLower.move_voltage(12000);
 			} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
@@ -48,7 +62,7 @@ void refreshIntake() {
 			intakeMiddleUpper.move_voltage(12000);
 			intakeMiddleLower.move_voltage(12000);
 			} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-			knockerPiston.set_value(false); // shut knocker		
+			knockerPiston.set_value(false); // shut knocker	
 			intakeBottom.move_voltage(12000);
 			intakeMiddleUpper.move_voltage(12000);
 			intakeMiddleLower.move_voltage(12000);

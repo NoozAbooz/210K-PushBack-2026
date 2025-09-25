@@ -18,8 +18,8 @@ inline pros::Motor intakeBottom(8); // preroller
 
 // Pneumatics
 inline pros::adi::Pneumatics knockerPiston('X', false);
-inline pros::adi::Pneumatics loaderPiston('X', false); // matchloader
-inline pros::adi::Pneumatics intakeLiftPiston('X', false);
+inline pros::adi::Pneumatics loaderPiston('A', false); // matchloader
+inline pros::adi::Pneumatics intakeLiftPiston('G', false);
 
 /* Declare sensors */
 inline pros::Imu inertial1(9);
@@ -47,7 +47,7 @@ inline double wheel_distance_in = (36.0 / 48.0) * 3.17 * M_PI;
 // distance_* : Linear PID for straight driving
 // turn_*     : PID for turning in place
 // heading_correction_* : PID for heading correction during linear movement
-inline double distance_kp = 1.1, distance_ki = 0.1, distance_kd = 7;
+inline double distance_kp = 0.9, distance_ki = 0.1, distance_kd = 8;
 inline double turn_kp = 0.3, turn_ki = 0, turn_kd = 2.5;
 inline double heading_correction_kp = 0.6, heading_correction_ki = 0, heading_correction_kd = 4;
 
@@ -60,11 +60,11 @@ inline bool using_vertical_tracker = true;   // Set to true if a vertical tracki
 
 // Horizontal distance from the center of the bot to the vertical tracking wheel (in inches, positive is when the wheel is behind the center of the robot)
 inline double horizontal_tracker_dist_from_center = 9.5;
-inline double horizontal_tracker_diameter = 1.975; // Diameter of the horizontal tracker wheel (in inches)
+inline double horizontal_tracker_diameter = 2.0; // Diameter of the horizontal tracker wheel (in inches)
 
 // Vertical distance from the center of the bot to the horizontal tracking wheel (in inches, positive is when the wheel is to the right of the center)
 inline double vertical_tracker_dist_from_center = 0.2;
-inline double vertical_tracker_diameter = 1.975; // Diameter of the vertical tracker wheel (in inches)
+inline double vertical_tracker_diameter = 2.0; // Diameter of the vertical tracker wheel (in inches)
 
 // ============================================================================
 // ADVANCED TUNING (OPTIONAL)

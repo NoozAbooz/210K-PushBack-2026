@@ -13,7 +13,9 @@
  */
 
 void testPID() {
-    kw::driveTo(24, 3000);
+    kw::driveTo(24, 3000, 127, true);
+    kw::turnToAngle(180, 1000);
+
 }
 void testDistReset() {
     float absX = (rightDistance.get_distance() / 25.4);
