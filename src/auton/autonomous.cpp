@@ -13,7 +13,7 @@
  */
 
 void testPID() {
-
+    kw::driveTo(24, 3000);
 }
 void testDistReset() {
     float absX = (rightDistance.get_distance() / 25.4);

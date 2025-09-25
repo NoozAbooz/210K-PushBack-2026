@@ -6,15 +6,15 @@ inline pros::Controller controller(pros::E_CONTROLLER_MASTER);
 
 // Drivetrain
 
-// v1
-inline pros::MotorGroup leftDrive({-11, -12, 13});
-inline pros::MotorGroup rightDrive({-16, 15, 14});
+// v2
+inline pros::MotorGroup leftDrive({-11, -12, 14});
+inline pros::MotorGroup rightDrive({13, 15, -16});
 
 // Intake
-inline pros::Motor intakeMiddleLower(-4); // yes
-inline pros::Motor intakeMiddleUpper(8); // yes
-inline pros::Motor intakeTop(10); // 11w flexwheel for goal height
-inline pros::Motor intakeBottom(9); // preroller
+inline pros::Motor intakeMiddleLower(-3); // yes
+inline pros::Motor intakeMiddleUpper(10); // yes
+inline pros::Motor intakeTop(7); // 11w flexwheel for goal height
+inline pros::Motor intakeBottom(8); // preroller
 
 // Pneumatics
 inline pros::adi::Pneumatics knockerPiston('X', false);
@@ -22,15 +22,15 @@ inline pros::adi::Pneumatics loaderPiston('X', false); // matchloader
 inline pros::adi::Pneumatics intakeLiftPiston('X', false);
 
 /* Declare sensors */
-inline pros::Imu inertial1(7);
-inline pros::Imu inertial2(19);
-inline pros::Optical optical(17);
+inline pros::Imu inertial1(9);
+inline pros::Imu inertial2(5);
+inline pros::Optical optical(4);
 
 inline pros::Distance fwdDistance(11);
 inline pros::Distance rightDistance(18);
 
-inline pros::Rotation horizontalEncoder(-20);
-inline pros::Rotation verticalEncoder(5);
+inline pros::Rotation verticalEncoder(6);
+inline pros::Rotation horizontalEncoder(-17);
 //hello world it is 210K secret note iykyk :D
 
 namespace kw {

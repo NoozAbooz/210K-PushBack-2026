@@ -20,7 +20,7 @@ double prev_left_output = 0, prev_right_output = 0;
  * - exit: If true, stops the robot at the end; if false, allows chaining.
  * - max_output: Maximum output to motors. (0, 127]
  */
-void turnToAngle(double turn_angle, double time_limit_msec, double max_output, bool exit) {
+void kw::turnToAngle(double turn_angle, double time_limit_msec, double max_output, bool exit) {
   max_output = max_output * (12.0 / 127.0); // convert from [-127, 127] decivolts to [-12, 12] volts
   // Prepare for turn
   kw::stop_chassis(pros::E_MOTOR_BRAKE_COAST);
@@ -102,7 +102,7 @@ void turnToAngle(double turn_angle, double time_limit_msec, double max_output, b
  * - exit: If true, stops the robot at the end; if false, allows chaining.
  * - max_output: Maximum voltage output to motors.
  */
-void driveTo(double distance_in, double time_limit_msec, double max_output, bool exit) {
+void kw::driveTo(double distance_in, double time_limit_msec, double max_output, bool exit) {
   max_output = max_output * (12.0 / 127.0); // convert from [-127, 127] decivolts to [-12, 12] volts
   // Store initial dist travelled (function comes from odom.cpp)
   double start_vertical_pos = kw::get_vertical_distance_traveled();
@@ -217,7 +217,7 @@ void driveTo(double distance_in, double time_limit_msec, double max_output, bool
  * - max_output: Maximum voltage output to motors.
  * - overturn: If true, allows overturning for sharp turns.
  */
-void moveToPoint(double x, double y, double time_limit_msec, bool forwards, double max_output, bool exit, bool overturn) {
+void kw::moveToPoint(double x, double y, double time_limit_msec, bool forwards, double max_output, bool exit, bool overturn) {
   max_output = max_output * (12.0 / 127.0); // convert from [-127, 127] decivolts to [-12, 12] volts
   kw::stop_chassis(pros::E_MOTOR_BRAKE_COAST); // Stop chassis before moving
   is_turning = true;                  // Set turning state
