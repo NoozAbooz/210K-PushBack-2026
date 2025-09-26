@@ -12,116 +12,93 @@
 
 // right trigger (Y) - match load ✅
 
-bool telemToggle = true; // for switching tele output on controller screen
 bool hoardStatus = false; // for toggling hoard mode
 bool parkStatus = false; // for toggling park mode
 void toggleHoard() {
-	pros::Task([] {
-		while (true) {
-			// Report temperature telemetry 😭
-			double drivetrainTemps = kw::vector_average(leftDrive.get_temperature_all());
-			if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)) {
-				telemToggle = !telemToggle; // Toggle telemetry display
-			}
-			if(!telemToggle) {
-				controller.print(0, 0, "DT%.0lf|INT%.0lf|T%.0lf  ", drivetrainTemps, intakeBottom.get_temperature(), kw::theta);
-			} else {
-				controller.print(0, 0, "X:%.0lf Y:%.0lf T:%.0lf   ", kw::x_pos, kw::y_pos, kw::theta);
-			}
-
-			pros::delay(50);
-
-			if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
-				hoardStatus = !hoardStatus;
-				if (hoardStatus) {
-					console.println("Hoard mode: ON");
-					controller.rumble(".");
-					pros::delay(100);
-				} else {
-					console.println("Hoard mode: OFF");
-					controller.rumble("..");
-					pros::delay(100);
-				}
-			}
+	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+		hoardStatus = !hoardStatus;
+		if (hoardStatus) {
+			console.println("Hoard mode: ON");
+		} else {
+			console.println("Hoard mode: OFF");
 		}
-	});
-
+	}
 }
+
 void park() {
-if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
-				parkStatus = !parkStatus;
-				if (parkStatus) {
-					console.println("Hoard mode: ON");
-					intakeLiftPiston.set_value(true); // lift intake
-					controller.rumble(".");
-					pros::delay(100);
-				} else {
-					console.println("Hoard mode: OFF");
-					intakeLiftPiston.set_value(false); // lower intake
-					controller.rumble("..");
-					pros::delay(100);
-				}
-			}
+	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
+		parkStatus = !parkStatus;
+		if (parkStatus) {
+			intakeLiftPiston.set_value(true); // lift intake
+		} else {
+			intakeLiftPiston.set_value(false); // lower intake
 		}
+	}
+}
 
 // Intake Hold (no hoard) to score
 void refreshIntake() {
-		if(hoardStatus == false)
-			if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
+	if(hoardStatus == false) {
+		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
 			knockerPiston.set_value(true); // open knocker
 			intakeBottom.move_voltage(12000);
 			intakeTop.move_voltage(12000);
 			intakeMiddleUpper.move_voltage(12000);
 			intakeMiddleLower.move_voltage(12000);
-			} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
+		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
 			intakeTop.move_voltage(-4000);
 			intakeBottom.move_voltage(12000);
 			intakeMiddleUpper.move_voltage(12000);
 			intakeMiddleLower.move_voltage(12000);
-			} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
 			knockerPiston.set_value(false); // shut knocker	
 			intakeBottom.move_voltage(12000);
 			intakeMiddleUpper.move_voltage(12000);
 			intakeMiddleLower.move_voltage(12000);
-			} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
+		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
 			intakeBottom.move_voltage(-12000);
 			intakeMiddleUpper.move_voltage(-12000);
 			intakeMiddleLower.move_voltage(-12000);
-			} else {
+		} else {
 			intakeTop.move_voltage(0);
 			intakeBottom.move_voltage(0);
 			intakeMiddleUpper.move_voltage(0);
 			intakeMiddleLower.move_voltage(0);
 		}
-		else // hoard mode
-			if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
+	} else { // hoard mode
+		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
 			knockerPiston.set_value(true); // open knocker
 			intakeTop.move_voltage(12000);
 			intakeBottom.move_voltage(-9000);
 			intakeMiddleUpper.move_voltage(12000);
 			intakeMiddleLower.move_voltage(12000);
-			} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
+			rumble_pattern = ".";
+		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
 			intakeTop.move_voltage(-4000);
 			intakeBottom.move_voltage(-9000);
 			intakeMiddleUpper.move_voltage(12000);
 			intakeMiddleLower.move_voltage(12000);
-			} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+			rumble_pattern = ".";
+		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
 			knockerPiston.set_value(false); // shut knocker		
 			//intakeTop.move_voltage(12000);
 			intakeBottom.move_voltage(12000);
 			intakeMiddleUpper.move_voltage(-12000);
 			intakeMiddleLower.move_voltage(12000);
-			} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
+			rumble_pattern = ".";
+		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
 			intakeBottom.move_voltage(-12000);
 			intakeMiddleUpper.move_voltage(12000);
 			intakeMiddleLower.move_voltage(-12000);
-			} else {
+			rumble_pattern = ".";
+		} else {
 			intakeTop.move_voltage(0);
 			intakeBottom.move_voltage(0);
 			intakeMiddleLower.move_voltage(0);
 			intakeMiddleUpper.move_voltage(0);
 		}
 	}
+}
 
 bool loaderStatus = false; // matchloader frame/tongue mech
 void refreshLoader() {

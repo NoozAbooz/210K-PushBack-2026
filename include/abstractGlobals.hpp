@@ -18,6 +18,8 @@ extern std::string field_status;
 extern bool update_odom;
 
 extern void competitionTelemtryRefresh();
+extern void initTelemetry();
+extern std::string rumble_pattern;
 
 /* Functions */
 // DT

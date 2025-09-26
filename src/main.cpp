@@ -11,7 +11,7 @@
  */
 void opcontrol() {
 	field_status = "opcontrol";
-	toggleHoard(); // init async loop
+	initTelemetry();
 
 	while (true) { // Main continuous loop
 		/* Drive */
@@ -20,8 +20,8 @@ void opcontrol() {
 		/* Subsystem Listeners */
 		refreshIntake();
 		refreshLoader();
+		toggleHoard();
 		park();
-
 
 		pros::delay(10); // Delay to save resources on brain
 	}
