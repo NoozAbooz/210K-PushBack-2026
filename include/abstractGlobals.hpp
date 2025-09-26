@@ -25,6 +25,7 @@ void drive_arcade();
 
 void refreshIntake();
 void toggleHoard();
+void park();
 void refreshLoader();
 
 /* Macros */

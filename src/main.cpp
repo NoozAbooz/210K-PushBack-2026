@@ -20,6 +20,7 @@ void opcontrol() {
 		/* Subsystem Listeners */
 		refreshIntake();
 		refreshLoader();
+		park();
 
 
 		pros::delay(10); // Delay to save resources on brain

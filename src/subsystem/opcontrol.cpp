@@ -14,6 +14,7 @@
 
 bool telemToggle = true; // for switching tele output on controller screen
 bool hoardStatus = false; // for toggling hoard mode
+bool parkStatus = false; // for toggling park mode
 void toggleHoard() {
 	pros::Task([] {
 		while (true) {
@@ -46,6 +47,22 @@ void toggleHoard() {
 	});
 
 }
+void park() {
+if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
+				parkStatus = !parkStatus;
+				if (parkStatus) {
+					console.println("Hoard mode: ON");
+					intakeLiftPiston.set_value(true); // lift intake
+					controller.rumble(".");
+					pros::delay(100);
+				} else {
+					console.println("Hoard mode: OFF");
+					intakeLiftPiston.set_value(false); // lower intake
+					controller.rumble("..");
+					pros::delay(100);
+				}
+			}
+		}
 
 // Intake Hold (no hoard) to score
 void refreshIntake() {
@@ -57,7 +74,7 @@ void refreshIntake() {
 			intakeMiddleUpper.move_voltage(12000);
 			intakeMiddleLower.move_voltage(12000);
 			} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
-			intakeTop.move_voltage(-12000);
+			intakeTop.move_voltage(-4000);
 			intakeBottom.move_voltage(12000);
 			intakeMiddleUpper.move_voltage(12000);
 			intakeMiddleLower.move_voltage(12000);
@@ -80,12 +97,12 @@ void refreshIntake() {
 			if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
 			knockerPiston.set_value(true); // open knocker
 			intakeTop.move_voltage(12000);
-			intakeBottom.move_voltage(-12000);
+			intakeBottom.move_voltage(-9000);
 			intakeMiddleUpper.move_voltage(12000);
 			intakeMiddleLower.move_voltage(12000);
 			} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
-			intakeTop.move_voltage(-12000);
-			intakeBottom.move_voltage(-12000);
+			intakeTop.move_voltage(-4000);
+			intakeBottom.move_voltage(-9000);
 			intakeMiddleUpper.move_voltage(12000);
 			intakeMiddleLower.move_voltage(12000);
 			} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
