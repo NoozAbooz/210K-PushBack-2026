@@ -5,7 +5,7 @@ namespace kw
 {
 	extern double x_pos; // global X
     extern double y_pos; // global Y
-    extern double theta; // global theta [0, 359]
+    extern double theta; // global theta [0, 360)
 
     extern double correct_angle;
     extern bool update_odom;

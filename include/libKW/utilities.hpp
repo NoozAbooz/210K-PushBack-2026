@@ -13,7 +13,7 @@ namespace kw {
 	extern double decivolt_to_milivolt(double input);
 	extern double largest_abs(double a, double b);
 
-	extern double normalizeTarget(double angle);
-	extern void scaleToMin(double& left_output, double& right_output, double min_output);
-	extern void scaleToMax(double& left_output, double& right_output, double max_output);
+	extern double normalize_target(double angle);
+	extern void scale_to_min(double& left_output, double& right_output, double min_output);
+	extern void scale_to_max(double& left_output, double& right_output, double max_output);
 }

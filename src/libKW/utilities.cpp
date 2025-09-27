@@ -62,7 +62,7 @@ double kw::largest_abs(double a, double b) { // return the value with largest ma
  * Normalizes an angle to be within +/-180 degrees of the current heading.
  * - angle: The target angle to normalize.
  */
-double kw::normalizeTarget(double angle) {
+double kw::normalize_target(double angle) {
   // Adjust angle to be within +/-180 degrees of the inertial sensor's rotation
   if (angle - inertial1.get_rotation() > 180) {
     while (angle - inertial1.get_rotation() > 180) angle -= 360;
@@ -82,7 +82,7 @@ double kw::normalizeTarget(double angle) {
  * - right_output: Reference to right output voltage.
  * - min_output: Minimum allowed output voltage.
  */
-void kw::scaleToMin(double& left_output, double& right_output, double min_output) {
+void kw::scale_to_min(double& left_output, double& right_output, double min_output) {
   // Scale outputs to ensure minimum voltage is met for both sides
   if (fabs(left_output) <= fabs(right_output) && left_output < min_output && left_output > 0) {
     right_output = right_output / left_output * min_output;
@@ -105,7 +105,7 @@ void kw::scaleToMin(double& left_output, double& right_output, double min_output
  * - right_output: Reference to right output voltage.
  * - max_output: Maximum allowed output voltage.
  */
-void kw::scaleToMax(double& left_output, double& right_output, double max_output) {
+void kw::scale_to_max(double& left_output, double& right_output, double max_output) {
   // Scale outputs to ensure maximum voltage is not exceeded for both sides
   if (fabs(left_output) >= fabs(right_output) && left_output > max_output) {
     right_output = right_output / left_output * max_output;
