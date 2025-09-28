@@ -18,8 +18,8 @@ inline pros::Motor intakeBottom(8); // preroller
 
 // Pneumatics
 inline pros::adi::Pneumatics knockerPiston('X', false);
-inline pros::adi::Pneumatics loaderPiston('A', false); // matchloader
-inline pros::adi::Pneumatics intakeLiftPiston('G', false);
+inline pros::adi::Pneumatics loaderPiston('G', false); // matchloader
+inline pros::adi::Pneumatics intakeLiftPiston('A', false);
 
 /* Declare sensors */
 inline pros::Imu inertial1(9);
