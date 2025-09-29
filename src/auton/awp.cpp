@@ -1,14 +1,65 @@
+#include "deviceGlobals.hpp"
+#include "libKW/drivetrain/movements.hpp"
 #include "main.h"
+#include "pros/rtos.hpp"
 
 void sawp() {
-	intakeBottom.move_voltage(12000);
+	pros::Task([]{
+			intakeBottom.move_voltage(12000);
 	intakeMiddleLower.move_voltage(12000);
 	intakeMiddleUpper.move(-12000);
-	//kw::moveToPoint(6, 15, 2000);
-	//kw::swing(90, 2000, true, 80);
-	kw::moveToPoint(9, 21, 2000, true, 40);
+	loaderPiston.set_value(true);
+	});
+
+	kw::boomerang(14, 25, 90, 0.5, 4000, true, 80);
+	pros::Task([] {
+		loaderPiston.set_value(true);
+	});
+	kw::moveToPoint(15.5, 25, 1000);
+	pros::delay(500);
+	kw::moveToPoint(-14.5, 25.7, 1000, false);
+	pros::Task([]{
+		intakeBottom.move_voltage(-8000);
+		intakeMiddleLower.move_voltage(12000);
+		intakeMiddleUpper.move(12000);
+		intakeTop.move_voltage(12000);
+		pros::delay(500);
+		loaderPiston.set_value(false);
+	});
+	pros::delay(3000);
+	kw::moveToPoint(-10, 15, 1000);
+	kw::boomerang(-25, 0, 225, 0.7, 3000, true, 90);
+	pros::Task([]{
+		intakeBottom.move_voltage(12000);
+	intakeMiddleLower.move_voltage(12000);
+	intakeMiddleUpper.move(-12000);
+	loaderPiston.set_value(true);
+	});
+	pros::Task([]{
+		loaderPiston.set_value(false);
+	});
+	kw::moveToPoint(-24, -20, 1000);
 	
-	// kw::turnToAngle(310, 1000);
+	kw::moveToPoint(-28, -45, 1000);
+	pros::Task([]{
+		pros::delay(100);
+		intakeBottom.move_voltage(12000);
+		intakeMiddleLower.move_voltage(12000);
+		intakeMiddleUpper.move(12000);
+		loaderPiston.set_value(true);
+	});
+	pros::delay(500);
+	kw::turnToAngle(135, 1000);
+	kw::moveToPoint(-34, -34, 1000, false);
+	pros::Task([]{
+		pros::delay(600);
+		intakeBottom.move_voltage(12000);
+		intakeMiddleLower.move_voltage(12000);
+		intakeMiddleUpper.move(12000);
+		intakeTop.move_voltage(-6000);
+		pros::delay(500);
+		loaderPiston.set_value(false);
+	});
 	// kw::driveTo(15, 1000);
 	// pros::delay(2000);
 
