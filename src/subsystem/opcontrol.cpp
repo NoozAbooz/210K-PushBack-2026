@@ -69,13 +69,13 @@ void refreshIntake() {
 		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
 			knockerPiston.set_value(true); // open knocker
 			intakeTop.move_voltage(12000);
-			intakeBottom.move_voltage(-12000);
+			intakeBottom.move_voltage(-2000);
 			intakeMiddleUpper.move_voltage(12000);
 			intakeMiddleLower.move_voltage(12000);
 			rumble_pattern = ".";
 		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
 			intakeTop.move_voltage(-4000);
-			intakeBottom.move_voltage(-12000);
+			intakeBottom.move_voltage(-2000);
 			intakeMiddleUpper.move_voltage(12000);
 			intakeMiddleLower.move_voltage(12000);
 			rumble_pattern = ".";
