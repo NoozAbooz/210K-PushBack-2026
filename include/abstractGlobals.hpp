@@ -36,6 +36,8 @@ void scoreOwnColour(int timeout);
 
 /* Autons */
 void sawp();
+void sawp_12();
+
 void left_half();
 void right_half();
 void skills();

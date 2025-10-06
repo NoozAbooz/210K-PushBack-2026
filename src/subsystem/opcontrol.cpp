@@ -46,7 +46,7 @@ void refreshIntake() {
 			intakeMiddleUpper.move_voltage(12000);
 			intakeMiddleLower.move_voltage(12000);
 		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
-			intakeTop.move_voltage(-2500);
+			intakeTop.move_voltage(-4000);
 			intakeBottom.move_voltage(12000);
 			intakeMiddleUpper.move_voltage(12000);
 			intakeMiddleLower.move_voltage(12000);
@@ -74,7 +74,7 @@ void refreshIntake() {
 			intakeMiddleLower.move_voltage(12000);
 			rumble_pattern = ".";
 		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
-			intakeTop.move_voltage(-2500);
+			intakeTop.move_voltage(-4000);
 			intakeBottom.move_voltage(-12000);
 			intakeMiddleUpper.move_voltage(12000);
 			intakeMiddleLower.move_voltage(12000);
