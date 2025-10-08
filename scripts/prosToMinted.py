@@ -153,7 +153,7 @@ def main():
             or ('include' and 'okapi') in components
 
             or ('include' and 'gif-pros') in components
-            or ('include' and 'lemlib') in components
+            or ('include' and 'maelstrom') in components
             or ('include' and 'fmt') in components
             or ('include' and 'robodash') in components
             or ('include' and 'catLib') in components
