@@ -72,6 +72,7 @@ void kw::initialize_odom() {
 	  	console.println("Passed Primary IMU calibration check"); 
 	} else {
 	  	if( errno == ENODEV ) {
+			rumble_pattern = "---";
 			console.println("[ERROR] Primary IMU failed to calibrate...");
 	  	}
 	}
