@@ -22,8 +22,8 @@ inline pros::adi::Pneumatics loaderPiston('G', false); // matchloader
 inline pros::adi::Pneumatics intakeLiftPiston('A', false);
 
 /* Declare sensors */
-inline pros::Imu inertial1(9);
-inline pros::Imu inertial2(5);
+inline pros::Imu inertial1(5);
+inline pros::Imu inertial2(9); // more scuffed one
 inline pros::Optical optical(4);
 
 inline pros::Distance fwdDistance(11);
