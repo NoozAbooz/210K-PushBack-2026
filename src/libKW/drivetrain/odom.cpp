@@ -13,11 +13,11 @@ double kw::get_imu_rotation() {
 	double rotation1 = inertial1.get_rotation();
 	double rotation2 = inertial2.get_rotation();
 
-	// if (!isnanf(inertial2.get_rotation()) && !std::isinf(inertial2.get_rotation())) { // use imu 2 when available
-	// 	return (rotation1 + rotation2) / 2;
-	// } else {
+	if (!isnanf(inertial2.get_rotation()) && !std::isinf(inertial2.get_rotation())) { // use imu 2 when available
+		return (rotation1 + rotation2) / 2;
+	} else {
 		return rotation1;
-	// }
+	}
 }
 
 double kw::get_vertical_distance_traveled() {
