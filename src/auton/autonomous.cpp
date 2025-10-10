@@ -26,7 +26,6 @@ void testDistReset() {
 }
 void testColourSort() {
     alliance = "red"; // set alliance to red for testing
-    scoreOwnColour(5000);
 }
 
 /* Legacy Auton Routines */

@@ -6,17 +6,27 @@ double kw::y_pos = 0; // global Y
 double kw::theta = 0; // global theta [0, 359]
 
 double kw::correct_angle = 0;
-bool kw::update_odom = true;
+bool kw::update_odom;
 
 // Return robot rotation in degrees, unwrapped
 double kw::get_imu_rotation() {
 	double rotation1 = inertial1.get_rotation();
 	double rotation2 = inertial2.get_rotation();
 
-	if (!isnanf(inertial2.get_rotation()) && !std::isinf(inertial2.get_rotation())) { // use imu 2 when available
-		return (rotation1 + rotation2) / 2;
-	} else {
+	bool imu1_valid = !isnanf(rotation1) && !std::isinf(rotation1);
+	bool imu2_valid = !isnanf(rotation2) && !std::isinf(rotation2);
+
+	if (imu1_valid && imu2_valid) { // use both when available
+		return (rotation1 * 0.7) + (rotation2 * 0.3); // use weighted average
+	} else if (imu1_valid && !imu2_valid) { // use imu1 if imu2 is invalid
 		return rotation1;
+	} else if (!imu1_valid && imu2_valid) { // use imu2 if imu1 is invalid
+		return rotation2;
+	} else { // both invalid, use arc method w/ horizontal pod
+		console.println("ODOM Using arc method fallback");
+		double horizontal_distance = ((horizontalEncoder.get_position() / 36000.0) * M_PI * kw::horizontal_tracker_diameter);
+		double heading_rad = -(horizontal_distance / std::fabs(kw::horizontal_tracker_dist_from_center)); // negative since horizontal pod is backwards
+		return kw::to_deg(heading_rad); // convert to degrees
 	}
 }
 
@@ -87,7 +97,7 @@ void kw::initialize_odom() {
 }
 
 void kw::set_odom_position(double x_new, double y_new, double theta_new) {
-	update_odom = false; // stop odom task loop
+	kw::update_odom = false; // stop odom task loop
 	x_pos = x_new;
 	y_pos = y_new;
 
@@ -102,7 +112,7 @@ void kw::set_odom_position(double x_new, double y_new, double theta_new) {
 		inertial1.set_rotation(theta_new);
 		inertial2.set_rotation(theta_new);
 	}
-	update_odom = true; // resume odom task loop
+	kw::update_odom = true; // resume odom task loop
 }
 /* // pos reset - do not run async
 float absX = -((backwardDist.get_distance() / 25.4 + 3.9) - 72);
@@ -113,7 +123,7 @@ void kw::odom_update() {
 	console.printf("%.0lf, %.0lf", verticalEncoder.get_position(), get_horizontal_distance_traveled());
 
 	while (true) {
-		if (update_odom == true) {
+		if (kw::update_odom == true) {
 			// printf("%f, %f\n", get_vertical_distance_traveled(), get_horizontal_distance_traveled());
 			double heading_rad = kw::to_rad(kw::get_imu_rotation());
 			double vertical_pos = kw::get_vertical_distance_traveled();

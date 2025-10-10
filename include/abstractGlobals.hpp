@@ -15,14 +15,12 @@ void rdconfig_init();
 
 extern std::string alliance;
 extern std::string field_status;
-extern bool update_odom;
 
 extern void competitionTelemtryRefresh();
 extern void initTelemetry();
 extern std::string rumble_pattern;
 
 /* Functions */
-// DT
 void drive_arcade();
 
 void refreshIntake();
@@ -32,7 +30,7 @@ void refreshLoader();
 
 /* Macros */
 extern bool intakeLock;
-void scoreOwnColour(int timeout);
+void intakeMacro(std::string str);
 
 /* Autons */
 void sawp();

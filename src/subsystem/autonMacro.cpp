@@ -1,5 +1,12 @@
 #include "main.h"
 
+void stopIntake() {
+	intakeTop.move_voltage(0);
+	intakeBottom.move_voltage(0);
+	intakeMiddleUpper.move_voltage(0);
+	intakeMiddleLower.move_voltage(0);
+}
+
 // void scoreOwnColour(int timeout) { // intended to be called in auton
 // 	int timer = 0;
 // 	// red range: 8-25
