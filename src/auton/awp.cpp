@@ -10,8 +10,8 @@ void sawp() {
 		intakeMiddleLower.move_voltage(12000);
 		intakeMiddleUpper.move_voltage(12000);
 	});
-	kw::boomerang(18, 24.5, 90, 0.5, 4000, true, 80, false);
-	pros::delay(500);
+	kw::boomerang(19, 24.5, 90, 0.5, 4000, true, 90, false);
+	pros::delay(600);
 	//pros::delay(800);
 	kw::moveToPoint(-16, 26, 1500, false, 90);
 	pros::Task([] {
@@ -25,14 +25,14 @@ void sawp() {
 	pros::delay(1600);
 	kw::moveToPoint(-5, 26, 1000, true, 127, false);
 	kw::boomerang(-23, 0, 218, 0.6, 2000, true, 90, false);
-	// pros::Task([] {
-	// 	pros::delay(400);
-	// 	loaderPiston.set_value(true);
-	// 	intakeBottom.move_voltage(12000);
-	// 	intakeMiddleLower.move_voltage(12000);
-	// 	intakeMiddleUpper.move_voltage(-12000);
-	// 	intakeTop.move_voltage(0);
-	// });
+	pros::Task([] {
+		//pros::delay(200);
+		loaderPiston.set_value(true);
+		intakeBottom.move_voltage(12000);
+		intakeMiddleLower.move_voltage(12000);
+		intakeMiddleUpper.move_voltage(-12000);
+		intakeTop.move_voltage(0);
+	});
 	// pros::delay(500);
 	// kw::boomerang(-24, -46, 180, 0.2, 2000, true, 90, true);
 	// pros::Task([] {
