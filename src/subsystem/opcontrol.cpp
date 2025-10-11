@@ -36,29 +36,67 @@ void park() {
 	}
 }
 
+void intakeMacro(std::string str) {
+	if(str == "R1") { // score on long goal
+		knockerPiston.set_value(true); // open knocker
+		intakeBottom.move_voltage(12000);
+		intakeTop.move_voltage(12000);
+		intakeMiddleUpper.move_voltage(12000);
+		intakeMiddleLower.move_voltage(12000);
+	} else if (str == "R2") { // score on mid goal
+		intakeTop.move_voltage(-6000);
+		intakeBottom.move_voltage(12000);
+		intakeMiddleUpper.move_voltage(12000);
+		intakeMiddleLower.move_voltage(12000);
+	} else if (str == "L1") { // intake up to long goal scoring
+		knockerPiston.set_value(false); // shut knocker	
+		intakeBottom.move_voltage(12000);
+		intakeMiddleUpper.move_voltage(12000);
+		intakeMiddleLower.move_voltage(12000);
+	} else if (str == "L2") { // outtake out of intake
+		intakeBottom.move_voltage(-12000);
+		intakeMiddleUpper.move_voltage(-12000);
+		intakeMiddleLower.move_voltage(-12000);
+	// hoard mode
+	} else if(str == "HOARD_R1") { // score on long goal
+		knockerPiston.set_value(true); // open knocker
+		intakeTop.move_voltage(12000);
+		intakeBottom.move_voltage(-4000);
+		intakeMiddleUpper.move_voltage(12000);
+		intakeMiddleLower.move_voltage(12000);
+		rumble_pattern = ".";
+	} else if (str == "HOARD_R2") { // score on mid goal
+		intakeTop.move_voltage(-6000);
+		intakeBottom.move_voltage(-4000);
+		intakeMiddleUpper.move_voltage(12000);
+		intakeMiddleLower.move_voltage(12000);
+		rumble_pattern = ".";
+	} else if (str == "HOARD_L1") { // intake into hoard
+		knockerPiston.set_value(false); // shut knocker		
+		//intakeTop.move_voltage(12000);
+		intakeBottom.move_voltage(12000);
+		intakeMiddleUpper.move_voltage(-12000);
+		intakeMiddleLower.move_voltage(12000);
+		rumble_pattern = ".";
+	} else if (str == "HOARD_L2") { // outtake out of intake from hoard
+		intakeBottom.move_voltage(-12000);
+		intakeMiddleUpper.move_voltage(12000);
+		intakeMiddleLower.move_voltage(-12000);
+		rumble_pattern = ".";
+	}
+}
+
 // Intake Hold (no hoard) to score
 void refreshIntake() {
 	if(hoardStatus == false) {
 		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
-			knockerPiston.set_value(true); // open knocker
-			intakeBottom.move_voltage(12000);
-			intakeTop.move_voltage(12000);
-			intakeMiddleUpper.move_voltage(12000);
-			intakeMiddleLower.move_voltage(12000);
+			intakeMacro("R1");
 		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
-			intakeTop.move_voltage(-6000);
-			intakeBottom.move_voltage(12000);
-			intakeMiddleUpper.move_voltage(12000);
-			intakeMiddleLower.move_voltage(12000);
+			intakeMacro("R2");
 		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-			knockerPiston.set_value(false); // shut knocker	
-			intakeBottom.move_voltage(12000);
-			intakeMiddleUpper.move_voltage(12000);
-			intakeMiddleLower.move_voltage(12000);
+			intakeMacro("L1");
 		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
-			intakeBottom.move_voltage(-12000);
-			intakeMiddleUpper.move_voltage(-12000);
-			intakeMiddleLower.move_voltage(-12000);
+			intakeMacro("L2");
 		} else {
 			intakeTop.move_voltage(0);
 			intakeBottom.move_voltage(0);
@@ -67,29 +105,16 @@ void refreshIntake() {
 		}
 	} else { // hoard mode
 		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
-			knockerPiston.set_value(true); // open knocker
-			intakeTop.move_voltage(12000);
-			intakeBottom.move_voltage(-4000);
-			intakeMiddleUpper.move_voltage(12000);
-			intakeMiddleLower.move_voltage(12000);
+			intakeMacro("HOARD_R1");
 			rumble_pattern = ".";
 		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
-			intakeTop.move_voltage(-6000);
-			intakeBottom.move_voltage(-4000);
-			intakeMiddleUpper.move_voltage(12000);
-			intakeMiddleLower.move_voltage(12000);
+			intakeMacro("HOARD_R2");
 			rumble_pattern = ".";
 		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-			knockerPiston.set_value(false); // shut knocker		
-			//intakeTop.move_voltage(12000);
-			intakeBottom.move_voltage(12000);
-			intakeMiddleUpper.move_voltage(-12000);
-			intakeMiddleLower.move_voltage(12000);
+			intakeMacro("HOARD_L1");
 			rumble_pattern = ".";
 		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
-			intakeBottom.move_voltage(-12000);
-			intakeMiddleUpper.move_voltage(12000);
-			intakeMiddleLower.move_voltage(-12000);
+			intakeMacro("HOARD_L2");
 			rumble_pattern = ".";
 		} else {
 			intakeTop.move_voltage(0);

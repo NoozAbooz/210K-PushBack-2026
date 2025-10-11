@@ -2,7 +2,6 @@
 #include "main.h"
 
 std::string field_status;
-bool update_odom = false;
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -15,7 +14,7 @@ void initialize() {
     pros::delay(10);
 
     /* Configurations */
-    update_odom = true; // toggle kw::odom alg
+    kw::update_odom = true; // toggle kw::odom alg
     pros::Task([] {
         // chassis.calibrate();
         kw::initialize_odom();
@@ -35,8 +34,9 @@ void initialize() {
     maelstrom::logging::init(true, false, left_motors, right_motors, 5);
     pros::Task error_logger(maelstrom::logging::robot_faults_log);
 
-    if (update_odom == false) {
+    if (kw::update_odom == false) {
         rd_view_alert(sensorview, "[BIG FAT WARNING] update_odom is DISABLED!! You better know what you're doing!");
+        rumble_pattern = "---";
     }
     console.println("Robot initialized");
 }
