@@ -83,6 +83,14 @@ void intakeMacro(std::string str) {
 		intakeMiddleUpper.move_voltage(12000);
 		intakeMiddleLower.move_voltage(-12000);
 		rumble_pattern = ".";
+	} else if (str == "HOARD_LOAD_R1") { // preparing to score on long goal from hoard
+		intakeBottom.move_voltage(-4000);
+		intakeMiddleUpper.move_voltage(12000);
+		intakeMiddleLower.move_voltage(12000);
+	} else if (str == "HOARD_LOAD_R2") { // preparing to score on mid goal from hoard
+		intakeBottom.move_voltage(-4000);
+		intakeMiddleUpper.move_voltage(4000);
+		intakeMiddleLower.move_voltage(12000);
 	}
 }
 
