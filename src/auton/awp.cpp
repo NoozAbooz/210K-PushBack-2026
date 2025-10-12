@@ -79,7 +79,7 @@ void sawp_12() {
 	intakeMacro("L1");
 	kw::driveTo(29, 2000); // drive to loader
 	loaderPiston.set_value(true);
-	kw::turnToAngle(270, 1000); // turn to face loader
+	kw::turnToAngle(90, 1000); // turn to face loader
 	pros::delay(100);
 
 	kw::driveTo(6, 800); // drive into loader
@@ -87,7 +87,7 @@ void sawp_12() {
 	pros::delay(900);
 
 	kw::driveTo(-10, 800, 127, false); // slowly drive back from loader
-	kw::moveToPoint(16, 25, 2000, false, 90); // drive backwards into long goal
+	kw::moveToPoint(-16, 25, 2000, false, 90); // drive backwards into long goal
 	//kw::driveTo(-23, 1000);
 	stopIntake();
 	pros::delay(100);
@@ -96,7 +96,7 @@ void sawp_12() {
 
 	pros::delay(1000);
 	intakeMacro("HOARD_L1"); // intake into hoard
-	kw::turnToAngle(160, 1000); // swing to face group of three #1
+	kw::turnToAngle(200, 1000); // swing to face group of three #1
 
 
 	//kw::swing(310, 2000);
