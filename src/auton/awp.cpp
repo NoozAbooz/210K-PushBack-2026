@@ -75,7 +75,7 @@ void right_half() { // Right Side Half Solo AWP
 
 /* LEGACY */
 
-void sawp_12() {
+void nooz_sawp() {
 	intakeMacro("L1");
 	kw::driveTo(29, 2000); // drive to loader
 	loaderPiston.set_value(true);

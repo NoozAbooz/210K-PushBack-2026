@@ -35,7 +35,7 @@ void stopIntake();
 
 /* Autons */
 void sawp();
-void sawp_12();
+void nooz_sawp();
 
 void left_half();
 void right_half();
