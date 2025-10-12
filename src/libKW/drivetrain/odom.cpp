@@ -23,10 +23,11 @@ double kw::get_imu_rotation() {
 	} else if (!imu1_valid && imu2_valid) { // use imu2 if imu1 is invalid
 		return rotation2;
 	} else { // both invalid, use arc method w/ horizontal pod
-		console.println("ODOM Using arc method fallback");
-		double horizontal_distance = ((horizontalEncoder.get_position() / 36000.0) * M_PI * kw::horizontal_tracker_diameter);
-		double heading_rad = -(horizontal_distance / std::fabs(kw::horizontal_tracker_dist_from_center)); // negative since horizontal pod is backwards
-		return kw::to_deg(heading_rad); // convert to degrees
+		// console.println("ODOM Using arc method fallback");
+		// double horizontal_distance = ((horizontalEncoder.get_position() / 36000.0) * M_PI * kw::horizontal_tracker_diameter);
+		// double heading_rad = -(horizontal_distance / std::fabs(kw::horizontal_tracker_dist_from_center)); // negative since horizontal pod is backwards
+		// return kw::to_deg(heading_rad); // convert to degrees
+		return 0;
 	}
 }
 

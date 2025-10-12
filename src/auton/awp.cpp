@@ -76,13 +76,28 @@ void right_half() { // Right Side Half Solo AWP
 /* LEGACY */
 
 void sawp_12() {
-	intakeBottom.move_voltage(8000);
-	intakeMiddleLower.move_voltage(12000);
-	intakeMiddleUpper.move(-3000);
-	// kw::moveToPoint(6, 15, 2000);
-	// kw::swing(90, 2000, true, 40);
-	kw::moveToPoint(5, 14, 2000, true, 127, false);
-	kw::moveToPoint(9, 21, 2000, true, 20);
+	intakeMacro("L1");
+	kw::driveTo(29, 2000); // drive to loader
+	loaderPiston.set_value(true);
+	kw::turnToAngle(270, 1000); // turn to face loader
+	pros::delay(100);
+
+	kw::driveTo(6, 800); // drive into loader
+	kw::move_raw(3000, 3000); // keep driving into loader to prevent bounceback
+	pros::delay(900);
+
+	kw::driveTo(-10, 800, 127, false); // slowly drive back from loader
+	kw::moveToPoint(16, 25, 2000, false, 90); // drive backwards into long goal
+	//kw::driveTo(-23, 1000);
+	stopIntake();
+	pros::delay(100);
+	intakeMacro("R1"); // score on long goal
+	loaderPiston.set_value(false); // retract matchloader
+
+	pros::delay(1000);
+	intakeMacro("HOARD_L1"); // intake into hoard
+	kw::turnToAngle(160, 1000); // swing to face group of three #1
+
 
 	//kw::swing(310, 2000);
 
@@ -90,7 +105,7 @@ void sawp_12() {
 	// kw::driveTo(15, 1000);
 	// pros::delay(2000);
 
-	// // bgo to upper goal
+	// // go to upper goal
 	// kw::driveTo(-12, 1000);
 	// kw::turnToAngle(270, 1000);
 	// kw::moveToPoint(-30, 14, 1, 3000);

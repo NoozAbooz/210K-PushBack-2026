@@ -31,6 +31,7 @@ void refreshLoader();
 /* Macros */
 extern bool intakeLock;
 void intakeMacro(std::string str);
+void stopIntake();
 
 /* Autons */
 void sawp();

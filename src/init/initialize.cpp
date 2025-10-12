@@ -31,8 +31,8 @@ void initialize() {
 
     std::vector<int> left_motors = {11, 12, 14};
     std::vector<int> right_motors = {13, 15, 16};
-    maelstrom::logging::init(true, false, left_motors, right_motors, 5);
-    pros::Task error_logger(maelstrom::logging::robot_faults_log);
+    //maelstrom::logging::init(true, false, left_motors, right_motors, 5);
+    //pros::Task error_logger(maelstrom::logging::robot_faults_log);
 
     if (kw::update_odom == false) {
         rd_view_alert(sensorview, "[BIG FAT WARNING] update_odom is DISABLED!! You better know what you're doing!");
