@@ -96,7 +96,7 @@ void intakeMacro(std::string str) {
 
 // Intake Hold (no hoard) to score
 void refreshIntake() {
-	if(hoardStatus == false) {
+	if(hoardStatus == false && intakeLock == false) { // normal mode
 		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
 			intakeMacro("R1");
 		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
@@ -111,7 +111,7 @@ void refreshIntake() {
 			intakeMiddleUpper.move_voltage(0);
 			intakeMiddleLower.move_voltage(0);
 		}
-	} else { // hoard mode
+	} else if (intakeLock == false) { // hoard mode
 		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
 			intakeMacro("HOARD_R1");
 			rumble_pattern = ".";
