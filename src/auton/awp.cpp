@@ -76,58 +76,40 @@ void right_half() { // Right Side Half Solo AWP
 /* LEGACY */
 
 void nooz_sawp() {
-	kw::driveTo(28.0, 2000); // drive to loader
-    pros::Task ([] {
-       loaderPiston.set_value(true);
-       intakeMacro("L1");
-    });
+	intakeMacro("L1");
+	kw::driveTo(32, 2500, 127); // drive to loader
 	loaderPiston.set_value(true);
-	kw::turnToAngle(90, 1000); // turn to face loader
-	kw::driveTo(6, 800); // drive into loader
-    kw::move_raw(2000, 2000); // keep driving into loader to prevent bounceback
-	pros::delay(600);
+	kw::turnToAngle(90, 700); // turn to face loader
+	pros::delay(100);
+
+	kw::driveTo(6, 800, 127, false); // drive into loader
+	kw::move_raw(3000, 3000); // keep driving into loader to prevent bounceback
+	pros::delay(900);
 
 	kw::driveTo(-10, 800, 127, false); // slowly drive back from loader
-	kw::moveToPoint(-19, 31.5, 2000, false, 90); // drive backwards into long goal
-	pros::Task ([] {
-		pros::delay(500);
+	//kw::moveToPoint(-18, 34, 2000, false, 90); // drive backwards into long goal
+	pros::Task([] {
+		kw::driveTo(-23, 1000); // drive backwards into long goal
+	});
+
+	pros::delay(800); // wait to arrive at goal
 	intakeMacro("R1"); // score on long goal
 	loaderPiston.set_value(false); // retract matchloader
-	pros::delay(1300);
-	intakeMacro("HOARD_L1"); // intake into hoard
-	});
-	kw::moveToPoint(-19, 31.5, 2000, false, 90); // drive backwards into long goal
 
-	pros::delay(1000);
-	 kw::driveTo(7, 1000, 127); // drive forward a bit to avoid bounceback
-    kw::turnToAngle(215, 1000); // turn to face neutral zone
-    kw::moveToPoint(-20, 15, 2000, true, 127); // drive into neutral zone
-    loaderPiston.set_value(true); // extend matchloader
-	pros::delay(50);
-	kw::turnToAngle(180, 1000);
-	loaderPiston.set_value(false); // retract matchloader
-	kw::moveToPoint(-29, -33, 2000, true, 127);
-	loaderPiston.set_value(true); // extend matchloader
-	kw::turnToAngle(135, 1000);
-	pros::Task([] {
-		pros::delay(600);
-		intakeMacro("HOARD_R2"); // score on long goal
-	});
-	kw::moveToPoint(-42, -24, 1000, false, 127);
 	pros::delay(800);
-	stopIntake();
-	kw::moveToPoint(-6, -64, 1000);
-	kw::turnToAngle(90, 1000);
-	kw::driveTo(-14, 1000);
-	intakeMacro("HOARD_R1");
+	kw::driveTo(1, 1000, 127, false);
+	kw::turnToAngle(220, 1500); // swing to face group of three #1
+	intakeMacro("L1"); // intake into hoard
+	kw::driveTo(30, 1500, 80);
 
+	kw::turnToAngle(180, 1000);
+	intakeMacro("HOARD_L1");
 
-
-	//kw::swing(310, 2000);
-
-	// kw::turnToAngle(310, 1000);
-	// kw::driveTo(15, 1000);
-	// pros::delay(2000);
+	pros::Task([] {
+		kw::driveTo(48, 1000); // drive backwards into long goal
+	});
+	pros::delay(1000);
+	loaderPiston.set_value(true); // loader down to prevent balls from rolling away
 
 	// // go to upper goal
 	// kw::driveTo(-12, 1000);
