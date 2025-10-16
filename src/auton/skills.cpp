@@ -41,6 +41,8 @@ void skills() {
     kw::moveToPoint(-20, 15, 2000, true, 90); // drive into neutral zone
     loaderPiston.set_value(true); // extend matchloader
     kw::driveTo(5, 2000, 60);
+    kw::driveTo(-34, 1000, 90);
+    
     // kw::boomerang(-45, 24, 0, 0.1, 4000, true, 80);
     // kw::turnToAngle(0, 1000);
     // kw::driveTo(3, 2000, 60);
