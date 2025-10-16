@@ -76,27 +76,51 @@ void right_half() { // Right Side Half Solo AWP
 /* LEGACY */
 
 void nooz_sawp() {
-	intakeMacro("L1");
-	kw::driveTo(29, 2000); // drive to loader
+	kw::driveTo(28.0, 2000); // drive to loader
+    pros::Task ([] {
+       loaderPiston.set_value(true);
+       intakeMacro("L1");
+    });
 	loaderPiston.set_value(true);
 	kw::turnToAngle(90, 1000); // turn to face loader
-	pros::delay(100);
-
 	kw::driveTo(6, 800); // drive into loader
-	kw::move_raw(3000, 3000); // keep driving into loader to prevent bounceback
-	pros::delay(900);
+    kw::move_raw(2000, 2000); // keep driving into loader to prevent bounceback
+	pros::delay(600);
 
 	kw::driveTo(-10, 800, 127, false); // slowly drive back from loader
-	kw::moveToPoint(-16, 25, 2000, false, 90); // drive backwards into long goal
-	//kw::driveTo(-23, 1000);
-	stopIntake();
-	pros::delay(100);
+	kw::moveToPoint(-19, 31.5, 2000, false, 90); // drive backwards into long goal
+	pros::Task ([] {
+		pros::delay(500);
 	intakeMacro("R1"); // score on long goal
 	loaderPiston.set_value(false); // retract matchloader
+	pros::delay(1300);
+	intakeMacro("HOARD_L1"); // intake into hoard
+	});
+	kw::moveToPoint(-19, 31.5, 2000, false, 90); // drive backwards into long goal
 
 	pros::delay(1000);
-	intakeMacro("HOARD_L1"); // intake into hoard
-	kw::turnToAngle(200, 1000); // swing to face group of three #1
+	 kw::driveTo(7, 1000, 127); // drive forward a bit to avoid bounceback
+    kw::turnToAngle(215, 1000); // turn to face neutral zone
+    kw::moveToPoint(-20, 15, 2000, true, 127); // drive into neutral zone
+    loaderPiston.set_value(true); // extend matchloader
+	pros::delay(50);
+	kw::turnToAngle(180, 1000);
+	loaderPiston.set_value(false); // retract matchloader
+	kw::moveToPoint(-29, -33, 2000, true, 127);
+	loaderPiston.set_value(true); // extend matchloader
+	kw::turnToAngle(135, 1000);
+	pros::Task([] {
+		pros::delay(600);
+		intakeMacro("HOARD_R2"); // score on long goal
+	});
+	kw::moveToPoint(-42, -24, 1000, false, 127);
+	pros::delay(800);
+	stopIntake();
+	kw::moveToPoint(-6, -64, 1000);
+	kw::turnToAngle(90, 1000);
+	kw::driveTo(-14, 1000);
+	intakeMacro("HOARD_R1");
+
 
 
 	//kw::swing(310, 2000);

@@ -1,3 +1,5 @@
+#include "abstractGlobals.hpp"
+#include "deviceGlobals.hpp"
 #include "main.h"
 
 void skills() {
@@ -5,7 +7,7 @@ void skills() {
     toggleColourSort = false;
 
 	//intakeMacro("L1");
-	kw::driveTo(28.2, 2000); // drive to loader
+	kw::driveTo(28.0, 2000); // drive to loader
     pros::Task ([] {
        loaderPiston.set_value(true);
        intakeMacro("L1");
@@ -21,9 +23,10 @@ void skills() {
        intakeMacro("R1");
        pros::delay(1200);
        intakeMacro("HOARD_R1");
+        initColourSort();
        pros::delay(1000);
        intakeMacro("L1");
-
+       toggleColourSort = true;
        
     });
 	kw::moveToPoint(-22, 31.6, 2000, false, 90); // drive backwards into long goal
@@ -32,11 +35,12 @@ void skills() {
 	//stopIntake();
 	pros::delay(1000);
 	//intakeMacro("R1"); // score on long goal
-	//loaderPiston.set_value(false); // retract matchloader
-    // kw::driveTo(7, 1000, 127); // drive forward a bit to avoid bounceback
-    // kw::turnToAngle(215, 1000); // turn to face neutral zone
-    // kw::moveToPoint(-20, 15, 2000, true, 90); // drive into neutral zone
-    // kw::driveTo(5, 2000, 60);
+	loaderPiston.set_value(false); // retract matchloader
+    kw::driveTo(7, 1000, 127); // drive forward a bit to avoid bounceback
+    kw::turnToAngle(215, 1000); // turn to face neutral zone
+    kw::moveToPoint(-20, 15, 2000, true, 90); // drive into neutral zone
+    loaderPiston.set_value(true); // extend matchloader
+    kw::driveTo(5, 2000, 60);
     // kw::boomerang(-45, 24, 0, 0.1, 4000, true, 80);
     // kw::turnToAngle(0, 1000);
     // kw::driveTo(3, 2000, 60);
