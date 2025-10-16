@@ -61,13 +61,13 @@ void intakeMacro(std::string str) {
 	} else if(str == "HOARD_R1") { // score on long goal
 		knockerPiston.set_value(true); // open knocker
 		intakeTop.move_voltage(12000);
-		intakeBottom.move_voltage(-4000);
+		intakeBottom.move_voltage(-2000);
 		intakeMiddleUpper.move_voltage(12000);
 		intakeMiddleLower.move_voltage(12000);
 		rumble_pattern = ".";
 	} else if (str == "HOARD_R2") { // score on mid goal
 		intakeTop.move_voltage(-6000);
-		intakeBottom.move_voltage(-4000);
+		intakeBottom.move_voltage(-2000);
 		intakeMiddleUpper.move_voltage(12000);
 		intakeMiddleLower.move_voltage(12000);
 		rumble_pattern = ".";
