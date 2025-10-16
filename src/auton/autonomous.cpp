@@ -13,8 +13,8 @@
  */
 
 void testPID() {
-    //kw::driveTo(24, 3000, 127, true);
-    kw::turnToAngle(180, 1000);
+    //kw::driveTo(24, 3000, 127);
+    kw::turnToAngle(180, 1500);
 
 }
 void testDistReset() {
