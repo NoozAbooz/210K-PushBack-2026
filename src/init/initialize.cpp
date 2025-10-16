@@ -1,4 +1,3 @@
-#include "deviceGlobals.hpp"
 #include "main.h"
 
 std::string field_status;
@@ -11,6 +10,7 @@ std::string field_status;
  */
 void initialize() {
     rdconfig_init();
+    initColourSort();
     pros::delay(10);
 
     /* Configurations */

@@ -11,6 +11,7 @@
  */
 void opcontrol() {
 	field_status = "opcontrol";
+	toggleColourSort = false;
 	initTelemetry();
 
 	while (true) { // Main continuous loop

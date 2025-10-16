@@ -2,7 +2,7 @@
 
 bool toggleColourSort = false;
 bool intakeLock = false;
-void initColourSort(int timeout) { // intended to be called in auton
+void initColourSort() { // intended to be called in auton
 	pros::Task ([] {
 		while (true) {
 			if (toggleColourSort) {
