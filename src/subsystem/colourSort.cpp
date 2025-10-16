@@ -9,8 +9,7 @@ void initColourSort(int timeout) { // intended to be called in auton
 				// red range: 8-25
 				// blue range: 200-230
 			
-				if (((alliance == "red" || alliance == "na") && (optical.get_hue() > 200 && optical.get_hue() < 230)) || 
-					((alliance == "blue") && (optical.get_hue() > 8 && optical.get_hue() < 30))) {
+				if (((alliance == "red" || alliance == "na") && (optical.get_hue() > 200 && optical.get_hue() < 230))) {
 					intakeLock = true;
 
 					intakeMacro("HOARD_L1");
