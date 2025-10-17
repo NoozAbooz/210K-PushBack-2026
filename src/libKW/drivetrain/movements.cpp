@@ -6,11 +6,11 @@ using namespace kw;
 // ============================================================================
 bool is_turning = false;
 double prev_left_output = 0, prev_right_output = 0;
-double current_movement_error = 0; // stored as absolute value
+double current_movement_error = 0; // distance to target, stored as non-abs value
 
 void kw::waitUntilDistance(double dist_to_target_in, double time_limit_msec) {
     double start_time = pros::millis();
-    while (current_movement_error < std::fabs(dist_to_target_in) && pros::millis() - start_time <= time_limit_msec) {
+    while (std::fabs(current_movement_error) > std::fabs(dist_to_target_in) && (pros::millis() - start_time) <= time_limit_msec) {
         pros::delay(10);
     }
 }
