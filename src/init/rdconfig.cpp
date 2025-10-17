@@ -1,4 +1,5 @@
 #include "main.h"
+#include <cstdio>
 
 rd_view_t *homeview = rd_view_create("Home");
 rd_view_t *sensorview = rd_view_create("Sensors");
@@ -97,15 +98,15 @@ void render_home_view() {
     lv_obj_align(title, LV_ALIGN_TOP_MID, 0, 20);
     lv_obj_add_style(title, &style_text_large, 0);
 
-    // Add "Console" button
-    lv_obj_t* console_btn = lv_btn_create(right_container);
-    lv_obj_t* console_btn_label = lv_label_create(console_btn);
-    lv_label_set_text(console_btn_label, "Console");
-    lv_obj_center(console_btn_label);
-    lv_obj_align(console_btn, LV_ALIGN_BOTTOM_MID, 0, -100);  // Positioned above the Setup button
-    lv_obj_add_event_cb(console_btn, [](lv_event_t* e) {
+    // Add "Sensors" button
+    lv_obj_t* sensors_btn = lv_btn_create(right_container);
+    lv_obj_t* sensors_btn_label = lv_label_create(sensors_btn);
+    lv_label_set_text(sensors_btn_label, "Sensors");
+    lv_obj_center(sensors_btn_label);
+    lv_obj_align(sensors_btn, LV_ALIGN_BOTTOM_MID, 0, -100);  // Positioned above the Setup button
+    lv_obj_add_event_cb(sensors_btn, [](lv_event_t* e) {
         if (lv_event_get_code(e) == LV_EVENT_CLICKED) {
-            console.focus();
+            rd_view_focus(sensorview);
         }
     }, LV_EVENT_CLICKED, NULL);
 
@@ -118,7 +119,7 @@ void render_home_view() {
         if (lv_event_get_code(e) == LV_EVENT_CLICKED) {
             Gif* gif = new Gif("/usd/nokotan.gif", rd_view_obj(gifview));
 		    rd_view_focus(gifview);
-            rd_view_alert(gifview, "Shika noko tokotoko arawaru nokonoko");
+            //rd_view_alert(gifview, "Shika noko tokotoko arawaru nokonoko");
 		    console.println("Running gif...");
         }
     }, LV_EVENT_CLICKED, NULL);
@@ -184,29 +185,32 @@ void render_sensor_view() {
         sprintf(buffer, "TEMPERATURE  L:%.2f°C | R:%.2f°C | Batt:%.2f°C", leftDrive.get_temperature(), rightDrive.get_temperature(), pros::battery::get_temperature());
         lv_label_set_text(debug_line_2, buffer);
 
-        sprintf(buffer, "INTAKE  TOP:%.2f°C | MID UPPER:%.2f°C | MID LOWER:%.2f°C | BOTTOM:%.2f°C", intakeTop.get_temperature(), intakeMiddleUpper.get_temperature(), intakeMiddleLower.get_temperature(), intakeBottom.get_temperature());
+        sprintf(buffer, "INTAKE  TOP:%.2f°C | MID UPPER:%.2f°C", intakeTop.get_temperature(), intakeMiddleUpper.get_temperature());
         lv_label_set_text(debug_line_3, buffer);
+
+        sprintf(buffer, "INTAKE   MID LOWER:%.2f°C | BOTTOM:%.2f°C", intakeMiddleLower.get_temperature(), intakeBottom.get_temperature());
+        lv_label_set_text(debug_line_4, buffer);
 
         // auto auton = gui_selector.get_auton();
         // const char* auton_name = auton->name.c_str();
         sprintf(buffer, "ALLIANCE: %s", alliance.c_str());
-        lv_label_set_text(debug_line_4, buffer);
+        lv_label_set_text(debug_line_5, buffer);
 
         int total_seconds = pros::millis() / 1000;
         int minutes = total_seconds / 60;
         int seconds = total_seconds % 60;
         sprintf(buffer, "Time Elapsed (min:sec): %d:%02d", minutes, seconds);
-        lv_label_set_text(debug_line_5, buffer);
+        lv_label_set_text(debug_line_6, buffer);
     
         sprintf(buffer, "Radio Status: %s", controller.is_connected() ? "Connected" : "Disconnected");
-        lv_label_set_text(debug_line_6, buffer);
+        lv_label_set_text(debug_line_7, buffer);
 
         const char* competition_status_str = (pros::competition::get_status() == 7) ? "Disabled" : (pros::competition::get_status() == 6) ? "Autonomous" : (pros::competition::get_status() == 4) ? "Driver Control" : "Not Connected";
         sprintf(buffer, "Competition Status: %s", competition_status_str);
-        lv_label_set_text(debug_line_7, buffer);
+        lv_label_set_text(debug_line_8, buffer);
 
         sprintf(buffer, "Distance Sensors  Fwd: %.2fin | Right: %.2fin", (float)(fwdDistance.get_distance() / 25.4), (float)(rightDistance.get_distance() / 25.4));
-        lv_label_set_text(debug_line_8, buffer);
+        lv_label_set_text(debug_line_9, buffer);
 
         pros::delay(200); // Update every 200 milliseconds
     }

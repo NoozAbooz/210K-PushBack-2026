@@ -53,10 +53,12 @@ void intakeMacro(std::string str) {
 		intakeBottom.move_voltage(12000);
 		intakeMiddleUpper.move_voltage(12000);
 		intakeMiddleLower.move_voltage(12000);
+		intakeTop.move_voltage(0);
 	} else if (str == "L2") { // outtake out of intake
 		intakeBottom.move_voltage(-12000);
 		intakeMiddleUpper.move_voltage(-12000);
 		intakeMiddleLower.move_voltage(-12000);
+		intakeTop.move_voltage(0);
 	// hoard mode
 	} else if(str == "HOARD_R1") { // score on long goal
 		knockerPiston.set_value(true); // open knocker
@@ -73,23 +75,25 @@ void intakeMacro(std::string str) {
 		rumble_pattern = ".";
 	} else if (str == "HOARD_L1") { // intake into hoard
 		knockerPiston.set_value(false); // shut knocker		
-		//intakeTop.move_voltage(12000);
+		intakeTop.move_voltage(0);
 		intakeBottom.move_voltage(12000);
 		intakeMiddleUpper.move_voltage(-12000);
 		intakeMiddleLower.move_voltage(12000);
 		rumble_pattern = ".";
 	} else if (str == "HOARD_L2") { // outtake out of intake from hoard
+		intakeTop.move_voltage(0);
 		intakeBottom.move_voltage(-12000);
 		intakeMiddleUpper.move_voltage(12000);
 		intakeMiddleLower.move_voltage(-12000);
 		rumble_pattern = ".";
 	} else if (str == "HOARD_LOAD_R1") { // preparing to score on long goal from hoard
-		intakeBottom.move_voltage(-4000);
+		intakeBottom.move_voltage(-2000);
 		intakeMiddleUpper.move_voltage(12000);
 		intakeMiddleLower.move_voltage(12000);
 	} else if (str == "HOARD_LOAD_R2") { // preparing to score on mid goal from hoard
-		intakeBottom.move_voltage(-4000);
-		intakeMiddleUpper.move_voltage(4000);
+		intakeTop.move_voltage(-12000);
+		intakeBottom.move_voltage(-2000);
+		intakeMiddleUpper.move_voltage(12000);
 		intakeMiddleLower.move_voltage(12000);
 	}
 }
