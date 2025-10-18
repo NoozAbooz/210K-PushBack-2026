@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "210K-kw",
+    "project_name": "v3-libKW",
     "target": "v5",
     "templates": {
       "gif-pros": {
