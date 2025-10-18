@@ -20,7 +20,7 @@ void right_elim() {
     pros::delay(250);
     kw::driveTo(-10, 800);
     pros::delay(300);
-    kw::turnToAngle(142, 1000);
+    kw::turnToAngle(143.5, 1000);
     kw::driveTo(47.5, 2000);
     kw::turnToAngle(164, 1000);
     intakeMacro("L1");

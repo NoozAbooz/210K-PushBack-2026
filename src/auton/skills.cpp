@@ -63,7 +63,8 @@ void skills() {
     kw::driveTo(70, 3000);
     kw::turnToAngle(235, 1000);
     loaderPiston.set_value(true);
-    kw::boomerang(-106, 32, 270, 0.2, 3000, true, 80);
+    kw::boomerang(-106, 31.7, 270, 0.2, 3000, true, 80);
+    kw::turnToAngle(270, 1000);
     kw::move_raw(4000, 4000); // keep driving into loader to prevent bounceback
     pros::delay(5000);
         kw::driveTo(-5, 2000, 80);
@@ -78,9 +79,9 @@ void skills() {
     loaderPiston.set_value(false);
     kw::driveTo(80, 4000);
     kw::turnToAngle(0, 1000);
-    kw::driveTo(-31.5, 1500);
+    kw::driveTo(-29.5, 1500);
     kw::turnToAngle(270, 1000);
-    kw::driveTo(10, 800);
+  //  kw::driveTo(10, 800);
     kw::move_raw(-12000, -12000);
     pros::delay(4000);
     kw::move_raw(0, 0);
