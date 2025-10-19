@@ -36,12 +36,12 @@ void sawp() {
 	kw::driveTo(32, 2000, 50);
 
 	/* score on low mid goal */
-	kw::turnToAngle(230, 1000); // face mid goal
+	kw::turnToAngle(228, 1000); // face mid goal
 
 	pros::Task([] {
 		kw::driveTo(13, 1500, 80);
 	});
-	pros::delay(250);
+	pros::delay(350);
 	intakeMacro("HOARD_L2");
 
 	pros::delay(600);

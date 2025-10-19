@@ -39,7 +39,7 @@ void skills() {
     kw::driveTo(-10, 800, 127, false); // slowly drive back from loader
 	//kw::moveToPoint(-18, 34, 2000, false, 90); // drive backwards into long goal
 	pros::Task([] { // prep to score early via task
-		kw::driveTo(-23, 1000, 100); // drive backwards into long goal
+		kw::driveTo(-23, 2000, 55); // drive backwards into long goal
 	});
 	pros::delay(800); // ASYNC wait to arrive at goal
 	intakeMacro("R1"); // score on long goal
@@ -52,7 +52,7 @@ void skills() {
     pros::delay(400);
     kw::driveTo(-31, 1000);
     kw::turnToAngle(90, 1000);
-    kw::driveTo(-20, 700, 127, true); // drive fwd from long goal
+    kw::driveTo(-20, 700, 55, true); // drive fwd from long goal
     intakeMacro("HOARD_R1");
     pros::delay(2000);
     intakeMacro("HOARD_L1");
@@ -66,6 +66,8 @@ void skills() {
     kw::boomerang(-106, 31.7, 270, 0.2, 3000, true, 80);
     kw::turnToAngle(270, 1000);
     kw::move_raw(4000, 4000); // keep driving into loader to prevent bounceback
+    kw::driveTo(-1, 800, 127); // slowly drive back from loader
+    kw::driveTo(1, 1000);
     pros::delay(5000);
         kw::driveTo(-5, 2000, 80);
     kw::turnToAngle(264, 1000);
@@ -79,7 +81,7 @@ void skills() {
     loaderPiston.set_value(false);
     kw::driveTo(80, 4000);
     kw::turnToAngle(0, 1000);
-    kw::driveTo(-29.5, 1500);
+    kw::driveTo(-30.5, 1500);
     kw::turnToAngle(270, 1000);
   //  kw::driveTo(10, 800);
     kw::move_raw(-12000, -12000);

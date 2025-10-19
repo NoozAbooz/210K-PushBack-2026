@@ -29,6 +29,7 @@ void right_elim() {
     kw::driveTo(-28, 1500, 127, false);
     pros::delay(1500);
     intakeMacro("HOARD_R1");
+    intakeBottom.move_voltage(-8000);
   
 
 }
@@ -58,4 +59,5 @@ void left_elim() {
     kw::driveTo(-28, 1500, 127, false);
     pros::delay(1500);
     intakeMacro("HOARD_R1");
+    intakeBottom.move_voltage(-8000);
 }
