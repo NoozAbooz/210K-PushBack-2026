@@ -24,7 +24,7 @@ extern std::string rumble_pattern;
 extern void drive_arcade();
 
 extern void refreshIntake();
-extern void toggleHoard();
+//extern void toggleHoard();
 extern void park();
 extern void refreshLoader();
 
