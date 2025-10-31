@@ -47,7 +47,7 @@ void initialize() {
  * the robot is enabled, this task will exit.
  */
 void disabled() {
-    field_status = "disabled";
+    //field_status = "disabled";
    // odomLiftPiston.set_value(false);
 }
 

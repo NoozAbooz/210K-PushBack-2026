@@ -10,6 +10,14 @@
  * the task from where it left off.
  */
 void opcontrol() {
+	pros::Task([] { // run only in competition
+		if (field_status == "competition") {
+			Gif* gif = new Gif("/usd/nokotan.gif", rd_view_obj(gifview));
+			rd_view_focus(gifview);
+			console.println("Launching gif...");
+		}
+	});
+
 	field_status = "opcontrol";
 	toggleColourSort = false;
 	initTelemetry();
