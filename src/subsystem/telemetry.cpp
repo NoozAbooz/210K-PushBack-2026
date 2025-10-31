@@ -22,6 +22,9 @@ void initTelemetry() {
 			if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)) {
 				gui_selector.prev_auton();
 			}
+			if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
+				alliance = (alliance == "red") ? "blue" : "red"; // toggle alliance
+			}
 
 			if(telemState == 0) {
 				controller.print(0, 0, "DT%.0lf|INT%.0lf|T%.0lf  ", drivetrainTemps, intakeBottom.get_temperature(), kw::theta);

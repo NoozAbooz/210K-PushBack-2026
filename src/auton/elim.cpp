@@ -1,26 +1,63 @@
+#include "abstractGlobals.hpp"
+#include "deviceGlobals.hpp"
 #include "libKW/drivetrain/movements.hpp"
 #include "main.h"
 #include "pros/rtos.hpp"
 
 void right_elim() {
-kw::boomerang(7, 17, 30, 0.8, 1000, true, 100, false);
-kw::boomerang(34, 33, 90, 0.65, 2000, true, 90, true);
-pros::Task([]{
-    loaderPiston.set_value(true);
-    });
-pros::delay(400);
-kw::moveToPoint(14, 32,  2000, false, 127);
-pros::delay(1000);
-kw::boomerang(34, -11, 158, 0.2, 3000, true, 90);
-kw::turnToAngle(180, 1000);
-kw::boomerang(33.0, 8, 180, 0.2, 3000, false , 60);
-pros::delay(3000);
-kw::boomerang(32.5, -25, 180, 0.2, 3000, true , 90);
-pros::delay(1000);
-kw::boomerang(33.0, 8, 180, 0.2, 3000, false , 60);
+    intakeMacro("HOARD_L1");
+
+    kw::driveTo(19.5, 1500);
+    pros::delay(350);
+
+    kw::driveTo(22.65, 1500);
+
+    kw::turnToAngle(62, 1000);
+    //intakeMacro("L1");
+    kw::driveTo(12, 1000, 127);
+    kw::turnToAngle(72.5, 1000);
+    loaderPiston.set_value(true); // lower matchloader to gather balls
+    pros::delay(250);
+    kw::driveTo(-10, 800);
+    pros::delay(300);
+    kw::turnToAngle(143.5, 1000);
+    kw::driveTo(47.5, 2000);
+    kw::turnToAngle(164, 1000);
+    intakeMacro("L1");
+    kw::driveTo(7, 500);
+    pros::delay(400);
+    kw::driveTo(-28, 1500, 127, false);
+    pros::delay(1500);
+    intakeMacro("HOARD_R1");
+    intakeBottom.move_voltage(-8000);
+  
 
 }
 
 void left_elim() {
+    intakeMacro("HOARD_L1");
 
+    kw::driveTo(19.5, 1500);
+    pros::delay(350);
+
+    kw::driveTo(22.65, 1500);
+
+    kw::turnToAngle(298, 1000);
+    //intakeMacro("L1");
+    kw::driveTo(12, 1000, 127);
+    kw::turnToAngle(287.5, 1000);
+    loaderPiston.set_value(true); // lower matchloader to gather balls
+    pros::delay(250);
+    kw::driveTo(-10, 800);
+    pros::delay(300);
+    kw::turnToAngle(216.5, 1000);
+    kw::driveTo(47.5, 2000);
+    kw::turnToAngle(196, 1000);
+    intakeMacro("L1");
+    kw::driveTo(7, 500);
+    pros::delay(400);
+    kw::driveTo(-28, 1500, 127, false);
+    pros::delay(1500);
+    intakeMacro("HOARD_R1");
+    intakeBottom.move_voltage(-8000);
 }

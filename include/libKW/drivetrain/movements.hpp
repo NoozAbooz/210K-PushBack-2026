@@ -5,6 +5,14 @@ namespace kw {
 	enum LateralDirection { CW = 1, CCW = -1 };
 
 	/**
+	 * @brief Delay execution until we are a certain distance AWAY from target
+	 *
+	 * @param dist_to_target_in Distance away from target at the point to continue execution (in inches)
+	 * @param time_limit_msec Maximum time allowed for the wait (in milliseconds)
+	 */
+	extern void waitUntilDistance(double dist_to_target_in, double time_limit_msec);
+
+	/**
 	 * @brief Turn to global angle between [0, 360)
 	 *
 	 * @param turn_angle Target angle to turn to (in degrees)

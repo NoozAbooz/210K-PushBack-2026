@@ -6,6 +6,14 @@ using namespace kw;
 // ============================================================================
 bool is_turning = false;
 double prev_left_output = 0, prev_right_output = 0;
+double current_movement_error = 0; // distance to target, stored as non-abs value
+
+void kw::waitUntilDistance(double dist_to_target_in, double time_limit_msec) {
+    double start_time = pros::millis();
+    while (std::fabs(current_movement_error) > std::fabs(dist_to_target_in) && (pros::millis() - start_time) <= time_limit_msec) {
+        pros::delay(10);
+    }
+}
 
 // ============================================================================
 // MAIN DRIVE AND TURN FUNCTIONS
@@ -158,6 +166,7 @@ void kw::driveTo(double distance_in, double time_limit_msec, double max_output, 
   while (((!pid_distance.targetArrived()) && pros::millis() - start_time <= time_limit_msec && exit) || (exit == false && current_distance < distance_in && pros::millis() - start_time <= time_limit_msec)) {
     // Calculate current distance and heading
     current_distance = fabs(get_vertical_distance_traveled() - start_vertical_pos);
+    current_movement_error = distance_in - (get_vertical_distance_traveled() - start_vertical_pos); // used for kw::waitUntilDistance
     current_angle = kw::get_imu_rotation();
     left_output = pid_distance.update(current_distance) * drive_direction;
     right_output = left_output;

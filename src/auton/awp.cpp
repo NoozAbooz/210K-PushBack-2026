@@ -14,9 +14,9 @@ void sawp() {
 	pros::delay(100);
 
 	/* get balls from loader */
-	kw::driveTo(6, 800, 127, false); // drive into loader
+	kw::driveTo(6, 800, 90, false); // drive into loader
 	kw::move_raw(3000, 3000); // keep driving into loader to prevent bounceback
-	pros::delay(750); // stay at matchloader
+	pros::delay(700); // stay at matchloader
 
 	/* score on long goal */
 	kw::driveTo(-10, 800, 127, false); // slowly drive back from loader
@@ -29,40 +29,40 @@ void sawp() {
 	loaderPiston.set_value(false); // retract matchloader
 
 	/* drive to group of 3 */
-	pros::delay(1400);
+	pros::delay(1600);
 	kw::driveTo(1.5, 1000, 127, false); // drive fwd from long goal
-	kw::turnToAngle(220, 1500); // swing to face group of three #1
+	kw::turnToAngle(219, 1500); // swing to face group of three #1
 	intakeMacro("HOARD_L1"); // intake into hoard
 	kw::driveTo(32, 2000, 50);
 
 	/* score on low mid goal */
-	kw::turnToAngle(230, 1000); // face mid goal
+	kw::turnToAngle(228, 1000); // face mid goal
 
 	pros::Task([] {
-		kw::driveTo(13.5, 1500, 80);
+		kw::driveTo(13, 1500, 80);
 	});
-	pros::delay(225);
+	pros::delay(350);
 	intakeMacro("HOARD_L2");
 
-	pros::delay(500);
+	pros::delay(600);
 	kw::driveTo(2, 600); // give it a little push into the goal
 
 	/* back away and go to group 3 */
-	pros::delay(300);
+	pros::delay(275);
 	intakeMacro("HOARD_L1");
 	kw::driveTo(-12.5, 1500); // back away from mid goal
 
-	kw::turnToAngle(182, 1000); // face 2nd group of three
+	kw::turnToAngle(183, 1000); // face 2nd group of three
 
 	pros::Task([] {
-		kw::driveTo(42, 2500); // drive to 2nd group of three
+		kw::driveTo(42.5, 2500); // drive to 2nd group of three
 	});
-	pros::delay(600); // async wait before putting loader down
+	pros::delay(650); // async wait before putting loader down
 	loaderPiston.set_value(true); // lower matchloader to prevent balls from rolling away
 
-	kw::turnToAngle(128.5, 1000); // face long goal
+	kw::turnToAngle(127, 1000); // face long goal
 	pros::Task([] {
-		pros::delay(450);
+		pros::delay(600);
 		intakeMacro("HOARD_LOAD_R2"); // already start cycling balls up to 3rd stage
 	});
 
@@ -70,7 +70,7 @@ void sawp() {
 		kw::driveTo(-12, 800); // drive backwards into long goal
 		kw::move_raw(-4000, -4000);
 	});
-	pros::delay(800);
+	pros::delay(600);
 	intakeMacro("HOARD_R2");
 
 }
