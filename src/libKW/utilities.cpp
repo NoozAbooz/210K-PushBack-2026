@@ -64,10 +64,10 @@ double kw::largest_abs(double a, double b) { // return the value with largest ma
  */
 double kw::normalize_target(double angle) {
   // Adjust angle to be within +/-180 degrees of the inertial sensor's rotation
-  if (angle - inertial1.get_rotation() > 180) {
-    while (angle - inertial1.get_rotation() > 180) angle -= 360;
-  } else if (angle - inertial1.get_rotation() < -180) {
-    while (angle - inertial1.get_rotation() < -180) angle += 360;
+  if (angle - kw::get_imu_rotation() > 180) {
+    while (angle - kw::get_imu_rotation() > 180) angle -= 360;
+  } else if (angle - kw::get_imu_rotation() < -180) {
+    while (angle - kw::get_imu_rotation() < -180) angle += 360;
   }
   return angle;
 }

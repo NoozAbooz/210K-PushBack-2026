@@ -348,7 +348,7 @@ void kw::moveToPoint(double x, double y, double time_limit_msec, bool forwards, 
 	  right_output = kw::volt_to_milivolt(right_output);
     kw::move_raw(left_output, right_output); // send mv value
     pros::delay(10);
-  }
+  } 
   if(exit == true) {
     prev_left_output = 0;
     prev_right_output = 0;
