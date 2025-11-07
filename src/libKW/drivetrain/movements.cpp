@@ -91,7 +91,7 @@ void kw::turnToAngle(double turn_angle, double time_limit_msec, double max_outpu
       if(output > max_output) output = max_output;
       else if(output < -max_output) output = -max_output;
       
-	  output = kw::volt_to_milivolt(output); // convert PID output from [-12, 12] decivolt to to [-12000, 12000] millivolts
+	    output = kw::volt_to_milivolt(output); // convert PID output from [-12, 12] decivolt to to [-12000, 12000] millivolts
       kw::move_raw(output, -output); // send mv value
       pros::delay(10);
     }
