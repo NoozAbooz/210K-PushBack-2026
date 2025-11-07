@@ -41,7 +41,7 @@ void intakeMacro(std::string str) {
 		intakeBottom.move_voltage(12000);
 		intakeTop.move_voltage(12000);
 	} else if (str == "R2") { // score on mid goal
-		intakeTop.move_voltage(-9000);
+		intakeTop.move_voltage(-8000);
 		intakeBottom.move_voltage(12000);
 	} else if (str == "L1") { // intake up to long goal scoring
 
@@ -49,7 +49,7 @@ void intakeMacro(std::string str) {
 		intakeTop.move_voltage(0);
 	} else if (str == "L2") { // outtake out of intake
 		intakeBottom.move_voltage(-12000);
-		intakeTop.move_voltage(-12000);
+		intakeTop.move_voltage(-0);
 	// hoard mode
 	// } else if(str == "HOARD_R1") { // score on long goal
 	// 	knockerPiston.set_value(true); // open knocker

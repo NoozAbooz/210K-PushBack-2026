@@ -112,12 +112,12 @@ void render_home_view() {
 
     lv_obj_t* gif_btn = lv_btn_create(right_container);
     lv_obj_t* gif_btn_label = lv_label_create(gif_btn);
-    lv_label_set_text(gif_btn_label, "Shikanoko");
+    lv_label_set_text(gif_btn_label, "Evernight");
     lv_obj_center(gif_btn_label);
     lv_obj_align(gif_btn, LV_ALIGN_BOTTOM_MID, 0, -50);  // Positioned above the Setup button
     lv_obj_add_event_cb(gif_btn, [](lv_event_t* e) {
         if (lv_event_get_code(e) == LV_EVENT_CLICKED) {
-            Gif* gif = new Gif("/usd/nokotan.gif", rd_view_obj(gifview));
+            Gif* gif = new Gif("/usd/evernight.gif", rd_view_obj(gifview));
 		    rd_view_focus(gifview);
             //rd_view_alert(gifview, "Shika noko tokotoko arawaru nokonoko");
 		    console.println("Running gif...");
