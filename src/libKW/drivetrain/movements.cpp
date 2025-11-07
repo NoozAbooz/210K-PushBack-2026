@@ -33,7 +33,7 @@ void kw::turnToAngle(double turn_angle, double time_limit_msec, double max_outpu
   // Prepare for turn
   kw::stop_chassis(pros::E_MOTOR_BRAKE_COAST);
   is_turning = true;
-  double threshold = 3;
+  double threshold = 1;
   kw::PID pid = kw::PID(kw::turn_kp, kw::turn_ki, kw::turn_kd);
 
   // Normalize and set PID target
@@ -42,7 +42,7 @@ void kw::turnToAngle(double turn_angle, double time_limit_msec, double max_outpu
   pid.setIntegralMax(0);  
   pid.setIntegralRange(3);
   pid.setSmallBigErrorTolerance(threshold, threshold * 3);
-  pid.setSmallBigErrorDuration(50, 250);
+  pid.setSmallBigErrorDuration(50, 150);
   pid.setDerivativeTolerance(threshold * 4.5);
 
   // PID loop for turning
@@ -62,7 +62,7 @@ void kw::turnToAngle(double turn_angle, double time_limit_msec, double max_outpu
       if(output > max_output) output = max_output;
       else if(output < -max_output) output = -max_output;
 
-	  output = kw::volt_to_milivolt(output); // convert PID output from [-12, 12] decivolt to to [-12000, 12000] millivolts
+	    output = kw::volt_to_milivolt(output); // convert PID output from [-12, 12] decivolt to to [-12000, 12000] millivolts
       kw::move_raw(output, -output); // send mv value
       pros::delay(10);
     }
@@ -77,7 +77,7 @@ void kw::turnToAngle(double turn_angle, double time_limit_msec, double max_outpu
       if(output > max_output) output = max_output;
       else if(output < -max_output) output = -max_output;
       
-	  output = kw::volt_to_milivolt(output); // convert PID output from [-12, 12] decivolt to to [-12000, 12000] millivolts
+	    output = kw::volt_to_milivolt(output); // convert PID output from [-12, 12] decivolt to to [-12000, 12000] millivolts
       kw::move_raw(-output, output); // send mv value
       pros::delay(10);
     }
@@ -147,7 +147,7 @@ void kw::driveTo(double distance_in, double time_limit_msec, double max_output, 
   pid_distance.setTarget(distance_in);
   pid_distance.setIntegralMax(3);  
   pid_distance.setSmallBigErrorTolerance(threshold, threshold * 3);
-  pid_distance.setSmallBigErrorDuration(50, 250);
+  pid_distance.setSmallBigErrorDuration(20, 100);
   pid_distance.setDerivativeTolerance(5);
 
   pid_heading.setTarget(normalize_target(correct_angle));

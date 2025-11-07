@@ -14,7 +14,7 @@ double kw::wheel_distance_in = (36.0 / 48.0) * 3.17 * M_PI;
 // turn_*     : PID for turning in place
 // heading_correction_* : PID for heading correction during linear movement
 double kw::distance_kp = 1, kw::distance_ki = 0, kw::distance_kd = 8;
-double kw::turn_kp = 0.3, kw::turn_ki = 0, kw::turn_kd = 2.8;
+double kw::turn_kp = 0.3, kw::turn_ki = 0.05, kw::turn_kd = 2.8;
 double kw::heading_correction_kp = 0.6, kw::heading_correction_ki = 0, kw::heading_correction_kd = 4;
 
 // Enable or disable the use of tracking wheels
@@ -44,9 +44,9 @@ bool kw::dir_change_end = true;     // Less accel/decel due to expecting directi
 double kw::min_output = 4; // Minimum output voltage to motors while chaining movements
 
 // Maximum allowed change in voltage output per 10 msec during movement
-double kw::max_slew_accel_fwd = 18;
+double kw::max_slew_accel_fwd = 14;
 double kw::max_slew_decel_fwd = 18;
-double kw::max_slew_accel_rev = 18;
+double kw::max_slew_accel_rev = 14;
 double kw::max_slew_decel_rev = 18;
 
 // Prevents too much slipping during boomerang movements
