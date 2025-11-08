@@ -135,3 +135,10 @@ void refreshLoader() {
 		loaderPiston.set_value(loaderStatus);
 	}
 }
+bool knockerStatus = false; // matchloader frame/tongue mech
+void refreshKnocker() {
+	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+		knockerStatus = !knockerStatus;
+		knockerPiston.set_value(knockerStatus);
+	}
+}
