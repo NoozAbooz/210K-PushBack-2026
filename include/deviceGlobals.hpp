@@ -11,9 +11,9 @@ inline pros::MotorGroup leftDrive({-11, -12, 14});
 inline pros::MotorGroup rightDrive({13, 15, -16});
 
 // Intake
-inline pros::Motor intakeMiddleLower(-3); // yes
+inline pros::Motor intakeMiddleLower(-10); // yes
 inline pros::Motor intakeMiddleUpper(10); // yes
-inline pros::Motor intakeTop(-10); // 11w flexwheel for goal height
+inline pros::Motor intakeTop(-3); // 11w flexwheel for goal height
 inline pros::Motor intakeBottom(-7); // preroller
 
 // Pneumatics
