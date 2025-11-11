@@ -12,31 +12,36 @@
 
 // right trigger (Y) - match load ✅
 
-bool hoardStatus = false; // for toggling hoard mode
 bool parkStatus = false; // for toggling park mode
-// void toggleHoard() {
-// 	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
-// 		//hoardStatus = !hoardStatus;
-// 		if (hoardStatus) {
-// 			console.println("Hoard mode: ON");
-// 		} else {
-// 			console.println("Hoard mode: OFF");
-// 		}
-// 	}
-// }
 
 void park() {
 	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
 		parkStatus = !parkStatus;
 		if (parkStatus) {
-			intakeLiftPiston.set_value(true); // lift intake
+			intakeLiftPiston.set_value(true); // push down
 		} else {
-			intakeLiftPiston.set_value(false); // lower intake
+			intakeLiftPiston.set_value(false); // lif up
 		}
+	}
+
+	// macro
+	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
+		int startTime = pros::millis();
+
+		while (intakeDistance.get_distance() > 20 && (pros::millis() - startTime < 5000)) { // 5 second to park
+			// remember its in mm!!!
+			intakeBottom.move_voltage(-12000);
+			intakeTop.move_voltage(0);
+			pros::delay(10);
+		}
+		intakeTop.brake();
+		intakeLiftPiston.set_value(true); // push down
 	}
 }
 
+std::string intakeMacroStatus = "";
 void intakeMacro(std::string str) {
+	intakeMacroStatus = str;
 	if(str == "R1") { // score on long goal-
 		intakeBottom.move_voltage(12000);
 		intakeMiddleLower.move_voltage(12000);
@@ -53,7 +58,7 @@ void intakeMacro(std::string str) {
 	} else if (str == "L2") { // outtake out of intake
 		intakeBottom.move_voltage(-12000);
 		intakeMiddleLower.move_voltage(-12000);
-		intakeTop.move_voltage(-0);
+		intakeTop.move_voltage(0);
 	// hoard mode
 	// } else if(str == "HOARD_R1") { // score on long goal
 	// 	knockerPiston.set_value(true); // open knocker
@@ -95,7 +100,7 @@ void intakeMacro(std::string str) {
 
 // Intake Hold (no hoard) to score
 void refreshIntake() {
-	if(hoardStatus == false && intakeLock == false) { // normal mode
+	if(intakeLock == false) { // normal mode
 		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
 			intakeMacro("R1");
 		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
@@ -129,7 +134,7 @@ void refreshIntake() {
 	// 		intakeMiddleLower.move_voltage(0);
 	// 		intakeMiddleUpper.move_voltage(0);
 	}
-	}
+}
 
 
 bool loaderStatus = false; // matchloader frame/tongue mech

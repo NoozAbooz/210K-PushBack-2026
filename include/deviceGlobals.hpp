@@ -24,10 +24,11 @@ inline pros::adi::Pneumatics intakeLiftPiston('H', false);
 /* Declare sensors */
 inline pros::Imu inertial1(5); // should always be the less scuffed one
 inline pros::Imu inertial2(9); // less scuffed one
-inline pros::Optical optical(4);
+inline pros::Optical optical(8);
 
 inline pros::Distance fwdDistance(11);
 inline pros::Distance rightDistance(18);
+inline pros::Distance intakeDistance(0);
 
 inline pros::Rotation verticalEncoder(6);
 inline pros::Rotation horizontalEncoder(-17);
