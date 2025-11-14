@@ -28,6 +28,7 @@ extern void refreshIntake();
 extern void park();
 extern void refreshLoader();
 extern void refreshKnocker();
+extern void refreshwing();
 
 /* Macros (mainly intended to be called in auton)*/
 extern bool intakeLock; // true = disabled intaking, false = normal

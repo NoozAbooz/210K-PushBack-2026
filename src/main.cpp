@@ -32,6 +32,7 @@ void opcontrol() {
 		//toggleHoard();
 		refreshKnocker();
 		park();
+		refreshwing();
 
 		pros::delay(10); // Delay to save resources on brain
 	}

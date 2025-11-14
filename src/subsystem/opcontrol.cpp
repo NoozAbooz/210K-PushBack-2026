@@ -12,33 +12,6 @@
 
 // right trigger (Y) - match load ✅
 
-bool parkStatus = false; // for toggling park mode
-
-void park() {
-	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
-		parkStatus = !parkStatus;
-		if (parkStatus) {
-			intakeLiftPiston.set_value(true); // push down
-		} else {
-			intakeLiftPiston.set_value(false); // lif up
-		}
-	}
-
-	// macro
-	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
-		int startTime = pros::millis();
-
-		while (intakeDistance.get_distance() > 20 && (pros::millis() - startTime < 5000)) { // 5 second to park
-			// remember its in mm!!!
-			intakeBottom.move_voltage(-12000);
-			intakeTop.move_voltage(0);
-			pros::delay(10);
-		}
-		intakeTop.brake();
-		intakeLiftPiston.set_value(true); // push down
-	}
-}
-
 std::string intakeMacroStatus = "";
 void intakeMacro(std::string str) {
 	intakeMacroStatus = str;
@@ -136,6 +109,31 @@ void refreshIntake() {
 	}
 }
 
+bool parkStatus = false; // for toggling park mode
+
+void park() {
+	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
+		parkStatus = !parkStatus;
+		if (parkStatus) {
+			intakeLiftPiston.set_value(true); // push down
+		} else {
+			intakeLiftPiston.set_value(false); // lif up
+		}
+	}
+
+	// macro
+	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
+		int startTime = pros::millis();
+
+		while (intakeDistance.get_distance() > 200 && (pros::millis() - startTime < 5000)) { // 5 second to park
+			// remember its in mm!!!
+			intakeMacro("L2");
+			pros::delay(800);
+		}
+		stopIntake();
+		intakeLiftPiston.set_value(true); // push down
+	}
+}
 
 bool loaderStatus = false; // matchloader frame/tongue mech
 void refreshLoader() {
@@ -146,8 +144,16 @@ void refreshLoader() {
 }
 bool knockerStatus = false; // matchloader frame/tongue mech
 void refreshKnocker() {
-	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
 		knockerStatus = !knockerStatus;
 		knockerPiston.set_value(knockerStatus);
+	}
+}
+
+bool wingStatus = false; // matchloader frame/tongue mech
+void refreshwing() {
+	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+		wingStatus = !wingStatus;
+		wingPiston.set_value(wingStatus);
 	}
 }
