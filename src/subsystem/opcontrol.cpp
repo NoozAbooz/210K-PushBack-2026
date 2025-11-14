@@ -128,7 +128,7 @@ void park() {
 		while (intakeDistance.get_distance() > 200 && (pros::millis() - startTime < 5000)) { // 5 second to park
 			// remember its in mm!!!
 			intakeMacro("L2");
-			pros::delay(800);
+			pros::delay(600);
 		}
 		stopIntake();
 		intakeLiftPiston.set_value(true); // push down
