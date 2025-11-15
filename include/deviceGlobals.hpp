@@ -26,7 +26,7 @@ inline pros::adi::Pneumatics wingPiston('C', false);
 /* Declare sensors */
 inline pros::Imu inertial1(13); // should always be the less scuffed one
 inline pros::Imu inertial2(16); // less scuffed one
-inline pros::Optical optical(15);
+inline pros::Optical optical(7);
 
 inline pros::Distance fwdDistance(0);
 inline pros::Distance rightDistance(17);

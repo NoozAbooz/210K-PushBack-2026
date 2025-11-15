@@ -11,7 +11,8 @@ void initColourSort() { // intended to be called in auton
 			
 				if (((alliance == "red" || alliance == "na") && (optical.get_hue() > 200 && optical.get_hue() < 230)) || 
 					((alliance == "blue") && (optical.get_hue() > 8 && optical.get_hue() < 25))) {
-					pros::delay(50); // debounce
+					//pros::delay(50); // debounce
+					console.println("Coloursort triggered");
 					intakeLock = true;
 					intakeMacro("R2");
 					pros::delay(500);
