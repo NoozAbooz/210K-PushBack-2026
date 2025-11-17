@@ -26,6 +26,7 @@ void testDistReset() {
 }
 void testColourSort() {
     alliance = "red"; // set alliance to red for testing
+    toggleColourSort = true;
 }
 
 /* Legacy Auton Routines */
@@ -55,7 +56,7 @@ void autonomous() {
 
     // wait for inertial to calibrate until starting auton
     int start_time = pros::millis();
-    while ((isnanf(inertial1.get_rotation()) || std::isinf(inertial1.get_rotation())) && start_time < 2500) {
+    while ((isnanf(inertial1.get_rotation()) || std::isinf(inertial1.get_rotation())) && start_time < 2800) {
 		pros::delay(10);
 	}
     console.println("Running auton...");
