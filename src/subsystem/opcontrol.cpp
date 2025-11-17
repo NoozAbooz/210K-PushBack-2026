@@ -12,44 +12,26 @@
 
 // right trigger (Y) - match load ✅
 
-bool hoardStatus = false; // for toggling hoard mode
-bool parkStatus = false; // for toggling park mode
-// void toggleHoard() {
-// 	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
-// 		//hoardStatus = !hoardStatus;
-// 		if (hoardStatus) {
-// 			console.println("Hoard mode: ON");
-// 		} else {
-// 			console.println("Hoard mode: OFF");
-// 		}
-// 	}
-// }
-
-void park() {
-	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
-		parkStatus = !parkStatus;
-		if (parkStatus) {
-			intakeLiftPiston.set_value(true); // lift intake
-		} else {
-			intakeLiftPiston.set_value(false); // lower intake
-		}
-	}
-}
-
+std::string intakeMacroStatus = "";
 void intakeMacro(std::string str) {
+	intakeMacroStatus = str;
 	if(str == "R1") { // score on long goal-
 		intakeBottom.move_voltage(12000);
+		intakeMiddleLower.move_voltage(12000);
 		intakeTop.move_voltage(12000);
 	} else if (str == "R2") { // score on mid goal
-		intakeTop.move_voltage(-9000);
+		intakeTop.move_voltage(-10000);
+		intakeMiddleLower.move_voltage(12000);
 		intakeBottom.move_voltage(12000);
 	} else if (str == "L1") { // intake up to long goal scoring
 
 		intakeBottom.move_voltage(12000);
+		intakeMiddleLower.move_voltage(0);
 		intakeTop.move_voltage(0);
 	} else if (str == "L2") { // outtake out of intake
 		intakeBottom.move_voltage(-12000);
-		intakeTop.move_voltage(-12000);
+		intakeMiddleLower.move_voltage(-12000);
+		intakeTop.move_voltage(0);
 	// hoard mode
 	// } else if(str == "HOARD_R1") { // score on long goal
 	// 	knockerPiston.set_value(true); // open knocker
@@ -91,7 +73,7 @@ void intakeMacro(std::string str) {
 
 // Intake Hold (no hoard) to score
 void refreshIntake() {
-	if(hoardStatus == false && intakeLock == false) { // normal mode
+	if(intakeLock == false) { // normal mode
 		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
 			intakeMacro("R1");
 		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
@@ -125,13 +107,53 @@ void refreshIntake() {
 	// 		intakeMiddleLower.move_voltage(0);
 	// 		intakeMiddleUpper.move_voltage(0);
 	}
+}
+
+bool parkStatus = false; // for toggling park mode
+
+void park() {
+	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
+		parkStatus = !parkStatus;
+		if (parkStatus) {
+			intakeLiftPiston.set_value(true); // push down
+		} else {
+			intakeLiftPiston.set_value(false); // lif up
+		}
 	}
 
+	// macro
+	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
+		int startTime = pros::millis();
+
+		while (intakeDistance.get_distance() > 200 && (pros::millis() - startTime < 5000)) { // 5 second to park
+			// remember its in mm!!!
+			intakeMacro("L2");
+			pros::delay(600);
+		}
+		stopIntake();
+		intakeLiftPiston.set_value(true); // push down
+	}
+}
 
 bool loaderStatus = false; // matchloader frame/tongue mech
 void refreshLoader() {
 	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
 		loaderStatus = !loaderStatus;
 		loaderPiston.set_value(loaderStatus);
+	}
+}
+bool knockerStatus = false; // matchloader frame/tongue mech
+void refreshKnocker() {
+	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
+		knockerStatus = !knockerStatus;
+		knockerPiston.set_value(knockerStatus);
+	}
+}
+
+bool wingStatus = false; // matchloader frame/tongue mech
+void refreshwing() {
+	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+		wingStatus = !wingStatus;
+		wingPiston.set_value(wingStatus);
 	}
 }

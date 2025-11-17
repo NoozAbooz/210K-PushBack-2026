@@ -27,10 +27,13 @@ extern void refreshIntake();
 //extern void toggleHoard();
 extern void park();
 extern void refreshLoader();
+extern void refreshKnocker();
+extern void refreshwing();
 
 /* Macros (mainly intended to be called in auton)*/
 extern bool intakeLock; // true = disabled intaking, false = normal
 extern void intakeMacro(std::string str); // put "R1", "R2", "L1", "L2" for normal mode, "HOARD_R1", "HOARD_R2", "HOARD_L1", "HOARD_L2" for hoard mode
+extern std::string intakeMacroStatus;
 extern void stopIntake(); // stops all intake motors
 extern void initColourSort();
 extern bool toggleColourSort; // true = enabled colour sorting, false = disabled
