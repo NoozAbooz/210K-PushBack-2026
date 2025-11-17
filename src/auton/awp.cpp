@@ -11,31 +11,31 @@ void sawp() {
 
 	/* travel to loader */
 	intakeMacro("L1");
-	kw::driveTo(31.3, 2500, 127); // drive to loader
+	kw::driveTo(31.7, 2500, 127); // drive to loader
 	loaderPiston.set_value(true);
 	kw::turnToAngle(90, 700); // turn to face loader
 	pros::delay(50);
 
 	/* get balls from loader */
-	kw::driveTo(12,800, 100); // drive into loader
-	kw::move_raw(3000, 3000); // keep driving into loader to prevent bounceback
-	pros::delay(150); // stay at matchloader
+	kw::driveTo(13,800, 100); // drive into loader
+	kw::move_raw(8000, 8000); // keep driving into loader to prevent bounceback
+	pros::delay(250); // stay at matchloader
 
 	/* score on long goal */
 	//kw::driveTo(-10, 800, 127, false); // slowly drive back from loader
 	//kw::moveToPoint(-18, 34, 2000, false, 90); // drive backwards into long goal
 	pros::Task([] { // prep to score early via task
-		//kw::moveToPoint(-19, 33, 1000, false, 127); // drive backwards into long goal
-		kw::driveTo(-33, 1500); // drive backwards into long goal
+		kw::moveToPoint(-19, 33.4, 1000, false, 127); // drive backwards into long goal
+		//kw::driveTo(-33, 1500); // drive backwards into long goal
 	});
 	pros::delay(500); // ASYNC wait to arrive at goal
 	intakeMacro("R1"); // score on long goal
 	loaderPiston.set_value(false); // retract matchloader
 
 	// /* drive to group of 3 */
-	pros::delay(1400);
+	pros::delay(1600);
 	// kw::driveTo(1.5, 1000, 127, false); // drive fwd from long goal
-	kw::turnToAngle(220, 800); // swing to face group of three #1
+	kw::turnToAngle(225, 800); // swing to face group of three #1
 	pros::Task([] {
 		intakeMacro("L1"); // intake into hoard
 	});
@@ -45,24 +45,22 @@ void sawp() {
 	kw::driveTo(29, 1500, 127, false);
 	loaderPiston.set_value(true); // lower matchloader to prevent balls from rolling away
 	kw::turnToAngle(140, 1000);
-	kw::driveTo(-13, 1000);
+	kw::moveToPoint(-39.3, -24.4, 1000, false);
 		pros::Task([] {
 		intakeMacro("R2"); // intake into hoard
 	});
-	pros::delay(600);
+	pros::delay(800);
 	pros::Task([] {
 		intakeMacro("L1");
 	});
-	kw::moveToPoint(17.5, -59.9 , 1500, true); // drive backwards into long goal
-	kw::turnToAngle(90, 1000); // face long goal
-	pros::delay(100);
+	kw::moveToPoint(-3.5, -60.9 , 1500, true); // drive backwards into long goal
+	kw::turnToAngle(90, 600); // face long goal
 	pros::Task([] {
-	kw::move_raw(	4000, 4000); // keep driving into loader to prevent bounceback
+	kw::move_raw(	8000, 8000); // keep driving into loader to prevent bounceback
 	});
-	pros::delay(350);
+	pros::delay(850);
 	pros::Task([] {
-		kw::turnToAngle(90, 1000); // face long goal
-		kw::moveToPoint(-19, -64.1, 1000, false); // drive backwards into long goal
+		kw::moveToPoint(-21, -60.8	, 1000, false); // drive backwards into long goal
 		intakeMacro("R1");
 		wingPiston.set_value(true); // deploy wings
 	});
