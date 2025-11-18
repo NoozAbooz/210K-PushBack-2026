@@ -143,7 +143,7 @@ void left_half() { // Left Side Half Solo AWP
 	});
 	kw::moveToPoint(-16, 27, 1000, false);
 	kw::moveToPoint(-11, 48, 5000, false, 60);
-	kw::turnToAngle(197.7, 1000);
+	kw::turnToAngle(197.7, 1000, 127, 127);
 	//kw::boomerang(-17, 32, 197.7, 0.6, 2000, false, 70);
 
 }
