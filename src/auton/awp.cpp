@@ -17,7 +17,7 @@ void sawp() {
 	pros::delay(50);
 
 	/* get balls from loader */
-	kw::driveTo(12.7,800, 100); // drive into loader
+	kw::driveTo(13,800,70); // drive into loader
 	kw::move_raw(3000, 3000); // keep driving into loader to prevent bounceback
 	pros::delay(250); // stay at matchloader
 
@@ -49,14 +49,14 @@ void sawp() {
 		pros::Task([] {
 		intakeMacro("R2"); // intake into hoard
 	});
-	pros::delay(800);
+	pros::delay(750);
 	pros::Task([] {
 		intakeMacro("L1");
 	});
 	kw::moveToPoint(-3.5, -61.0 , 1500, true); // drive backwards into long goal
 	kw::turnToAngle(90, 600); // face long goal
 	pros::Task([] {
-	kw::driveTo(16.5, 800, 90); // drive into loader
+	kw::driveTo(16.5, 800, 70); // drive into loader
 	kw::move_raw(	3000, 3000); // keep driving into loader to prevent bounceback
 	});
 	pros::delay(1050);
@@ -122,11 +122,10 @@ void left_half() { // Left Side Half Solo AWP
 	pros::delay(1400);
 	intakeMacro("L1");
 	kw::moveToPoint(-29.7, 15.4, 2000);
-	kw::turnToAngle(197.7, 1000);
 	pros::Task([] {
-
-		pros::delay(100);
-		kw::driveTo(10.5, 2000, 60); // drive backwards into long goal
+		//pros::delay(100);
+		kw::turnToAngle(197.7, 1000);
+		kw::driveTo(10.7, 2000, 60); // drive backwards into long goal
 		kw::move_raw(3000, 3000);
 	});
 	pros::delay(1600);
@@ -142,7 +141,7 @@ void left_half() { // Left Side Half Solo AWP
 		loaderPiston.set_value(false); // retract matchloader
 	});
 	kw::moveToPoint(-16, 27, 1000, false);
-	kw::moveToPoint(-11, 48, 5000, false, 60);
+	kw::moveToPoint(-11, 48, 5000, false, 100);
 	kw::turnToAngle(197.7, 1000, 127, 127);
 	//kw::boomerang(-17, 32, 197.7, 0.6, 2000, false, 70);
 
