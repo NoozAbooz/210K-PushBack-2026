@@ -8,6 +8,9 @@ void skills() {
 	alliance = "red";
     toggleColourSort = false;
 
+    kw::distance_kp = 1, kw::distance_ki = 0, kw::distance_kd = 8;
+    kw::turn_kp = 0.3, kw::turn_ki = 0, kw::turn_kd = 2.8;
+
 	intakeMacro("L1");
 	kw::driveTo(31, 2500, 127); // drive to loader
 	loaderPiston.set_value(true);

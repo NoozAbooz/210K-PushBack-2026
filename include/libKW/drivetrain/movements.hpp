@@ -20,7 +20,7 @@ namespace kw {
 	 * @param max_output Maximum output to motors. (0, 127]
 	 * @param exit If true, stops the robot at the end; if false, allows chaining
 	 */
-	extern void turnToAngle(double turn_angle, double time_limit_msec, double max_output = 127, bool exit = true);
+	extern void turnToAngle(double turn_angle, double time_limit_msec, double max_output = 127, double min_speed = 0, bool exit = true);
 
 	/**
 	 * @brief Move laterally (forward and back)

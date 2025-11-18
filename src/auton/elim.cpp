@@ -5,7 +5,10 @@
 #include "pros/rtos.hpp"
 
 void right_elim() {
-    intakeMacro("HOARD_L1");
+    kw::distance_kp = 1, kw::distance_ki = 0, kw::distance_kd = 8;
+    kw::turn_kp = 0.3, kw::turn_ki = 0, kw::turn_kd = 2.8; // slime kp!!!!
+
+    intakeMacro("L1");
 
     kw::driveTo(19.5, 1500);
     pros::delay(350);

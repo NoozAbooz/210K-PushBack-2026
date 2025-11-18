@@ -28,7 +28,7 @@ void kw::waitUntilDistance(double dist_to_target_in, double time_limit_msec) {
  * - exit: If true, stops the robot at the end; if false, allows chaining.
  * - max_output: Maximum output to motors. (0, 127]
  */
-void kw::turnToAngle(double turn_angle, double time_limit_msec, double max_output, bool exit) {
+void kw::turnToAngle(double turn_angle, double time_limit_msec, double max_output, double min_speed, bool exit) {
   max_output = max_output * (12.0 / 127.0); // convert from [-127, 127] decivolts to [-12, 12] volts
   // Prepare for turn
   kw::stop_chassis(pros::E_MOTOR_BRAKE_COAST);
@@ -90,6 +90,9 @@ void kw::turnToAngle(double turn_angle, double time_limit_msec, double max_outpu
       previous_heading = current_heading;
       if(output > max_output) output = max_output;
       else if(output < -max_output) output = -max_output;
+
+      if(output < min_speed) output = min_speed;
+      else if (output > -min_speed) output = -min_speed;
       
 	    output = kw::volt_to_milivolt(output); // convert PID output from [-12, 12] decivolt to to [-12000, 12000] millivolts
       kw::move_raw(output, -output); // send mv value
