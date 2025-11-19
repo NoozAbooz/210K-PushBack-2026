@@ -19,4 +19,7 @@ namespace kw
     extern pros::Task odom_task;
     extern void set_odom_position(double x_new, double y_new, double theta_new = 360);
     extern void odom_update();
+
+    inline pros::Mutex encoder_mutex = pros::Mutex();
+    inline pros::Mutex odom_mutex = pros::Mutex();
 }

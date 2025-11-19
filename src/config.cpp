@@ -14,7 +14,7 @@ double kw::wheel_distance_in = (36.0 / 48.0) * 3.17 * M_PI;
 // turn_*     : PID for turning in place
 // heading_correction_* : PID for heading correction during linear movement
 double kw::distance_kp = 1, kw::distance_ki = 0, kw::distance_kd = 8;
-double kw::turn_kp = 0.3, kw::turn_ki = 0.30, kw::turn_kd = 2.8;
+double kw::turn_kp = 0.3, kw::turn_ki = 0.0, kw::turn_kd = 2.6;
 double kw::heading_correction_kp = 0.6, kw::heading_correction_ki = 0, kw::heading_correction_kd = 4;
 
 // Enable or disable the use of tracking wheels

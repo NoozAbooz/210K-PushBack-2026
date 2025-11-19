@@ -99,6 +99,7 @@ void kw::initialize_odom() {
 
 void kw::set_odom_position(double x_new, double y_new, double theta_new) {
 	kw::update_odom = false; // stop odom task loop
+	//kw::odom_mutex.take();
 	x_pos = x_new;
 	y_pos = y_new;
 
@@ -113,6 +114,7 @@ void kw::set_odom_position(double x_new, double y_new, double theta_new) {
 		inertial1.set_rotation(theta_new);
 		inertial2.set_rotation(theta_new);
 	}
+	//kw::odom_mutex.give();
 	kw::update_odom = true; // resume odom task loop
 }
 /* // pos reset - do not run async
@@ -126,9 +128,14 @@ void kw::odom_update() {
 	while (true) {
 		if (kw::update_odom == true) {
 			// printf("%f, %f\n", get_vertical_distance_traveled(), get_horizontal_distance_traveled());
+			//kw::odom_mutex.take();
+
 			double heading_rad = kw::to_rad(kw::get_imu_rotation());
+
+			kw::encoder_mutex.take();
 			double vertical_pos = kw::get_vertical_distance_traveled();
     		double horizontal_pos = kw::get_horizontal_distance_traveled();
+			kw::encoder_mutex.give();
 
     		double delta_heading_rad = heading_rad - prev_heading_rad;
 			double delta_vertical_in = (vertical_pos - prev_vertical_pos);
@@ -161,6 +168,8 @@ void kw::odom_update() {
     		prev_heading_rad = heading_rad;
     		prev_horizontal_pos = horizontal_pos;
     		prev_vertical_pos = vertical_pos;
+
+			//kw::odom_mutex.give();
 		}
 
 		pros::delay(10);

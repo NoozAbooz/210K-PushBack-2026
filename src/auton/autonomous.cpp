@@ -20,10 +20,21 @@ void testPID() {
 
 }
 void testDistReset() {
-    float absX = (rightDistance.get_distance() / 25.4);
-    float absY = (fwdDistance.get_distance() / 25.4);
+    double weights = 0; // weighted average distance from keej https://github.com/8pxl/keejLib/blob/main/lib/src/keejLib/odom.cpp
+    double weightedDist = 0;
 
-    kw::set_odom_position(absX, absY);
+    for (int i=0; i<3; i++) {
+        double distReading = kw::mm_to_in(fwdDistance.get_distance());
+        double confidence = fwdDistance.get_distance();
+        if (confidence <= 20) { confidence = 2; } 
+        weights += confidence;
+        weightedDist += distReading * confidence;
+        pros::delay(10);
+    }
+    double avgDist = weightedDist / weights;
+        
+
+    kw::set_odom_position(0, 0);
     //chassis.moveToPose(24, 24, 90, 1500);
 }
 void testColourSort() {

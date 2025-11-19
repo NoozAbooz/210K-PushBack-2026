@@ -27,8 +27,18 @@ void kw::waitUntilDistance(double dist_to_target_in, double time_limit_msec) {
  * - time_limit_msec: Maximum time allowed for the turn (in milliseconds).
  * - exit: If true, stops the robot at the end; if false, allows chaining.
  * - max_output: Maximum output to motors. (0, 127]
+ * - min_speed: Minimum speed to turn at (0, 127]
+ * - async: If true, runs the turn in a separate task and returns immediately.
  */
-void kw::turnToAngle(double turn_angle, double time_limit_msec, double max_output, double min_speed, bool exit) {
+void kw::turnToAngle(double turn_angle, double time_limit_msec, double max_output, double min_speed, bool exit, bool async) {
+  if(async) {
+    pros::Task task([&]() { 
+      kw::turnToAngle(turn_angle, time_limit_msec, max_output, min_speed, exit);
+    });
+    pros::delay(10);
+    return;
+  }
+
   max_output = max_output * (12.0 / 127.0); // convert from [-127, 127] decivolts to [-12, 12] volts
   min_speed = min_speed * (12.0 / 127.0); // convert from [-127, 127] decivolts to [-12, 12] volts
   // Prepare for turn
@@ -112,13 +122,25 @@ void kw::turnToAngle(double turn_angle, double time_limit_msec, double max_outpu
  * Drives the robot a specified distance (in inches) using PID control.
  * - distance_in: Target distance to drive (positive or negative).
  * - time_limit_msec: Maximum time allowed for the move (in milliseconds).
- * - exit: If true, stops the robot at the end; if false, allows chaining.
  * - max_output: Maximum voltage output to motors.
+ * - exit: If true, stops the robot at the end; if false, allows chaining.
+ * - async: If true, runs the drive in a separate task and returns immediately.
  */
-void kw::driveTo(double distance_in, double time_limit_msec, double max_output, bool exit) {
+void kw::driveTo(double distance_in, double time_limit_msec, double max_output, bool exit, bool async) {
+  if(async) {
+    pros::Task task([&]() { 
+      kw::driveTo(distance_in, time_limit_msec, max_output, exit);
+    });
+    pros::delay(10);
+    return;
+  }
+
   max_output = max_output * (12.0 / 127.0); // convert from [-127, 127] decivolts to [-12, 12] volts
   // Store initial dist travelled (function comes from odom.cpp)
+  kw::encoder_mutex.take();
   double start_vertical_pos = kw::get_vertical_distance_traveled();
+  kw::encoder_mutex.give();
+
   kw::stop_chassis(pros::E_MOTOR_BRAKE_COAST); // Stop chassis before moving
   is_turning = true;
   double threshold = 0.5;
@@ -170,8 +192,11 @@ void kw::driveTo(double distance_in, double time_limit_msec, double max_output, 
   // Main PID loop for driving straight
   while (((!pid_distance.targetArrived()) && pros::millis() - start_time <= time_limit_msec && exit) || (exit == false && current_distance < distance_in && pros::millis() - start_time <= time_limit_msec)) {
     // Calculate current distance and heading
+    kw::encoder_mutex.take();
     current_distance = fabs(get_vertical_distance_traveled() - start_vertical_pos);
     current_movement_error = distance_in - (get_vertical_distance_traveled() - start_vertical_pos); // used for kw::waitUntilDistance
+    kw::encoder_mutex.give();
+
     current_angle = kw::get_imu_rotation();
     left_output = pid_distance.update(current_distance) * drive_direction;
     right_output = left_output;
@@ -227,11 +252,20 @@ void kw::driveTo(double distance_in, double time_limit_msec, double max_output, 
  * - x, y: Coordinates of the target point.
  * - time_limit_msec: Maximum time allowed for the move (in milliseconds).
  * - forwards: Direction to move in (true (default) for forward, false for backward).
- * - exit: If true, stops the robot at the end; if false, allows chaining.
  * - max_output: Maximum voltage output to motors.
+ * - exit: If true, stops the robot at the end; if false, allows chaining.
  * - overturn: If true, allows overturning for sharp turns.
+ * - async: If true, runs the drive in a separate task and returns immediately.
  */
-void kw::moveToPoint(double x, double y, double time_limit_msec, bool forwards, double max_output, bool exit, bool overturn) {
+void kw::moveToPoint(double x, double y, double time_limit_msec, bool forwards, double max_output, bool exit, bool overturn, bool async) {
+  if(async) {
+    pros::Task task([&]() { 
+      kw::moveToPoint(x, y, time_limit_msec, forwards, max_output, exit, overturn);
+    });
+    pros::delay(10);
+    return;
+  }
+
   max_output = max_output * (12.0 / 127.0); // convert from [-127, 127] decivolts to [-12, 12] volts
   kw::stop_chassis(pros::E_MOTOR_BRAKE_COAST); // Stop chassis before moving
   is_turning = true;                  // Set turning state
@@ -290,6 +324,8 @@ void kw::moveToPoint(double x, double y, double time_limit_msec, bool forwards, 
   // Main PID loop for moving to point
   while (pros::millis() - start_time <= time_limit_msec) {
     // Continuously update targets as robot moves
+    //kw::odom_mutex.take();
+
     pid_heading.setTarget(normalize_target(kw::to_deg(atan2(x - x_pos, y - y_pos)) + add));
     pid_distance.setTarget(hypot(x - x_pos, y - y_pos));
     current_angle = kw::get_imu_rotation();
@@ -310,6 +346,7 @@ void kw::moveToPoint(double x, double y, double time_limit_msec, bool forwards, 
       correction_output = 0;
       ch = false;
     }
+    //kw::odom_mutex.give();
 
     // Minimum Output Check
     if(min_speed) {

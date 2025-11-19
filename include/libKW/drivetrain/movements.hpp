@@ -18,9 +18,11 @@ namespace kw {
 	 * @param turn_angle Target angle to turn to (in degrees)
 	 * @param time_limit_msec Maximum time allowed for the turn (in milliseconds)
 	 * @param max_output Maximum output to motors. (0, 127]
+	 * @param min_speed Minimum speed to turn at (0, 127]
 	 * @param exit If true, stops the robot at the end; if false, allows chaining
+	 * @param async If true, runs the turn in a separate task and returns immediately
 	 */
-	extern void turnToAngle(double turn_angle, double time_limit_msec, double max_output = 127, double min_speed = 0, bool exit = true);
+	extern void turnToAngle(double turn_angle, double time_limit_msec, double max_output = 127, double min_speed = 0, bool exit = true, bool async = false);
 
 	/**
 	 * @brief Move laterally (forward and back)
@@ -29,8 +31,9 @@ namespace kw {
 	 * @param time_limit_msec Maximum time allowed for the movement (in milliseconds)
 	 * @param max_output Maximum output to motors. (0, 127]
 	 * @param exit If true, stops the robot at the end; if false, allows chaining
+	 * @param async If true, runs the drive in a separate task and returns immediately
 	 */
-	extern void driveTo(double distance_in, double time_limit_msec, double max_output = 127, bool exit = true);
+	extern void driveTo(double distance_in, double time_limit_msec, double max_output = 127, bool exit = true, bool async = false);
 
 	/**
 	 * @brief Move using odometry to specified cartesian coordinate
@@ -42,8 +45,9 @@ namespace kw {
 	 * @param max_output Maximum output to motors. (0, 127]
 	 * @param exit If true, stops the robot at the end; if false, allows chaining
 	 * @param overturn If true, allows overturning for sharp turns.
+	 * @param async If true, runs the drive in a separate task and returns immediately
 	 */
-	extern void moveToPoint(double x, double y, double time_limit_msec, bool forwards = true, double max_output = 127, bool exit = true, bool overturn = false);
+	extern void moveToPoint(double x, double y, double time_limit_msec, bool forwards = true, double max_output = 127, bool exit = true, bool overturn = false, bool async = false);
 
 	/**
 	 * @brief Swing turn by moving only one side of the drivetrain
