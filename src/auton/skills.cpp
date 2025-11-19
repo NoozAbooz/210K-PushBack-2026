@@ -20,15 +20,17 @@ void skills() {
 	pros::delay(50);
 
 	/* get balls from loader */
-	kw::driveTo(11.5,800, 60); // drive into loader
-	kw::move_raw(3000, 3000); // keep driving into loader to prevent bounceback
-    pros::delay(50);
+	kw::driveTo(11.4,800, 60); // drive into loader
+	kw::move_raw(4000, 4000); // keep driving into loader to prevent bounceback
+   //ros::delay(50);
     // kw::move_raw(-3000, -3000);
     // pros::delay(80);
     // kw::move_raw(6000, 6000);
 
 
-	pros::delay(250); // stay at matchloader
+	pros::delay(550); // stay at matchloader
+    kw::move_raw(1000, 1000);
+    pros::delay(1000);
 
 	/* score on long goal */
 	kw::driveTo(-10, 1000, 80); // slowly drive back from loader
@@ -36,13 +38,29 @@ void skills() {
     kw::turnToAngle(125, 1500);
 	kw::moveToPoint(-18, 46, 1000, false); // drive backwards into long goal
     kw::turnToAngle(90, 1000);
+    stopIntake();
     kw::driveTo(-70, 3000);
     kw::turnToAngle(0, 1000);
     kw::move_raw(6000, 6000);
-    pros::delay(800);
+    pros::delay(400);
     kw::driveTo(-14.2, 1000);
     kw::turnToAngle(270, 1000);
     kw::driveTo(-13,1000, 60); // drive into loader
+    pros::delay(200);
+    intakeMacro("R1");
+    pros::delay(2400);
+    loaderPiston.set_value(true);
+    intakeMacro("L1");
+    kw::driveTo(26.4, 1000, 70);
+    kw::move_raw(4000, 4000);
+    pros::delay(2000);
+    kw::driveTo(-27, 2000, 600);
+    pros::delay(200);
+    intakeMacro("R1");
+    pros::delay(2000);
+    kw::driveTo(5, 1000);
+    knockerPiston.set_value(true);
+    kw::driveTo(-5.5, 2000, 40);
     //kw::moveToPoint(-75, 32.8, 2000, false, 70);
 	// 	//kw::driveTo(-33, 1500); // drive backwards into long goal
 
