@@ -17,7 +17,7 @@ void sawp() {
 	pros::delay(50);
 
 	/* get balls from loader */
-	kw::driveTo(11.8,800, 60); // drive into loader
+	kw::driveTo(11.4,800, 60); // drive into loader
 	kw::move_raw(3000, 3000); // keep driving into loader to prevent bounceback
 	pros::delay(250); // stay at matchloader
 
@@ -40,26 +40,28 @@ void sawp() {
 		intakeMacro("L1"); // intake into hoard
 	});
 
-	kw::driveTo(7.3, 1000, 127, false);
+	kw::driveTo(8.3, 1000, 127, false);
 	kw::turnToAngle(178, 1000);
 	kw::driveTo(30, 1500, 127, false);
 	loaderPiston.set_value(true); // lower matchloader to prevent balls from rolling away
 	kw::turnToAngle(140, 1000);
-	kw::correct_angle = kw::normalize_target(140.6);
-	kw::moveToPoint(-40.3, -25.4, 1000, false);
+	//kw::correct_angle = kw::normalize_target(140.6);
+	kw::moveToPoint(-37.3, -24.4, 1000, false);
 		pros::Task([] {
 		intakeMacro("R2"); // intake into hoard
 			pros::delay(750);
 		intakeMacro("L1");
 	});
 	pros::delay(750);
-	kw::moveToPoint(-4.5, -63.15 , 1500, true); // drive backwards into long goal
+	kw::moveToPoint(-3.5, -61.15 , 1500, true); // drive backwards into long goal
+	pros::delay(50);
+	kw::correct_angle = kw::normalize_target(152);
 	kw::turnToAngle(90, 600); // face long goal
 	kw::driveTo(14.8, 800, 90); // drive into loader
 	kw::move_raw(3000, 3000); // keep driving into loader to prevent bounceback
 	pros::delay(650);
 	pros::Task([] {
-		kw::moveToPoint(-23, -63.54	, 1000, false); // drive backwards into long goal
+		kw::moveToPoint(-23, -62.04	, 1000, false); // drive backwards into long goal
 		//kw::driveTo(-33, 1000);
 		intakeMacro("R1");
 		wingPiston.set_value(true); // deploy wings
@@ -121,10 +123,11 @@ void left_half() { // Left Side Half Solo AWP
 	pros::delay(1400);
 	intakeMacro("L1");
 	kw::moveToPoint(-29.7, 15.4, 2000);
+	pros::delay(200);
 	pros::Task([] {
 		//pros::delay(100);
 		kw::turnToAngle(197.7, 1000);
-		kw::driveTo(10.7, 2000, 60); // drive backwards into long goal
+		kw::driveTo(11.3, 2000, 60); // drive backwards into long goal
 		kw::move_raw(3000, 3000);
 	});
 	pros::delay(1600);
@@ -140,8 +143,8 @@ void left_half() { // Left Side Half Solo AWP
 		loaderPiston.set_value(false); // retract matchloader
 	});
 	kw::moveToPoint(-16, 27, 1000, false);
-	kw::moveToPoint(-11, 48, 5000, false, 100);
-	kw::turnToAngle(197.7, 1000, 127, 127);
+	kw::moveToPoint(-12, 47, 5000, false, 100);
+	kw::turnToAngle(197.7, 1000, 127);
 	//kw::boomerang(-17, 32, 197.7, 0.6, 2000, false, 70);
 
 }
