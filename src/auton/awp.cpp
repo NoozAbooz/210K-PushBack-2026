@@ -122,14 +122,14 @@ void left_half() { // Left Side Half Solo AWP
 	intakeMacro("R2");
 	pros::delay(1400);
 	intakeMacro("L1");
-	kw::moveToPoint(-29.7, 15.4, 2000);
+	kw::moveToPoint(-29.5, 15.4, 2000);
 	pros::delay(200);
-	pros::Task([] {
+
 		//pros::delay(100);
 		kw::turnToAngle(197.7, 1000);
 		kw::driveTo(11.3, 2000, 60); // drive backwards into long goal
 		kw::move_raw(3000, 3000);
-	});
+
 	pros::delay(1600);
 	//kw::driveTo(-30, 1000);
 	kw::moveToPoint(-25, 31, 1000, false);
