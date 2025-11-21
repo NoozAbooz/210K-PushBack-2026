@@ -15,7 +15,7 @@ void initColourSort() { // intended to be called in auton
 					console.println("Coloursort triggered");
 					intakeLock = true;
 					intakeMacro("R2");
-					pros::delay(500);
+					pros::delay(300);
 					intakeLock = false;
 					intakeMacro("R1");
 				}

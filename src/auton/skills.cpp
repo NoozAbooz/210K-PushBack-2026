@@ -20,12 +20,12 @@ void skills() {
 	pros::delay(50);
 
 	/* get balls from loader */
-	kw::driveTo(11.4,800, 60); // drive into loader
+	kw::driveTo(11.7,800, 60); // drive into loader
 	kw::move_raw(4000, 4000); // keep driving into loader to prevent bounceback
-    pros::delay(50);
-    kw::move_raw(-6000, -6000);
-    pros::delay(50);
-    kw::move_raw(6000, 6000);
+    // pros::delay(50);
+    // kw::move_raw(-6000, -6000);
+    // pros::delay(50);
+    // kw::move_raw(6000, 6000);
 
 
 	pros::delay(550); // stay at matchloader
@@ -93,11 +93,51 @@ void skills() {
     // move to loader 4
     kw::driveTo(-10, 1000);
     loaderPiston.set_value(false);
-    kw::turnToAngle(270, 1000);
-    kw::move_raw(6000, 6000); // wall reset
-    pros::delay(400);
-    kw::driveTo(-6, 800, 80);
+    kw::moveToPoint(-111, -1, 2000, false, 90);
     kw::turnToAngle(0, 1000);
-    kw::driveTo(-70, 2500, 80); // move through alley
+    stopIntake();
+    knockerPiston.set_value(false);
+    kw::driveTo(-70, 3000);
+    kw::turnToAngle(270, 1000);
+    kw::move_raw(6000, 6000);
+    pros::delay(400);
+        kw::driveTo(-14.2, 1000);
+    kw::turnToAngle(180, 1000);
+    kw::driveTo(-14,1000, 60); // drive into loader
+    pros::delay(200);
+    intakeMacro("R1");
+    pros::delay(2400);
+    loaderPiston.set_value(true);
+    kw::set_odom_position(0, 0, 0);
+
+    // get from loader #2
+    intakeMacro("L1");
+    kw::moveToPoint(-0.5, 26.4, 1000, true, 70);
+    kw::move_raw(4000, 4000); // keep driving into loader to prevent bounceback
+    pros::delay(50);
+    kw::move_raw(-6000, -6000);
+    pros::delay(50);
+    kw::move_raw(6000, 6000);
+    pros::delay(2000);
+
+   // back to long goal
+    kw::moveToPoint(0, -6, 1000, false, 60);
+    pros::delay(200);
+    intakeMacro("R1");
+    pros::delay(2600);
+    stopIntake();
+    kw::driveTo(5, 1000);
+    knockerPiston.set_value(true);
+    kw::driveTo(-5.5, 2000, 60);
+    pros::delay(200);
+    kw::set_odom_position(0, 0, 0);
+    kw::driveTo(15, 1000);
+    kw::turnToAngle(125, 1000);
+    kw::moveToPoint(-30, 35.4, 1000, false); // drive backwards into alley
+    kw::turnToAngle(90, 1000);
+    loaderPiston.set_value(false);
+    kw::driveTo(10, 1000);
+    kw::moveToPoint(-49, 40, 5000, false);
+   
 
 }

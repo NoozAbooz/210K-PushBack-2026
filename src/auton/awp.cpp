@@ -25,7 +25,7 @@ void sawp() {
 	//kw::driveTo(-10, 800, 127, false); // slowly drive back from loader
 	//kw::moveToPoint(-18, 34, 2000, false, 90); // drive backwards into long goal
 	pros::Task([] { // prep to score early via task
-		kw::moveToPoint(-20, 32.7, 1000, false, 127); // drive backwards into long goal
+		kw::moveToPoint(-20, 33.0, 1000, false, 127); // drive backwards into long goal
 		//kw::driveTo(-33, 1500); // drive backwards into long goal
 	});
 	pros::delay(500); // ASYNC wait to arrive at goal
@@ -38,6 +38,7 @@ void sawp() {
 	kw::turnToAngle(225, 800); // swing to face group of three #1
 	pros::Task([] {
 		intakeMacro("L1"); // intake into hoard
+		toggleColourSort = false;
 	});
 
 	kw::driveTo(8.3, 1000, 127, false);
@@ -46,22 +47,24 @@ void sawp() {
 	loaderPiston.set_value(true); // lower matchloader to prevent balls from rolling away
 	kw::turnToAngle(140, 1000);
 	//kw::correct_angle = kw::normalize_target(140.6);
-	kw::moveToPoint(-37.3, -24.4, 1000, false);
+	kw::moveToPoint(-37.4, -24.5, 1000, false);
 		pros::Task([] {
-		intakeMacro("R2"); // intake into hoard
-			pros::delay(750);
+		intakeMacro("R2"); // intake into hoard4
+			intakeTop.move_voltage(-6500);
+			pros::delay(850);
 		intakeMacro("L1");
 	});
-	pros::delay(750);
+	pros::delay(850);
 	kw::moveToPoint(-3.5, -61.15 , 1500, true); // drive backwards into long goal
 	pros::delay(50);
 	kw::correct_angle = kw::normalize_target(152);
+	toggleColourSort = true;
 	kw::turnToAngle(90, 600); // face long goal
-	kw::driveTo(14.8, 800, 90); // drive into loader
+	kw::driveTo(15, 800, 90); // drive into loader
 	kw::move_raw(3000, 3000); // keep driving into loader to prevent bounceback
 	pros::delay(650);
 	pros::Task([] {
-		kw::moveToPoint(-23, -62.04	, 1000, false); // drive backwards into long goal
+		kw::moveToPoint(-23, -62.74	, 1000, false); // drive backwards into long goal
 		//kw::driveTo(-33, 1000);
 		intakeMacro("R1");
 		wingPiston.set_value(true); // deploy wings
@@ -110,43 +113,53 @@ void sawp() {
 
 
 void left_half() { // Left Side Half Solo AWP
+	toggleColourSort = true;
+
+	/* travel to loader */
 	intakeMacro("L1");
-	pros::Task([] {
-		pros::delay(390);
-		loaderPiston.set_value(true); // lower matchloader to gather balls
+	kw::driveTo(31.7, 2500, 127); // drive to loader
+	loaderPiston.set_value(true);
+	kw::turnToAngle(270, 700); // turn to face loader
+	pros::delay(50);
+
+	/* get balls from loader */
+	kw::driveTo(11.4,800, 60); // drive into loader
+	kw::move_raw(3000, 3000); // keep driving into loader to prevent bounceback
+	pros::delay(250); // stay at matchloader
+
+	/* score on long goal */
+	//kw::driveTo(-10, 800, 127, false); // slowly drive back from loader
+	//kw::moveToPoint(18, 34, 2000, false, 90); // drive backwards into long goal
+	pros::Task([] { // prep to score early via task
+		kw::moveToPoint(22, 31.0, 3000, false, 127); // drive backwards into long goal
+		kw::move_raw(-6000, -6000);
+
+		//kw::driveTo(-33, 1500); // drive backwards into long goal
 	});
-    kw::driveTo(26.5, 1500, 127);
-	kw::turnToAngle(228, 700); // turn to face loader
-	kw::moveToPoint(15.7, 36.3, 2000, false, 100); // drive into loader
-	pros::delay(400); // stay at matchloader
+	pros::delay(500); // ASYNC wait to arrive at goal
+	intakeMacro("R1"); // score on long goal
+	loaderPiston.set_value(false); // retract matchloader
+
+	// /* drive to group of 3 */
+	pros::delay(2000);
+	// kw::driveTo(1.5, 1000, 127, false); // drive fwd from long goal
+	kw::driveTo(10, 1000);
+	kw::turnToAngle(135, 800); // swing to face group of three #1
+	pros::Task([] {
+		intakeMacro("L1"); // intake into hoard
+		//toggleColourSort = false;
+	});
+
+	kw::moveToPoint(22, 10, 1000, true, 70);
+	kw::driveTo(5, 1000, 60);
+	pros::delay(300);
+
+	kw::turnToAngle(315, 1000);
+	kw::moveToPoint(35, -6, 1000, false, 80);
+	kw::driveTo(-5, 1000);
+	pros::delay(700);
 	intakeMacro("R2");
-	pros::delay(1400);
-	intakeMacro("L1");
-	kw::moveToPoint(-29.5, 15.4, 2000);
-	pros::delay(200);
-
-		//pros::delay(100);
-		kw::turnToAngle(197.7, 1000);
-		kw::driveTo(11.3, 2000, 60); // drive backwards into long goal
-		kw::move_raw(3000, 3000);
-
-	pros::delay(1600);
-	//kw::driveTo(-30, 1000);
-	kw::moveToPoint(-25, 31, 1000, false);
-	pros::delay(400); 
-	intakeMacro("R1");
-	kw::driveTo(-2, 700);
-	pros::delay(1000);
-	kw::driveTo(20, 1000);
-	pros::Task([] {
-		stopIntake();
-		loaderPiston.set_value(false); // retract matchloader
-	});
-	kw::moveToPoint(-16, 27, 1000, false);
-	kw::moveToPoint(-12, 47, 5000, false, 100);
-	kw::turnToAngle(197.7, 1000, 127);
-	//kw::boomerang(-17, 32, 197.7, 0.6, 2000, false, 70);
-
+	intakeTop.move_voltage(-5500);
 }
 
 void right_half() { // Right Side Half Solo AWP

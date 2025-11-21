@@ -288,7 +288,7 @@ void kw::moveToPoint(double x, double y, double time_limit_msec, bool forwards, 
     if(!dir_change_start && !dir_change_end) {
       max_slew_fwd = 24;
       max_slew_rev = 24;
-      min_speed = true;
+      min_speed = false;
     }
   }
 
