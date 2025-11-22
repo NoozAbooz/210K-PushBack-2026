@@ -47,3 +47,5 @@ extern void right_half();
 extern void skills();
 extern void right_elim();
 extern void left_elim();
+extern void left_7();
+extern void right_7();
