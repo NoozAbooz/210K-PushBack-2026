@@ -1,3 +1,4 @@
+#include "abstractGlobals.hpp"
 #include "main.h"
 
 /**
@@ -40,6 +41,7 @@ void testDistReset() {
 void testColourSort() {
     alliance = "red"; // set alliance to red for testing
     toggleColourSort = true;
+    intakeMacro("R1");
 }
 
 /* Legacy Auton Routines */
@@ -62,6 +64,7 @@ rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
     {"Move forward", driveForward, "", 0},
     { "Test PID", testPID, "", 220},
     { "Test BM", testDistReset, "", 220},
+    { "Test Colour Sort", testColourSort, "", 220},
 });
 
 void autonomous() {

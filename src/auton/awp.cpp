@@ -17,15 +17,15 @@ void sawp() {
 	pros::delay(50);
 
 	/* get balls from loader */
-	kw::driveTo(11.4,800, 60); // drive into loader
-	kw::move_raw(3000, 3000); // keep driving into loader to prevent bounceback
+	kw::driveTo(11.5,800, 60); // drive into loader
+	kw::move_raw(4000, 4000); // keep driving into loader to prevent bounceback
 	pros::delay(250); // stay at matchloader
 
 	/* score on long goal */
 	//kw::driveTo(-10, 800, 127, false); // slowly drive back from loader
 	//kw::moveToPoint(-18, 34, 2000, false, 90); // drive backwards into long goal
 	pros::Task([] { // prep to score early via task
-		kw::moveToPoint(-20, 33.0, 1000, false, 127); // drive backwards into long goal
+		kw::moveToPoint(-20, 34.0, 1000, false, 127); // drive backwards into long goal
 		//kw::driveTo(-33, 1500); // drive backwards into long goal
 	});
 	pros::delay(500); // ASYNC wait to arrive at goal
@@ -47,7 +47,7 @@ void sawp() {
 	loaderPiston.set_value(true); // lower matchloader to prevent balls from rolling away
 	kw::turnToAngle(140, 1000);
 	//kw::correct_angle = kw::normalize_target(140.6);
-	kw::moveToPoint(-37.4, -24.5, 1000, false);
+	kw::moveToPoint(-37.4, -23.0, 1000, false);
 		pros::Task([] {
 		intakeMacro("R2"); // intake into hoard4
 			intakeTop.move_voltage(-6500);
@@ -64,7 +64,7 @@ void sawp() {
 	kw::move_raw(3000, 3000); // keep driving into loader to prevent bounceback
 	pros::delay(650);
 	pros::Task([] {
-		kw::moveToPoint(-23, -62.74	, 1000, false); // drive backwards into long goal
+		kw::moveToPoint(-23, -59.74	, 1000, false); // drive backwards into long goal
 		//kw::driveTo(-33, 1000);
 		intakeMacro("R1");
 		wingPiston.set_value(true); // deploy wings
@@ -143,19 +143,19 @@ void left_half() { // Left Side Half Solo AWP
 	// /* drive to group of 3 */
 	pros::delay(2000);
 	// kw::driveTo(1.5, 1000, 127, false); // drive fwd from long goal
-	kw::driveTo(10, 1000);
+	kw::driveTo(15, 1000);
 	kw::turnToAngle(135, 800); // swing to face group of three #1
 	pros::Task([] {
 		intakeMacro("L1"); // intake into hoard
 		//toggleColourSort = false;
 	});
 
-	kw::moveToPoint(22, 10, 1000, true, 70);
+	kw::moveToPoint(22, 8, 1000, true, 70);
 	kw::driveTo(5, 1000, 60);
 	pros::delay(300);
 
 	kw::turnToAngle(315, 1000);
-	kw::moveToPoint(35, -6, 1000, false, 80);
+	kw::moveToPoint(35, -8, 1000, false, 80);
 	kw::driveTo(-5, 1000);
 	pros::delay(700);
 	intakeMacro("R2");
