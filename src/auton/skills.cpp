@@ -41,6 +41,7 @@ void skills() {
     stopIntake();
     kw::driveTo(-70, 3000);
     kw::turnToAngle(0, 1000);
+    // wall reset
     kw::move_raw(6000, 6000);
     pros::delay(400);
     kw::driveTo(-14.2, 1000);
@@ -99,6 +100,7 @@ void skills() {
     knockerPiston.set_value(false);
     kw::driveTo(-70, 3000);
     kw::turnToAngle(270, 1000);
+    // wall reset location
     kw::move_raw(6000, 6000);
     pros::delay(400);
         kw::driveTo(-14.2, 1000);
