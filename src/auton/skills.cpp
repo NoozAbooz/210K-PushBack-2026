@@ -40,8 +40,9 @@ void skills() {
     kw::turnToAngle(90, 1000);
     stopIntake();
     kw::driveTo(-70, 3000);
-    kw::turnToAngle(0, 1000);
-    kw::move_raw(6000, 6000);
+
+    kw::turnToAngle(0, 1000); // face the wall for reset
+    kw::move_raw(6000, 6000); // drive into wall
     pros::delay(400);
     kw::driveTo(-14.2, 1000);
     kw::turnToAngle(270, 1000);
