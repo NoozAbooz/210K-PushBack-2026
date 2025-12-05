@@ -20,7 +20,7 @@ void intakeMacro(std::string str) {
 		intakeMiddleLower.move_voltage(12000);
 		intakeTop.move_voltage(12000);
 	} else if (str == "R2") { // score on mid goal
-		intakeTop.move_voltage(-5000);
+		intakeTop.move_voltage(-4000);
 		intakeMiddleLower.move_voltage(12000);
 		intakeBottom.move_voltage(12000);
 	} else if (str == "L1") { // intake up to long goal scoring
