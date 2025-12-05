@@ -318,7 +318,7 @@
     "upload_options": {
       "after": "screen",
       "description": "Kawaii Kittens",
-      "slot": 1
+      "slot": 2
     },
     "use_early_access": true
   }
