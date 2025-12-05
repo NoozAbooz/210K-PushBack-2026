@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "v3-libKW",
+    "project_name": "v3-libKW-skills",
     "target": "v5",
     "templates": {
       "gif-pros": {
@@ -318,7 +318,8 @@
     "upload_options": {
       "after": "screen",
       "description": "Kawaii Kittens",
-      "slot": 2
+      "slot": 3,
+      "icon": "alien"
     },
     "use_early_access": true
   }
