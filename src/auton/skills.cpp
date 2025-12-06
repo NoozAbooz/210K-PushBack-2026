@@ -42,9 +42,7 @@ void skills() {
     kw::driveTo(-70, 3000);
 
     kw::turnToAngle(0, 1000); // face the wall for reset
-    kw::move_raw(6000, 6000); // drive into wall
-    pros::delay(400);
-    kw::driveTo(-14.2, 1000);
+    kw::driveTo(-10.8, 1000);
     kw::turnToAngle(270, 1000);
     kw::driveTo(-13,1000, 60); // drive into loader
     pros::delay(200);
@@ -60,7 +58,7 @@ void skills() {
     pros::delay(50);
     kw::move_raw(-6000, -6000);
     pros::delay(50);
-    kw::move_raw(6000, 6000);
+    kw::move_raw(4000, 4000);
     pros::delay(2000);
 
     // back to long goal
@@ -78,7 +76,7 @@ void skills() {
     // move to loader 3
     kw::driveTo(12, 1000);
     kw::turnToAngle(270, 1000);
-    kw::moveToPoint(-93.5, 12, 3500, true, 90); // limit speed
+    kw::moveToPoint(-91.5, 10, 3500, true, 90); // limit speed
     kw::turnToAngle(0, 1000);
 
     // get from loader #3
@@ -86,9 +84,9 @@ void skills() {
     kw::driveTo(12.12, 1000, true, 70);
     kw::move_raw(4000, 4000); // keep driving into loader to prevent bounceback
     pros::delay(50);
-    kw::move_raw(-6000, -6000);
+    kw::move_raw(-4000, -4000);
     pros::delay(50);
-    kw::move_raw(6000, 6000);
+    kw::move_raw(4000, 4000);
     pros::delay(2000);
 
     // move to loader 4
@@ -101,11 +99,9 @@ void skills() {
     kw::driveTo(-70, 3000);
     kw::turnToAngle(270, 1000);
     // wall reset location
-    kw::move_raw(6000, 6000);
-    pros::delay(400);
-        kw::driveTo(-14.2, 1000);
+    kw::driveTo(-10.4, 1000);
     kw::turnToAngle(180, 1000);
-    kw::driveTo(-14,1000, 60); // drive into loader
+    kw::driveTo(-17,1000, 60); // drive into loader
     pros::delay(200);
     intakeMacro("R1");
     pros::delay(2400);
@@ -136,10 +132,11 @@ void skills() {
     kw::driveTo(15, 1000);
     kw::turnToAngle(125, 1000);
     kw::moveToPoint(-30, 35.4, 1000, false); // drive backwards into alley
-    kw::turnToAngle(90, 1000);
+    kw::swing(90, 1000, false);
     loaderPiston.set_value(false);
     kw::driveTo(10, 1000);
-    kw::moveToPoint(-49, 40, 5000, false);
+    kw::moveToPoint(-44, 36, 5000, false);
+    kw::driveTo(-2, 1000);
    
 
 }
