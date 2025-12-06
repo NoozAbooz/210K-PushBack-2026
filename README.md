@@ -3,11 +3,11 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/2088S">
+  <a href="https://github.com/NoozAbooz/210K-PushBack-2026">
     <img src="https://raw.githubusercontent.com/NoozAbooz/210K-PushBack-2026/V1/logo.png" alt="Logo" width="200">
   </a>
 
-<h1 align="center">Push BAck</h1>
+<h1 align="center">Push Back</h1>
 
   <p align="center">
     VRC 210K Kawaii Kittens
@@ -17,8 +17,8 @@
     Western Mechatronics Robotics Club
     <br/>
     <br/>
-    <a href="https://www.robotevents.com/teams/VRC/210K">RobotEvents</a>
-    <a rref="https://210k.westernmech.ca/">210K Website</a>
+    <a href="https://www.robotevents.com/teams/VRC/210K">RobotEvents</a> </br>
+    <a rref="https://210k.westernmech.ca/">Website</a>
   </p>
 </div>
 
@@ -43,6 +43,6 @@ To contribute, follow these steps:
 
 <!-- CONTACT -->
 ## Contact
-If you would like to contact us, you can do so on our [discord server](https://discord.gg/ZymgDaWFHg).
+If you would like to contact us, you can do so on our [discord server](https://discord.gg/Jg5SuzW8Vg).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
