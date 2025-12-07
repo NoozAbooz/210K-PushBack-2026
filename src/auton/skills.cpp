@@ -69,6 +69,7 @@ void skills() {
     stopIntake();
     kw::driveTo(5, 1000);
     knockerPiston.set_value(true);
+    pros::delay(200);
     kw::driveTo(-5.5, 2000, 60);
     pros::delay(200);
     kw::set_odom_position(0, 0, 0);
@@ -81,13 +82,13 @@ void skills() {
 
     // get from loader #3
     intakeMacro("L1");
-    kw::driveTo(12.12, 1000, true, 70);
+    kw::driveTo(14.12, 1000);
     kw::move_raw(4000, 4000); // keep driving into loader to prevent bounceback
     pros::delay(50);
     kw::move_raw(-4000, -4000);
     pros::delay(50);
     kw::move_raw(4000, 4000);
-    pros::delay(2000);
+    pros::delay(2200);
 
     // move to loader 4
     kw::driveTo(-10, 1000);
@@ -126,6 +127,7 @@ void skills() {
     stopIntake();
     kw::driveTo(5, 1000);
     knockerPiston.set_value(true);
+    pros::delay(200);
     kw::driveTo(-5.5, 2000, 60);
     pros::delay(200);
     kw::set_odom_position(0, 0, 0);

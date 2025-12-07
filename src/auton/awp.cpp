@@ -11,7 +11,7 @@ void sawp() {
 
 	/* travel to loader */
 	intakeMacro("L1");
-	kw::driveTo(31.7, 2500, 127); // drive to loader
+	kw::driveTo(31.0, 2500, 127); // drive to loader
 	loaderPiston.set_value(true);
 	kw::turnToAngle(90, 700); // turn to face loader
 	pros::delay(50);
@@ -25,7 +25,7 @@ void sawp() {
 	//kw::driveTo(-10, 800, 127, false); // slowly drive back from loader
 	//kw::moveToPoint(-18, 34, 2000, false, 90); // drive backwards into long goal
 	pros::Task([] { // prep to score early via task
-		kw::moveToPoint(-20, 34.0, 1000, false, 127); // drive backwards into long goal
+		kw::moveToPoint(-20, 32.0, 1000, false, 127); // drive backwards into long goal
 		//kw::driveTo(-33, 1500); // drive backwards into long goal
 	});
 	pros::delay(500); // ASYNC wait to arrive at goal
@@ -33,7 +33,7 @@ void sawp() {
 	loaderPiston.set_value(false); // retract matchloader
 
 	// /* drive to group of 3 */
-	pros::delay(1600);
+	pros::delay(1500);
 	// kw::driveTo(1.5, 1000, 127, false); // drive fwd from long goal
 	kw::turnToAngle(225, 800); // swing to face group of three #1
 	pros::Task([] {
@@ -47,27 +47,29 @@ void sawp() {
 	loaderPiston.set_value(true); // lower matchloader to prevent balls from rolling away
 	kw::turnToAngle(140, 1000);
 	//kw::correct_angle = kw::normalize_target(140.6);
-	kw::moveToPoint(-37.4, -23.0, 1000, false);
+	kw::moveToPoint(-37.2, -26.5, 1000, false);
 		pros::Task([] {
 		intakeMacro("R2"); // intake into hoard4
-			intakeTop.move_voltage(-6500);
-			pros::delay(850);
+			intakeTop.move_voltage(-5000);
+			pros::delay(725);
 		intakeMacro("L1");
 	});
-	pros::delay(850);
-	kw::moveToPoint(-3.5, -61.15 , 1500, true); // drive backwards into long goal
+	pros::delay(750);
+	kw::moveToPoint(-3.5, -61.95 , 1500, true); // drive backwards into long goal
 	pros::delay(50);
 	kw::correct_angle = kw::normalize_target(152);
 	toggleColourSort = true;
 	kw::turnToAngle(90, 600); // face long goal
 	kw::driveTo(15, 800, 90); // drive into loader
 	kw::move_raw(3000, 3000); // keep driving into loader to prevent bounceback
-	pros::delay(650);
+	pros::delay(450);
 	pros::Task([] {
-		kw::moveToPoint(-23, -59.74	, 1000, false); // drive backwards into long goal
+		kw::moveToPoint(-23, -63.04	, 1000, false); // drive backwards into long goal
 		//kw::driveTo(-33, 1000);
+
 		intakeMacro("R1");
 		wingPiston.set_value(true); // deploy wings
+		kw::move_raw(-6000, -6000);
 	});
 
 
