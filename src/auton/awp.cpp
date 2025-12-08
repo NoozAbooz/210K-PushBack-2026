@@ -71,46 +71,6 @@ void sawp() {
 		wingPiston.set_value(true); // deploy wings
 		kw::move_raw(-6000, -6000);
 	});
-
-
-	// /* score on low mid goal */
-	// kw::turnToAngle(228, 1000); // face mid goal
-
-	// pros::Task([] {
-	// 	kw::driveTo(13, 1500, 80);
-	// });
-	// pros::delay(350);
-	// intakeMacro("HOARD_L2");
-
-	// pros::delay(600);
-	// kw::driveTo(2, 600); // give it a little push into the goal
-
-	// /* back away and go to group 3 */
-	// pros::delay(275);
-	// intakeMacro("HOARD_L1");
-	// kw::driveTo(-12.5, 1500); // back away from mid goal
-
-	// kw::turnToAngle(183, 1000); // face 2nd group of three
-
-	// pros::Task([] {
-	// 	kw::driveTo(42.5, 2500); // drive to 2nd group of three
-	// });
-	// pros::delay(650); // async wait before putting loader down
-	// loaderPiston.set_value(true); // lower matchloader to prevent balls from rolling away
-
-	// kw::turnToAngle(127, 1000); // face long goal
-	// pros::Task([] {
-	// 	pros::delay(600);
-	// 	intakeMacro("HOARD_LOAD_R2"); // already start cycling balls up to 3rd stage
-	// });
-
-	// pros::Task([] {
-	// 	kw::driveTo(-12, 800); // drive backwards into long goal
-	// 	kw::move_raw(-4000, -4000);
-	// });
-	// pros::delay(600);
-	// intakeMacro("HOARD_R2");
-
 }
 
 
