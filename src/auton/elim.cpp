@@ -45,10 +45,11 @@ void right_elim() {
 
 void left_elim() {
     intakeMacro("L1");
-    kw::driveTo(28.5, 1500, 70);
-    kw::moveToPoint(-13, 49, 1000);
+    wingPiston.set_value(true);
+    kw::driveTo(28.5, 2000, 50);
+    kw::moveToPoint(-14, 48, 1000);
     pros::delay(400);
-    kw::moveToPoint(-3, 33, 1000, false);
+    kw::moveToPoint(0, 22, 1000, false);
     kw::turnToAngle(236, 1000);
     kw::moveToPoint(-31, 17, 2000);
     loaderPiston.set_value(true);
@@ -77,19 +78,20 @@ void left_7() {
     kw::moveToPoint(-31, 17, 2000);
     loaderPiston.set_value(true);
     kw::turnToAngle(200, 1000);    
-    kw::moveToPoint(-36.5, 3, 1500, true, 80);
-    kw::move_raw(3000, 3000);
+    kw::moveToPoint(-35.7, 3, 1500, true, 80);
+    kw::move_raw(1000, 1000);
     pros::delay(200);
     //kw::driveTo(-33, 1000);
     kw::moveToPoint(-25.8, 32.3, 1000, false);
     kw::move_raw(-8000, -8000);
     pros::delay(700);
     intakeMacro("R1");
-    pros::delay(1500);
+    pros::delay(2500);
     stopIntake();
-    kw::moveToPoint(-22.3, 10, 1000);
+    kw::moveToPoint(-22.1, 10, 1000);
     kw::turnToAngle(200, 1000);
-    kw::moveToPoint(-7, 46, 8000, false, 60);
+    kw::moveToPoint(-7.5, 46, 8000, false, 60);
+    kw::driveTo(-7, 1000);
 
 }
 

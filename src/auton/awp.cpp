@@ -75,53 +75,27 @@ void sawp() {
 
 
 void left_half() { // Left Side Half Solo AWP
-	toggleColourSort = true;
-
-	/* travel to loader */
 	intakeMacro("L1");
-	kw::driveTo(31.7, 2500, 127); // drive to loader
+    wingPiston.set_value(true);
+    kw::driveTo(28.5, 2000, 60, false);
+    kw::moveToPoint(-15, 49, 1000);
+    pros::delay(200);
+    kw::moveToPoint(-15, 22, 1000, false, 127, false);
+    kw::turnToAngle(236, 1000);
+    kw::moveToPoint(-30, 25, 1000, false, 127, false);
+	kw::moveToPoint(-25.59, 32.4, 1000, false);
+	kw::move_raw(-7000, -7000);
+    pros::delay(300);
+    intakeMacro("R1");
 	loaderPiston.set_value(true);
-	kw::turnToAngle(270, 700); // turn to face loader
-	pros::delay(50);
-
-	/* get balls from loader */
-	kw::driveTo(11.4,800, 60); // drive into loader
-	kw::move_raw(3000, 3000); // keep driving into loader to prevent bounceback
-	pros::delay(250); // stay at matchloader
-
-	/* score on long goal */
-	//kw::driveTo(-10, 800, 127, false); // slowly drive back from loader
-	//kw::moveToPoint(18, 34, 2000, false, 90); // drive backwards into long goal
-	pros::Task([] { // prep to score early via task
-		kw::moveToPoint(22, 31.0, 3000, false, 127); // drive backwards into long goal
-		kw::move_raw(-6000, -6000);
-
-		//kw::driveTo(-33, 1500); // drive backwards into long goal
-	});
-	pros::delay(500); // ASYNC wait to arrive at goal
-	intakeMacro("R1"); // score on long goal
-	loaderPiston.set_value(false); // retract matchloader
-
-	// /* drive to group of 3 */
-	pros::delay(2000);
-	// kw::driveTo(1.5, 1000, 127, false); // drive fwd from long goal
-	kw::driveTo(15, 1000);
-	kw::turnToAngle(135, 800); // swing to face group of three #1
-	pros::Task([] {
-		intakeMacro("L1"); // intake into hoard
-		//toggleColourSort = false;
-	});
-
-	kw::moveToPoint(22, 8, 1000, true, 70);
-	kw::driveTo(5, 1000, 60);
-	pros::delay(300);
-
-	kw::turnToAngle(315, 1000);
-	kw::moveToPoint(35, -8, 1000, false, 80);
-	kw::driveTo(-5, 1000);
-	pros::delay(700);
-	intakeMacro("R2");
-	intakeTop.move_voltage(-5500);
+	pros::delay(1500);
+	intakeMacro("L1");
+	kw::moveToPoint(-32.07, 2.08, 1000, true, 80);
+	kw::move_raw(5000, 5000);
+	pros::delay(400);
+	kw::driveTo(-10, 1000);
+	kw::turnToAngle(239, 1000);
+	kw::moveToPoint(15, 36, 1000, false, 127);
 }
 
 void right_half() { // Right Side Half Solo AWP
