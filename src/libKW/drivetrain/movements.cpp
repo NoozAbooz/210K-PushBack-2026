@@ -151,17 +151,17 @@ void kw::driveTo(double distance_in, double time_limit_msec, double max_output, 
   if(!exit) {
     // Adjust slew rates and min speed for chaining
     if(!dir_change_start && dir_change_end) {
-      max_slew_fwd = drive_direction > 0 ? 24 : max_slew_decel_rev;
-      max_slew_rev = drive_direction > 0 ? max_slew_decel_fwd : 24;
+      max_slew_fwd = drive_direction > 0 ? 12 : max_slew_decel_rev;
+      max_slew_rev = drive_direction > 0 ? max_slew_decel_fwd : 12;
     }
     if(dir_change_start && !dir_change_end) {
-      max_slew_fwd = drive_direction > 0 ? max_slew_accel_fwd : 24;
-      max_slew_rev = drive_direction > 0 ? 24 : max_slew_accel_rev;
+      max_slew_fwd = drive_direction > 0 ? max_slew_accel_fwd : 12;
+      max_slew_rev = drive_direction > 0 ? 12 : max_slew_accel_rev;
       min_speed = true;
     }
     if(!dir_change_start && !dir_change_end) {
-      max_slew_fwd = 24;
-      max_slew_rev = 24;
+      max_slew_fwd = 12;
+      max_slew_rev = 12;
       min_speed = true;
     }
   }
