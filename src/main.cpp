@@ -20,6 +20,7 @@ void opcontrol() {
 
 	field_status = "opcontrol";
 	toggleColourSort = false;
+	
 	initTelemetry();
 
 	while (true) { // Main continuous loop
@@ -32,7 +33,7 @@ void opcontrol() {
 		//toggleHoard();
 		refreshKnocker();
 		park();
-		refreshwing();
+		refreshWing();
 
 		pros::delay(10); // Delay to save resources on brain
 	}

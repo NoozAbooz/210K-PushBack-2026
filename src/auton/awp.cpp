@@ -2,12 +2,14 @@
 #include "deviceGlobals.hpp"
 #include "libKW/drivetrain/chassis.hpp"
 #include "libKW/drivetrain/movements.hpp"
+#include "libKW/drivetrain/odom.hpp"
+#include "libKW/utilities.hpp"
 #include "main.h"
 #include "pros/rtos.hpp"
 #include <sys/_intsup.h>
 
 void sawp() {
-	toggleColourSort = true;
+	toggleColourSort = false;
 
 	/* travel to loader */
 	intakeMacro("L1");
@@ -24,8 +26,11 @@ void sawp() {
 	/* score on long goal */
 	//kw::driveTo(-10, 800, 127, false); // slowly drive back from loader
 	//kw::moveToPoint(-18, 34, 2000, false, 90); // drive backwards into long goal
+	double turn_angle = kw::normalize_target(kw::to_deg(atan2(-20 - kw::x_pos, 31 - kw::y_pos))) + 180;
+	kw::turnToAngle(turn_angle, 1000); // turn towards long goal
+
 	pros::Task([] { // prep to score early via task
-		kw::moveToPoint(-20, 32.0, 1000, false, 127); // drive backwards into long goal
+		kw::moveToPoint(-20, 33.0, 1000, false, 127); // drive backwards into long goal
 		//kw::driveTo(-33, 1500); // drive backwards into long goal
 	});
 	pros::delay(500); // ASYNC wait to arrive at goal
@@ -48,14 +53,19 @@ void sawp() {
 	kw::turnToAngle(140, 1000);
 	//kw::correct_angle = kw::normalize_target(140.6);
 	kw::moveToPoint(-37.2, -26.5, 1000, false);
-		pros::Task([] {
+	pros::Task([] {
 		intakeMacro("R2"); // intake into hoard4
 			intakeTop.move_voltage(-5000);
 			pros::delay(725);
 		intakeMacro("L1");
 	});
+	pros::Task([] {
+		double turn_angle = kw::normalize_target(kw::to_deg(atan2(-3.5 - kw::x_pos, -61.95 - kw::y_pos)));
+		kw::turnToAngle(turn_angle, 1000);
+	});
 	pros::delay(750);
-	kw::moveToPoint(-3.5, -61.95 , 1500, true); // drive backwards into long goal
+
+	kw::moveToPoint(-3.5, -61.95 , 1500, true); // 
 	pros::delay(50);
 	kw::correct_angle = kw::normalize_target(152);
 	toggleColourSort = true;
@@ -63,14 +73,18 @@ void sawp() {
 	kw::driveTo(15, 800, 90); // drive into loader
 	kw::move_raw(3000, 3000); // keep driving into loader to prevent bounceback
 	pros::delay(450);
-	pros::Task([] {
-		kw::moveToPoint(-23, -63.04	, 1000, false); // drive backwards into long goal
+		turn_angle = kw::normalize_target(kw::to_deg(atan2(-23 - kw::x_pos, -63 - kw::y_pos))) + 180;
+		kw::turnToAngle(turn_angle, 1000);
+		
+		kw::moveToPoint(-23, -63.04, 1000, false); // drive backwards into long goal
 		//kw::driveTo(-33, 1000);
 
 		intakeMacro("R1");
-		wingPiston.set_value(true); // deploy wings
+		wingPiston.set_value(true); // deploy wings for driver
 		kw::move_raw(-6000, -6000);
-	});
+
+		wingStatus = true;
+		loaderStatus = true;
 }
 
 
