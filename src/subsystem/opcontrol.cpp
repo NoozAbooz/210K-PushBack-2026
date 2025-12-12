@@ -114,11 +114,7 @@ bool parkStatus = false; // for toggling park mode
 void park() {
 	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
 		parkStatus = !parkStatus;
-		if (parkStatus) {
-			intakeLiftPiston.set_value(true); // push down
-		} else {
-			intakeLiftPiston.set_value(false); // lif up
-		}
+		intakeLiftPiston.set_value(parkStatus);
 	}
 
 	// macro
