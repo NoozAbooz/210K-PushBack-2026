@@ -109,25 +109,14 @@ void refreshIntake() {
 	}
 }
 
-bool parkStatus = false; // for toggling park mode
-
 void park() {
-	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
-		parkStatus = !parkStatus;
-		intakeLiftPiston.set_value(parkStatus);
-	}
-
-	// macro
 	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
-		int startTime = pros::millis();
-
-		while (intakeDistance.get_distance() > 200 && (pros::millis() - startTime < 5000)) { // 5 second to park
-			// remember its in mm!!!
-			intakeMacro("L2");
-			pros::delay(600);
-		}
-		stopIntake();
-		intakeLiftPiston.set_value(true); // push down
+		pros::Task([] {
+			intakeLiftPiston.set_value(true);
+			kw::move_raw(12000, 12000);
+			pros::delay(500);
+			kw::stop_chassis();
+		});
 	}
 }
 

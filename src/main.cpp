@@ -21,6 +21,7 @@ void opcontrol() {
 	field_status = "opcontrol";
 	toggleColourSort = false;
 	initTelemetry();
+	bool parkStatus = false; // for toggling mid goal piston
 
 	while (true) { // Main continuous loop
 		/* Drive */
@@ -31,8 +32,13 @@ void opcontrol() {
 		refreshLoader();
 		//toggleHoard();
 		refreshKnocker();
-		park();
 		refreshwing();
+		park();
+
+	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
+		parkStatus = !parkStatus;
+		intakeLiftPiston.set_value(parkStatus);
+	}
 
 		pros::delay(10); // Delay to save resources on brain
 	}
