@@ -94,7 +94,7 @@ void left_7() {
     stopIntake();
     kw::moveToPoint(-22.1, 10, 1000);
     kw::turnToAngle(204, 1000);
-    kw::moveToPoint(-7.8, 48, 8000, false, 60);
+    kw::moveToPoint(-8.0, 48, 8000, false, 60);
         kw::turnToAngle(204, 1000);
     //kw::driveTo(-7, 1000);
 
