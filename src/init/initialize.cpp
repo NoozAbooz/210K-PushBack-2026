@@ -14,11 +14,11 @@ void initialize() {
     pros::delay(10);
 
     /* Configurations */
-    kw::update_odom = true; // toggle kw::odom alg
-    pros::Task([] {
-        // chassis.calibrate();
-        kw::initialize_odom();
-    });
+    // kw::update_odom = true; // toggle kw::odom alg
+    // pros::Task([] {
+    //     // chassis.calibrate();
+    //     kw::initialize_odom();
+    // });
 
     optical.set_integration_time(10);
     pros::delay(20);
