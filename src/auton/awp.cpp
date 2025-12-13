@@ -52,7 +52,7 @@ void sawp() {
 	loaderPiston.set_value(true); // lower matchloader to prevent balls from rolling away
 	kw::turnToAngle(140, 1000);
 	//kw::correct_angle = kw::normalize_target(140.6);
-	kw::moveToPoint(-37.2, -26.5, 1000, false);
+	kw::moveToPoint(-37.2, -24.5, 1000, false);
 	pros::Task([] {
 		intakeMacro("R2"); // intake into hoard4
 			intakeTop.move_voltage(-5000);
@@ -65,7 +65,7 @@ void sawp() {
 	});
 	pros::delay(750);
 
-	kw::moveToPoint(-3.5, -61.95 , 1500, true); // 
+	kw::moveToPoint(-3.5, -62.65 , 1500, true); // 
 	pros::delay(50);
 	kw::correct_angle = kw::normalize_target(152);
 	toggleColourSort = true;
@@ -76,7 +76,7 @@ void sawp() {
 		turn_angle = kw::normalize_target(kw::to_deg(atan2(-23 - kw::x_pos, -63 - kw::y_pos))) + 180;
 		kw::turnToAngle(turn_angle, 1000);
 		
-		kw::moveToPoint(-23, -63.04, 1000, false); // drive backwards into long goal
+		kw::moveToPoint(-23, -61.54, 1000, false); // drive backwards into long goal
 		//kw::driveTo(-33, 1000);
 
 		intakeMacro("R1");
