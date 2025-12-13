@@ -44,50 +44,55 @@ void skills() {
     kw::turnToAngle(0, 1000); // face the wall for reset
     kw::driveTo(-10.8, 1000);
     kw::turnToAngle(270, 1000);
-    kw::driveTo(-13,1000, 60); // drive into loader
+    kw::driveTo(-15,1000, 60); // drive into loader
     pros::delay(200);
     intakeMacro("R1");
-    pros::delay(2400);
+     kw::move_raw(-4000, -4000);
+    pros::delay(2700);
     loaderPiston.set_value(true);
     kw::set_odom_position(0, 0, 0);
 
     // get from loader #2
     intakeMacro("L1");
-    kw::moveToPoint(-0.5, 26.4, 1000, true, 70);
-    kw::move_raw(4000, 4000); // keep driving into loader to prevent bounceback
-    pros::delay(50);
-    kw::move_raw(-6000, -6000);
-    pros::delay(50);
-    kw::move_raw(4000, 4000);
-    pros::delay(2000);
-
-    // back to long goal
-    kw::moveToPoint(0, -6, 1000, false, 60);
-    pros::delay(200);
-    intakeMacro("R1");
-    pros::delay(2600);
-    stopIntake();
-    kw::driveTo(5, 1000);
-    knockerPiston.set_value(true);
-    pros::delay(200);
-    kw::driveTo(-5.5, 2000, 60);
-    pros::delay(200);
-    kw::set_odom_position(0, 0, 0);
-   
-    // move to loader 3
-    kw::driveTo(12, 1000);
-    kw::turnToAngle(270, 1000);
-    kw::moveToPoint(-91.5, 10, 3500, true, 90); // limit speed
-    kw::turnToAngle(0, 1000);
-
-    // get from loader #3
-    intakeMacro("L1");
-    kw::driveTo(14.12, 1000);
+    kw::moveToPoint(-0.5, 28.4, 2000, true, 70);
     kw::move_raw(4000, 4000); // keep driving into loader to prevent bounceback
     pros::delay(50);
     kw::move_raw(-4000, -4000);
     pros::delay(50);
     kw::move_raw(4000, 4000);
+    pros::delay(2400);
+
+    // back to long goal
+    kw::moveToPoint(0, -6, 1000, false, 60);
+    pros::delay(200);
+    intakeMacro("R1");
+    pros::delay(2700);
+     kw::move_raw(-5000, -5000);
+    stopIntake();
+    kw::driveTo(5, 1000);
+    knockerPiston.set_value(true);
+    pros::delay(200);
+    kw::driveTo(-5.5, 2000, 60);
+    kw::move_raw(-5000, -5000);
+    pros::delay(400);
+    kw::set_odom_position(0, 0, 0);
+    //loaderPiston.set_value(false);
+   
+    // move to loader 3
+    kw::driveTo(12, 1000);
+    kw::turnToAngle(270, 1000);
+    //loaderPiston.set_value(true);
+    kw::moveToPoint(-92.0, 13, 3500, true, 90); // limit speed
+    kw::turnToAngle(0, 1000);
+
+    // get from loader #3
+    intakeMacro("L1");
+    kw::driveTo(17.12, 2000, 60);
+    kw::move_raw(4000, 4000); // keep driving into loader to prevent bounceback
+    pros::delay(50);
+    kw::move_raw(-4000, -4000);
+    pros::delay(50);
+    kw::move_raw(3000, 3000);
     pros::delay(2200);
 
     // move to loader 4
@@ -100,30 +105,32 @@ void skills() {
     kw::driveTo(-70, 3000);
     kw::turnToAngle(270, 1000);
     // wall reset location
-    kw::driveTo(-10.4, 1000);
+    kw::driveTo(-10.3, 1000);
     kw::turnToAngle(180, 1000);
-    kw::driveTo(-17,1000, 60); // drive into loader
+    kw::driveTo(-18.5,1000, 60); // drive into loader
     pros::delay(200);
     intakeMacro("R1");
-    pros::delay(2400);
+    kw::move_raw(-4000, -4000); // keep driving into loader to prevent bounceback
+    pros::delay(3000);
     loaderPiston.set_value(true);
     kw::set_odom_position(0, 0, 0);
 
     // get from loader #2
     intakeMacro("L1");
-    kw::moveToPoint(-0.5, 26.4, 1000, true, 70);
+    kw::moveToPoint(0, 26.4, 1000, true, 70);
     kw::move_raw(4000, 4000); // keep driving into loader to prevent bounceback
     pros::delay(50);
     kw::move_raw(-6000, -6000);
     pros::delay(50);
-    kw::move_raw(6000, 6000);
-    pros::delay(2000);
+    kw::move_raw(3000, 3000);
+    pros::delay(2400);
 
    // back to long goal
-    kw::moveToPoint(0, -6, 1000, false, 60);
+    kw::moveToPoint(1, -6, 1000, false, 60);
     pros::delay(200);
     intakeMacro("R1");
-    pros::delay(2600);
+     kw::move_raw(-4000, -4000);
+    pros::delay(3000);
     stopIntake();
     kw::driveTo(5, 1000);
     knockerPiston.set_value(true);
@@ -137,7 +144,7 @@ void skills() {
     kw::swing(90, 1000, false);
     loaderPiston.set_value(false);
     kw::driveTo(10, 1000);
-    kw::moveToPoint(-44, 36, 5000, false);
+    kw::moveToPoint(-44, 37, 5000, false);
     kw::driveTo(-2, 1000);
    
 
