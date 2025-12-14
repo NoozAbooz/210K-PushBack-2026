@@ -72,27 +72,31 @@ void left_elim() {
 
 void left_7() {
 
-     toggleColourSort = false;
+     toggleColourSort = true;
      intakeMacro("L1");
+     pros::Task([] {
+        pros::delay(750);
+        loaderPiston.set_value(true);
+    });
     kw::driveTo(28.5, 2000, 60);
     kw::turnToAngle(236, 1000);
     kw::moveToPoint(-30, 17, 2000);
-    loaderPiston.set_value(true);
     kw::turnToAngle(200, 1000);    
-    kw::moveToPoint(-34.87, 2.7, 1500, true, 70);
+    kw::moveToPoint(-34.37, 2.7, 1500, true, 70);
     kw::move_raw(3000, 3000);
+    pros::delay(150);
     //pros::delay(50);
     //kw::driveTo(-33, 1000);
-    kw::moveToPoint(-25, 33.3, 1000, false);
-    kw::move_raw(-8000, -8000);
+    kw::moveToPoint(-25.2, 33.3, 1000, false);
+    kw::move_raw(-10000, -10000);
     //stopIntake();
     pros::delay(200);
     //toggleColourSort = true;
     intakeMacro("R1");
     loaderPiston.set_value(false);
-    pros::delay(2800);
+    pros::delay(2300);
     stopIntake();
-    kw::moveToPoint(-22.1, 10, 1000);
+    kw::moveToPoint(-20.1, 10, 1000);
     kw::turnToAngle(204, 1000);
     kw::moveToPoint(-8.0, 48, 8000, false, 60);
         kw::turnToAngle(204, 1000);
