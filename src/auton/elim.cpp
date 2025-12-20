@@ -96,9 +96,9 @@ void left_7() {
     loaderPiston.set_value(false);
     pros::delay(2300);
     stopIntake();
-    kw::moveToPoint(-20.1, 10, 1000);
+    kw::moveToPoint(-20.7, 10, 1000);
     kw::turnToAngle(204, 1000);
-    kw::moveToPoint(-8.0, 48, 8000, false, 60);
+    kw::moveToPoint(-8.7, 48, 8000, false, 60);
         kw::turnToAngle(204, 1000);
     //kw::driveTo(-7, 1000);
 

@@ -30,7 +30,7 @@ void sawp() {
 	kw::turnToAngle(turn_angle, 1000); // turn towards long goal
 
 	pros::Task([] { // prep to score early via task
-		kw::moveToPoint(-20, 33.0, 1000, false, 127); // drive backwards into long goal
+		kw::moveToPoint(-20, 32.0, 1000, false, 127); // drive backwards into long goal
 		//kw::driveTo(-33, 1500); // drive backwards into long goal
 	});
 	pros::delay(500); // ASYNC wait to arrive at goal
@@ -47,12 +47,12 @@ void sawp() {
 	});
 
 	kw::driveTo(8.3, 1000, 127, false);
-	kw::turnToAngle(178, 1000);
+	kw::turnToAngle(180, 1000);
 	kw::driveTo(30, 1500, 127, false);
 	loaderPiston.set_value(true); // lower matchloader to prevent balls from rolling away
 	kw::turnToAngle(140, 1000);
 	//kw::correct_angle = kw::normalize_target(140.6);
-	kw::moveToPoint(-37.2, -24.5, 1000, false);
+	kw::moveToPoint(-38.1, -24, 1000, false);
 	pros::Task([] {
 		intakeMacro("R2"); // intake into hoard4
 			intakeTop.move_voltage(-5000);
@@ -65,7 +65,7 @@ void sawp() {
 	});
 	pros::delay(750);
 
-	kw::moveToPoint(-3.5, -62.65 , 1500, true); // 
+	kw::moveToPoint(-3.5, -63.25 , 1500, true); // 
 	pros::delay(50);
 	kw::correct_angle = kw::normalize_target(152);
 	toggleColourSort = true;
@@ -76,7 +76,7 @@ void sawp() {
 		turn_angle = kw::normalize_target(kw::to_deg(atan2(-23 - kw::x_pos, -63 - kw::y_pos))) + 180;
 		kw::turnToAngle(turn_angle, 1000);
 		
-		kw::moveToPoint(-23, -61.54, 1000, false); // drive backwards into long goal
+		kw::moveToPoint(-23, -63.74, 1000, false); // drive backwards into long goal
 		//kw::driveTo(-33, 1000);
 
 		intakeMacro("R1");

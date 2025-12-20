@@ -46,7 +46,7 @@ void testColourSort() {
 
 /* Legacy Auton Routines */
 void driveForward() {
-
+    kw::driveTo(6, 3000, 127);
 }
 
 rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
