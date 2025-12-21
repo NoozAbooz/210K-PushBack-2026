@@ -82,9 +82,9 @@ void left_7() {
     kw::turnToAngle(236, 1000);
     kw::moveToPoint(-30, 17, 2000);
     kw::turnToAngle(200, 1000);    
-    kw::moveToPoint(-34.37, 2.7, 1500, true, 70);
+    kw::moveToPoint(-34.37, 2.7, 1000, true, 70);
     kw::move_raw(3000, 3000);
-    pros::delay(150);
+    pros::delay(70);
     //pros::delay(50);
     //kw::driveTo(-33, 1000);
     kw::moveToPoint(-25.2, 33.3, 1000, false);
