@@ -41,8 +41,4 @@ To contribute, follow these steps:
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-<!-- CONTACT -->
-## Contact
-If you would like to contact us, you can do so on our [discord server](https://discord.gg/Jg5SuzW8Vg).
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

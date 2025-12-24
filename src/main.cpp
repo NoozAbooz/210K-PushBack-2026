@@ -30,9 +30,7 @@ void opcontrol() {
 		/* Subsystem Listeners */
 		refreshIntake();
 		refreshLoader();
-		//toggleHoard();
 		refreshKnocker();
-		park();
 		refreshWing();
 
 		pros::delay(10); // Delay to save resources on brain
