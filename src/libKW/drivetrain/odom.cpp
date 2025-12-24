@@ -123,7 +123,7 @@ float absY = leftDist.get_distance() / 25.4 - 0;
 chassis.setPose(absX, absY, chassis.getPose().theta); */
 
 void kw::odom_update() {
-	console.printf("%.0lf, %.0lf", verticalEncoder.get_position(), get_horizontal_distance_traveled());
+	console.printf("%.0lf, %.0lf\n", verticalEncoder.get_position(), get_horizontal_distance_traveled());
 
 	while (true) {
 		if (kw::update_odom == true) {

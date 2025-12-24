@@ -1,13 +1,12 @@
 #include "main.h"
 
-std::string field_status;
-
 /**
  * Runs initialization code. This occurs as soon as the program is started.
  *
  * All other competition modes are blocked by initialize; it is recommended
  * to keep execution time for this mode under a few seconds.
  */
+std::string field_status;
 void initialize() {
     rdconfig_init();
     initColourSort();
@@ -16,7 +15,6 @@ void initialize() {
     /* Configurations */
     kw::update_odom = true; // toggle kw::odom alg
     pros::Task([] {
-        // chassis.calibrate();
         kw::initialize_odom();
     });
 
@@ -24,15 +22,6 @@ void initialize() {
     pros::delay(20);
     optical.set_led_pwm(100);
     //odomLiftPiston.set_value(false);
-
-    pros::Task([] {
-
-    });
-
-    std::vector<int> left_motors = {11, 12, 14};
-    std::vector<int> right_motors = {13, 15, 16};
-    //maelstrom::logging::init(true, false, left_motors, right_motors, 5);
-    //pros::Task error_logger(maelstrom::logging::robot_faults_log);
 
     if (kw::update_odom == false) {
         rd_view_alert(sensorview, "[BIG FAT WARNING] update_odom is DISABLED!! You better know what you're doing!");
@@ -47,7 +36,7 @@ void initialize() {
  * the robot is enabled, this task will exit.
  */
 void disabled() {
-    //field_status = "disabled";
+    field_status = "disabled";
    // odomLiftPiston.set_value(false);
 }
 

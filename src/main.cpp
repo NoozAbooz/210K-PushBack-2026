@@ -1,5 +1,4 @@
 #include "main.h"
-#include "abstractGlobals.hpp"
 
 /**
  * Runs the operator control code. This function will be started in its own task
@@ -11,8 +10,9 @@
  */
 void opcontrol() {
 	pros::Task([] { // run only in competition
-		if (field_status == "competition") {
-			//Gif* gif = new Gif("/usd/evernight.gif", rd_view_obj(gifview));
+		initTelemetry();
+		if (pros::c::competition_is_connected()) {
+			Gif* gif = new Gif("/usd/evernight.gif", rd_view_obj(gifview));
 			rd_view_focus(gifview);
 			console.println("Launching gif...");
 		}
@@ -20,8 +20,6 @@ void opcontrol() {
 
 	field_status = "opcontrol";
 	toggleColourSort = false;
-	
-	initTelemetry();
 
 	while (true) { // Main continuous loop
 		/* Drive */

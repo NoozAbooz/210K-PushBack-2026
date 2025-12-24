@@ -44,15 +44,56 @@ void testColourSort() {
     intakeMacro("R1");
 }
 
+void measureOdomOffsets() {
+    std::pair<double, double> offsets = {0,0};
+    for (int i = 0; i < 2; i++) {
+        std::pair<double, double> deltaEnc = {0, 0};
+        inertial1.reset(true);
+        inertial2.reset(true);
+        double imuStart = kw::theta;
+
+        // this -> turn(target, {.async = true, .timeout=1000, .exit = new exit::Range(0.01, 500)});
+        kw::set_odom_position(0, 0);
+        std::pair<double, double> prev = {0,0};
+
+        if (i % 2 == 0) {
+            kw::move_raw(3000, -3000);
+        } else {
+            kw::move_raw(-3000, 3000);
+        }
+        int start_time = pros::millis();
+
+        while (pros::millis() - start_time < 1400) {
+            double currVert = verticalEncoder.get_position() / 100.0;
+            double currHoriz = horizontalEncoder.get_position() / 100.0;
+            
+            deltaEnc.first += fabs((currVert - prev.first));
+            deltaEnc.second += fabs(currHoriz - prev.second);
+            // std::cout << "vert: " << deltaEnc.first << " horiz: " << deltaEnc.second << std::endl;
+            prev.first = currVert;
+            prev.second = currHoriz;
+            pros::delay(10);
+            
+            if (pros::millis() - start_time > 800) {
+                kw::move_raw(0, 0);
+            }
+        }
+        double delta = kw::to_rad(fabs(kw::theta - imuStart));
+        // std::cout << delta << std::endl;
+        offsets.first += ((deltaEnc.first * M_PI * 2.0) / 360) / delta;
+        offsets.second += ((deltaEnc.second * M_PI * 2.0) / 360) / delta;
+    }
+    console.printf("%.2lf, %.2lf\n", offsets.first / 2, offsets.second / 2);
+}
+
 /* Legacy Auton Routines */
 void driveForward() {
-    kw::driveTo(6, 3000, 127);
+    kw::driveTo(6, 3000);
 }
 
 rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
     {"SAWP", sawp, "", 0},
     {"6+3 Left", left_half, "", 0},
-    //{"Right Side AWP", right_half, "", 0},
 
     {"9 Right", right_elim, "", 0},
     {"9 Left", left_elim, "", 0},
@@ -63,7 +104,7 @@ rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
 
     {"Move forward", driveForward, "", 0},
     { "Test PID", testPID, "", 220},
-    { "Test BM", testDistReset, "", 220},
+    { "Test DistReset", measureOdomOffsets, "", 220},
     { "Test Colour Sort", testColourSort, "", 220},
 });
 

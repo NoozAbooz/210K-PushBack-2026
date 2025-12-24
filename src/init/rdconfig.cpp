@@ -5,7 +5,7 @@ rd_view_t *homeview = rd_view_create("Home");
 rd_view_t *sensorview = rd_view_create("Sensors");
 rd::Console console;
 rd_view_t *allianceview = rd_view_create("Alliance Colour");
-rd_view_t *gifview = rd_view_create("Shikanoko");
+rd_view_t *gifview = rd_view_create("GIFView");
 
 // alliance select
 lv_style_t style_text_large;

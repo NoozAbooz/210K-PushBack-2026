@@ -4,7 +4,6 @@
 #include "gif-pros/gifclass.hpp"
 #include "robodash/api.h"
 #include "liblvgl/lvgl.h"
-#include "maelstrom/api.hpp"
 
 extern rd::Console console;
 extern rd_view_t *gifview;
@@ -24,12 +23,9 @@ extern std::string rumble_pattern;
 extern void drive_arcade();
 
 extern void refreshIntake();
-//extern void toggleHoard();
-extern void park();
 extern void refreshLoader();
 extern void refreshKnocker();
 extern void refreshWing();
-extern bool parkStatus;
 extern bool loaderStatus;
 extern bool knockerStatus;
 extern bool wingStatus;

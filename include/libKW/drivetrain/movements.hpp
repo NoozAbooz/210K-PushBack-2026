@@ -3,6 +3,9 @@
 
 namespace kw {
 	enum LateralDirection { CW = 1, CCW = -1 };
+	extern bool is_turning;
+	extern double prev_left_output, prev_right_output;
+	extern double current_movement_error; // distance to target, stored as non-abs value
 
 	/**
 	 * @brief Delay execution until we are a certain distance AWAY from target
