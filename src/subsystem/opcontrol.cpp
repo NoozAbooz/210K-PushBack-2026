@@ -8,6 +8,7 @@ void intakeMacro(std::string str) {
 		intakeMiddleLower.move_voltage(12000);
 		intakeTop.move_voltage(12000);
 	} else if (str == "R2") { // score on mid goal
+		intakePullDownPiston.set_value(true); // pull down intake band
 		intakeTop.move_voltage(-10000);
 		intakeMiddleLower.move_voltage(12000);
 		intakeBottom.move_voltage(12000);
@@ -33,6 +34,7 @@ void refreshIntake() {
 		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
 			intakeMacro("L2");
 		} else {
+			intakePullDownPiston.set_value(false); // pull down intake band
 			intakeTop.move_voltage(0);
 			intakeBottom.move_voltage(0);
 			intakeMiddleUpper.move_voltage(0);
@@ -45,7 +47,7 @@ bool parkStatus = false; // for toggling park mode
 void park() {
 	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
 		parkStatus = !parkStatus;
-		intakeLiftPiston.set_value(parkStatus);
+		
 	}
 }
 
@@ -60,7 +62,7 @@ bool knockerStatus = false;
 void refreshKnocker() {
 	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
 		knockerStatus = !knockerStatus;
-		knockerPiston.set_value(knockerStatus);
+		
 	}
 }
 

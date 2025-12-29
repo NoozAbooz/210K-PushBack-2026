@@ -12,7 +12,6 @@
  */
 void opcontrol() {
 	pros::Task([] { // run only in competition
-		initTelemetry();
 		if (pros::c::competition_is_connected()) {
 			Gif* gif = new Gif("/usd/evernight.gif", rd_view_obj(gifview));
 			rd_view_focus(gifview);
@@ -22,6 +21,7 @@ void opcontrol() {
 
 	field_status = "opcontrol";
 	toggleColourSort = false;
+	initTelemetry();
 
 	while (true) { // Main continuous loop
 		/* Drive */

@@ -67,7 +67,7 @@ void skills() {
      kw::move_raw(-8000, -8000);
     stopIntake();
     kw::driveTo(5, 1000);
-    knockerPiston.set_value(true);
+    //knockerPiston.set_value(true);
     pros::delay(200);
     kw::driveTo(-5.5, 2000, 60);
     kw::move_raw(-5000, -5000);
@@ -98,7 +98,7 @@ void skills() {
     kw::moveToPoint(-111, -1, 2000, false, 90);
     kw::turnToAngle(0, 1000);
     stopIntake();
-    knockerPiston.set_value(false);
+    //knockerPiston.set_value(false);
     kw::driveTo(-70, 3000);
     kw::turnToAngle(270, 1000);
     // wall reset location
@@ -130,7 +130,7 @@ void skills() {
     pros::delay(3000);
     stopIntake();
     kw::driveTo(5, 1000);
-    knockerPiston.set_value(true);
+    //knockerPiston.set_value(true);
     pros::delay(200);
     kw::driveTo(-5.5, 2000, 60);
     pros::delay(200);

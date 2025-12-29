@@ -17,10 +17,9 @@ inline pros::Motor intakeTop(-18); // 11w flexwheel for goal height
 inline pros::Motor intakeBottom(-19); // preroller
 
 // Pneumatics
-inline pros::adi::Pneumatics knockerPiston('D', false);
 inline pros::adi::Pneumatics loaderPiston('B', false); // matchloader
-inline pros::adi::Pneumatics intakeLiftPiston('A', false);
 inline pros::adi::Pneumatics wingPiston('C', false);
+inline pros::adi::Pneumatics intakePullDownPiston('A', false);
 
 /* Declare sensors */
 inline pros::Imu inertial1(13); // should always be the less scuffed one
