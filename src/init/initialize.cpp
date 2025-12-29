@@ -8,6 +8,7 @@
  * to keep execution time for this mode under a few seconds.
  */
 std::string field_status;
+
 void initialize() {
     rdconfig_init();
     initColourSort();
@@ -38,6 +39,7 @@ void initialize() {
  */
 void disabled() {
     field_status = "disabled";
+
    // odomLiftPiston.set_value(false);
 }
 
