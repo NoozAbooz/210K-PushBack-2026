@@ -1,4 +1,5 @@
 #include "main.h"
+#include "libKW/api.hpp"
 using namespace kw;
 
 void kw::swing(double swing_angle, double time_limit_msec, bool forwards, double max_output, bool exit) {

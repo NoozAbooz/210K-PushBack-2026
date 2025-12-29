@@ -1,4 +1,5 @@
 #include "main.h"
+#include "libKW/api.hpp"
 
 int telemState = 0; // for switching tele output on controller screen
 int timer = 0;

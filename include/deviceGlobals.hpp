@@ -1,6 +1,5 @@
 #pragma once
 #include "main.h"
-#include "pros/adi.hpp"
 
 // Controller
 inline pros::Controller controller(pros::E_CONTROLLER_MASTER);

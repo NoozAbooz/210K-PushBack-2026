@@ -1,9 +1,5 @@
-#include "abstractGlobals.hpp"
-#include "deviceGlobals.hpp"
-#include "libKW/drivetrain/chassis.hpp"
-#include "libKW/drivetrain/movements.hpp"
 #include "main.h"
-#include "pros/rtos.hpp"
+#include "libKW/api.hpp"
 
 void right_elim() {
     intakeMacro("L1");

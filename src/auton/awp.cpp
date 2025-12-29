@@ -1,12 +1,5 @@
-#include "abstractGlobals.hpp"
-#include "deviceGlobals.hpp"
-#include "libKW/drivetrain/chassis.hpp"
-#include "libKW/drivetrain/movements.hpp"
-#include "libKW/drivetrain/odom.hpp"
-#include "libKW/utilities.hpp"
 #include "main.h"
-#include "pros/rtos.hpp"
-#include <sys/_intsup.h>
+#include "libKW/api.hpp"
 
 void sawp() {
 	toggleColourSort = false;

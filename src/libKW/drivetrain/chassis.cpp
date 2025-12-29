@@ -1,4 +1,5 @@
 #include "main.h"
+#include "libKW/api.hpp"
 
 // opcontrol
 double kw::drive_curve(double input, double curve) {

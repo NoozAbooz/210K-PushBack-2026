@@ -1,11 +1,11 @@
 #include "main.h"
+#include "libKW/api.hpp"
 
 #include <deque>
 #include <vector>
 #include <numeric>  // for std::accumulate
 #include <algorithm>
 #include <deque>
-#include <cmath>
 
 double kw::vector_average(const std::vector<double>& v) {
 	return std::accumulate(v.begin(), v.end(), 0.0) / v.size();

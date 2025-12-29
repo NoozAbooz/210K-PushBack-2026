@@ -75,9 +75,6 @@ void opcontrol(void);
 #include "abstractGlobals.hpp"
 #include "deviceGlobals.hpp"
 
-// libKW
-#include "libKW/api.hpp"
-
 //#include <iostream>
 #endif
 

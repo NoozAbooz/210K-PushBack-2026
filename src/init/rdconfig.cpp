@@ -1,5 +1,7 @@
 #include "main.h"
-#include <cstdio>
+#include "libKW/api.hpp"
+#include "gif-pros/gifclass.hpp"
+#include "liblvgl/lvgl.h"
 
 rd_view_t *homeview = rd_view_create("Home");
 rd_view_t *sensorview = rd_view_create("Sensors");

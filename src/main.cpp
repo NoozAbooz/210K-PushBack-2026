@@ -1,4 +1,6 @@
 #include "main.h"
+#include "libKW/api.hpp"
+#include "gif-pros/gifclass.hpp"
 
 /**
  * Runs the operator control code. This function will be started in its own task

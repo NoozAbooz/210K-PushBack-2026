@@ -1,4 +1,5 @@
 #include "main.h"
+#include "libKW/api.hpp"
 using namespace kw;
 
 void kw::boomerang(double x, double y, double a, double dlead, double time_limit_msec,
