@@ -106,6 +106,8 @@ rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
     { "Test PID", testPID, "", 220},
     { "Test DistReset", measureOdomOffsets, "", 220},
     { "Test Colour Sort", testColourSort, "", 220},
+    {"Legacy SAWP", legacy_sawp, "", 0},
+    {"Legacy Skills", Legacy_skills, "", 0}
 });
 
 void autonomous() {

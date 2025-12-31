@@ -37,12 +37,17 @@ extern void initColourSort();
 extern bool toggleColourSort; // true = enabled colour sorting, false = disabled
 
 /* Autons */
+// AWP Routines
 extern void sawp();
-extern void nooz_sawp();
- 
+extern void legacy_sawp();
 extern void left_half();
 extern void right_half();
+
+// Skills Routines
 extern void skills();
+extern void Legacy_skills();
+
+// Elim Routines
 extern void right_elim();
 extern void left_elim();
 extern void left_7();
