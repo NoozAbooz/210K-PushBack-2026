@@ -1,3 +1,4 @@
+#include "libKW/drivetrain/movements.hpp"
 #include "main.h"
 #include "libKW/api.hpp"
 
@@ -68,62 +69,112 @@ void left_elim() {
 
 void left_7() {
 
-     toggleColourSort = true;
-     intakeMacro("L1");
-     pros::Task([] {
+   pros::Task([] {
+        intakeMacro("L1");
         pros::delay(750);
         loaderPiston.set_value(true);
     });
-    kw::driveTo(28.5, 2000, 60);
-    kw::turnToAngle(236, 1000);
-    kw::moveToPoint(-30, 17, 2000);
-    kw::turnToAngle(200, 1000);    
-    kw::moveToPoint(-34.37, 2.7, 1000, true, 70);
+    kw::moveToPoint(-6.44, 18.67, 1000, true, 127, false); // Loader #1
+    kw::swing(233, 700);
+    kw::moveToPoint(-32.19, 1.93, 1000, false, 127); 
+    kw::turnToAngle(180, 700);
+    kw::moveToPoint(-32.19, -8.59, 1000, false, 127); // Long Goal #1
+    kw::driveTo(3, 1000, 70);
     kw::move_raw(3000, 3000);
-    pros::delay(70);
-    //pros::delay(50);
-    //kw::driveTo(-33, 1000);
-    kw::moveToPoint(-25.2, 33.3, 1000, false);
-    kw::move_raw(-10000, -10000);
-    //stopIntake();
-    pros::delay(200);
-    //toggleColourSort = true;
-    intakeMacro("R1");
-    loaderPiston.set_value(false);
-    pros::delay(2300);
+    pros::delay(450);
+    kw::moveToPoint(-32.19, 15.45, 1000, false, 127);
+    kw::move_raw(-5000, -5000);
+    pros::Task([] {
+		pros::delay(600);
+		intakeMacro("R1");
+	});
+    pros::delay(1700);
     stopIntake();
-    kw::moveToPoint(-20.7, 10, 1000);
-    kw::turnToAngle(204, 1000);
-    kw::moveToPoint(-8.7, 48, 8000, false, 60);
-        kw::turnToAngle(204, 1000);
-    //kw::driveTo(-7, 1000);
+    kw::moveToPoint(-22.53, 10.94, 1000, true, 70, false);
+    kw::moveToPoint(-22.53, 37.34, 8000, false, 100);
+      
+   // **old Stuff below**
+   
+    //  toggleColourSort = true;
+    //  intakeMacro("L1");
+    //  pros::Task([] {
+    //     pros::delay(750);
+    //     loaderPiston.set_value(true);
+    // });
+    // kw::driveTo(28.5, 2000, 60);
+    // kw::turnToAngle(236, 1000);
+    // kw::moveToPoint(-30, 17, 2000);
+    // kw::turnToAngle(200, 1000);    
+    // kw::moveToPoint(-34.37, 2.7, 1000, true, 70);
+    // kw::move_raw(3000, 3000);
+    // pros::delay(70);
+    // //pros::delay(50);
+    // //kw::driveTo(-33, 1000);
+    // kw::moveToPoint(-25.2, 33.3, 1000, false);
+    // kw::move_raw(-10000, -10000);
+    // //stopIntake();
+    // pros::delay(200);
+    // //toggleColourSort = true;
+    // intakeMacro("R1");
+    // loaderPiston.set_value(false);
+    // pros::delay(2300);
+    // stopIntake();
+    // kw::moveToPoint(-20.7, 10, 1000);
+    // kw::turnToAngle(204, 1000);
+    // kw::moveToPoint(-8.7, 48, 8000, false, 60);
+    //     kw::turnToAngle(204, 1000);
+    // //kw::driveTo(-7, 1000);
 
 }
 
 void right_7() {
-    toggleColourSort = false;
-     intakeMacro("L1");
-    kw::driveTo(28.5, 2000, 60);
-    kw::turnToAngle(124, 1000);
-    kw::moveToPoint(30, 17, 2000);
-    loaderPiston.set_value(true);
-    kw::turnToAngle(160, 1000);    
-    kw::moveToPoint(34.87, 2.7, 1500, true, 70);
-    kw::move_raw(7000, 7000);
-    pros::delay(50);
-    //kw::driveTo(-33, 1000);
-    kw::moveToPoint(25.0, 33.3, 1000, false);
-    kw::move_raw(-8000, -8000);
-    //stopIntake();
-    pros::delay(200);
-    toggleColourSort = true;
-    intakeMacro("R1");
-    loaderPiston.set_value(false);
-    pros::delay(2200);
+pros::Task([] {
+        intakeMacro("L1");
+        pros::delay(750);
+        loaderPiston.set_value(true);
+    });
+    kw::moveToPoint(6.44, 18.67, 1000, true, 127, false); // Loader #1
+    kw::swing(233, 700);
+    kw::moveToPoint(32.19, 1.93, 1000, false, 127); 
+    kw::turnToAngle(180, 700);
+    kw::moveToPoint(32.19, -8.59, 1000, false, 127); // Long Goal #1
+    kw::driveTo(3, 1000, 70);
+    kw::move_raw(3000, 3000);
+    pros::delay(450);
+    kw::moveToPoint(32.19, 15.45, 1000, false, 127);
+    kw::move_raw(-5000, -5000);
+    pros::Task([] {
+		pros::delay(600);
+		intakeMacro("R1");
+	});
+    pros::delay(1700);
     stopIntake();
-    kw::moveToPoint(+38.1, 23.53, 1000);
-    kw::turnToAngle(164, 1000);
-    kw::moveToPoint(+30.0, 51, 8000, false, 70);
-    kw::driveTo(-7, 1000);
-    kw::turnToAngle(164, 1000);
+
+    //old stuff below
+
+//     toggleColourSort = false;
+//      intakeMacro("L1");
+//     kw::driveTo(28.5, 2000, 60);
+//     kw::turnToAngle(124, 1000);
+//     kw::moveToPoint(30, 17, 2000);
+//     loaderPiston.set_value(true);
+//     kw::turnToAngle(160, 1000);    
+//     kw::moveToPoint(34.87, 2.7, 1500, true, 70);
+//     kw::move_raw(7000, 7000);
+//     pros::delay(50);
+//     //kw::driveTo(-33, 1000);
+//     kw::moveToPoint(25.0, 33.3, 1000, false);
+//     kw::move_raw(-8000, -8000);
+//     //stopIntake();
+//     pros::delay(200);
+//     toggleColourSort = true;
+//     intakeMacro("R1");
+//     loaderPiston.set_value(false);
+//     pros::delay(2200);
+//     stopIntake();
+//     kw::moveToPoint(+38.1, 23.53, 1000);
+//     kw::turnToAngle(164, 1000);
+//     kw::moveToPoint(+30.0, 51, 8000, false, 70);
+//     kw::driveTo(-7, 1000);
+//     kw::turnToAngle(164, 1000);
 }
