@@ -21,6 +21,8 @@ void kw::turnToAngle(double turn_angle, double time_limit_msec, double max_outpu
   }
 
   // Prepare for turn
+  max_output = max_output * (12.0 / 127.0); // convert from [-127, 127] decivolts to [-12, 12] volts
+  min_speed = min_speed * (12.0 / 127.0); // convert from [0, 127] decivolts to [0, 12] volts
   kw::stop_chassis(pros::E_MOTOR_BRAKE_COAST);
   is_turning = true;
   double threshold = 1;

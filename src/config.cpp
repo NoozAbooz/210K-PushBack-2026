@@ -42,7 +42,7 @@ bool kw::heading_correction = true; // Use heading correction when the bot is st
 bool kw::dir_change_start = true;   // Less accel/decel due to expecting direction change at start of movement
 bool kw::dir_change_end = true;     // Less accel/decel due to expecting direction change at end of movement
 
-double kw::min_output = 4; // Minimum output voltage to motors while chaining movements
+double kw::min_output = 2; // Minimum output voltage to motors while chaining movements
 
 // Maximum allowed change in voltage output per 10 msec during movement
 double kw::max_slew_accel_fwd = 14;
