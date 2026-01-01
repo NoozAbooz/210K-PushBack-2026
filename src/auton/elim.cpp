@@ -1,6 +1,8 @@
+#include "libKW/drivetrain/chassis.hpp"
 #include "libKW/drivetrain/movements.hpp"
 #include "main.h"
 #include "libKW/api.hpp"
+#include "pros/motors.h"
 
 void right_elim() {
     intakeMacro("L1");
@@ -92,7 +94,7 @@ void left_7() {
     stopIntake();
     kw::moveToPoint(-22.53, 10.94, 1000, true, 70, false);
     kw::moveToPoint(-22.53, 37.34, 8000, false, 100);
-      
+    kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
    // **old Stuff below**
    
     //  toggleColourSort = true;
@@ -149,7 +151,9 @@ pros::Task([] {
 	});
     pros::delay(1700);
     stopIntake();
+ // wing part
 
+    kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
     //old stuff below
 
 //     toggleColourSort = false;
