@@ -26,6 +26,7 @@ namespace kw {
 	 * @param async If true, runs the turn in a separate task and returns immediately
 	 */
 	extern void turnToAngle(double turn_angle, double time_limit_msec, double max_output = 127, double min_speed = 0, bool exit = true, bool async = false);
+	extern void turnToPoint(double x, double y, double time_limit_msec, bool forwards = true, double max_output = 127, double min_speed = 0, bool exit = true, bool async = false);
 
 	/**
 	 * @brief Move laterally (forward and back)
