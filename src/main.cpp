@@ -1,4 +1,5 @@
 #include "main.h"
+#include "deviceGlobals.hpp"
 #include "libKW/api.hpp"
 #include "gif-pros/gifclass.hpp"
 
@@ -11,6 +12,7 @@
  * the task from where it left off.
  */
 void opcontrol() {
+	wingPiston.set_value(true);
 	pros::Task([] { // run only in competition
 		if (pros::competition::is_connected() && pros::competition::is_field_control()) {
 			Gif* gif = new Gif("/usd/evernight.gif", rd_view_obj(gifview));
