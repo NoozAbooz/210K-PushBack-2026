@@ -68,8 +68,14 @@ void refreshKnocker() {
 
 bool wingStatus = false;
 void refreshWing() {
-	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
-		wingStatus = !wingStatus;
-		wingPiston.set_value(wingStatus);
+	if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+		// wingStatus = !wingStatus;
+		if (!wingPiston.is_extended()) {
+			wingPiston.retract();
+		}
+	} else {
+		if (wingPiston.is_extended()) {
+			wingPiston.extend();
+		}
 	}
 }
