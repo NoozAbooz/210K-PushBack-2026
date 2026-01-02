@@ -21,7 +21,8 @@ inline pros::MotorGroup intake({-11, 20});
 inline pros::adi::Pneumatics loaderPiston('I', false); // matchloader
 inline pros::adi::Pneumatics wingPiston('C', false);
 inline pros::adi::Pneumatics intakePullDownPiston('A', false);
-inline pros::adi::Pneumatics trapdoor('B', false);
+inline pros::adi::Pneumatics trapdoorPiston('B', false);
+inline pros::adi::Pneumatics blockerPiston('H', false);
 
 /* Declare sensors */
 inline pros::Imu inertial1(16); // should always be the less scuffed one
