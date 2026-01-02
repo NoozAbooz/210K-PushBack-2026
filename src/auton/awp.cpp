@@ -16,7 +16,7 @@ void sawp() {
 		pros::delay(600);
 		intakeMacro("R1");
 	});
-	kw::moveToPoint(-16.74, 31.55, 1500, false, 127); // long Goal #1
+	kw::moveToPoint(-18.74, 32.5, 1500, false, 127); // long Goal #1
 	kw::move_raw(-2000, -2000);
 	pros::delay(1000);
 	loaderPiston.set_value(false);
@@ -43,9 +43,9 @@ void sawp() {
 	kw::moveToPoint(-34.12, -27.68, 1000, false, 127); // Mid Goal
 	kw::move_raw(-2000, -2000);
 	pros::delay(1000);
-	kw::moveToPoint(-1.93, -61.81, 1500, true, 127); // Mid to Loader
+	kw::moveToPoint(-3.93, -62.81, 1500, true, 127); // Mid to Loader
 	kw::turnToAngle(90, 600); // Turning to Loader #2
-	kw::moveToPoint(10.94, -61.81, 1000, true, 90); // Loader #2
+	kw::moveToPoint(10.94, -62.81, 1000, true, 90); // Loader #2
 	kw::move_raw(3000, 3000);
 	pros::delay(300);
 	pros::Task([] {
