@@ -9,12 +9,14 @@ void intakeMacro(std::string str) {
 		// intakeMiddleLower.move_voltage(12000);
 		// intakeTop.move_voltage(12000);
 		intake.move_voltage(12000);
+		trapdoorPiston.set_value(true); // open trapdoor for scoring
 	} else if (str == "R2") { // score on mid goal
+		// intakePullDownPiston.set_value(true); // pull down intake band
+		// intakeTop.move_voltage(-10000);
+		// intakeMiddleLower.move_voltage(12000);
+		// intakeBottom.move_voltage(12000);
+		intake.move_voltage(9000);
 		intakePullDownPiston.set_value(true); // pull down intake band
-		intakeTop.move_voltage(-10000);
-		intakeMiddleLower.move_voltage(12000);
-		intakeBottom.move_voltage(12000);
-		intake.move_voltage(12000);
 	} else if (str == "L1") { // intake up to long goal scoring
 		intake.move_voltage(12000);
 	} else if (str == "L2") { // outtake out of intake
@@ -34,10 +36,11 @@ void refreshIntake() {
 			intakeMacro("L2");
 		} else {
 			intakePullDownPiston.set_value(false); // pull down intake band
-			intakeTop.move_voltage(0);
-			intakeBottom.move_voltage(0);
-			intakeMiddleUpper.move_voltage(0);
-			intakeMiddleLower.move_voltage(0);
+			trapdoorPiston.set_value(false); // close trapdoor
+			// intakeTop.move_voltage(0);
+			// intakeBottom.move_voltage(0);
+			// intakeMiddleUpper.move_voltage(0);
+			// intakeMiddleLower.move_voltage(0);
 			intake.move_voltage(0);
 		}
 	}
@@ -62,14 +65,16 @@ bool knockerStatus = false;
 void refreshKnocker() {
 	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
 		knockerStatus = !knockerStatus;
-		
+		blockerPiston.set_value(knockerStatus);
 	}
 }
 
 bool wingStatus = false;
 void refreshWing() {
-	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
-		wingStatus = !wingStatus;
-		wingPiston.set_value(wingStatus);
+	if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+		// wingStatus = !wingStatus;
+		wingPiston.set_value(false);
+	} else {
+		wingPiston.set_value(true);
 	}
 }
