@@ -15,14 +15,14 @@ inline pros::Motor intakeMiddleLower(-0); // very top roller
 inline pros::Motor intakeMiddleUpper(0); // yes
 inline pros::Motor intakeTop(-0); // 11w flexwheel for goal height
 inline pros::Motor intakeBottom(-0); // preroller
-inline pros::MotorGroup intake({-11, 20});
+inline pros::MotorGroup intake({20, -11});
 
 // Pneumatics
-inline pros::adi::Pneumatics loaderPiston('I', false); // matchloader
-inline pros::adi::Pneumatics wingPiston('C', false);
-inline pros::adi::Pneumatics intakePullDownPiston('A', false);
-inline pros::adi::Pneumatics trapdoorPiston('B', false);
-inline pros::adi::Pneumatics blockerPiston('H', false);
+inline pros::adi::Pneumatics loaderPiston('D', false); // matchloader
+inline pros::adi::Pneumatics trapdoorPiston('H', false);
+inline pros::adi::Pneumatics intakePullDownPiston('A', false); // midgoal
+inline pros::adi::Pneumatics wingPiston('B', false);
+inline pros::adi::Pneumatics blockerPiston('G', false);
 
 /* Declare sensors */
 inline pros::Imu inertial1(16); // should always be the less scuffed one

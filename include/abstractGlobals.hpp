@@ -22,10 +22,10 @@ extern void drive_arcade();
 
 extern void refreshIntake();
 extern void refreshLoader();
-extern void refreshKnocker();
+extern void refreshBlocker();
 extern void refreshWing();
 extern bool loaderStatus;
-extern bool knockerStatus;
+extern bool blockerStatus;
 extern bool wingStatus;
 
 /* Macros (mainly intended to be called in auton)*/

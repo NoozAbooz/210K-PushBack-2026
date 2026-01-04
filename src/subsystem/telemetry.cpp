@@ -9,7 +9,6 @@ void initTelemetry() {
 	pros::Task([] {
 		while (true) {
 			// Report temperature telemetry
-			double drivetrainTemps = kw::vector_average(leftDrive.get_temperature_all());
 			if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
 				telemState++; // Toggle telemetry display
 			}
@@ -28,7 +27,9 @@ void initTelemetry() {
 			// }
 
 			if(telemState == 0) {
-				controller.print(0, 0, "DT%.0lf|INT%.0lf|T%.0lf  ", drivetrainTemps, intakeBottom.get_temperature(), kw::theta);
+				double drivetrainAvgTemp = kw::vector_average(leftDrive.get_temperature_all());
+				double intakeAvgTemp = kw::vector_average(intake.get_temperature_all());
+				controller.print(0, 0, "DT%.0lf|INT%.0lf|T%.0lf  ", drivetrainAvgTemp, intakeAvgTemp, kw::theta);
 			} else if (telemState == 1) {
 				controller.print(0, 0, "X:%.0lf Y:%.0lf T:%.0lf   ", kw::x_pos, kw::y_pos, kw::theta);
 			} else if (telemState == 2) {

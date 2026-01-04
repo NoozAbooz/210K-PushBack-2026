@@ -1,4 +1,5 @@
 #include "main.h"
+#include "abstractGlobals.hpp"
 #include "deviceGlobals.hpp"
 #include "libKW/api.hpp"
 #include "gif-pros/gifclass.hpp"
@@ -12,7 +13,8 @@
  * the task from where it left off.
  */
 void opcontrol() {
-	wingPiston.set_value(true);
+	field_status = "opcontrol";
+	initTelemetry();
 	pros::Task([] { // run only in competition
 		if (pros::competition::is_connected() && pros::competition::is_field_control()) {
 			Gif* gif = new Gif("/usd/evernight.gif", rd_view_obj(gifview));
@@ -21,9 +23,7 @@ void opcontrol() {
 		}
 	});
 
-	field_status = "opcontrol";
 	toggleColourSort = false;
-	initTelemetry();
 
 	while (true) { // Main continuous loop
 		/* Drive */
@@ -32,7 +32,7 @@ void opcontrol() {
 		/* Subsystem Listeners */
 		refreshIntake();
 		refreshLoader();
-		refreshKnocker();
+		refreshBlocker();
 		refreshWing();
 
 		pros::delay(10); // Delay to save resources on brain

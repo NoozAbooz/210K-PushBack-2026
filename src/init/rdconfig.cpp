@@ -2,6 +2,7 @@
 #include "libKW/api.hpp"
 #include "gif-pros/gifclass.hpp"
 #include "liblvgl/lvgl.h"
+#include "pros/misc.hpp"
 
 rd_view_t *homeview = rd_view_create("Home");
 rd_view_t *sensorview = rd_view_create("Sensors");
@@ -187,11 +188,11 @@ void render_sensor_view() {
         sprintf(buffer, "TEMPERATURE  L:%.2f°C | R:%.2f°C | Batt:%.2f°C", leftDrive.get_temperature(), rightDrive.get_temperature(), pros::battery::get_temperature());
         lv_label_set_text(debug_line_2, buffer);
 
-        sprintf(buffer, "INTAKE  TOP:%.2f°C | MID UPPER:%.2f°C", intakeTop.get_temperature(), intakeMiddleUpper.get_temperature());
+        sprintf(buffer, "INTAKE L:%.2f°C | Intake R:%.2f°C", intake.get_temperature(0), intake.get_temperature(1));
         lv_label_set_text(debug_line_3, buffer);
 
-        sprintf(buffer, "INTAKE   MID LOWER:%.2f°C | BOTTOM:%.2f°C", intakeMiddleLower.get_temperature(), intakeBottom.get_temperature());
-        lv_label_set_text(debug_line_4, buffer);
+        // sprintf(buffer, "INTAKE   MID LOWER:%.2f°C | BOTTOM:%.2f°C", intakeMiddleLower.get_temperature(), intakeBottom.get_temperature());
+        // lv_label_set_text(debug_line_4, buffer);
 
         // auto auton = gui_selector.get_auton();
         // const char* auton_name = auton->name.c_str();
@@ -206,6 +207,10 @@ void render_sensor_view() {
     
         sprintf(buffer, "Radio Status: %s", controller.is_connected() ? "Connected" : "Disconnected");
         lv_label_set_text(debug_line_7, buffer);
+
+        const char* competition_controller_str = pros::competition::is_field_control() ? "Field Control" : pros::competition::is_competition_switch() ? "Competition Switch" : "Not Connected";
+        sprintf(buffer, "VEXnet Switch: %s", competition_controller_str);
+        lv_label_set_text(debug_line_4, buffer);
 
         const char* competition_status_str = (pros::competition::get_status() == 7) ? "Disabled" : (pros::competition::get_status() == 6) ? "Autonomous" : (pros::competition::get_status() == 4) ? "Driver Control" : "Not Connected";
         sprintf(buffer, "Competition Status: %s", competition_status_str);

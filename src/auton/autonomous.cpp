@@ -1,5 +1,10 @@
+#include "libKW/config.hpp"
+#include "libKW/drivetrain/chassis.hpp"
+#include "libKW/drivetrain/movements.hpp"
+#include "libKW/drivetrain/odom.hpp"
 #include "main.h"
 #include "libKW/api.hpp"
+#include "pros/motors.h"
 
 /**
  * Runs the user autonomous code. This function will be started in its own task
@@ -14,9 +19,10 @@
  */
 
 void testPID() {
-    kw::driveTo(24, 3000, 127);
+    //kw::driveTo(24, 3000, 127);
+    //kw::moveToPoint(0, 24, 1000)  ; // kw::turnToAngle(180, 1500);
+    // kw::driveTo(24, 3000, 127);
     kw::turnToAngle(180, 1500);
-    kw::driveTo(24, 3000, 127);
     kw::turnToAngle(0, 1500);
 
 }
@@ -50,38 +56,38 @@ void measureOdomOffsets() {
         std::pair<double, double> deltaEnc = {0, 0};
         inertial1.reset(true);
         inertial2.reset(true);
-        double imuStart = kw::theta;
+        double imuStart = kw::get_imu_rotation();
 
         // this -> turn(target, {.async = true, .timeout=1000, .exit = new exit::Range(0.01, 500)});
         kw::set_odom_position(0, 0);
         std::pair<double, double> prev = {0,0};
 
         if (i % 2 == 0) {
-            kw::move_raw(3000, -3000);
+            kw::move_raw(6000, -6000);
         } else {
-            kw::move_raw(-3000, 3000);
+            kw::move_raw(-6000, 6000);
         }
         int start_time = pros::millis();
 
-        while (pros::millis() - start_time < 1400) {
+        while (pros::millis() - start_time < 1800) {
             double currVert = verticalEncoder.get_position() / 100.0;
             double currHoriz = horizontalEncoder.get_position() / 100.0;
             
-            deltaEnc.first += fabs((currVert - prev.first));
+            deltaEnc.first += fabs(currVert - prev.first);
             deltaEnc.second += fabs(currHoriz - prev.second);
             // std::cout << "vert: " << deltaEnc.first << " horiz: " << deltaEnc.second << std::endl;
             prev.first = currVert;
             prev.second = currHoriz;
             pros::delay(10);
             
-            if (pros::millis() - start_time > 800) {
-                kw::move_raw(0, 0);
+            if (pros::millis() - start_time > 1000) {
+                kw::stop_chassis(pros::E_MOTOR_BRAKE_BRAKE);
             }
         }
-        double delta = kw::to_rad(fabs(kw::theta - imuStart));
+        double delta = kw::to_rad(fabs(kw::get_imu_rotation() - imuStart));
         // std::cout << delta << std::endl;
-        offsets.first += ((deltaEnc.first * M_PI * 2.0) / 360) / delta;
-        offsets.second += ((deltaEnc.second * M_PI * 2.0) / 360) / delta;
+        offsets.first += ((deltaEnc.first / 360) * M_PI * kw::vertical_tracker_diameter) / delta;
+        offsets.second += ((deltaEnc.second / 360) * M_PI * kw::horizontal_tracker_diameter) / delta;
     }
     console.printf("%.2lf, %.2lf\n", offsets.first / 2, offsets.second / 2);
 }
@@ -93,10 +99,9 @@ void driveForward() {
 
 rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
     {"SAWP", sawp, "", 0},
-    {"6+3 Left", left_half, "", 0},
+    {"Left Awp", left_half, "", 0},
+    {"Right Awp", right_half, "", 0},
 
-    {"9 Right", right_elim, "", 0},
-    {"9 Left", left_elim, "", 0},
     {"7 Right", right_7, "", 0},
     {"7 Left", left_7, "", 0},
 

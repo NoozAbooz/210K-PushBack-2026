@@ -14,12 +14,19 @@ void skills(){
         intakeMacro("L1");
         wingPiston.set_value(false); // retract wing
     });
-    kw::driveTo(3.8, 3000, 70);
+    kw::move_raw(12000, 12000);
+    pros::delay(800);
+    kw::move_raw(0,0);
     pros::delay(1000);
-    kw::driveTo(3.8, 3000, 70);
-    pros::delay(1000);
-    kw::driveTo(-20, 1500);
-    kw::move_raw(5000, 5000);
+    kw::move_raw(12000, 12000);
+    pros::delay(200);
+    // kw::driveTo(3.8, 3000, 127);
+    // pros::delay(1000);
+    // kw::driveTo(3.8, 3000, 127);
+    // pros::delay(1000);
+    kw::driveTo(-10, 1500);
+    kw::move_raw(4000, 4000);
+    pros::delay(600);
     kw::set_odom_position(0, 0, 0);
 
     // Mid Goal
