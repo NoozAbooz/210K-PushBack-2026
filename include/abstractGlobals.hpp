@@ -3,7 +3,7 @@
 // 3rd party libraries
 #include "gif-pros/gifclass.hpp"
 #include "robodash/api.h"
-#include "liblvgl/lvgl.h"
+#include "libKW/api.hpp"
 
 extern rd::Console console;
 extern rd_view_t *gifview;
