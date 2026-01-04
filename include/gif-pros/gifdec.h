@@ -1,4 +1,3 @@
-#pragma once
 #ifndef GIFDEC_H
 #define GIFDEC_H
 
@@ -46,11 +45,11 @@ typedef struct gd_GIF {
     uint8_t *canvas, *frame;
 } gd_GIF;
 
-gd_GIF *gifpros_gd_open_gif(FILE *fp);
-int gifpros_gd_get_frame(gd_GIF *gif);
-void gifpros_gd_render_frame(gd_GIF *gif, uint8_t *buffer);
-void gifpros_gd_rewind(gd_GIF *gif);
-void gifpros_gd_close_gif(gd_GIF *gif);
+gd_GIF *gd_open_gif(FILE *fp);
+int gd_get_frame(gd_GIF *gif);
+void gd_render_frame(gd_GIF *gif, uint8_t *buffer);
+void gd_rewind(gd_GIF *gif);
+void gd_close_gif(gd_GIF *gif);
 
 #ifdef __cplusplus
 }

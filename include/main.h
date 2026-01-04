@@ -4,7 +4,7 @@
  * Contains common definitions and header files used throughout your PROS
  * project.
  *
- * \copyright Copyright (c) 2017-2024, Purdue University ACM SIGBots.
+ * \copyright Copyright (c) 2017-2023, Purdue University ACM SIGBots.
  * All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
@@ -39,8 +39,7 @@
 /**
  * You should add more #includes here
  */
-#include "abstractGlobals.hpp"
-#include "deviceGlobals.hpp"
+//#include "okapi/api.hpp"
 
 /**
  * If you find doing pros::Motor() to be tedious and you'd prefer just to do
@@ -72,9 +71,10 @@ void opcontrol(void);
 #endif
 
 #ifdef __cplusplus
-/**
- * You can add C++-only headers here
- */
+// Device Init
+#include "abstractGlobals.hpp"
+#include "deviceGlobals.hpp"
+
 //#include <iostream>
 #endif
 
