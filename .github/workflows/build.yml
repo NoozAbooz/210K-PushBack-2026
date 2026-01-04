@@ -1,4 +1,4 @@
-name: Build Project w/ PROS
+name: Build Project
 
 on:
   push:
@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   build:
-    name: PROS CI Test
+    name: PROS CI Compile
     runs-on: ubuntu-latest
     
     steps:
@@ -57,4 +57,4 @@ jobs:
 
       - name: Run LemLib/pros-build
         id: test
-        uses: LemLib/pros-build@v4.0.0
+        uses: LemLib/pros-build@v5.0.0
