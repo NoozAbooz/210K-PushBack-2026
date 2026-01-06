@@ -7,8 +7,8 @@ inline pros::Controller controller(pros::E_CONTROLLER_MASTER);
 // Drivetrain
 
 // v2
-inline pros::MotorGroup leftDrive({-10, -9, 19});
-inline pros::MotorGroup rightDrive({2, 1, -15});
+inline pros::MotorGroup leftDrive({-8, -9, 19});
+inline pros::MotorGroup rightDrive({2, 3, -15});
 
 // Intake
 inline pros::Motor intakeMiddleLower(-0); // very top roller
