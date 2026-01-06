@@ -10,20 +10,20 @@ void sawp() {
 		blockerPiston.set_value(true);
 		loaderPiston.set_value(true);
 	});
-	kw::moveToPoint(0, 30.05, 1000, true, 127);
+	kw::moveToPoint(0, 30.75, 1000, true, 127);
 	kw::turnToAngle(90, 700); // turn to face loader
-	kw::moveToPoint(9.66, 34.35, 1000, true, 90); // Loader #1
-	//kw::move_raw(5000, 5000);
+	kw::moveToPoint(12.81, 32.75, 1000, true, 90); // Loader #1
+	kw::move_raw(1000, 1000);
 	pros::delay(400);
 	pros::Task([] {
 		pros::delay(600);
 		intakeMacro("R1");
 	});
-	kw::moveToPoint(-18.74, 34.8, 1500, false, 127); // long Goal #1
+	kw::moveToPoint(-17.74, 33.2, 1500, false, 127); // long Goal #1
 	kw::move_raw(-2000, -2000);
 	pros::delay(1000);
 	loaderPiston.set_value(false);
-	kw::turnToAngle(225, 800, true, 90); // turn to face cluster
+	kw::turnToAngle(205, 800, true, 90); // turn to face cluster
 	pros::Task([] {
 		intakeMacro("L1");
 		pros::delay(300);
@@ -33,29 +33,29 @@ void sawp() {
 		pros::delay(600);
 		loaderPiston.set_value(true);
 	});
-	kw::boomerang(-25.75, 10.37, 180, 0.3, 1500, true, 70); // Mid Cluster 1
+	kw::moveToPoint(-15.75, 12.37, 1500, true, 90); // Mid Cluster 1
 	kw::turnToAngle(180, 200);
-	kw::driveTo(35, 1000, 127, false);
-	kw::boomerang(-24.11, -36.70, 135, 0.2, 1000, true, 60); // Mid Cluster 2
+	kw::driveTo(38, 1000, 127, false);
+	kw::boomerang(-13.11, -33.70, 135, 0.2, 1000, true, 70); // Mid Cluster 2
 	pros::Task([] {
-		pros::delay(1000);
+		pros::delay(700);
 		intakeMacro("R2");
-		pros::delay(1000);
+		pros::delay(1400);
 		intakeMacro("L1");
 	});
-	kw::boomerang(-34.12, -19.68, 135, 0.3, 1000, false, 80); // Mid Goal
-	kw::move_raw(-4000, -4000);
-	pros::delay(1000);
-	kw::moveToPoint(-3.93, -56.41, 1500, true, 127); // Mid to Loader
+	kw::boomerang(-27.12, -24.68, 135, 0.3, 1000, false, 80); // Mid Goal
+	kw::move_raw(-2000, -2000);
+	pros::delay(1400);
+	kw::moveToPoint(2, -58.11, 1500, true, 127); // Mid to Loader
 	kw::turnToAngle(90, 900); // Turning to Loader #2
-	kw::moveToPoint(11.94, -58.41, 1000, true, 90); // Loader #2
-	kw::move_raw(5000, 5000);
+	kw::moveToPoint(19.94, -55.01, 1000, true, 90); // Loader #2
+	kw::move_raw(1000, 1000);
 	pros::delay(400);
 	pros::Task([] {
 		pros::delay(600);
 		intakeMacro("R1");
 	});
-	kw::moveToPoint(-17.38, -58.85, 1000, false, 127); // long Goal #2
+	kw::moveToPoint(-17.38, -55.05, 1000, false, 127); // long Goal #2
 	kw::move_raw(-4000, -4000);
 
 }
