@@ -45,7 +45,11 @@ double kw::get_vertical_distance_traveled() {
 	}
 }
 double kw::get_horizontal_distance_traveled() {
-	return ((horizontalEncoder.get_position() / 36000.0) * M_PI * kw::horizontal_tracker_diameter);
+	if (!isnanf(horizontalEncoder.get_position()) && !std::isinf(horizontalEncoder.get_position())) {
+		return ((horizontalEncoder.get_position() / 36000.0) * M_PI * kw::horizontal_tracker_diameter);
+	} else {
+		return 0;
+	}
 }
 
 // double get_dt_heading() {

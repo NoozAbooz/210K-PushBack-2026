@@ -54,8 +54,6 @@ void measureOdomOffsets() {
     std::pair<double, double> offsets = {0,0};
     for (int i = 0; i < 2; i++) {
         std::pair<double, double> deltaEnc = {0, 0};
-        inertial1.reset(true);
-        inertial2.reset(true);
         double imuStart = kw::get_imu_rotation();
 
         // this -> turn(target, {.async = true, .timeout=1000, .exit = new exit::Range(0.01, 500)});
@@ -63,9 +61,11 @@ void measureOdomOffsets() {
         std::pair<double, double> prev = {0,0};
 
         if (i % 2 == 0) {
-            kw::move_raw(6000, -6000);
+            //kw::move_raw(6000, -6000);
+            kw::turnToAngle(175, 1500);
         } else {
-            kw::move_raw(-6000, 6000);
+            //kw::move_raw(-6000, 6000);
+            kw::turnToAngle(185, 1500);
         }
         int start_time = pros::millis();
 
@@ -80,16 +80,17 @@ void measureOdomOffsets() {
             prev.second = currHoriz;
             pros::delay(10);
             
-            if (pros::millis() - start_time > 1000) {
-                kw::stop_chassis(pros::E_MOTOR_BRAKE_BRAKE);
-            }
+            // if (pros::millis() - start_time > 1000) {
+            //     kw::stop_chassis(pros::E_MOTOR_BRAKE_BRAKE);
+            // }
         }
         double delta = kw::to_rad(fabs(kw::get_imu_rotation() - imuStart));
         // std::cout << delta << std::endl;
         offsets.first += ((deltaEnc.first / 360) * M_PI * kw::vertical_tracker_diameter) / delta;
         offsets.second += ((deltaEnc.second / 360) * M_PI * kw::horizontal_tracker_diameter) / delta;
     }
-    console.printf("%.2lf, %.2lf\n", offsets.first / 2, offsets.second / 2);
+    console.printf("Vert Pod Offset: %.2lf\n", offsets.first / 2);
+    console.printf("Horiz Pod Offset: %.2lf\n", offsets.second / 2);
 }
 
 /* Legacy Auton Routines */
