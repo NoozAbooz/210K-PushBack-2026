@@ -8,125 +8,181 @@
 #include "pros/rtos.hpp"
 
 void skills(){
-
-    // Park Zone Balls
-    pros::Task([]{
-        intakeMacro("L1");
-        wingPiston.set_value(false); // retract wing
-    });
-    kw::move_raw(12000, 12000);
-    pros::delay(800);
-    kw::move_raw(0,0);
-    pros::delay(1000);
-    kw::move_raw(12000, 12000);
-    pros::delay(200);
-    // kw::driveTo(3.8, 3000, 127);
-    // pros::delay(1000);
-    // kw::driveTo(3.8, 3000, 127);
-    // pros::delay(1000);
-    kw::driveTo(-10, 1500);
-    kw::move_raw(4000, 4000);
-    pros::delay(600);
-    kw::set_odom_position(0, 0, 0);
-
-    // Mid Goal
-    kw::driveTo(-28, 1000);
-    kw::turnToAngle(97, 800);
-    kw::moveToPoint(15.45, -31.55, 1000, true, 80);
-    kw::turnToAngle(45, 600);
-    kw::moveToPoint(12.23, -37.99, 1000, false, 110);
-    kw::move_raw(-3000, -3000);
-    intakeMacro("R2");
-    pros::delay(6000);
-    kw::driveTo(5, 1000);
-    pros::Task([]{
-        intakeMacro("L1");
-        pros::delay(600);
-        loaderPiston.set_value(true);
-    });
-
-    // First Loader
-    kw::moveToPoint(45.07, -3.86, 1500, true, 127);
-    kw::turnToAngle(0, 600);
-    kw::moveToPoint(45.71, 7.73, 1000, true, 90);
-    kw::move_raw(3000, 3000);
-    pros::delay(1500);
-
-    // Driving To First Goal
-    kw::moveToPoint(58.59, -23.18, 1500, false, 127);
-    stopIntake();
-    kw::moveToPoint(56.66, -90.78,1500, false);
-    kw::turnToAngle(270, 700);
-    kw::moveToPoint(45.71, -91.42, 1000, true);
-    kw::turnToAngle(180, 700);
-
-    // First Goal
-    kw::moveToPoint(45.71, -79.83, 1000, false);
-    kw::move_raw(-5000, -5000);
-    kw::set_odom_position(0, 0, 0);
-    intakeMacro("R1");
-    pros::delay(2000);
-
-    // Second Loader + Goal
-    intakeMacro("L1");
-    kw::moveToPoint(0.00, 20.40, 1000);
-    kw::driveTo(6, 1000, 60);
-    kw::move_raw(3000, 3000);
-    pros::delay(1500);
-    kw::moveToPoint(0, 0, 1000, false);
-    intakeMacro("R1");
-    pros::delay(2000);
-
-    // Driving To Third Loader
+toggleColourSort = false;
+	pros::Task([] {
+		intakeMacro("L1");
+		blockerPiston.set_value(true);
+		loaderPiston.set_value(true);
+        wingPiston.set_value(true); // deploy wings for driver
+	});
+	kw::moveToPoint(0, 30.75, 1000, true, 127);
+	kw::turnToAngle(90, 700); // turn to face loader
+	kw::moveToPoint(13.81, 33.4, 1000, true,100); // Loader #1
+	kw::move_raw(5000, 5000);
+	pros::delay(1000);
+    kw::moveToPoint(-17, 44, 1000, false);
+    intake.move_voltage(0);
     loaderPiston.set_value(false);
-    kw::boomerang(16.10, 9.66, 90, 0.5, 1500, true, 70);
-    stopIntake();
-    kw::moveToPoint(93.35, 9.01, 2000, true);
-    loaderPiston.set_value(true);
-    intakeMacro("L1");
-    kw::turnToAngle(0, 700);
-
-    // Third Loader
-    kw::moveToPoint(93.35, 20.04, 1000, true, 127);
-    kw::driveTo(6, 1000, 60);
-    kw::move_raw(3000, 3000);
-    pros::delay(1500);
-
-    // Driving To Third Goal
-    kw::moveToPoint(107.52, -0.64, 1500, false, 127);
-    kw::turnToAngle(0, 700);
-    kw::moveToPoint(102.37, -73.39, 2000, false);
-    kw::turnToAngle(270, 700);
-    kw::moveToPoint(94.00, -72.11, 1000, true);
-    kw::turnToAngle(180, 700);
-
-    // Third Goal
-    kw::moveToPoint(94.00, -60.52, 1000, false);
-    kw::move_raw(-5000, -5000);
-    kw::set_odom_position(0, 0, 0);
-    intakeMacro("R1");
-    pros::delay(2000);
-
-    // Fourth Loader + Goal
-    intakeMacro("L1");
-    kw::moveToPoint(0.00, 20.40, 1000);
-    kw::driveTo(6, 1000, 60);
-    kw::move_raw(3000, 3000);
-    pros::delay(1500);
-    kw::moveToPoint(0, 0, 1000, false);
-    intakeMacro("R1");
-    pros::delay(2000);
-    loaderPiston.set_value(false);
-
-    // Parking
-    kw::swing(50, 700);
-    kw::moveToPoint(14.81, 7.73, 1500, true, 127);
-    kw::turnToAngle(90, 700);
-    kw::moveToPoint(47.64, 8.37, 1500, true, 127);
     kw::turnToAngle(90, 800);
-    kw::move_raw(12000, 12000);
-    pros::delay(4000);
-    kw::move_raw(0, 0);
+    kw::moveToPoint(-86, 45, 2000, false);
+    kw::turnToAngle(180, 800);
+    kw::moveToPoint(-86, 37, 2000, true);
+    kw::turnToAngle(270, 800);
+    kw::driveTo(-10, 1000);
+    //kw::moveToPoint(75, 31, 2000, true);
+    kw::turnToAngle(270, 800);
+    kw::move_raw(-5000, -5000);
+    intakeMacro("R1");
+    pros::delay(3000);
+    kw::set_odom_position(0, 0, 0);
+    intakeMacro("L1");
+        loaderPiston.set_value(true);
+    kw::moveToPoint(0, 27.75, 1000, true, 100);
+    kw::move_raw(5000, 5000);
+    pros::delay(1000);
+    kw::moveToPoint(0, 0, 1000, false);
+    kw::move_raw(-5000, -5000);
+    intakeMacro("R1");
+    pros::delay(3000);
+    //kw::set_odom_position(0, 0, 0);
+    intakeMacro("L1");
+    kw::driveTo(10, 1000);
+    kw::turnToAngle(270, 1000);
+    kw::moveToPoint(-95, 22, 1000, true, 127);
+    kw::turnToAngle(0, 800);
+    loaderPiston.set_value(true);
+    kw::moveToPoint(-95, 35, 3000, true);
+    kw::move_raw(5000, 5000);
+    pros::delay(1000);
+    kw::moveToPoint(-111, 6, 1000, false);
+    loaderPiston.set_value(false);
+    intake.move_voltage(0);
+    kw::moveToPoint(-115, -64, 2000, false);
+    kw::turnToAngle(90, 800);
+    kw::moveToPoint(-102, -66, 1000, true);
+    kw::turnToAngle(180, 800);
+    kw::moveToPoint(-101, -50, 1000, false);
+    kw::move_raw(-5000, -5000);
+    intakeMacro("R1");
+
+    // // Park Zone Balls
+    // pros::Task([]{
+    //     intakeMacro("L1");
+    //     wingPiston.set_value(false); // retract wing
+    // });
+    // kw::move_raw(12000, 12000);
+    // pros::delay(800);
+    // kw::move_raw(0,0);
+    // pros::delay(1000);
+    // kw::move_raw(12000, 12000);
+    // pros::delay(200);
+    // // kw::driveTo(3.8, 3000, 127);
+    // // pros::delay(1000);
+    // // kw::driveTo(3.8, 3000, 127);
+    // // pros::delay(1000);
+    // kw::driveTo(-10, 1500);
+    // kw::move_raw(4000, 4000);
+    // pros::delay(600);
+    // kw::set_odom_position(0, 0, 0);
+
+    // // Mid Goal
+    // kw::driveTo(-28, 1000);
+    // kw::turnToAngle(97, 800);
+    // kw::moveToPoint(15.45, -31.55, 1000, true, 80);
+    // kw::turnToAngle(45, 600);
+    // kw::moveToPoint(12.23, -37.99, 1000, false, 110);
+    // kw::move_raw(-3000, -3000);
+    // intakeMacro("R2");
+    // pros::delay(6000);
+    // kw::driveTo(5, 1000);
+    // pros::Task([]{
+    //     intakeMacro("L1");
+    //     pros::delay(600);
+    //     loaderPiston.set_value(true);
+    // });
+
+    // // First Loader
+    // kw::moveToPoint(45.07, -3.86, 1500, true, 127);
+    // kw::turnToAngle(0, 600);
+    // kw::moveToPoint(45.71, 7.73, 1000, true, 90);
+    // kw::move_raw(3000, 3000);
+    // pros::delay(1500);
+
+    // // Driving To First Goal
+    // kw::moveToPoint(58.59, -23.18, 1500, false, 127);
+    // stopIntake();
+    // kw::moveToPoint(56.66, -90.78,1500, false);
+    // kw::turnToAngle(270, 700);
+    // kw::moveToPoint(45.71, -91.42, 1000, true);
+    // kw::turnToAngle(180, 700);
+
+    // // First Goal
+    // kw::moveToPoint(45.71, -79.83, 1000, false);
+    // kw::move_raw(-5000, -5000);
+    // kw::set_odom_position(0, 0, 0);
+    // intakeMacro("R1");
+    // pros::delay(2000);
+
+    // // Second Loader + Goal
+    // intakeMacro("L1");
+    // kw::moveToPoint(0.00, 20.40, 1000);
+    // kw::driveTo(6, 1000, 60);
+    // kw::move_raw(3000, 3000);
+    // pros::delay(1500);
+    // kw::moveToPoint(0, 0, 1000, false);
+    // intakeMacro("R1");
+    // pros::delay(2000);
+
+    // // Driving To Third Loader
+    // loaderPiston.set_value(false);
+    // kw::boomerang(16.10, 9.66, 90, 0.5, 1500, true, 70);
+    // stopIntake();
+    // kw::moveToPoint(93.35, 9.01, 2000, true);
+    // loaderPiston.set_value(true);
+    // intakeMacro("L1");
+    // kw::turnToAngle(0, 700);
+
+    // // Third Loader
+    // kw::moveToPoint(93.35, 20.04, 1000, true, 127);
+    // kw::driveTo(6, 1000, 60);
+    // kw::move_raw(3000, 3000);
+    // pros::delay(1500);
+
+    // // Driving To Third Goal
+    // kw::moveToPoint(107.52, -0.64, 1500, false, 127);
+    // kw::turnToAngle(0, 700);
+    // kw::moveToPoint(102.37, -73.39, 2000, false);
+    // kw::turnToAngle(270, 700);
+    // kw::moveToPoint(94.00, -72.11, 1000, true);
+    // kw::turnToAngle(180, 700);
+
+    // // Third Goal
+    // kw::moveToPoint(94.00, -60.52, 1000, false);
+    // kw::move_raw(-5000, -5000);
+    // kw::set_odom_position(0, 0, 0);
+    // intakeMacro("R1");
+    // pros::delay(2000);
+
+    // // Fourth Loader + Goal
+    // intakeMacro("L1");
+    // kw::moveToPoint(0.00, 20.40, 1000);
+    // kw::driveTo(6, 1000, 60);
+    // kw::move_raw(3000, 3000);
+    // pros::delay(1500);
+    // kw::moveToPoint(0, 0, 1000, false);
+    // intakeMacro("R1");
+    // pros::delay(2000);
+    // loaderPiston.set_value(false);
+
+    // // Parking
+    // kw::swing(50, 700);
+    // kw::moveToPoint(14.81, 7.73, 1500, true, 127);
+    // kw::turnToAngle(90, 700);
+    // kw::moveToPoint(47.64, 8.37, 1500, true, 127);
+    // kw::turnToAngle(90, 800);
+    // kw::move_raw(12000, 12000);
+    // pros::delay(4000);
+    // kw::move_raw(0, 0);
 
 }
 
