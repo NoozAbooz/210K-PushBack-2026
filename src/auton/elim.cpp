@@ -86,10 +86,15 @@ void left_7() {
     kw::moveToPoint(-33.19, -8.59, 1000, true, 110); // Long Goal #1
     //kw::driveTo(3, 1000, 70);
     kw::move_raw(5000, 5000);
-    pros::delay(180);
+    pros::delay(150);
+    pros::Task([] {
+		pros::delay(300);
+		stopIntake();
+		pros::delay(400);
+		intakeMacro("R1");
+	});
     kw::moveToPoint(-33.59, 24.45, 1000, false, 127);
     kw::move_raw(-5000, -5000);
-		intakeMacro("R1");
     pros::delay(1700);
     kw::moveToPoint(-23.53, 16.94, 1000, true, 120);
     kw::turnToAngle(180, 700);
@@ -148,10 +153,15 @@ pros::Task([] {
     kw::moveToPoint(33.19, -8.59, 1000, true, 110); // Long Goal #1
     //kw::driveTo(3, 1000, 70);
     kw::move_raw(5000, 5000);
-    pros::delay(180);
+    pros::delay(150);
+    pros::Task([] {
+		pros::delay(300);
+		stopIntake();
+		pros::delay(400);
+		intakeMacro("R1");
+	});
     kw::moveToPoint(33.59, 24.45, 1000, false, 127);
     kw::move_raw(-5000, -5000);
-		intakeMacro("R1");
     pros::delay(1700);
     kw::moveToPoint(48, 6, 1000, false);
     kw::turnToAngle(180, 700);

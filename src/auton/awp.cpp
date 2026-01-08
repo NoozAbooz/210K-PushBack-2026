@@ -1,3 +1,4 @@
+#include "abstractGlobals.hpp"
 #include "deviceGlobals.hpp"
 #include "libKW/drivetrain/movements.hpp"
 #include "main.h"
@@ -16,7 +17,9 @@ void sawp() {
 	kw::move_raw(5000, 5000);
 	pros::delay(150);
 	pros::Task([] {
-		pros::delay(700);
+		pros::delay(300);
+		stopIntake();
+		pros::delay(400);
 		intakeMacro("R1");
 	});
 	kw::moveToPoint(-17.74, 33.7, 1500, false, 127); // long Goal #1
@@ -41,6 +44,8 @@ void sawp() {
 		pros::delay(800);
 		intakeMacro("R2");
 		pros::delay(1400);
+		intake.move_voltage(0);
+		pros::delay(700);
 		intakeMacro("L1");
 	});
 	kw::boomerang(-35.12, -24.68, 135, 0.3, 1000, false, 80); // Mid Goal
@@ -52,7 +57,9 @@ void sawp() {
 	kw::move_raw(5000, 5000);
 	pros::delay(150);
 	pros::Task([] {
-		pros::delay(800);
+		pros::delay(300);
+		stopIntake();
+		pros::delay(400);
 		intakeMacro("R1");
 	});
 	kw::moveToPoint(-17.38, -61.55, 1000, false, 127); // long Goal #2
@@ -152,7 +159,9 @@ void left_half() { // Left Side Half Solo AWP
 	kw::move_raw(5000, 5000);
 	pros::delay(150);
 	pros::Task([] {
-		pros::delay(700);
+		pros::delay(300);
+		stopIntake();
+		pros::delay(400);
 		intakeMacro("R1");
 	});
 	kw::moveToPoint(17.74, 33.7, 1500, false, 127); // long Goal #1
@@ -175,10 +184,7 @@ void left_half() { // Left Side Half Solo AWP
 	kw::moveToPoint(14, 23, 1000, true, 127); // Mid Goal
 	kw::turnToAngle(270, 1000);
 	kw::moveToPoint(33, 23, 1000, false, 70); // Loader #2
-
-
 	kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
-	
 
 }
 
@@ -195,7 +201,9 @@ toggleColourSort = false;
 	kw::move_raw(5000, 5000);
 	pros::delay(150);
 	pros::Task([] {
-		pros::delay(700);
+		pros::delay(300);
+		stopIntake();
+		pros::delay(400);
 		intakeMacro("R1");
 	});
 	kw::moveToPoint(-17.74, 33.7, 1500, false, 127); // long Goal #1
@@ -220,7 +228,6 @@ toggleColourSort = false;
 	kw::moveToPoint(-11, 22, 1000, false, 127); // Mid Goal
 	kw::turnToAngle(270, 1000);
 	kw::moveToPoint(-38, 23, 1000, true, 70); // Loader #2
-
 	kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
 }
 
