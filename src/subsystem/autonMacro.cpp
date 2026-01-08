@@ -1,10 +1,9 @@
 #include "main.h"
 
 void stopIntake() {
-	intakeTop.move_voltage(0);
-	intakeBottom.move_voltage(0);
-	intakeMiddleUpper.move_voltage(0);
-	intakeMiddleLower.move_voltage(0);
+	intake.move_voltage(0);
+	trapdoorPiston.set_value(false); // close trapdoor
+	intakePullDownPiston.set_value(false); // pull down intake band
 }
 
 // void scoreOwnColour(int timeout) { // intended to be called in auton
