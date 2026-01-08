@@ -177,7 +177,7 @@ void left_half() { // Left Side Half Solo AWP
 	kw::moveToPoint(33, 23, 1000, false, 70); // Loader #2
 
 
-
+	kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
 	
 
 }
@@ -220,6 +220,8 @@ toggleColourSort = false;
 	kw::moveToPoint(-11, 22, 1000, false, 127); // Mid Goal
 	kw::turnToAngle(270, 1000);
 	kw::moveToPoint(-38, 23, 1000, true, 70); // Loader #2
+
+	kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
 }
 
 /* LEGACY */
