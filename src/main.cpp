@@ -14,7 +14,6 @@
  */
 void opcontrol() {
 	field_status = "opcontrol";
-	initTelemetry();
 	pros::Task([] { // run only in competition
 		if (pros::competition::is_connected() && pros::competition::is_field_control()) {
 			Gif* gif = new Gif("/usd/evernight.gif", rd_view_obj(gifview));
