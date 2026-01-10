@@ -29,7 +29,7 @@ void opcontrol() {
 
 	while (true) { // Main continuous loop
 		/* Drive */
-		kw::drive_arcade(0, 0, 0.7);
+		kw::drive_arcade(0, 0, 0.85);
 
 		/* Subsystem Listeners */
 		refreshIntake();

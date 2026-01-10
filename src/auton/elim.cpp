@@ -75,18 +75,18 @@ void left_7() {
 
    pros::Task([] {
         intakeMacro("L1");
-        pros::delay(600);
+        pros::delay(750);
         loaderPiston.set_value(true);
         blockerPiston.set_value(true);
     });
-    kw::moveToPoint(-5.2, 22.67, 1000, true, 90, false); // Loader #1
+    kw::moveToPoint(-5.8, 24.67, 1000, true, 90, false); // Loader #1
     kw::turnToAngle(233, 700);
     kw::moveToPoint(-32.19, 1.93, 1000, true, 127); 
     kw::turnToAngle(180, 700);
-    kw::moveToPoint(-33.19, -8.59, 1000, true, 110); // Long Goal #1
+    kw::moveToPoint(-33.19, -8.59, 1000, true, 60); // Long Goal #1
     //kw::driveTo(3, 1000, 70);
     kw::move_raw(5000, 5000);
-    pros::delay(150);
+    pros::delay(420);
     pros::Task([] {
 		pros::delay(300);
 		stopIntake();
@@ -96,12 +96,12 @@ void left_7() {
     kw::moveToPoint(-33.59, 24.45, 1000, false, 127);
     kw::move_raw(-5000, -5000);
     pros::delay(1700);
-    kw::moveToPoint(-23.53, 16.94, 1000, true, 120);
+    kw::moveToPoint(-21.53, 16.94, 1000, true, 120);
     kw::turnToAngle(180, 700);
         intake.move_voltage(0);
-    kw::moveToPoint(-21.53, 39.34, 8000, false, 100);
+    kw::moveToPoint(-22.03, 38.34, 8000, false, 127);
     kw::turnToAngle(180, 700);
-    kw::driveTo(-1, 1000, 70);
+    //kw::driveTo(-1, 1000, 70);
     stopIntake();
     kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
     
@@ -153,7 +153,7 @@ pros::Task([] {
     kw::moveToPoint(33.19, -8.59, 1000, true, 110); // Long Goal #1
     //kw::driveTo(3, 1000, 70);
     kw::move_raw(5000, 5000);
-    pros::delay(150);
+    pros::delay(200);
     pros::Task([] {
 		pros::delay(300);
 		stopIntake();
