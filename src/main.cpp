@@ -24,6 +24,7 @@ void opcontrol() {
 
 	leftDrive.set_brake_mode_all(pros::E_MOTOR_BRAKE_COAST);
 	rightDrive.set_brake_mode_all(pros::E_MOTOR_BRAKE_COAST);
+	intake.set_brake_mode_all(pros::E_MOTOR_BRAKE_COAST);
 	toggleColourSort = false;
 
 	while (true) { // Main continuous loop

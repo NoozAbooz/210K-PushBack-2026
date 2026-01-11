@@ -147,7 +147,7 @@ void kw::moveToPoint(double x, double y, double time_limit_msec, bool forwards, 
     kw::move_raw(left_output, right_output); // send mv value
     pros::delay(10);
   } 
-  if(exit == true) {
+  if(exit) {
     prev_left_output = 0;
     prev_right_output = 0;
     kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD); // Stop at end if required
