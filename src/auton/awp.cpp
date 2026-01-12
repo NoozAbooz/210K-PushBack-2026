@@ -48,21 +48,23 @@ void sawp() {
 		pros::delay(700);
 		intakeMacro("L1");
 	});
-	kw::boomerang(-35.12, -24.68, 135, 0.3, 1000, false, 80); // Mid Goal
+	kw::boomerang(-37.12, -23.68, 135, 0.3, 1000, false, 80); // Mid Goal
 	kw::move_raw(-2000, -2000);
 	pros::delay(1200);
 	kw::moveToPoint(2, -58.11, 1500, true, 127); // Mid to Loader
 	kw::turnToAngle(90, 900); // Turning to Loader #2
-	kw::moveToPoint(23.94, -60.01, 1000, true, 50); // Loader #2
+	kw::moveToPoint(23.24, -60.01, 1000, true, 50); // Loader #2
 	kw::move_raw(5000, 5000);
-	pros::delay(70);
+	pros::delay(60);
 	pros::Task([] {
 		pros::delay(300);
 		stopIntake();
+		loaderPiston.set_value(false);
 		pros::delay(400);
 		intakeMacro("R1");
 	});
-	kw::moveToPoint(-17.38, -60.25, 1000, false, 127); // long Goal #2
+	kw::moveToPoint(-17.38, -60.05, 1000, false, 127); // long Goal #2
+
 	kw::move_raw(-6000, -6000);
 
 }
@@ -166,7 +168,7 @@ void left_half() { // Left Side Half Solo AWP
 	});
 	kw::moveToPoint(17.74, 33.7, 1500, false, 127); // long Goal #1
 	kw::move_raw(-6000, -6000);
-	pros::delay(1000);
+	pros::delay(1200);
 	loaderPiston.set_value(false);
 	kw::turnToAngle(155, 800, true, 90); // turn to face cluster
 	pros::Task([] {

@@ -22,8 +22,7 @@ void testPID() {
     //kw::driveTo(24, 3000, 127);
     //kw::moveToPoint(0, 24, 1000)  ; // kw::turnToAngle(180, 1500);
     // kw::driveTo(24, 3000, 127);
-    kw::turnToAngle(180, 1500);
-    kw::turnToAngle(0, 1500);
+   // kw::driveTo(5, 1000);
 
 }
 void testDistReset() {
@@ -108,12 +107,12 @@ rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
 
     {"Skills", skills, "", 100},
 
-    {"Move forward", driveForward, "", 0},
+    {"Move forward", testPID, "", 0},
     // { "Test PID", testPID, "", 220},
     // { "Test DistReset", measureOdomOffsets, "", 220},
     // { "Test Colour Sort", testColourSort, "", 220},
     // {"Legacy SAWP", legacy_sawp, "", 0},
-    // {"Legacy Skills", Legacy_skills, "", 0}
+    {"Legacy Skills", Legacy_skills, "", 0}
 });
 
 void autonomous() {
