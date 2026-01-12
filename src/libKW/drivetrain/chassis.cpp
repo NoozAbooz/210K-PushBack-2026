@@ -30,16 +30,8 @@ void kw::move_raw(double left, double right) { // in millivolts, non-blocking
 }
 
 void kw::stop_chassis(pros::motor_brake_mode_e_t mode) {
-    if (mode == pros::E_MOTOR_BRAKE_HOLD) {
-        leftDrive.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-        rightDrive.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-    } else if (mode == pros::E_MOTOR_BRAKE_COAST) {
-        leftDrive.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-        rightDrive.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-    } else if (mode == pros::E_MOTOR_BRAKE_BRAKE) {
-        leftDrive.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-        rightDrive.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    }
+    leftDrive.set_brake_mode(mode);
+    rightDrive.set_brake_mode(mode);
     leftDrive.brake();
     rightDrive.brake();
 }

@@ -11,6 +11,7 @@ std::string field_status;
 
 void initialize() {
     rdconfig_init();
+    initTelemetry(); // start here so that we can see telem while disabled
     initColourSort();
     pros::delay(10);
 

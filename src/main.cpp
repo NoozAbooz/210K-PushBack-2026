@@ -14,7 +14,6 @@
  */
 void opcontrol() {
 	field_status = "opcontrol";
-	initTelemetry();
 	pros::Task([] { // run only in competition
 		if (pros::competition::is_connected() && pros::competition::is_field_control()) {
 			Gif* gif = new Gif("/usd/evernight.gif", rd_view_obj(gifview));
@@ -25,6 +24,7 @@ void opcontrol() {
 
 	leftDrive.set_brake_mode_all(pros::E_MOTOR_BRAKE_COAST);
 	rightDrive.set_brake_mode_all(pros::E_MOTOR_BRAKE_COAST);
+	intake.set_brake_mode_all(pros::E_MOTOR_BRAKE_COAST);
 	toggleColourSort = false;
 
 	while (true) { // Main continuous loop
