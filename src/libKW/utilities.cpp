@@ -121,3 +121,132 @@ void kw::scale_to_max(double& left_output, double& right_output, double max_outp
     right_output = -max_output;
   }
 }
+
+// ============================================================================
+// LOOKUP TABLE IMPLEMENTATION
+// ============================================================================
+
+/*
+ * Constructor for LookupTable
+ * - data: Initializer list of {velocity, voltage} pairs
+ */
+kw::lookup_table::lookup_table(std::initializer_list<std::pair<double, double>> data)
+  : table(data) {}
+
+/*
+ * Get interpolated voltage value for a given velocity
+ * - velocity: The velocity to look up
+ * Returns: Interpolated voltage value
+ */
+double kw::lookup_table::get_value(double velocity) {
+  // Handle edge cases
+  if (table.empty()) return 0.0;
+  if (table.size() == 1) return table[0].second;
+  
+  // If velocity is below the first point, return first voltage
+  if (velocity <= table[0].first) {
+    return table[0].second;
+  }
+  
+  // If velocity is above the last point, return last voltage
+  if (velocity >= table[table.size() - 1].first) {
+    return table[table.size() - 1].second;
+  }
+  
+  // Find the two points to interpolate between
+  for (size_t i = 0; i < table.size() - 1; i++) {
+    if (velocity >= table[i].first && velocity <= table[i + 1].first) {
+      // Linear interpolation
+      double v1 = table[i].first;
+      double v2 = table[i + 1].first;
+      double volt1 = table[i].second;
+      double volt2 = table[i + 1].second;
+      
+      double ratio = (velocity - v1) / (v2 - v1);
+      return volt1 + ratio * (volt2 - volt1);
+    }
+  }
+  
+  return 0.0;
+}
+
+// ============================================================================
+// VELOCITY CONTROLLER IMPLEMENTATION
+// ============================================================================
+
+/*
+ * Constructor for VelocityController
+ * - motor: Pointer to the motor to control
+ * - voltage_lut: Lookup table for feedforward control
+ * - velocity_pid: PID controller for velocity error correction
+ * - max_voltage: Maximum voltage to apply to the motor
+ */
+kw::velocity_controller::velocity_controller(pros::MotorGroup* motor_group, lookup_table voltage_lut, 
+                                           kw::PID velocity_pid, double max_voltage) 
+  : motor_group(motor_group), voltage_lut(voltage_lut), velocity_pid(velocity_pid), 
+    target(0.0), max_voltage(max_voltage), last_commanded_velocity(0.0), running(true) {
+  task = new pros::Task([this] {
+    while (running) {
+      this->update();
+      pros::delay(10);
+    }
+  });
+}
+
+/*
+ * Destructor for VelocityController
+ */
+kw::velocity_controller::~velocity_controller() {
+  running = false;
+  if (task != nullptr) {
+    delete task;
+  }
+}
+
+/*
+ * Set the desired target velocity
+ * - new_target: The target velocity to reach
+ */
+void kw::velocity_controller::set_target(double new_target) {
+  target = new_target;
+}
+
+/*
+ * Update the velocity controller with feedforward and PID
+ * Returns: The current velocity after the update
+ */
+double kw::velocity_controller::update() {
+  if (motor_group == nullptr) return 0.0;
+  if (target == 0.0) {
+    motor_group->move_voltage(0);
+    last_commanded_velocity = 0.0;
+    return 0.0;
+  }
+  
+  double velocity = target;
+  
+  // Feedforward from lookup table
+  float ff = voltage_lut.get_value(velocity);
+    
+  // PID control based on velocity error
+  float error = velocity - kw::vector_average(motor_group -> get_actual_velocity_all());
+  float pid_output = velocity_pid.update(error);
+  
+  // Combine feedforward and PID
+  float total_voltage = ff + pid_output;
+  total_voltage = clamp(total_voltage, -max_voltage, max_voltage);
+  
+  // Apply voltage to motor
+  motor_group->move_voltage(static_cast<int>(total_voltage));
+  last_commanded_velocity = velocity;
+  
+  return motor_group->get_actual_velocity();
+}
+
+/*
+ * Get the current velocity
+ */
+double kw::velocity_controller::get_velocity() {
+  if (motor_group == nullptr) return 0.0;
+  return motor_group->get_actual_velocity();
+}

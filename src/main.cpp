@@ -32,10 +32,10 @@ void opcontrol() {
 		kw::drive_arcade(0, 0, 0.7);
 
 		/* Subsystem Listeners */
-		refreshIntake();
-		refreshLoader();
-		refreshBlocker();
-		refreshWing();
+		refreshSubsys1(); // intake
+		refreshSubsys2(); // loader
+		refreshSubsys3(); // blocker
+		refreshSubsys4(); // wing
 
 		pros::delay(10); // Delay to save resources on brain
 	}

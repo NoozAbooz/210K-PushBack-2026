@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/NoozAbooz/210K-PushBack-2026">
-    <img src="https://raw.githubusercontent.com/NoozAbooz/210K-PushBack-2026/V1/logo.png" alt="Logo" width="200">
+    <img src="./logo.png" alt="Logo" width="200">
   </a>
 
 <h1 align="center">Push Back</h1>

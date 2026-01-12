@@ -20,10 +20,10 @@ extern std::string rumble_pattern;
 /* Functions */
 extern void drive_arcade();
 
-extern void refreshIntake();
-extern void refreshLoader();
-extern void refreshBlocker();
-extern void refreshWing();
+extern void refreshSubsys1();
+extern void refreshSubsys2();
+extern void refreshSubsys3();
+extern void refreshSubsys4();
 extern bool loaderStatus;
 extern bool blockerStatus;
 extern bool wingStatus;
