@@ -216,7 +216,7 @@ void Legacy_skills() {
     kw::driveTo(-70, 3000);
 
     kw::turnToAngle(0, 1000); // face the wall for reset
-    kw::driveTo(-10.8, 1000);
+    kw::driveTo(-10.0, 1000);
     kw::turnToAngle(270, 1000);
     kw::driveTo(-15,1000, 60); // drive into loader
     pros::delay(200);
@@ -236,8 +236,9 @@ void Legacy_skills() {
     kw::moveToPoint(0, -6, 1000, false, 60);
     pros::delay(200);
     intakeMacro("R1");
-    pros::delay(2700);
      kw::move_raw(-8000, -8000);
+    pros::delay(2700);
+
     stopIntake();
     // kw::driveTo(5, 1000);
     // //knockerPiston.set_value(true);
@@ -271,12 +272,12 @@ void Legacy_skills() {
     kw::driveTo(-74, 3000);
     kw::turnToAngle(270, 1000);
     // wall reset location
-    kw::driveTo(-10.4, 1000);
+    kw::driveTo(-10.0, 1000);
     kw::turnToAngle(180, 1000);
     kw::driveTo(-18.5,1000, 60); // drive into loader
     pros::delay(200);
     intakeMacro("R1");
-    kw::turnToAngle(270, 800);
+    kw::turnToAngle(180, 800);
     kw::move_raw(-8000, -8000); // keep driving into loader to prevent bounceback
 
     pros::delay(2500);
@@ -290,7 +291,7 @@ void Legacy_skills() {
     pros::delay(1500);
 
    // back to long goal
-    kw::moveToPoint(1, -6, 1000, false, 60);
+    kw::moveToPoint(0, -1, 1000, false, 60);
     pros::delay(200);
     intakeMacro("R1");
      kw::move_raw(-8000, -8000);
@@ -303,13 +304,20 @@ void Legacy_skills() {
     // pros::delay(200);
    // kw::set_odom_position(0, 0, 0);
     kw::driveTo(15, 1000);
-    kw::turnToAngle(125, 1000);
-    kw::moveToPoint(-30, 35.4, 1000, false); // drive backwards into alley
-    kw::swing(90, 1000, false);
-    loaderPiston.set_value(false);
-    kw::driveTo(10, 1000);
-    kw::moveToPoint(-44, 37, 5000, false);
-    kw::driveTo(-2, 1000);
+    kw::boomerang(-34, 34, 90, 0.4, 1500, false, 70);
+    kw::turnToAngle(90, 1000);
+//     kw::turnToAngle(125, 1000);
+//     kw::moveToPoint(-30, 35.4, 1000, false); // drive backwards into alley
+//     kw::swing(90, 1000, false);
+loaderPiston.set_value(false);
+kw::driveTo(10, 1000);
+kw::moveToPoint(-44, 37, 5000, false);
+kw::driveTo(-2, 1000);
+//    intakeMacro("L1");
+    // kw::move_raw(-9000, -9000);
+    // pros::delay(1300);
+    kw::move_raw(0,0);
+
    
 
 }
