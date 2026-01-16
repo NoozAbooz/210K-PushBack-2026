@@ -51,9 +51,9 @@ void sawp() {
 	kw::boomerang(-37.12, -23.68, 135, 0.3, 1000, false, 80); // Mid Goal
 	kw::move_raw(-2000, -2000);
 	pros::delay(1200);
-	kw::moveToPoint(2, -58.11, 1500, true, 127); // Mid to Loader
+	kw::moveToPoint(2, -57.61, 1500, true, 127); // Mid to Loader
 	kw::turnToAngle(90, 900); // Turning to Loader #2
-	kw::moveToPoint(23.24, -60.01, 1000, true, 50); // Loader #2
+	kw::moveToPoint(23.24, -59.31, 1000, true, 50); // Loader #2
 	kw::move_raw(5000, 5000);
 	pros::delay(60);
 	pros::Task([] {
@@ -63,7 +63,7 @@ void sawp() {
 		pros::delay(400);
 		intakeMacro("R1");
 	});
-	kw::moveToPoint(-17.38, -60.05, 1000, false, 127); // long Goal #2
+	kw::moveToPoint(-17.38, -59.35, 1000, false, 127); // long Goal #2
 
 	kw::move_raw(-6000, -6000);
 
