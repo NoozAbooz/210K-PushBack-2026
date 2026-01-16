@@ -25,24 +25,39 @@ void testPID() {
    // kw::driveTo(5, 1000);
 
 }
-void testDistReset() {
+
+double getDistance(pros::Distance& sensor) {
     double weights = 0; // weighted average distance from keej https://github.com/8pxl/keejLib/blob/main/lib/src/keejLib/odom.cpp
     double weightedDist = 0;
 
     for (int i=0; i<3; i++) {
-        double distReading = kw::mm_to_in(fwdDistance.get_distance());
-        double confidence = fwdDistance.get_distance();
+        double distReading = kw::mm_to_in(bwdDistance.get_distance());
+        double confidence = bwdDistance.get_distance();
         if (confidence <= 20) { confidence = 2; } 
         weights += confidence;
         weightedDist += distReading * confidence;
         pros::delay(10);
     }
-    double avgDist = weightedDist / weights;
-        
+    return weightedDist / weights;
+}
 
-    kw::set_odom_position(0, 0);
+void testDistReset() {
+    // initial position: bwd 48.5n, right 1.2in
+    intakeMacro("L1");
+    kw::move_raw(6000, 6000);
+    pros::delay(400);
+    kw::move_raw(12000, 12000);
+    pros::delay(500);
+    kw::move_raw(6000, 6000);
+    pros::delay(700);
+    kw::move_raw(10000, 10000);
+    pros::delay(700);
+    kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
+
+    kw::set_odom_position(getDistance(rightDistance) - 1.2, getDistance(bwdDistance) - 48.5);
     //chassis.moveToPose(24, 24, 90, 1500);
 }
+
 void testColourSort() {
     alliance = "red"; // set alliance to red for testing
     toggleColourSort = true;
@@ -109,7 +124,7 @@ rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
 
     {"Move forward", testPID, "", 0},
     // { "Test PID", testPID, "", 220},
-    // { "Test DistReset", measureOdomOffsets, "", 220},
+    { "Test DistReset", testDistReset, "", 220},
     // { "Test Colour Sort", testColourSort, "", 220},
     // {"Legacy SAWP", legacy_sawp, "", 0},
     {"Legacy Skills", Legacy_skills, "", 0}
