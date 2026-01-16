@@ -17,7 +17,7 @@ void intakeMacro(std::string str) {
 	intakeMacroStatus = str;
 	if(str == "R1") { // score on long goal
 		trapdoorPiston.set_value(true); // open trapdoor to score
-		intake_velocity.set_target(600.0);
+		intake_velocity.set_target(540.0);
 	} else if (str == "R2") { // score on mid goal
 		intakePullDownPiston.set_value(true); // pull down intake band
 		intake_velocity.set_target(400.0);
