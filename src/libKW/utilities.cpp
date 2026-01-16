@@ -209,6 +209,7 @@ kw::velocity_controller::~velocity_controller() {
  */
 void kw::velocity_controller::set_target(double new_target) {
   target = new_target;
+  velocity_pid.setTarget(new_target);
 }
 
 /*
@@ -223,14 +224,11 @@ double kw::velocity_controller::update() {
     return 0.0;
   }
   
-  double velocity = target;
-  
   // Feedforward from lookup table
-  float ff = voltage_lut.get_value(velocity);
+  float ff = voltage_lut.get_value(target);
     
   // PID control based on velocity error
-  float error = velocity - kw::vector_average(motor_group -> get_actual_velocity_all());
-  float pid_output = velocity_pid.update(error);
+  float pid_output = velocity_pid.update(kw::vector_average(motor_group -> get_actual_velocity_all()));
   
   // Combine feedforward and PID
   float total_voltage = ff + pid_output;
@@ -238,15 +236,17 @@ double kw::velocity_controller::update() {
   
   // Apply voltage to motor
   motor_group->move_voltage(static_cast<int>(total_voltage));
-  last_commanded_velocity = velocity;
+  last_commanded_velocity = target;
+
+  printf("Target: %.2f, CurrentVel: %.2f, FF: %.2f, PID: %.2f, Output: %.2f\n", target, kw::vector_average(motor_group -> get_actual_velocity_all()), ff, pid_output, total_voltage);
   
   return motor_group->get_actual_velocity();
 }
 
 /*
- * Get the current velocity
+ * Get the target velocity
  */
 double kw::velocity_controller::get_velocity() {
   if (motor_group == nullptr) return 0.0;
-  return motor_group->get_actual_velocity();
+  return last_commanded_velocity;
 }
