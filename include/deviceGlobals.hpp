@@ -29,9 +29,9 @@ inline pros::Imu inertial1(16); // should always be the less scuffed one
 inline pros::Imu inertial2(14); // less scuffed one
 inline pros::Optical optical(0);
 
+inline pros::Distance bwdDistance(7);
+inline pros::Distance rightDistance(4);
 inline pros::Distance fwdDistance(0);
-inline pros::Distance rightDistance(0);
-inline pros::Distance intakeDistance(0);
 
 inline pros::Rotation verticalEncoder(13);
 inline pros::Rotation horizontalEncoder(-12);
