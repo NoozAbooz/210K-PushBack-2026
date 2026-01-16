@@ -2,15 +2,15 @@
 #include "libKW/api.hpp"
 using namespace kw;
 
-kw::lookup_table intake_lut({
-    {-600, -12000}, {-565, -11000}, {-520, -10000}, {-460, -9000}, {-400, -8000}, {-345, -7000}, 
-    {-288, -6000}, {-230, -5000}, {-175, -4000}, {-115, -3000}, {-50, -2000}, {0, -1000}, {0, 0},
-    {0, 1000}, {50, 2000}, {115, 3000}, {175, 4000}, {230, 5000}, {290, 6000}, {350, 7000},
-    {400, 8000}, {460, 9000}, {520, 10000}, {560, 11000}, {600, 12000}
-});
+// kw::lookup_table intake_lut({
+//     {-600, -12000}, {-565, -11000}, {-520, -10000}, {-460, -9000}, {-400, -8000}, {-345, -7000}, 
+//     {-288, -6000}, {-230, -5000}, {-175, -4000}, {-115, -3000}, {-50, -2000}, {0, -1000}, {0, 0},
+//     {0, 1000}, {50, 2000}, {115, 3000}, {175, 4000}, {230, 5000}, {290, 6000}, {350, 7000},
+//     {400, 8000}, {460, 9000}, {520, 10000}, {560, 11000}, {600, 12000}
+// });
 
-kw::PID vel_pid(20, 5, 0);
-kw::velocity_controller intake_velocity(&intake, intake_lut, vel_pid, 12000);
+// kw::PID vel_pid(20, 5, 0);
+// kw::velocity_controller intake_velocity(&intake, intake_lut, vel_pid, 12000);
 
 std::string intakeMacroStatus = "";
 void intakeMacro(std::string str) {
@@ -42,7 +42,7 @@ void refreshSubsys1() { // intake
 			intakeMacro("L2");
 		} else {
 			intakePullDownPiston.set_value(false); // pull down intake band
-			intake_velocity.set_target(0.0);
+			intake.move_voltage(0);
 			trapdoorPiston.set_value(false); // close trapdoor
 		}
 	}
