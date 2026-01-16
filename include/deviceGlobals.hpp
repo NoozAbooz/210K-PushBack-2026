@@ -15,7 +15,7 @@ inline pros::Motor intakeMiddleLower(-0); // very top roller
 inline pros::Motor intakeMiddleUpper(0); // yes
 inline pros::Motor intakeTop(-0); // 11w flexwheel for goal height
 inline pros::Motor intakeBottom(-0); // preroller
-inline pros::MotorGroup intake({20, -11}, pros::v5::MotorGears::blue);
+inline pros::MotorGroup intake({20, -11}, pros::v5::MotorGears::ratio_6_to_1);
 
 // Pneumatics
 inline pros::adi::Pneumatics loaderPiston('D', false); // matchloader
