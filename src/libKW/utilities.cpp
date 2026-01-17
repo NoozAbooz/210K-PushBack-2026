@@ -238,7 +238,7 @@ double kw::velocity_controller::update() {
   motor_group->move_voltage(static_cast<int>(total_voltage));
   last_commanded_velocity = target;
 
-  printf("Target: %.2f, CurrentVel: %.2f, FF: %.2f, PID: %.2f, Output: %.2f\n", target, kw::vector_average(motor_group -> get_actual_velocity_all()), ff, pid_output, total_voltage);
+  //printf("Target: %.2f, CurrentVel: %.2f, FF: %.2f, PID: %.2f, Output: %.2f\n", target, kw::vector_average(motor_group -> get_actual_velocity_all()), ff, pid_output, total_voltage);
   
   return motor_group->get_actual_velocity();
 }
