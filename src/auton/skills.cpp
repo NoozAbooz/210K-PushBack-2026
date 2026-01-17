@@ -222,7 +222,7 @@ void Legacy_skills() {
     pros::delay(200);
     intakeMacro("R1");
      kw::move_raw(-8000, -8000);
-    pros::delay(2000);
+    pros::delay(3000);
     kw::turnToAngle(270, 800);
     loaderPiston.set_value(true);
     kw::set_odom_position(0, 0, 0);
@@ -237,7 +237,7 @@ void Legacy_skills() {
     pros::delay(200);
     intakeMacro("R1");
      kw::move_raw(-8000, -8000);
-    pros::delay(2700);
+    pros::delay(3000);
 
     stopIntake();
     // kw::driveTo(5, 1000);
@@ -280,7 +280,7 @@ void Legacy_skills() {
     kw::turnToAngle(180, 800);
     kw::move_raw(-8000, -8000); // keep driving into loader to prevent bounceback
 
-    pros::delay(2500);
+    pros::delay(3000);
     loaderPiston.set_value(true);
     kw::set_odom_position(0, 0, 0);
 
@@ -295,7 +295,7 @@ void Legacy_skills() {
     pros::delay(200);
     intakeMacro("R1");
      kw::move_raw(-8000, -8000);
-    pros::delay(2500);
+    pros::delay(3000);
     stopIntake();
     // kw::driveTo(5, 1000);
     // //knockerPiston.set_value(true);
