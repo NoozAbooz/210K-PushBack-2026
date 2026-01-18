@@ -300,8 +300,9 @@
     },
     "upload_options": {
       "after": "screen",
-      "description": "Kawaii Kittens",
-      "slot": 2
+      "description": "My PROS Project",
+      "slot": 2,
+      "icon": "alien"
     },
     "use_early_access": true
   }
