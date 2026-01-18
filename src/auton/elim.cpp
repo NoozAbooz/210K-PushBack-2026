@@ -81,12 +81,12 @@ void left_7() {
     });
     kw::moveToPoint(-5.8, 21.67, 1000, true, 90, false); // Loader #1
     kw::turnToAngle(233, 700);
-    kw::moveToPoint(-28.59, 1.93, 2000, true, 127); 
+    kw::moveToPoint(-30.59, 1.93, 2000, true, 127); 
     kw::turnToAngle(180, 700);
-    kw::moveToPoint(-32.95, -9.5, 1100, true, 70); // Long Goal #1
+    kw::moveToPoint(-32.95, -10, 1100, true, 70); // Long Goal #1
     //kw::driveTo(3, 1000, 70);
     kw::move_raw(7000, 7000);
-    pros::delay(240);
+    pros::delay(210);
     pros::Task([] {
 		pros::delay(300);
 		stopIntake();
@@ -99,7 +99,7 @@ void left_7() {
     kw::moveToPoint(-22.23, 16.94, 1000, true, 120);
     kw::turnToAngle(180, 700);
         intake.move_voltage(0);
-    kw::moveToPoint(-23.03, 38.34, 8000, false, 127);
+    kw::moveToPoint(-23.03, 38.34, 8000, false, 80);
     kw::turnToAngle(180, 700);
     //kw::driveTo(-1, 1000, 70);
     stopIntake();
