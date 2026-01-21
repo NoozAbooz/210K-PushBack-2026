@@ -31,9 +31,9 @@ double getDistance(pros::Distance& sensor) {
     double weightedDist = 0;
 
     for (int i=0; i<3; i++) {
-        double distReading = kw::mm_to_in(bwdDistance.get_distance());
-        double confidence = bwdDistance.get_distance();
-        if (confidence <= 20) { confidence = 2; } 
+        double distReading = kw::mm_to_in(sensor.get_distance());
+        double confidence = sensor.get_confidence();
+        if (confidence <= 20) confidence = 2;
         weights += confidence;
         weightedDist += distReading * confidence;
         pros::delay(10);
