@@ -9,7 +9,7 @@ using namespace kw;
  * - direction: Direction to face the point (1 for forward, -1 for backward).
  * - time_limit_msec: Maximum time allowed for the turn (in milliseconds).
  */
-void turnToPoint(double x, double y, double time_limit_msec, bool forwards, double max_output, double min_speed, bool exit, bool async) {
+void kw::turnToPoint(double x, double y, double time_limit_msec, bool forwards, double max_output, double min_speed, bool exit, bool async) {
   if(async) {
     pros::Task task([&]() { 
       kw::turnToPoint(x, y, time_limit_msec, forwards, max_output, min_speed, exit);

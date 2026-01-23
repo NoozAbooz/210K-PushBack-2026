@@ -223,6 +223,12 @@ double kw::velocity_controller::update() {
     last_commanded_velocity = 0.0;
     return 0.0;
   }
+  if (fabs(target) == 12000) {
+    int sign = (target > 0) ? 1 : -1;
+    motor_group->move_voltage(sign * 12000);
+    last_commanded_velocity = motor_group->get_actual_velocity();
+    return motor_group->get_actual_velocity();
+  }
   
   // Feedforward from lookup table
   float ff = voltage_lut.get_value(target);

@@ -30,7 +30,7 @@ double getDistance(pros::Distance& sensor) {
     double weights = 0; // weighted average distance from keej https://github.com/8pxl/keejLib/blob/main/lib/src/keejLib/odom.cpp
     double weightedDist = 0;
 
-    for (int i=0; i<3; i++) {
+    for (int i=0; i<4; i++) {
         double distReading = kw::mm_to_in(sensor.get_distance());
         double confidence = sensor.get_confidence();
         if (confidence <= 20) confidence = 2;
@@ -43,19 +43,45 @@ double getDistance(pros::Distance& sensor) {
 
 void testDistReset() {
     // initial position: bwd 48.5n, right 1.2in
-    intakeMacro("L1");
+    intakeMacro("L1"); // all ts for a park zone clear
     kw::move_raw(6000, 6000);
-    pros::delay(400);
-    kw::move_raw(12000, 12000);
+    pros::delay(300);
+    kw::move_raw(8000, 8000);
     pros::delay(500);
     kw::move_raw(6000, 6000);
     pros::delay(700);
-    kw::move_raw(10000, 10000);
-    pros::delay(700);
+    kw::move_raw(12000, 12000);
+    pros::delay(500);
     kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
+    pros::delay(200);
 
+    kw::turnToAngle(0, 800); // make sure angle isnt fucked up by our barrier cross
+    // odom reset!!!
     kw::set_odom_position(getDistance(rightDistance) - 1.2, getDistance(bwdDistance) - 48.5);
-    //chassis.moveToPose(24, 24, 90, 1500);
+    
+    // move bwd to midgoal
+    kw::turnToPoint(-51, 10, 1000, false);
+    kw::moveToPoint(-51, 10, 2000, false);
+
+    // align with midgoal
+    kw::swing(140, 1000, false);
+
+    // grab 1 blue ball, score all 7
+    kw::driveTo(9, 800);
+    kw::driveTo(-10, 800);
+    intakeMacro("R2");
+    intake_velocity.set_target(500); // sketchy workaround to make velo controller work
+
+    pros::delay(4000);
+    kw::driveTo(5, 800, 127, false);
+    intakeMacro("L1");
+    loaderPiston.set_value(true);
+    blockerPiston.set_value(true);
+    wingPiston.set_value(true);
+
+    kw::moveToPoint(-27, 27, 2000);
+    kw::turnToAngle(90, 1000);
+
 }
 
 void testColourSort() {
@@ -144,5 +170,6 @@ void autonomous() {
 		pros::delay(10);
 	}
     console.println("Running auton...");
+    rd_view_focus(sensorview);
     gui_selector.run_auton();
 }
