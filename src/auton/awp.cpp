@@ -63,7 +63,7 @@ void sawp() {
 		pros::delay(400);
 		intakeMacro("R1");
 	});
-	kw::moveToPoint(-17.38, -59.85, 1000, false, 127); // long Goal #2
+	kw::moveToPoint(-17.38, -60.35, 1000, false, 127); // long Goal #2
 
 	kw::move_raw(-6000, -6000);
 
