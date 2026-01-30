@@ -1,8 +1,8 @@
 #pragma once
 
 // 3rd party libraries
+#include "libKW/api.hpp"
 #include "robodash/api.h"
-
 extern rd::Console console;
 extern rd_view_t *gifview;
 extern rd_view_t *allianceview;
@@ -10,12 +10,15 @@ extern rd::Selector gui_selector;
 extern rd_view_t *sensorview;
 extern void rdconfig_init();
 
+// libKW
 extern std::string alliance;
 extern std::string field_status;
 
 extern void competitionTelemtryRefresh();
 extern void initTelemetry();
 extern std::string rumble_pattern;
+
+extern kw::velocity_controller intake_velocity;
 
 /* Functions */
 extern void drive_arcade();
