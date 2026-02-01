@@ -149,6 +149,7 @@ rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
     {"Skills", skills, "", 100},
 
     {"Move forward", testPID, "", 0},
+    { "Measure Odom Offsets", measureOdomOffsets, "", 220},
     // { "Test PID", testPID, "", 220},
     { "Test DistReset", testDistReset, "", 220},
     // { "Test Colour Sort", testColourSort, "", 220},
