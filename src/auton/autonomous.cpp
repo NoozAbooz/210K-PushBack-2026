@@ -101,11 +101,11 @@ void measureOdomOffsets() {
         std::pair<double, double> prev = {0,0};
 
         if (i % 2 == 0) {
-            //kw::move_raw(6000, -6000);
-            kw::turnToAngle(175, 1500);
+            kw::move_raw(6000, -6000);
+            // kw::turnToAngle(175, 1500);
         } else {
-            //kw::move_raw(-6000, 6000);
-            kw::turnToAngle(185, 1500);
+            kw::move_raw(-6000, 6000);
+            // kw::turnToAngle(185, 1500);
         }
         int start_time = pros::millis();
 
@@ -120,9 +120,9 @@ void measureOdomOffsets() {
             prev.second = currHoriz;
             pros::delay(10);
             
-            // if (pros::millis() - start_time > 1000) {
-            //     kw::stop_chassis(pros::E_MOTOR_BRAKE_BRAKE);
-            // }
+            if (pros::millis() - start_time > 1000) {
+                kw::stop_chassis(pros::E_MOTOR_BRAKE_BRAKE);
+            }
         }
         double delta = kw::to_rad(fabs(kw::get_imu_rotation() - imuStart));
         // std::cout << delta << std::endl;
