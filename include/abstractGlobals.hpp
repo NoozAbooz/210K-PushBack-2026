@@ -41,7 +41,9 @@ extern bool toggleColourSort; // true = enabled colour sorting, false = disabled
 
 /* Autons */
 // AWP Routines
+extern void true_sawp();
 extern void sawp();
+
 extern void legacy_sawp();
 extern void left_half();
 extern void right_half();

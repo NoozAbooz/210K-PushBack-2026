@@ -103,7 +103,10 @@ void left_7() {
     kw::turnToAngle(180, 700);
     //kw::driveTo(-1, 1000, 70);
     stopIntake();
+    loaderPiston.set_value(false);
+    kw::turnToAngle(220, 1000);
     kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
+
     
    // **old Stuff below**
    

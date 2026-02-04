@@ -2,6 +2,76 @@
 #include "deviceGlobals.hpp"
 #include "libKW/drivetrain/movements.hpp"
 #include "main.h"
+#include "pros/rtos.hpp"
+
+void true_sawp(){
+	pros::Task([] {
+		intakeMacro("L1");
+		blockerPiston.set_value(true);
+		//loaderPiston.set_value(true);
+	});
+	kw::driveTo(8, 1000, 127); // push
+	kw::moveToPoint(-2, -40.52, 1800, false, 127); //loader
+	loaderPiston.set_value(true);
+	kw::turnToAngle(270, 700); // turn to face loader
+	kw::moveToPoint(-11.01, -43.27, 800, true, 80); // Loader #1
+	kw::move_raw(8000, 8000);
+	pros::delay(120);
+	pros::Task([] {
+		pros::delay(300);
+		stopIntake();
+		pros::delay(400);
+		intakeMacro("R1");
+		loaderPiston.set_value(false);
+	
+	});
+	kw::moveToPoint(21, -43, 1000, false, 127); // long Goal #1
+	kw::move_raw(-6000, -6000);
+	pros::delay(1200);
+	kw::turnToAngle(25, 800);
+	pros::Task([] {
+		intakeMacro("L1");
+		pros::delay(300);
+		loaderPiston.set_value(true);
+		pros::delay(300);
+		loaderPiston.set_value(false);
+		pros::delay(700);
+		loaderPiston.set_value(true);
+	});
+	kw::boomerang(26.5, -20, 0.3, 0, 1500, true, 80); // Mid Cluster 1
+	kw::moveToPoint(24.5, 28, 1700, true, 127);
+	kw::turnToAngle(315, 700);
+	pros::Task([] {
+		pros::delay(720);
+		intakeMacro("R2");
+		pros::delay(850);
+		intake.move_voltage(2000);
+		pros::delay(200);
+		intakePullDownPiston.set_value(false);
+		intakeMacro("L1");
+	});
+	//kw::turnToAngle(320, 700);
+	kw::boomerang(38.16, 12.4, 315, 0.3, 1000, false, 800.3);
+	//kw::moveToPoint(38, 11.3, 1000, false, 100); // Mid Goal
+	kw::move_raw(-3000, -3000);
+	pros::delay(850);
+	kw::moveToPoint(-1, 49.5, 1500, true, 127); // Mid to Loader
+	kw::turnToAngle(270, 900); // Turning to Loader #2
+	kw::moveToPoint(-14.5, 51.5, 1000, true, 80); // Loader #2
+	kw::move_raw(8000, 8000);
+	pros::delay(100);
+	pros::Task([] {
+		pros::delay(300);
+		stopIntake();
+		loaderPiston.set_value(false);
+		pros::delay(400);
+		intakeMacro("R1");
+	});
+	kw::moveToPoint(18, 51.25, 1000, false, 127); // long Goal #2
+	kw::move_raw(-6000, -6000);
+
+
+}
 
 void sawp() {
 	toggleColourSort = false;
@@ -63,7 +133,7 @@ void sawp() {
 		pros::delay(400);
 		intakeMacro("R1");
 	});
-	kw::moveToPoint(-17.38, -60.35, 1000, false, 127); // long Goal #2
+	kw::moveToPoint(-17.38, -61.35, 1000, false, 127); // long Goal #2
 
 	kw::move_raw(-6000, -6000);
 

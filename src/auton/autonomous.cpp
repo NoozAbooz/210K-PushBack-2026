@@ -1,3 +1,4 @@
+#include "deviceGlobals.hpp"
 #include "libKW/config.hpp"
 #include "libKW/drivetrain/chassis.hpp"
 #include "libKW/drivetrain/movements.hpp"
@@ -43,6 +44,8 @@ double getDistance(pros::Distance& sensor) {
 
 void testDistReset() {
     // initial position: bwd 48.5n, right 1.2in
+    wingPiston .set_value(true);
+    blockerPiston.set_value(true);
     intakeMacro("L1"); // all ts for a park zone clear
     kw::move_raw(6000, 6000);
     pros::delay(300);
@@ -51,8 +54,9 @@ void testDistReset() {
     kw::move_raw(6000, 6000);
     pros::delay(700);
     kw::move_raw(12000, 12000);
-    pros::delay(500);
+    pros::delay(450);
     kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
+    wingPiston.set_value(false);
     pros::delay(200);
 
     kw::turnToAngle(0, 800); // make sure angle isnt fucked up by our barrier cross
@@ -75,11 +79,9 @@ void testDistReset() {
     pros::delay(4000);
     kw::driveTo(5, 800, 127, false);
     intakeMacro("L1");
-    loaderPiston.set_value(true);
-    blockerPiston.set_value(true);
-    wingPiston.set_value(true);
+ 
 
-    kw::moveToPoint(-27, 27, 2000);
+    kw::moveToPoint(-27, -21, 2000);
     kw::turnToAngle(90, 1000);
 
 }
@@ -140,6 +142,7 @@ void driveForward() {
 
 rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
     {"SAWP", sawp, "", 0},
+    {"True SAWP", true_sawp, "", 0},
     {"Left Awp", left_half, "", 0},
     {"Right Awp", right_half, "", 0},
 
