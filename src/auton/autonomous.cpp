@@ -31,7 +31,7 @@ double getDistance(pros::Distance& sensor) {
     double weights = 0; // weighted average distance from keej https://github.com/8pxl/keejLib/blob/main/lib/src/keejLib/odom.cpp
     double weightedDist = 0;
 
-    for (int i=0; i<4; i++) {
+    for (int i=0; i<3; i++) {
         double distReading = kw::mm_to_in(sensor.get_distance());
         double confidence = sensor.get_confidence();
         if (confidence <= 20) confidence = 2;
@@ -44,8 +44,12 @@ double getDistance(pros::Distance& sensor) {
 
 void testDistReset() {
     // initial position: bwd 48.5n, right 1.2in
-    wingPiston .set_value(true);
+    wingPiston.set_value(true);
     blockerPiston.set_value(true);
+
+	double reset_x_coord
+	double reset_y_coord
+	
     intakeMacro("L1"); // all ts for a park zone clear
     kw::move_raw(6000, 6000);
     pros::delay(300);
@@ -61,7 +65,13 @@ void testDistReset() {
 
     kw::turnToAngle(0, 800); // make sure angle isnt fucked up by our barrier cross
     // odom reset!!!
-    kw::set_odom_position(getDistance(rightDistance) - 1.2, getDistance(bwdDistance) - 48.5);
+	pros::Task([] {
+		reset_x_coord = getDistance(rightDistance) - 1.2
+	});
+	reset_y_coord = getDistance(bwdDistance) - 48.5
+	pros::delay(10);
+
+    kw::set_odom_position(reset_x_coord, reset_y_coord);
     
     // move bwd to midgoal
     kw::turnToPoint(-51, 10, 1000, false);
