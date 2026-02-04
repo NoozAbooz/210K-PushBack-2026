@@ -47,8 +47,8 @@ void testDistReset() {
     wingPiston.set_value(true);
     blockerPiston.set_value(true);
 
-	double reset_x_coord
-	double reset_y_coord
+	double reset_x_coord;
+	double reset_y_coord;
 	
     intakeMacro("L1"); // all ts for a park zone clear
     kw::move_raw(6000, 6000);
@@ -66,9 +66,9 @@ void testDistReset() {
     kw::turnToAngle(0, 800); // make sure angle isnt fucked up by our barrier cross
     // odom reset!!!
 	pros::Task([] {
-		reset_x_coord = getDistance(rightDistance) - 1.2
+		reset_x_coord = getDistance(rightDistance) - 1.2; // error here? @NoozAbooz can you try to fix
 	});
-	reset_y_coord = getDistance(bwdDistance) - 48.5
+	reset_y_coord = getDistance(bwdDistance) - 48.5;
 	pros::delay(10);
 
     kw::set_odom_position(reset_x_coord, reset_y_coord);
