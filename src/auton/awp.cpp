@@ -35,18 +35,21 @@ void true_sawp(){
 		loaderPiston.set_value(true);
 		pros::delay(300);
 		loaderPiston.set_value(false);
-		pros::delay(700);
-		loaderPiston.set_value(true);
+		//pros::delay(700);
 	});
 	kw::boomerang(26.5, -20, 0.3, 0, 1500, true, 80); // Mid Cluster 1
+	pros::Task([] {
+		pros::delay(730);
+		loaderPiston.set_value(true);
+	});
 	kw::moveToPoint(24.5, 28, 1700, true, 127);
 	kw::turnToAngle(315, 700);
 	pros::Task([] {
 		pros::delay(720);
 		intakeMacro("R2");
-		pros::delay(850);
+		pros::delay(1000);
 		intake.move_voltage(2000);
-		pros::delay(200);
+		pros::delay(300);
 		intakePullDownPiston.set_value(false);
 		intakeMacro("L1");
 	});
@@ -54,10 +57,10 @@ void true_sawp(){
 	kw::boomerang(38.16, 12.4, 315, 0.3, 1000, false, 800.3);
 	//kw::moveToPoint(38, 11.3, 1000, false, 100); // Mid Goal
 	kw::move_raw(-3000, -3000);
-	pros::delay(850);
-	kw::moveToPoint(-1, 49.5, 1500, true, 127); // Mid to Loader
+	pros::delay(1000);
+	kw::moveToPoint(-1, 50.5, 1500, true, 127); // Mid to Loader
 	kw::turnToAngle(270, 900); // Turning to Loader #2
-	kw::moveToPoint(-14.5, 51.5, 1000, true, 80); // Loader #2
+	kw::moveToPoint(-14.5, 52.5, 1000, true, 80); // Loader #2
 	kw::move_raw(8000, 8000);
 	pros::delay(100);
 	pros::Task([] {
@@ -67,7 +70,7 @@ void true_sawp(){
 		pros::delay(400);
 		intakeMacro("R1");
 	});
-	kw::moveToPoint(18, 51.25, 1000, false, 127); // long Goal #2
+	kw::moveToPoint(18, 52.55, 1000, false, 127); // long Goal #2
 	kw::move_raw(-6000, -6000);
 
 
