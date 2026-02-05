@@ -90,10 +90,10 @@ void kw::driveTo(double distance_in, double time_limit_msec, double max_output, 
     if(min_speed) {
       scale_to_min(left_output, right_output, min_output);
     }
-    if(!exit) {
-      left_output = 24 * drive_direction;
-      right_output = 24 * drive_direction;
-    }
+    // if(!exit) {
+    //   left_output = 24 * drive_direction;
+    //   right_output = 24 * drive_direction;
+    // }
 
     left_output += correction_output;
     right_output -= correction_output;
