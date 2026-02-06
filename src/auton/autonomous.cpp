@@ -158,6 +158,7 @@ rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
     {"Right Awp", right_half, "", 0},
 
     {"7 Right", right_7, "", 0},
+    {"6+3", left_elim, "", 0},
     {"7 Left", left_7, "", 0},
 
     {"Skills", skills, "", 100},
