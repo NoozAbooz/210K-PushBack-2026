@@ -27,21 +27,6 @@ void testPID() {
 
 }
 
-double getDistance(pros::Distance& sensor) {
-    double weights = 0; // weighted average distance from keej https://github.com/8pxl/keejLib/blob/main/lib/src/keejLib/odom.cpp
-    double weightedDist = 0;
-
-    for (int i=0; i<3; i++) {
-        double distReading = kw::mm_to_in(sensor.get_distance());
-        double confidence = sensor.get_confidence();
-        if (confidence <= 20) confidence = 2;
-        weights += confidence;
-        weightedDist += distReading * confidence;
-        pros::delay(10);
-    }
-    return weightedDist / weights;
-}
-
 void testDistReset() {
     // initial position: bwd 48.5n, right 1.2in
     wingPiston.set_value(true);
@@ -66,9 +51,9 @@ void testDistReset() {
     kw::turnToAngle(0, 800); // make sure angle isnt fucked up by our barrier cross
     // odom reset!!!
     pros::Task([&reset_x_coord] {
-        reset_x_coord = getDistance(rightDistance) - 1.2; // error here? @NoozAbooz can you try to fix
+        reset_x_coord = kw::getDistance(rightDistance) - 1.2; // error here? @NoozAbooz can you try to fix
     });
-	reset_y_coord = getDistance(bwdDistance) - 48.5;
+	reset_y_coord = kw::getDistance(bwdDistance) - 48.5;
 	pros::delay(10);
 
     //kw::set_odom_position(getDistance(rightDistance) - 1.2, getDistance(bwdDistance) - 48.5);

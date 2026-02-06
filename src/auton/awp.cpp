@@ -20,7 +20,7 @@ void true_sawp(){
 	pros::Task([] {
 		pros::delay(300);
 		stopIntake();
-		pros::delay(450);
+		pros::delay(500);
 		intakeMacro("R1");
 		loaderPiston.set_value(false);
 	
@@ -67,7 +67,7 @@ void true_sawp(){
 		pros::delay(300);
 		stopIntake();
 		loaderPiston.set_value(false);
-		pros::delay(500);
+		pros::delay(600);
 		intakeMacro("R1");
 	});
 	kw::moveToPoint(18, 53.5, 1000, false, 127); // long Goal #2
