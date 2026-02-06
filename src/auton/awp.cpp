@@ -257,10 +257,12 @@ void left_half() { // Left Side Half Solo AWP
 	kw::move_raw(-3000, -3000);
 	intakeMacro("R2");
 	pros::delay(1500);
-	kw::moveToPoint(14, 20, 1000, true, 127); // Mid Goal
-	kw::turnToAngle(270, 1000);
-	kw::moveToPoint(37, 22, 8000, false, 40); // Loader #2
-	kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
+	intakeMacro("L1");
+	intake.move_voltage(0);
+	// kw::moveToPoint(14, 20, 1000, true, 127); // Mid Goal
+	// kw::turnToAngle(270, 1000);
+	// kw::moveToPoint(37, 22, 8000, false, 40); // Loader #2
+	// kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
 
 }
 
