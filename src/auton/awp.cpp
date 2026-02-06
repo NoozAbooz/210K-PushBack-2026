@@ -45,11 +45,11 @@ void true_sawp(){
 	kw::moveToPoint(24.5, 28, 1700, true, 127);
 	kw::turnToAngle(315, 700);
 	pros::Task([] {
-		pros::delay(720);
-		intakeMacro("R2");
 		pros::delay(750);
-		intake.move_voltage(00);
-		pros::delay(300);
+		intakeMacro("R2");
+		pros::delay(800);
+		intake.move_voltage(0);
+		pros::delay(400);
 		intakePullDownPiston.set_value(false);
 		intakeMacro("L1");
 	});
@@ -57,7 +57,7 @@ void true_sawp(){
 	kw::boomerang(38.16, 12.4, 315, 0.3, 1000, false, 800.3);
 	//kw::moveToPoint(38, 11.3, 1000, false, 100); // Mid Goal
 	kw::move_raw(-3000, -3000);
-	pros::delay(750);
+	pros::delay(800);
 	kw::moveToPoint(-1, 50.5, 1500, true, 127); // Mid to Loader
 	kw::turnToAngle(270, 900); // Turning to Loader #2
 	kw::moveToPoint(-14.5, 52.5, 1000, true, 60); // Loader #2
