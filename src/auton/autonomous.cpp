@@ -1,11 +1,4 @@
-#include "deviceGlobals.hpp"
-#include "libKW/config.hpp"
-#include "libKW/drivetrain/chassis.hpp"
-#include "libKW/drivetrain/movements.hpp"
-#include "libKW/drivetrain/odom.hpp"
 #include "main.h"
-#include "libKW/api.hpp"
-#include "pros/motors.h"
 
 /**
  * Runs the user autonomous code. This function will be started in its own task
@@ -35,23 +28,23 @@ void testDistReset() {
 	double reset_x_coord;
 	double reset_y_coord;
 	
+    
     intakeMacro("L1"); // all ts for a park zone clear
     kw::move_raw(6000, 6000);
-    pros::delay(300);
-    kw::move_raw(8000, 8000);
-    pros::delay(500);
+    pros::delay(800);
+
     kw::move_raw(6000, 6000);
     pros::delay(700);
-    kw::move_raw(10000, 10000);
+    kw::move_raw(12000, 12000);
     pros::delay(450);
     kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
-    wingPiston.set_value(false);
     pros::delay(200);
+    wingPiston.set_value(false);
 
-    kw::turnToAngle(0, 800); // make sure angle isnt fucked up by our barrier cross
+    kw::turnToAngle(0, 500); // make sure angle isnt fucked up by our barrier cross
     // odom reset!!!
     pros::Task([&reset_x_coord] {
-        reset_x_coord = kw::getDistance(rightDistance) - 1.2; // error here? @NoozAbooz can you try to fix
+        reset_x_coord = kw::getDistance(rightDistance) - 1.2;
     });
 	reset_y_coord = kw::getDistance(bwdDistance) - 48.5;
 	pros::delay(10);
@@ -60,11 +53,11 @@ void testDistReset() {
     kw::set_odom_position(reset_x_coord, reset_y_coord);
 
     // move bwd to midgoal
-    kw::turnToPoint(-51, 10, 1000, false);
-    kw::moveToPoint(-51, 10, 2000, false);
+    kw::turnToPoint(-51, 8, 800, false);
+    kw::moveToPoint(-51, 8, 1500, false, 100);
 
     // align with midgoal
-    kw::swing(140, 1000, false);
+    kw::swing(140, 800, false);
 
     // grab 1 blue ball, score all 7
     kw::driveTo(9, 800);
@@ -75,10 +68,11 @@ void testDistReset() {
     pros::delay(4000);
     kw::driveTo(5, 800, 127, false);
     intakeMacro("L1");
- 
 
-    kw::moveToPoint(-27, -21, 2000);
+    //kw::moveToPoint(-27, -28, 2000);
+    kw::driveTo(42, 1500);
     kw::turnToAngle(90, 1000);
+    loaderPiston.set_value(true);
 
 }
 
