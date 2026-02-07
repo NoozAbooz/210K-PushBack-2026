@@ -54,7 +54,7 @@ void true_sawp(){
 		intakeMacro("L1");
 	});
 	//kw::turnToAngle(320, 700);
-	kw::boomerang(38.16, 12.4, 315, 0.3, 1000, false, 800.3);
+	kw::boomerang(38.16, 18.4, 315, 0.3, 1000, false, 800.3);
 	//kw::moveToPoint(38, 11.3, 1000, false, 100); // Mid Goal
 	kw::move_raw(-3000, -3000);
 	pros::delay(800);

@@ -69,7 +69,7 @@ void left_elim() {
     kw::move_raw(-7000, -7000);
     pros::delay(1500);
     kw::moveToPoint(-37.5, -5, 1000, true, 127, false);
-    kw::moveToPoint(-37.5, -13, 900, true, 60);
+    kw::moveToPoint(-37.5, -14, 900, true, 60);
     kw::move_raw(6000, 6000);
     // pros::delay(100);
     pros::Task([]{
