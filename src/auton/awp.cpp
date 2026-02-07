@@ -40,13 +40,14 @@ void true_sawp(){
 	kw::boomerang(26.5, -20, 0.3, 0, 1500, true, 80); // Mid Cluster 1
 	pros::Task([] {
 		pros::delay(760);
+
 		loaderPiston.set_value(true);
 
 	});
 	kw::moveToPoint(24.5, 28, 1700, true, 127);
-	intake.move_voltage(0);
 	kw::turnToAngle(315, 700);
 	pros::Task([] {
+		intake_velocity.set_target(0);
 		pros::delay(750);
 		intakeMacro("R2");
 		pros::delay(800);
