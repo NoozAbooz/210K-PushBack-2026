@@ -42,7 +42,7 @@ void testDistReset() {
     pros::delay(500);
     kw::move_raw(6000, 6000);
     pros::delay(700);
-    kw::move_raw(12000, 12000);
+    kw::move_raw(10000, 10000);
     pros::delay(450);
     kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
     wingPiston.set_value(false);
@@ -154,6 +154,7 @@ rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
     { "Test DistReset", testDistReset, "", 220},
     // { "Test Colour Sort", testColourSort, "", 220},
     // {"Legacy SAWP", legacy_sawp, "", 0},
+    {"97 skills", skills, "", 0},
     {"Legacy Skills", Legacy_skills, "", 0}
 });
 

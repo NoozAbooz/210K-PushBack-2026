@@ -12,32 +12,41 @@ toggleColourSort = false;
 	pros::Task([] {
 		intakeMacro("L1");
 		blockerPiston.set_value(true);
-		loaderPiston.set_value(true);
         wingPiston.set_value(true); // deploy wings for driver
 	});
 
     wingPiston.set_value(true);
-	kw::move_raw(10000, 10000);
+	kw::move_raw(6000, 6000);
+    pros::delay(600);
+    
+    for (int i = 0; i < 3; i++) {
+        kw::turnToAngle(10, 400);
+        kw::turnToAngle(-10, 500);
+    }
 
-    pros::delay(800);
-    kw::move_raw(-12000, -12000);
+    kw::turnToAngle(0, 500);
+
+    kw::move_raw(-4000, -4000);
     pros::delay(400);
+    kw::turnToAngle(0, 500);
 
-    kw::move_raw(12000, 12000);
+    kw::move_raw(9000, 10000);
     pros::delay(800);
 
-    kw::move_raw(-12000, -12000);
-    pros::delay(800);
-
-    kw::move_raw(7000, 7000);
-    pros::delay(800);
     kw::stop_chassis();
-        pros::delay(200);
 
-    // reset
-    kw::turnToAngle(0, 800);
-    kw::set_odom_position(-(kw::getDistance(rightDistance) - 0), 0);
-    wingPiston.set_value(false);
+    // kw::move_raw(-12000, -12000);
+    // pros::delay(800);
+
+    // kw::move_raw(7000, 7000);
+    // pros::delay(800);
+    // kw::stop_chassis();
+    //     pros::delay(200);
+
+    // // reset
+    // kw::turnToAngle(0, 800);
+    // kw::set_odom_position(-(kw::getDistance(rightDistance) - 0), 0);
+    // wingPiston.set_value(false);
 
     // // move bwd to midgoal
     // kw::turnToPoint(0, 0, 1000, false);
