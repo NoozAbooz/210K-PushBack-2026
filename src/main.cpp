@@ -27,6 +27,9 @@ void opcontrol() {
 	intake.set_brake_mode_all(pros::E_MOTOR_BRAKE_COAST);
 	toggleColourSort = false;
 
+	wingPiston.set_value(true); // deploy wings for driver
+	blockerPiston.set_value(true);
+
 	while (true) { // Main continuous loop
 		/* Drive */
 		kw::drive_arcade(0, 0, 0.90);
