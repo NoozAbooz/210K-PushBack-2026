@@ -13,7 +13,7 @@ using namespace kw;
  * - overturn: If true, allows overturning for sharp turns.
  * - async: If true, runs the drive in a separate task and returns immediately.
  */
-void kw::moveToPoint(double x, double y, double time_limit_msec, bool forwards, double max_output, bool exit, bool overturn, bool async) {
+void kw::moveToPoint(double x, double y, double time_limit_msec, bool forwards, double max_output, bool exit, bool overturn, bool async, double minimum_speed) {
   if(async) {
     pros::Task task([&]() { 
       kw::moveToPoint(x, y, time_limit_msec, forwards, max_output, exit, overturn);
@@ -141,6 +141,10 @@ void kw::moveToPoint(double x, double y, double time_limit_msec, bool forwards, 
     }
     prev_left_output = left_output;
     prev_right_output = right_output;
+
+    if (minimum_speed > 0.0) {
+      left_output = (left_output > 0.0) ? std::max((float)left_output, (float)minimum_speed) : std::min((float)left_output, -(float)minimum_speed);
+    }
 
     left_output = kw::volt_to_milivolt(left_output); // convert PID output from [-12, 12] decivolt to to [-12000, 12000] millivolts
 	  right_output = kw::volt_to_milivolt(right_output);

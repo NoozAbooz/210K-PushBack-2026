@@ -37,7 +37,7 @@ namespace kw {
 	 * @param exit If true, stops the robot at the end; if false, allows chaining
 	 * @param async If true, runs the drive in a separate task and returns immediately
 	 */
-	extern void driveTo(double distance_in, double time_limit_msec, double max_output = 127, bool exit = true, bool async = false);
+	extern void driveTo(double distance_in, double time_limit_msec, double max_output = 127, bool exit = true, bool async = false, double minimum_speed = 0);
 
 	/**
 	 * @brief Move using odometry to specified cartesian coordinate
@@ -51,7 +51,7 @@ namespace kw {
 	 * @param overturn If true, allows overturning for sharp turns.
 	 * @param async If true, runs the drive in a separate task and returns immediately
 	 */
-	extern void moveToPoint(double x, double y, double time_limit_msec, bool forwards = true, double max_output = 127, bool exit = true, bool overturn = false, bool async = false);
+	extern void moveToPoint(double x, double y, double time_limit_msec, bool forwards = true, double max_output = 127, bool exit = true, bool overturn = false, bool async = false, double minimum_speed = 0);
 
 	/**
 	 * @brief Swing turn by moving only one side of the drivetrain
