@@ -1,8 +1,4 @@
-#include "abstractGlobals.hpp"
-#include "deviceGlobals.hpp"
-#include "libKW/drivetrain/movements.hpp"
 #include "main.h"
-#include "pros/rtos.hpp"
 
 void true_sawp(){
 	pros::Task([] {
@@ -51,17 +47,24 @@ void true_sawp(){
 		pros::delay(750);
 		intakeMacro("R2");
 		pros::delay(800);
-		intake.move_voltage(0);
+		//intake.move_voltage(0); // im pretty sure we have to we have to use the velocity controller to stop the intake
+		intake_velocity.set_target(0); // -> bro i forgot i made velo controller aurghhh
 		pros::delay(200);
-		intakePullDownPiston.set_value(false);
-		intakeMacro("L1");
+		// intakePullDownPiston.set_value(false); // balls were getting caught in the bot after we finish midgoal, i relocated this code a bit after -MZ
+		// intakeMacro("L1"); // -> it is expected balls will fall out of the bot as we go to loader cuz midgoal isnt closed.... but we cant risk it getting stuck
 	});
 	//kw::turnToAngle(320, 700);
 	kw::boomerang(38.16, 14.4, 315, 0.3, 1000, false, 800.3);
 	//kw::moveToPoint(38, 11.3, 1000, false, 100); // Mid Goal
 	kw::move_raw(-3000, -3000);
 	pros::delay(900);
+	//stopIntake(); // dont leak balls
 	kw::moveToPoint(-1, 50.5, 1500, true, 127); // Mid to Loader
+
+	// relocated part -MZ
+	intakePullDownPiston.set_value(false);
+	intakeMacro("L1");
+
 	kw::turnToAngle(270, 900); // Turning to Loader #2
 	kw::moveToPoint(-14.5, 52.5, 1000, true, 60); // Loader #2
 	kw::move_raw(8000, 8000);
