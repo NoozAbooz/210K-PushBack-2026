@@ -53,11 +53,11 @@ void left_elim() {
         pros::delay(300);
         loaderPiston.set_value(false);
     });
-    kw::moveToPoint(-6.0, 21.67, 1000, true, 90, false); // Loader #1
-    kw::boomerang(-35, 38.20, 270, 0.4, 2500, true, 50);
+    kw::moveToPoint(-6.0, 21.67, 1000, true, 80, false); // Loader #1
+    kw::boomerang(-35, 39.20, 270, 0.4, 2500, true, 50);
     pros::delay(500);
     kw::moveToPoint(-17, 21.67, 1000, false, 127, false);
-    kw::boomerang(-36, 9, 180, 0.5, 2000, false, 110);
+    kw::boomerang(-36, 9, 180, 0.5, 2000, false, 70);
     pros::Task([]{
         pros::delay(450);
             intakeMacro("R1");
@@ -94,31 +94,31 @@ void left_7() {
 
    pros::Task([] {
         intakeMacro("L1");
-        pros::delay(600);
+        pros::delay(650);
         loaderPiston.set_value(true);
         blockerPiston.set_value(true);
     });
-    kw::moveToPoint(-5.8, 21.67, 1000, true, 90, false); // Loader #1
+    kw::moveToPoint(-5.8, 21.67, 1000, true, 80, false); // Loader #1
     kw::turnToAngle(233, 700);
     kw::moveToPoint(-30.59, 1.93, 2000, true, 127); 
     kw::turnToAngle(180, 700);
-    kw::moveToPoint(-29.95, -10.5, 1100, true, 70); // Long Goal #1
+    kw::moveToPoint(-32.95, -10.5, 900, true, 70); // Long Goal #1
     //kw::driveTo(3, 1000, 70);
     kw::move_raw(7000, 7000);
-    pros::delay(270);
+    pros::delay(210);
     pros::Task([] {
 		pros::delay(300);
 		stopIntake();
 		pros::delay(400);
 		intakeMacro("R1");
 	});
-    kw::moveToPoint(-29.79, 24.45, 1000, false, 127);
+    kw::moveToPoint(-32.79, 24.45, 1000, false, 127);
     kw::move_raw(-5000, -5000);
     pros::delay(1600);
-    kw::moveToPoint(-19.3, 16.94, 1000, true, 127);
+    kw::moveToPoint(-22.3, 16.94, 1000, true, 127);
     kw::turnToAngle(180, 700);
-    intake.move_voltage(0);
-    kw::moveToPoint(-19.803, 33.34, 8000, false);
+    intake_velocity.set_target(0);
+    kw::moveToPoint(-23.803, 33.34, 8000, false);
     // kw::turnToAngle(180, 700);
     //kw::driveTo(-1, 1000, 70);
     stopIntake();
@@ -164,33 +164,33 @@ void left_7() {
 void right_7() {
 pros::Task([] {
         intakeMacro("L1");
-        pros::delay(600);
+        pros::delay(680);
         loaderPiston.set_value(true);
         blockerPiston.set_value(true);
     });
-    kw::moveToPoint(5.8, 21.67, 1000, true, 90, false); // Loader #1
+    kw::moveToPoint(6, 21.67, 1000, true, 70, false); // Loader #1
     kw::turnToAngle(127, 700);
     kw::moveToPoint(30.59, 1.93, 2000, true, 127); 
     kw::turnToAngle(180, 700);
-    kw::moveToPoint(32.95, -10, 1100, true, 70); // Long Goal #1
+    kw::moveToPoint(32.95, -10.5, 900, true, 70); // Long Goal #1
     //kw::driveTo(3, 1000, 70);
     kw::move_raw(7000, 7000);
-    pros::delay(170);
+    pros::delay(210);
     pros::Task([] {
 		pros::delay(300);
 		stopIntake();
 		pros::delay(400);
 		intakeMacro("R1");
+        loaderPiston.set_value(false);
 	});
-    kw::moveToPoint(32.79, 24.45, 1000, false, 127);
+    kw::moveToPoint(33.69, 24.45, 1000, false, 127);
     kw::move_raw(-5000, -5000);
     pros::delay(1600);
-    kw::moveToPoint(47.5, 6, 1000, true);
+    kw::moveToPoint(47, 16.94, 1000, true, 127);
     kw::turnToAngle(180, 700);
-        intake.move_voltage(0);
-    kw::moveToPoint(48, 36, 8000, false, 100);
-    kw::turnToAngle(180, 700);
-    kw::driveTo(-1, 1000, 70);
+    intake_velocity.set_target(0);
+    kw::moveToPoint(46, 32, 8000, false, 100);
+    kw::boomerang(44, 32, 226, 0.3, 1000, true, 100);
     kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
     //old stuff below
 
