@@ -56,8 +56,8 @@ void left_elim() {
     kw::moveToPoint(-6.0, 21.67, 1000, true, 90, false); // Loader #1
     kw::boomerang(-35, 38.20, 270, 0.4, 2500, true, 50);
     pros::delay(500);
-    kw::moveToPoint(-17, 21.67, 1000, false, 80, false);
-    kw::boomerang(-36, 9, 180, 0.5, 2000, false, 70);
+    kw::moveToPoint(-17, 21.67, 1000, false, 127, false);
+    kw::boomerang(-36, 9, 180, 0.5, 2000, false, 110);
     pros::Task([]{
         pros::delay(450);
             intakeMacro("R1");
@@ -79,12 +79,12 @@ void left_elim() {
         intakeMacro("L1");
         intake.move_voltage(0);
     });
-    kw::boomerang(-2, 34 , 215, 0.3, 2000 , false, 90);
+    kw::boomerang(-2, 34 , 215, 0.3, 2000 , false, 127);
     kw::move_raw(-6000, -6000);
-    // pros::delay(600);
-    // kw::moveToPoint(-28, 17, 1000);
-    // kw::turnToAngle(180, 700);
-    // kw::moveToPoint(-30, 37, 1000, false);
+    pros::delay(600);
+    kw::moveToPoint(-28, 17, 1000);
+    kw::turnToAngle(180, 700);
+    kw::moveToPoint(-30, 37, 1000, false);
 
 
 
@@ -102,23 +102,23 @@ void left_7() {
     kw::turnToAngle(233, 700);
     kw::moveToPoint(-30.59, 1.93, 2000, true, 127); 
     kw::turnToAngle(180, 700);
-    kw::moveToPoint(-32.95, -10, 1100, true, 70); // Long Goal #1
+    kw::moveToPoint(-29.95, -10.5, 1100, true, 70); // Long Goal #1
     //kw::driveTo(3, 1000, 70);
     kw::move_raw(7000, 7000);
-    pros::delay(170);
+    pros::delay(270);
     pros::Task([] {
 		pros::delay(300);
 		stopIntake();
 		pros::delay(400);
 		intakeMacro("R1");
 	});
-    kw::moveToPoint(-32.79, 24.45, 1000, false, 127);
+    kw::moveToPoint(-29.79, 24.45, 1000, false, 127);
     kw::move_raw(-5000, -5000);
     pros::delay(1600);
-    kw::moveToPoint(-23.23, 16.94, 1000, true, 120);
+    kw::moveToPoint(-19.3, 16.94, 1000, true, 127);
     kw::turnToAngle(180, 700);
     intake.move_voltage(0);
-    kw::moveToPoint(-23.73, 33.34, 8000, false);
+    kw::moveToPoint(-19.803, 33.34, 8000, false);
     // kw::turnToAngle(180, 700);
     //kw::driveTo(-1, 1000, 70);
     stopIntake();
