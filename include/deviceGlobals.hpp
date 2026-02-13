@@ -7,8 +7,8 @@ inline pros::Controller controller(pros::E_CONTROLLER_MASTER);
 // Drivetrain
 
 // v2
-inline pros::MotorGroup leftDrive({-6, -9, 19});
-inline pros::MotorGroup rightDrive({1, 3, -15});
+inline pros::MotorGroup leftDrive({-8, -9, 10});
+inline pros::MotorGroup rightDrive({1, 3, -2});
 
 // Intake
 inline pros::Motor intakeMiddleLower(-0); // very top roller
@@ -26,13 +26,13 @@ inline pros::adi::Pneumatics blockerPiston('G', false);
 
 /* Declare sensors */
 inline pros::Imu inertial1(16); // should always be the less scuffed one
-inline pros::Imu inertial2(14); // less scuffed one
+inline pros::Imu inertial2(15); // less scuffed one
 inline pros::Optical optical(0);
 
-inline pros::Distance bwdDistance(7);
-inline pros::Distance rightDistance(4);
+inline pros::Distance bwdDistance(6);
+inline pros::Distance rightDistance(5);
 inline pros::Distance fwdDistance(0);
 
-inline pros::Rotation verticalEncoder(13);
-inline pros::Rotation horizontalEncoder(-12);
+inline pros::Rotation verticalEncoder(6);
+inline pros::Rotation horizontalEncoder(-4);
 //hello world it is 210K secret note iykyk :D
