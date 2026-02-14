@@ -33,6 +33,6 @@ inline pros::Distance bwdDistance(6);
 inline pros::Distance rightDistance(5);
 inline pros::Distance fwdDistance(0);
 
-inline pros::Rotation verticalEncoder(6);
+inline pros::Rotation verticalEncoder(7);
 inline pros::Rotation horizontalEncoder(-4);
 //hello world it is 210K secret note iykyk :D
