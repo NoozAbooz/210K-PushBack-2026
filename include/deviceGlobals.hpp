@@ -18,11 +18,11 @@ inline pros::Motor intakeBottom(-0); // preroller
 inline pros::MotorGroup intake({20, -11}, pros::v5::MotorGears::ratio_6_to_1);
 
 // Pneumatics
-inline pros::adi::Pneumatics loaderPiston('D', false); // matchloader
-inline pros::adi::Pneumatics trapdoorPiston('H', false);
-inline pros::adi::Pneumatics intakePullDownPiston('A', false); // midgoal
-inline pros::adi::Pneumatics wingPiston('B', false);
-inline pros::adi::Pneumatics blockerPiston('G', false);
+inline pros::adi::Pneumatics loaderPiston('F', false); // matchloader
+inline pros::adi::Pneumatics trapdoorPiston('A', false);
+inline pros::adi::Pneumatics intakePullDownPiston('B', false); // midgoal
+inline pros::adi::Pneumatics wingPiston('G', false);
+inline pros::adi::Pneumatics blockerPiston('H', false);
 
 /* Declare sensors */
 inline pros::Imu inertial1(16); // should always be the less scuffed one
