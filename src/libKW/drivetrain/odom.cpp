@@ -102,24 +102,19 @@ void kw::initialize_odom() {
 }
 
 void kw::set_odom_position(double x_new, double y_new, double theta_new) {
-	kw::update_odom = false; // stop odom task loop
-	//kw::odom_mutex.take();
-	x_pos = x_new;
-	y_pos = y_new;
+	//kw::update_odom = false; // stop odom task loop
 
-	verticalEncoder.reset_position();
-	horizontalEncoder.reset_position();
-
-	prev_vertical_pos = 0;
-	prev_horizontal_pos = 0;
-	prev_heading_rad = 0;
+	// prev_vertical_pos = 0;
+	// prev_horizontal_pos = 0;
+	// prev_heading_rad = 0;
 
 	if (theta_new != 360) {
 		inertial1.set_rotation(theta_new);
 		inertial2.set_rotation(theta_new);
 	}
-	//kw::odom_mutex.give();
-	kw::update_odom = true; // resume odom task loop
+	x_pos = x_new;
+	y_pos = y_new;
+	// kw::update_odom = true; // resume odom task loop
 }
 /* // pos reset - do not run async
 float absX = -((backwardDist.get_distance() / 25.4 + 3.9) - 72);

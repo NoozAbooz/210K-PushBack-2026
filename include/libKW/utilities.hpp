@@ -5,6 +5,7 @@
 #include <initializer_list>
 
 namespace kw {
+	extern double getDistance(pros::Distance& sensor);
 	extern double vector_average(const std::vector<double>& v);
 	extern bool is_driver_control();
 	extern double to_rad(double angle_deg);

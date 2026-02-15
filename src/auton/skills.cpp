@@ -1,39 +1,54 @@
 #include "abstractGlobals.hpp"
 #include "deviceGlobals.hpp"
-#include "libKW/drivetrain/chassis.hpp"
-#include "libKW/drivetrain/movements.hpp"
-#include "libKW/drivetrain/odom.hpp"
-#include "main.h"
 #include "libKW/api.hpp"
-#include "pros/rtos.hpp"
+#include "main.h"
 
 void skills(){
-toggleColourSort = false;
-	pros::Task([] {
-		intakeMacro("L1");
-		blockerPiston.set_value(true);
-        wingPiston.set_value(true); // deploy wings for driver
-	});
+    toggleColourSort = false;
 
-    wingPiston.set_value(true);
-	kw::move_raw(6000, 6000);
-    pros::delay(600);
-    
-    for (int i = 0; i < 3; i++) {
-        kw::turnToAngle(10, 400);
-        kw::turnToAngle(-10, 500);
-    }
+	intakeMacro("L1");
+    wingPiston.set_value(true); // deploy wings for driver
+    blockerPiston.set_value(true);
 
-    kw::turnToAngle(0, 500);
+    double reset_x_coord;
+	double reset_y_coord;
 
-    kw::move_raw(-4000, -4000);
+	kw::move_raw(9000, 9000);
     pros::delay(400);
-    kw::turnToAngle(0, 500);
-
-    kw::move_raw(9000, 10000);
+    
+    kw::move_raw(-4000, -4000);
+    pros::delay(200);
+    kw::move_raw(12000, 12000);
     pros::delay(800);
+    kw::move_raw(-4000, -4000);
+    pros::delay(300);
+    kw::move_raw(12000, 12000);
+    pros::delay(900);
+    
+    kw::turnToAngle(0, 500);
+    
+    loaderPiston.set_value(true);
+    kw::move_raw(-12000, -12000);
+    pros::delay(800);
+    kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
+    pros::delay(200);
+    kw::turnToAngle(0, 500);
+    wingPiston.set_value(false);
+    pros::delay(200);
 
-    kw::stop_chassis();
+    // dist reset #1
+    reset_x_coord = kw::getDistance(rightDistance) - 65.9;
+	reset_y_coord = kw::getDistance(fwdDistance);
+    kw::set_odom_position(reset_x_coord, reset_y_coord);
+    console.printf("resetX: %.2f resetY: %.2f\n", reset_x_coord, reset_y_coord);
+    loaderPiston.set_value(false);
+
+    // move to midgoal
+    kw::moveToPoint(7, -2, 1500, false);
+    // kw::move_raw(9000, 10000);
+    // pros::delay(800);
+
+    // kw::stop_chassis();
 
     // kw::move_raw(-12000, -12000);
     // pros::delay(800);

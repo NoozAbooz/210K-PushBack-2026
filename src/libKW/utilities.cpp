@@ -7,6 +7,22 @@
 #include <algorithm>
 #include <deque>
 
+double kw::getDistance(pros::Distance& sensor) {
+    double weights = 0; // weighted average distance from keej https://github.com/8pxl/keejLib/blob/main/lib/src/keejLib/odom.cpp
+    double weightedDist = 0;
+
+    for (int i=0; i<3; i++) {
+        double distReading = kw::mm_to_in(sensor.get_distance());
+        double confidence = sensor.get_confidence();
+        if (confidence <= 20) confidence = 2;
+        weights += confidence;
+        weightedDist += distReading * confidence;
+        pros::delay(10);
+        //console.printf("Dist: %.2f inches, Confid: %.2f\n", distReading, confidence);
+    }
+    return (double)(weightedDist / weights);
+}
+
 double kw::vector_average(const std::vector<double>& v) {
 	return std::accumulate(v.begin(), v.end(), 0.0) / v.size();
 }
@@ -222,6 +238,12 @@ double kw::velocity_controller::update() {
     motor_group->move_voltage(0);
     last_commanded_velocity = 0.0;
     return 0.0;
+  }
+  if (fabs(target) == 12000) {
+    int sign = (target > 0) ? 1 : -1;
+    motor_group->move_voltage(sign * 12000);
+    last_commanded_velocity = motor_group->get_actual_velocity();
+    return motor_group->get_actual_velocity();
   }
   
   // Feedforward from lookup table

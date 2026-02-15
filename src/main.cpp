@@ -29,6 +29,7 @@ void opcontrol() {
 
 	wingPiston.set_value(true); // deploy wings for driver
 	blockerPiston.set_value(true);
+	intakePullDownPiston.set_value(false);
 
 	while (true) { // Main continuous loop
 		/* Drive */

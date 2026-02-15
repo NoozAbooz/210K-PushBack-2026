@@ -26,36 +26,14 @@ void testPID() {
 
 }
 
-double getDistance(pros::Distance& sensor) {
-    double weights = 0; // weighted average distance from keej https://github.com/8pxl/keejLib/blob/main/lib/src/keejLib/odom.cpp
-    double weightedDist = 0;
-
-    for (int i=0; i<3; i++) {
-        double distReading = kw::mm_to_in(bwdDistance.get_distance());
-        double confidence = bwdDistance.get_distance();
-        if (confidence <= 20) { confidence = 2; } 
-        weights += confidence;
-        weightedDist += distReading * confidence;
-        pros::delay(10);
-    }
-    return weightedDist / weights;
-}
-
 void testDistReset() {
-    // initial position: bwd 48.5n, right 1.2in
-    intakeMacro("L1");
-    kw::move_raw(6000, 6000);
-    pros::delay(600);
-    kw::move_raw(12000, 12000);
-    pros::delay(500);
-    kw::move_raw(6000, 6000);
-    pros::delay(700);
-    kw::move_raw(10000, 10000);
-    pros::delay(400);
-    kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
+    double reset_x_coord;
+    double reset_y_coord;
+    reset_x_coord = kw::getDistance(rightDistance) - 65.9;
+	reset_y_coord = kw::getDistance(fwdDistance);
+    console.printf("resetx: %.2f resety: %.2f\n", reset_x_coord, reset_y_coord);
+    kw::set_odom_position(reset_x_coord, reset_y_coord);
 
-    kw::set_odom_position(0, 0);
-    //chassis.moveToPose(24, 24, 90, 1500);
 }
 void testColourSort() {
     alliance = "red"; // set alliance to red for testing
