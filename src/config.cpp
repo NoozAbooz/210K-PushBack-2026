@@ -26,7 +26,7 @@ bool kw::using_vertical_tracker = true;  // Set to true if a vertical tracking w
 // These comments are in the perspective of a top down view of the robot when the robot is facing upwards on your view
 
 // Horizontal distance from the center of the bot to the vertical tracking wheel (in inches, positive is when the wheel is behind the center of the robot)
-double kw::horizontal_tracker_dist_from_center = 2.49; // must change to 3.44, the actual offset
+double kw::horizontal_tracker_dist_from_center = 1.81; // must change to 3.44, the actual offset
 double kw::horizontal_tracker_diameter = 2.125; // Diameter of the horizontal tracker wheel (in inches)
 
 // Vertical distance from the center of the bot to the horizontal tracking wheel (in inches, positive is when the wheel is to the right of the center)
