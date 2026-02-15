@@ -28,52 +28,31 @@ void skills(){
     kw::turnToAngle(0, 500);
     
     loaderPiston.set_value(true);
-    kw::move_raw(-12000, -12000);
-    pros::delay(800);
+    kw::move_raw(-11000, -11000);
+    pros::delay(700);
     kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
-    pros::delay(200);
+    pros::delay(100);
     kw::turnToAngle(0, 500);
+    kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
     wingPiston.set_value(false);
-    pros::delay(200);
+    pros::delay(300);
 
     // dist reset #1
-    reset_x_coord = kw::getDistance(rightDistance) - 65.9;
-	reset_y_coord = kw::getDistance(fwdDistance);
+    reset_x_coord = -(kw::getDistance(rightDistance) - 65.4);
+	reset_y_coord = -kw::getDistance(fwdDistance);
     kw::set_odom_position(reset_x_coord, reset_y_coord);
+    console.printf("rightDist: %.2f fwdDist: %.2f\n", kw::getDistance(rightDistance), kw::getDistance(fwdDistance));
     console.printf("resetX: %.2f resetY: %.2f\n", reset_x_coord, reset_y_coord);
     loaderPiston.set_value(false);
 
     // move to midgoal
-    kw::moveToPoint(7, -2, 1500, false);
-    // kw::move_raw(9000, 10000);
-    // pros::delay(800);
-
-    // kw::stop_chassis();
-
-    // kw::move_raw(-12000, -12000);
-    // pros::delay(800);
-
-    // kw::move_raw(7000, 7000);
-    // pros::delay(800);
-    // kw::stop_chassis();
-    //     pros::delay(200);
-
-    // // reset
-    // kw::turnToAngle(0, 800);
-    // kw::set_odom_position(-(kw::getDistance(rightDistance) - 0), 0);
-    // wingPiston.set_value(false);
-
-    // // move bwd to midgoal
-    // kw::turnToPoint(0, 0, 1000, false);
-    // kw::moveToPoint(0, 0, 2000, false);
-
-    // // align with midgoal
-    // kw::swing(315, 1000, false);
+    kw::moveToPoint(7.6, -70, 1500, false);
+    kw::swing(48, 800, false);
 
     // // grab 1 blue ball, score all 7
-    // kw::driveTo(9, 800);
-    // kw::driveTo(-10, 800);
-    // intakeMacro("R2");
+    kw::driveTo(9, 800);
+    kw::driveTo(-10, 800);
+    intakeMacro("R2");
     // intake_velocity.set_target(500); // sketchy workaround to make velo controller work
 
     // pros::delay(4000);
