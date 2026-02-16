@@ -2,31 +2,31 @@
 #include "libKW/api.hpp"
 using namespace kw;
 
-// kw::lookup_table intake_lut({
-//     {-600, -12000}, {-565, -11000}, {-520, -10000}, {-460, -9000}, {-400, -8000}, {-345, -7000}, 
-//     {-288, -6000}, {-230, -5000}, {-175, -4000}, {-115, -3000}, {-50, -2000}, {0, -1000}, {0, 0},
-//     {0, 1000}, {50, 2000}, {115, 3000}, {175, 4000}, {230, 5000}, {290, 6000}, {350, 7000},
-//     {400, 8000}, {460, 9000}, {520, 10000}, {560, 11000}, {600, 12000}
-// });
+kw::lookup_table intake_lut({
+    {-600, -12000}, {-565, -11000}, {-520, -10000}, {-460, -9000}, {-400, -8000}, {-345, -7000}, 
+    {-288, -6000}, {-230, -5000}, {-175, -4000}, {-115, -3000}, {-50, -2000}, {0, -1000}, {0, 0},
+    {0, 1000}, {50, 2000}, {115, 3000}, {175, 4000}, {230, 5000}, {290, 6000}, {350, 7000},
+    {400, 8000}, {460, 9000}, {520, 10000}, {560, 11000}, {600, 12000}
+});
 
-// kw::PID vel_pid(20, 5, 0);
-// kw::velocity_controller intake_velocity(&intake, intake_lut, vel_pid, 12000);
+kw::PID vel_pid(20, 5, 0);
+kw::velocity_controller intake_velocity(&intake, intake_lut, vel_pid, 12000);
 
 std::string intakeMacroStatus = "";
 void intakeMacro(std::string str) {
 	intakeMacroStatus = str;
 	if(str == "R1") { // score on long goal
 		trapdoorPiston.set_value(true); // open trapdoor to score
-		intake.move_voltage(11000);
+		intake_velocity.set_target(560);
 	} else if (str == "R2") { // score on mid goal
 		intakePullDownPiston.set_value(true); // pull down intake band
-		intake.move_voltage(9000);
+		intake_velocity.set_target(520);
 	} else if (str == "L1") { // intake up to long goal scoring
 		trapdoorPiston.set_value(false); // close trapdoor
 		intakePullDownPiston.set_value(false); // pull down intake band
-		intake.move_voltage(12000);
+		intake_velocity.set_target(12000);
 	} else if (str == "L2") { // outtake out of intake
-		intake.move_voltage(-12000);
+		intake_velocity.set_target(-12000);
 	}
 }
 
