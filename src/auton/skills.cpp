@@ -41,7 +41,7 @@ void skills(){
     reset_x_coord = -(kw::getDistance(rightDistance) - 65.4);
 	reset_y_coord = -kw::getDistance(fwdDistance);
     kw::set_odom_position(reset_x_coord, reset_y_coord);
-    console.printf("rightDist: %.2f fwdDist: %.2f\n", kw::getDistance(rightDistance), kw::getDistance(fwdDistance));
+    //console.printf("rightDist: %.2f fwdDist: %.2f\n", kw::getDistance(rightDistance), kw::getDistance(fwdDistance));
     console.printf("resetX: %.2f resetY: %.2f\n", reset_x_coord, reset_y_coord);
     loaderPiston.set_value(false);
 
