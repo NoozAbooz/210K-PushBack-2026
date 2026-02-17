@@ -25,7 +25,7 @@ void kw::moveToPoint(double x, double y, double time_limit_msec, bool forwards, 
   max_output = max_output * (12.0 / 127.0); // convert from [-127, 127] decivolts to [-12, 12] volts
   kw::stop_chassis(pros::E_MOTOR_BRAKE_COAST); // Stop chassis before moving
   is_turning = true;                  // Set turning state
-  double threshold = 0.5;
+  double threshold = 1;
   int add = forwards ? 0 : 180; // if driving backwards, add 180 degrees to heading
   double max_slew_fwd = forwards ? max_slew_accel_fwd : max_slew_decel_rev; // switch slew rate used based on direction
   double max_slew_rev = forwards ? max_slew_decel_fwd : max_slew_accel_rev;
