@@ -35,7 +35,7 @@ void kw::turnToAngle(double turn_angle, double time_limit_msec, double max_outpu
   pid.setIntegralRange(3);
   pid.setSmallBigErrorTolerance(threshold, threshold * 3);
   pid.setSmallBigErrorDuration(50, 150);
-  pid.setDerivativeTolerance(threshold * 4.5);
+  pid.setDerivativeTolerance(threshold * 5);
 
   // PID loop for turning
   double start_time = pros::millis();
