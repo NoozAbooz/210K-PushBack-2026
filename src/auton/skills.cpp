@@ -2,6 +2,7 @@
 #include "deviceGlobals.hpp"
 #include "libKW/api.hpp"
 #include "main.h"
+#include "pros/rtos.hpp"
 
 void skills(){
     toggleColourSort = false;
@@ -19,11 +20,11 @@ void skills(){
     kw::move_raw(-4000, -4000);
     pros::delay(200);
     kw::move_raw(12000, 12000);
-    pros::delay(800);
+    pros::delay(600);
     kw::move_raw(-4000, -4000);
     pros::delay(300);
-    kw::move_raw(12000, 12000);
-    pros::delay(900);
+    kw::move_raw(10000, 10000);
+    pros::delay(500);
     
     kw::turnToAngle(0, 500);
     
@@ -41,21 +42,34 @@ void skills(){
     reset_x_coord = -(kw::getDistance(rightDistance) - 65.4);
 	reset_y_coord = -kw::getDistance(fwdDistance);
     kw::set_odom_position(reset_x_coord, reset_y_coord);
-    console.printf("rightDist: %.2f fwdDist: %.2f\n", kw::getDistance(rightDistance), kw::getDistance(fwdDistance));
+    //console.printf("rightDist: %.2f fwdDist: %.2f\n", kw::getDistance(rightDistance), kw::getDistance(fwdDistance));
     console.printf("resetX: %.2f resetY: %.2f\n", reset_x_coord, reset_y_coord);
     loaderPiston.set_value(false);
 
     // move to midgoal
-    kw::moveToPoint(7.6, -70, 1500, false);
+    kw::moveToPoint(10.6, -70, 1500, false);
     kw::swing(48, 800, false);
 
     // // grab 1 blue ball, score all 7
-    kw::driveTo(9, 800);
-    kw::driveTo(-10, 800);
+    kw::driveTo(10, 800);
+    // kw::moveToPoint(17, -64, 1500, true);
+    // kw::moveToPoint(11, -70,1000, false);
+    kw::driveTo(-12, 800);
     intakeMacro("R2");
+    kw::move_raw(-7000, -7000);
     // intake_velocity.set_target(500); // sketchy workaround to make velo controller work
 
-    // pros::delay(4000);
+    pros::delay(3000);
+    pros::Task([] {
+        pros::delay(500);
+        loaderPiston.set_value(true);
+        pros::delay(1000);
+        intakeMacro("L1");
+    });
+    kw::moveToPoint(46, -30, 2000);
+    kw::turnToAngle(0, 700);
+    kw::moveToPoint(45, -23, 1000, true);
+    kw::move_raw(5000, 5000);
     // kw::driveTo(5, 800, 127, false);
     // intakeMacro("L1");
 
