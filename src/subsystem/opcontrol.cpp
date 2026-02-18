@@ -17,16 +17,20 @@ void intakeMacro(std::string str) {
 	intakeMacroStatus = str;
 	if(str == "R1") { // score on long goal
 		trapdoorPiston.set_value(true); // open trapdoor to score
-		intake_velocity.set_target(560);
+		intake_velocity.set_target(480);
 	} else if (str == "R2") { // score on mid goal
 		intakePullDownPiston.set_value(true); // pull down intake band
-		intake_velocity.set_target(520);
+		intake_velocity.set_target(390);
 	} else if (str == "L1") { // intake up to long goal scoring
 		trapdoorPiston.set_value(false); // close trapdoor
 		intakePullDownPiston.set_value(false); // pull down intake band
 		intake_velocity.set_target(12000);
 	} else if (str == "L2") { // outtake out of intake
 		intake_velocity.set_target(-12000);
+	} else if (str == "stop") {
+		trapdoorPiston.set_value(false); // close trapdoor
+		intakePullDownPiston.set_value(false); // pull down intake band
+		intake_velocity.set_target(0);
 	}
 }
 
@@ -41,9 +45,7 @@ void refreshSubsys1() { // intake
 		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
 			intakeMacro("L2");
 		} else {
-			intakePullDownPiston.set_value(false); // pull down intake band
-			intake.move_voltage(0);
-			trapdoorPiston.set_value(false); // close trapdoor
+			intakeMacro("stop");
 		}
 	}
 }

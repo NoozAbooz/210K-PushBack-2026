@@ -1,6 +1,9 @@
 #include "abstractGlobals.hpp"
 #include "deviceGlobals.hpp"
 #include "libKW/api.hpp"
+#include "libKW/drivetrain/chassis.hpp"
+#include "libKW/drivetrain/movements.hpp"
+#include "libKW/drivetrain/odom.hpp"
 #include "main.h"
 #include "pros/rtos.hpp"
 
@@ -8,8 +11,8 @@ void skills(){
     toggleColourSort = false;
 
 	intakeMacro("L1");
-    wingPiston.set_value(true); // deploy wings for driver
     blockerPiston.set_value(true);
+    wingPiston.set_value(true); // deploy wings for driver
 
     double reset_x_coord;
 	double reset_y_coord;
@@ -47,7 +50,7 @@ void skills(){
     loaderPiston.set_value(false);
 
     // move to midgoal
-    kw::moveToPoint(10.6, -70, 1500, false);
+    kw::moveToPoint(8.7, -70, 1500, false);
     kw::swing(48, 800, false);
 
     // // grab 1 blue ball, score all 7
@@ -59,22 +62,52 @@ void skills(){
     kw::move_raw(-7000, -7000);
     // intake_velocity.set_target(500); // sketchy workaround to make velo controller work
 
-    pros::delay(3000);
+    pros::delay(3500);
     pros::Task([] {
         pros::delay(500);
         loaderPiston.set_value(true);
-        pros::delay(1000);
+        //pros::delay(1000);
         intakeMacro("L1");
     });
-    kw::moveToPoint(46, -30, 2000);
+    kw::moveToPoint(48, -30, 2000);
     kw::turnToAngle(0, 700);
-    kw::moveToPoint(45, -23, 1000, true);
+    kw::moveToPoint(47, -23, 1000, true);
     kw::move_raw(5000, 5000);
-    // kw::driveTo(5, 800, 127, false);
-    // intakeMacro("L1");
-
-    // kw::moveToPoint(-27, -21, 2000);
-    // kw::turnToAngle(90, 1000);
+    pros::delay(1000);
+    kw::boomerang(64, -72, 0, 0.5, 2000, false, 90);
+    intakeMacro("stop");
+    kw::moveToPoint(60, -119, 1000, false, 127, false);
+    // kw::boomerang(45, -119, 45, 0.5, 2000, false, 60);
+    kw::turnToAngle(270, 1000);
+    kw::moveToPoint(50, -122, 1000, true, 127);
+    kw::turnToAngle(180, 1000);
+    kw::moveToPoint(48.6, -108, 1000, false, 80);
+    intakeMacro("L2");
+    pros::delay(200);
+    intakeMacro("R1");
+    kw::move_raw(-8000, -8000);
+    pros::delay(2500);
+    intakeMacro("L1");
+    kw::moveToPoint(50.6, -136, 1000, true, 80);
+    kw::move_raw(6000, 6000);
+    pros::delay(1000);
+    kw::moveToPoint(48.6, -108, 1000, false, 80);
+    pros::delay(100);
+     intakeMacro("R1");
+    kw::move_raw(-8000, -8000);
+    pros::delay(2000);
+    // loaderPiston.set_value(false);
+    // // kw::set_odom_position(0, 0, 0);
+    // kw::boomerang(33, 34, 90, 0.4, 2000, 70);
+    // loaderPiston.set_value(true);
+    // wingPiston.set_value(true);
+    // pros::delay(400);
+    // kw::move_raw(8000, 8000);
+    // pros::delay(1400);
+    // loaderPiston.set_value(false);
+    // kw::move_raw(6000, 6000);
+    // pros::delay(700);
+    // kw::move_raw(0, 0);
 
 }
 
