@@ -25,8 +25,8 @@ void skills(){
     kw::turnToAngle(0, 500);
     
     loaderPiston.set_value(true);
-    kw::move_raw(-11000, -11000);
-    pros::delay(700);
+    kw::move_raw(-12000, -12000);
+    pros::delay(650);
     kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
     kw::turnToAngle(0, 500);
     wingPiston.set_value(false);
@@ -42,8 +42,8 @@ void skills(){
     loaderPiston.set_value(false);
 
     // move to midgoal
-    kw::moveToPoint(9, -64, 1000, false);
-    kw::swing(48, 100, false);
+    kw::moveToPoint(10.5, -66, 1400, false);
+    kw::swing(48, 250, false);
 
     // // grab 1 blue ball, score all 7
     kw::driveTo(8, 900, 90);
@@ -54,7 +54,7 @@ void skills(){
     kw::move_raw(-7000, -7000);
 
     // slow down intake over time to prevent straggling balls in intake
-    intake_velocity.set_target(500);
+    intake_velocity.set_target(450);
     pros::delay(1300);
     intake_velocity.set_target(390);
 

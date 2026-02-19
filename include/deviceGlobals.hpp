@@ -8,14 +8,14 @@ inline pros::Controller controller(pros::E_CONTROLLER_MASTER);
 
 // v2
 inline pros::MotorGroup leftDrive({-8, -9, 10});
-inline pros::MotorGroup rightDrive({12, 3, -2});
+inline pros::MotorGroup rightDrive({11, 3, -2});
 
 // Intake
 inline pros::Motor intakeMiddleLower(-0); // very top roller
 inline pros::Motor intakeMiddleUpper(0); // yes
 inline pros::Motor intakeTop(-0); // 11w flexwheel for goal height
 inline pros::Motor intakeBottom(-0); // preroller
-inline pros::MotorGroup intake({20, -11}, pros::v5::MotorGears::ratio_6_to_1);
+inline pros::MotorGroup intake({20, -12}, pros::v5::MotorGears::ratio_6_to_1);
 
 // Pneumatics
 inline pros::adi::Pneumatics loaderPiston('F', false); // matchloader
@@ -26,7 +26,7 @@ inline pros::adi::Pneumatics blockerPiston('H', false);
 
 /* Declare sensors */
 inline pros::Imu inertial1(16); // should always be the less scuffed one
-inline pros::Imu inertial2(15); // less scuffed one
+inline pros::Imu inertial2(14); // less scuffed one
 inline pros::Optical optical(0);
 inline pros::Optical parkColour(13);
 
