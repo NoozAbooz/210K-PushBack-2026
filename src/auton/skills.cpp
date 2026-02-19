@@ -42,7 +42,7 @@ void skills(){
     loaderPiston.set_value(false);
 
     // move to midgoal
-    kw::moveToPoint(10.5, -66, 1400, false);
+    kw::moveToPoint(9, -66, 1500, false);
     kw::swing(48, 250, false);
 
     // // grab 1 blue ball, score all 7
