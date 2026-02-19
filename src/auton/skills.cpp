@@ -20,7 +20,7 @@ void skills(){
     kw::move_raw(-4000, -4000);
     pros::delay(300);
     kw::move_raw(10000, 10000);
-    pros::delay(550);
+    pros::delay(500);
     
     kw::turnToAngle(0, 500);
     
@@ -42,11 +42,11 @@ void skills(){
     loaderPiston.set_value(false);
 
     // move to midgoal
-    kw::moveToPoint(9, -66, 1500, false);
-    kw::swing(48, 250, false);
+    kw::moveToPoint(9.5, -64.8, 1500, false);
+    kw::swing(45, 250, false);
 
     // // grab 1 blue ball, score all 7
-    kw::driveTo(8, 900, 90);
+    kw::driveTo(9, 900, 90);
     // kw::moveToPoint(17, -64, 1500, true);
     // kw::moveToPoint(11, -70,1000, false);
     kw::driveTo(-12, 800);
@@ -54,8 +54,8 @@ void skills(){
     kw::move_raw(-7000, -7000);
 
     // slow down intake over time to prevent straggling balls in intake
-    intake_velocity.set_target(450);
-    pros::delay(1300);
+    intake_velocity.set_target(520);
+    pros::delay(1000);
     intake_velocity.set_target(390);
 
     pros::delay(2500);
@@ -65,33 +65,33 @@ void skills(){
         //pros::delay(1000);
         intakeMacro("L1");
     });
-    // kw::moveToPoint(48, -30, 2000);
-    // kw::turnToAngle(0, 700);
-    // kw::moveToPoint(47, -23, 1000, true);
-    // kw::move_raw(5000, 5000);
-    // pros::delay(1000);
-    // kw::boomerang(64, -72, 0, 0.5, 2000, false, 90);
-    // intakeMacro("stop");
-    // kw::moveToPoint(60, -119, 1000, false, 127, false);
-    // // kw::boomerang(45, -119, 45, 0.5, 2000, false, 60);
-    // kw::turnToAngle(270, 1000);
-    // kw::moveToPoint(50, -122, 1000, true, 127);
-    // kw::turnToAngle(180, 1000);
-    // kw::moveToPoint(48.6, -108, 1000, false, 80);
-    // intakeMacro("L2");
-    // pros::delay(200);
-    // intakeMacro("R1");
-    // kw::move_raw(-8000, -8000);
-    // pros::delay(2500);
-    // intakeMacro("L1");
-    // kw::moveToPoint(50.6, -136, 1000, true, 80);
-    // kw::move_raw(6000, 6000);
-    // pros::delay(1000);
-    // kw::moveToPoint(48.6, -108, 1000, false, 80);
-    // pros::delay(100);
-    //  intakeMacro("R1");
-    // kw::move_raw(-8000, -8000);
-    // pros::delay(2000);
+    kw::moveToPoint(48, -30, 2000);
+    kw::turnToAngle(0, 700);
+    kw::moveToPoint(47, -23, 1000, true);
+    kw::move_raw(5000, 5000);
+    pros::delay(1000);
+    kw::boomerang(64, -72, 0, 0.5, 2000, false, 90);
+    intakeMacro("stop");
+    kw::moveToPoint(60, -119, 1000, false, 127, false);
+    // kw::boomerang(45, -119, 45, 0.5, 2000, false, 60);
+    kw::turnToAngle(270, 1000);
+    kw::moveToPoint(50, -122, 1000, true, 127);
+    kw::turnToAngle(180, 1000);
+    kw::moveToPoint(48.6, -108, 1000, false, 80);
+    intakeMacro("L2");
+    pros::delay(200);
+    intakeMacro("R1");
+    kw::move_raw(-8000, -8000);
+    pros::delay(2500);
+    intakeMacro("L1");
+    kw::moveToPoint(50.6, -136, 1000, true, 80);
+    kw::move_raw(6000, 6000);
+    pros::delay(1000);
+    kw::moveToPoint(48.6, -108, 1000, false, 80);
+    pros::delay(100);
+     intakeMacro("R1");
+    kw::move_raw(-8000, -8000);
+    pros::delay(2000);
 
 
 
