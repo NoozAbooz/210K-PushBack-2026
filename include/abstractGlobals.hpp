@@ -35,6 +35,7 @@ extern std::string intakeMacroStatus;
 extern void stopIntake(); // stops all intake motors
 extern void initColourSort();
 extern bool toggleColourSort; // true = enabled colour sorting, false = disabled
+extern void driver_skills_macro();	
 
 /* Autons */
 // AWP Routines

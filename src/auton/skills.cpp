@@ -7,9 +7,9 @@
 void skills(){
     toggleColourSort = false;
 
-	intakeMacro("L1");
     wingPiston.set_value(true); // deploy wings for driver
     blockerPiston.set_value(true);
+    intakeMacro("L1");
 
     double reset_x_coord;
 	double reset_y_coord;
@@ -216,3 +216,53 @@ kw::driveTo(-8, 5000, 127, true, 127);
 }
 
 
+void driver_skills_macro() {
+    wingPiston.set_value(true); // deploy wings for driver
+    blockerPiston.set_value(true);
+    intakeMacro("L1");
+
+    double reset_x_coord;
+	double reset_y_coord;
+
+	kw::move_raw(9000, 9000);
+    pros::delay(400);
+    
+    kw::move_raw(-4000, -4000);
+    pros::delay(200);
+    kw::move_raw(12000, 12000);
+    pros::delay(600);
+    kw::move_raw(-4000, -4000);
+    pros::delay(300);
+    kw::move_raw(10000, 10000);
+    pros::delay(500);
+    
+    kw::turnToAngle(0, 500);
+    
+    loaderPiston.set_value(true);
+    kw::move_raw(-11000, -11000);
+    pros::delay(700);
+    kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
+    pros::delay(100);
+    kw::turnToAngle(0, 500);
+    kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
+    wingPiston.set_value(false);
+    pros::delay(300);
+
+    // dist reset #1
+    reset_x_coord = -(kw::getDistance(rightDistance) - 65.4);
+	reset_y_coord = -kw::getDistance(fwdDistance);
+    kw::set_odom_position(reset_x_coord, reset_y_coord);
+    //console.printf("rightDist: %.2f fwdDist: %.2f\n", kw::getDistance(rightDistance), kw::getDistance(fwdDistance));
+    console.printf("resetX: %.2f resetY: %.2f\n", reset_x_coord, reset_y_coord);
+    loaderPiston.set_value(false);
+
+    // move to midgoal
+    kw::moveToPoint(10.6, -70, 1500, false);
+    kw::swing(48, 800, false);
+
+    // // grab 1 blue ball, score all 7
+    kw::driveTo(10, 800);
+    // kw::moveToPoint(17, -64, 1500, true);
+    // kw::moveToPoint(11, -70,1000, false);
+    kw::driveTo(-12, 800);
+}
