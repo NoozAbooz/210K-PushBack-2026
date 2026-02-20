@@ -2,6 +2,7 @@
 
 // 3rd party libraries
 #include "robodash/api.h"
+#include "libKW/api.hpp"
 
 extern rd::Console console;
 extern rd_view_t *gifview;
@@ -27,6 +28,7 @@ extern void refreshSubsys4();
 extern bool loaderStatus;
 extern bool blockerStatus;
 extern bool wingStatus;
+extern kw::velocity_controller intake_velocity;
 
 /* Macros (mainly intended to be called in auton)*/
 extern bool intakeLock; // true = disabled intaking, false = normal

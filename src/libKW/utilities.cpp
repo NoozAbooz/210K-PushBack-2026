@@ -17,7 +17,7 @@ double kw::getDistance(pros::Distance& sensor) {
         if (confidence <= 20) confidence = 2;
         weights += confidence;
         weightedDist += distReading * confidence;
-        pros::delay(10);
+        pros::delay(20);
         //console.printf("Dist: %.2f inches, Confid: %.2f\n", distReading, confidence);
     }
     return (double)(weightedDist / weights);
