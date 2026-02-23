@@ -59,14 +59,14 @@ void true_sawp(){
 	kw::move_raw(-3000, -3000);
 	pros::delay(900);
 	//stopIntake(); // dont leak balls
-	kw::moveToPoint(-1, 50.5, 1500, true, 127); // Mid to Loader
+	kw::moveToPoint(-1, 52.3, 2000, true, 127); // Mid to Loader
 
 	// relocated part -MZ
 	intakePullDownPiston.set_value(false);
 	intakeMacro("L1");
 
 	kw::turnToAngle(270, 900); // Turning to Loader #2
-	kw::moveToPoint(-14.5, 52.5, 1000, true, 60); // Loader #2
+	kw::moveToPoint(-14.5, 54, 1000, true, 60); // Loader #2
 	kw::move_raw(8000, 8000);
 	pros::delay(100);
 	pros::Task([] {
@@ -76,7 +76,7 @@ void true_sawp(){
 		pros::delay(600);
 		intakeMacro("R1");
 	});
-	kw::moveToPoint(18, 53.5, 1000, false, 127); // long Goal #2
+	kw::moveToPoint(18, 54, 1000, false, 127); // long Goal #2
 	kw::move_raw(-8000, -8000);
 
 

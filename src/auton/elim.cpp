@@ -57,14 +57,14 @@ void left_elim() {
     kw::boomerang(-35, 39.20, 270, 0.4, 2500, true, 50);
     pros::delay(500);
     kw::moveToPoint(-17, 21.67, 1000, false, 127, false);
-    kw::boomerang(-36, 9, 180, 0.5, 2000, false, 70);
+    kw::boomerang(-37, 9, 180, 0.5, 2000, false, 70);
     pros::Task([]{
         pros::delay(450);
             intakeMacro("R1");
             pros::delay(1500);
             intakeMacro("L1");
     });
-    kw::moveToPoint(-37.5, 18, 1000, false);
+    kw::moveToPoint(-37.8, 18, 1000, false);
     loaderPiston.set_value(true);
     kw::move_raw(-7000, -7000);
     pros::delay(1500);
@@ -79,10 +79,10 @@ void left_elim() {
         intakeMacro("L1");
         intake.move_voltage(0);
     });
-    kw::boomerang(-2, 34 , 215, 0.3, 2000 , false, 127);
-    kw::move_raw(-6000, -6000);
+    kw::boomerang(-1.5, 34 , 215, 0.3, 2000 , false, 127);
+    kw::move_raw(-4000, -4000);
     pros::delay(600);
-    kw::moveToPoint(-28, 17, 1000);
+    kw::moveToPoint(-27.7, 17, 1000);
     kw::turnToAngle(180, 700);
     kw::moveToPoint(-30, 37, 1000, false);
 
@@ -112,13 +112,13 @@ void left_7() {
 		pros::delay(400);
 		intakeMacro("R1");
 	});
-    kw::moveToPoint(-32.79, 24.45, 1000, false, 127);
+    kw::moveToPoint(-34.79, 24.45, 1000, false, 127);
     kw::move_raw(-5000, -5000);
     pros::delay(1600);
     kw::moveToPoint(-22.3, 16.94, 1000, true, 127);
     kw::turnToAngle(180, 700);
     intake_velocity.set_target(0);
-    kw::moveToPoint(-23.803, 33.34, 8000, false);
+    kw::moveToPoint(-23.803, 34.84, 8000, false);
     // kw::turnToAngle(180, 700);
     //kw::driveTo(-1, 1000, 70);
     stopIntake();
@@ -183,10 +183,10 @@ pros::Task([] {
 		intakeMacro("R1");
         loaderPiston.set_value(false);
 	});
-    kw::moveToPoint(34.69, 24.45, 1000, false, 127);
+    kw::moveToPoint(34.89, 24.45, 1000, false, 127);
     kw::move_raw(-5000, -5000);
     pros::delay(1600);
-    kw::moveToPoint(47, 16.94, 1000, true, 127);
+    kw::moveToPoint(47, 12.94, 1000, true, 127);
     kw::turnToAngle(180, 700);
     intake_velocity.set_target(0);
     kw::moveToPoint(46, 32, 8000, false, 100);
