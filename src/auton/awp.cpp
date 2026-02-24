@@ -10,7 +10,7 @@ void true_sawp(){
 	kw::moveToPoint(-2, -40.52, 1800, false, 127); //loader
 	loaderPiston.set_value(true);
 	kw::turnToAngle(270, 700); // turn to face loader
-	kw::moveToPoint(-11.01, -43.27, 800, true, 60); // Loader #1
+	kw::moveToPoint(-11.01, -42.27, 800, true, 60); // Loader #1
 	kw::move_raw(8000, 8000);
 	pros::delay(120);
 	pros::Task([] {
