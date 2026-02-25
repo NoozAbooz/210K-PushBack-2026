@@ -3,32 +3,12 @@
 void skills(){
     // libKW MTPoint v0.1
     intakeMacro("L1"); // Start Same as Left Elims
-
-    pros::Task([] {
-        pros::delay(450);
-        stopIntake();
-    });
-
-    kw::moveToPoint(-4.58, 27, 1300); // Move To Four Stack
-    intakeMacro("L1");
-    kw::turnToAngle(230, 1000);
-    kw::moveToPoint(4, 38, 900, false); // mid goal
-
-    intakeMacro("R2");
-    intake_velocity.set_target(12000);
-    pros::delay(1200);
+    kw::moveToPoint(-5.58, 19.16, 1500); // Move To Four Stack
     stopIntake();
+    kw::moveToPoint(-1.68, 34.31, 2000, false); // mid goal
 
-    kw::turnToPoint(-33, 0, 1000); // move to loader 1
-    loaderPiston.set_value(true);
-    kw::moveToPoint(-32, 0, 1500);
-    kw::turnToAngle(180, 1000);
-    pros::delay(200);
 
-    intakeMacro("L1");
-    kw::driveTo(12, 900, 60);
-    
-}
+
 //     //Intake mid here
 //     kw::moveToPoint(-31.86, -1.84, 2000 ); // loader movement
 //     kw::moveToPoint(-31.86, -14.71, 2000 ); // loading
@@ -76,7 +56,7 @@ void skills(){
     // pros::delay(700);
     // kw::move_raw(0, 0);
 
-
+}
 
 void Legacy_skills() {
 	toggleColourSort = false;

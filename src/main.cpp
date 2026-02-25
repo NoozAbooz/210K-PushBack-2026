@@ -22,6 +22,9 @@ void opcontrol() {
 		}
 	});
 
+	// stop velocity controller
+	//intake_velocity.~velocity_controller();
+
 	// run the auton macro
 	inertial1.tare();
     inertial2.tare();

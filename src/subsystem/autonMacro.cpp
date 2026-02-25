@@ -2,8 +2,7 @@
 
 void stopIntake() {
 	intake.move_voltage(0);
-	trapdoorPiston.set_value(false); // close trapdoor
-	intakePullDownPiston.set_value(false); // pull down intake band
+	intake_velocity.set_target(0);
 }
 
 // void scoreOwnColour(int timeout) { // intended to be called in auton

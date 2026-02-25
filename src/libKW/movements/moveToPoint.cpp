@@ -25,7 +25,7 @@ void kw::moveToPoint(double x, double y, double time_limit_msec, bool forwards, 
   max_output = max_output * (12.0 / 127.0); // convert from [-127, 127] decivolts to [-12, 12] volts
   kw::stop_chassis(pros::E_MOTOR_BRAKE_COAST); // Stop chassis before moving
   is_turning = true;                  // Set turning state
-  double threshold = 2;
+  double threshold = 1.5;
   int add = forwards ? 0 : 180; // if driving backwards, add 180 degrees to heading
   double max_slew_fwd = forwards ? max_slew_accel_fwd : max_slew_decel_rev; // switch slew rate used based on direction
   double max_slew_rev = forwards ? max_slew_decel_fwd : max_slew_accel_rev;
@@ -56,12 +56,8 @@ void kw::moveToPoint(double x, double y, double time_limit_msec, bool forwards, 
   pid_distance.setIntegralMax(0);  
   pid_distance.setIntegralRange(3);
   pid_distance.setSmallBigErrorTolerance(threshold, threshold * 3);
-  pid_distance.setSmallBigErrorDuration(50, 250);
+  pid_distance.setSmallBigErrorDuration(60, 200);
   pid_distance.setDerivativeTolerance(5);
-  
-  pid_heading.setSmallBigErrorTolerance(threshold, threshold * 3);
-  pid_heading.setSmallBigErrorDuration(50, 150);
-  pid_heading.setDerivativeTolerance(threshold * 4.5);
   
   pid_heading.setSmallBigErrorTolerance(0, 0);
   pid_heading.setSmallBigErrorDuration(0, 0);
@@ -84,6 +80,7 @@ void kw::moveToPoint(double x, double y, double time_limit_msec, bool forwards, 
 
     pid_heading.setTarget(normalize_target(kw::to_deg(atan2(x - x_pos, y - y_pos)) + add));
     pid_distance.setTarget(hypot(x - x_pos, y - y_pos));
+    current_movement_error = hypot(x, y) - hypot(x - x_pos, y - y_pos);
     current_angle = kw::get_imu_rotation();
     // Calculate drive output based on heading and distance
     left_output = pid_distance.update(0) * cos(kw::to_rad(atan2(x - x_pos, y - y_pos) * 180 / M_PI + add - current_angle)) * (forwards ? 1 : -1); // multiply by -1 if driving backwards
