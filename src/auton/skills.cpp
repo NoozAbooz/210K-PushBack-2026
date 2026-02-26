@@ -34,22 +34,55 @@ void skills(){
     kw::driveTo(12, 900, 60);
     pros::delay(1000);
     kw::boomerang(-47, 28, 180, 0.4, 1500, false, 70); // boomerang to alley
-    kw::moveToPoint(-46, 91, 1500, false); // move straight in alley
+    kw::moveToPoint(-46, 91, 2000, false); // move straight in alley
     kw::turnToAngle(90, 1000); // turn here keeping loader down
     kw::moveToPoint(-36, 91, 1500); // align with goal
     kw::turnToAngle(0, 1000); // turn to goal
-    kw::moveToPoint(-34, 75, 1000, false);
+    kw::moveToPoint(-33.5, 75, 1000, false);
     kw::move_raw(-5000, -5000);
     intakeMacro("R1");
     pros::delay(2000);
     intakeMacro("L1");
-    kw::moveToPoint(-34.4, 104, 1500, true, 80); // loader
+    kw::moveToPoint(-33, 104, 1500, true, 80); // loader
     kw::move_raw(8000, 8000);
     pros::delay(1000);
-     kw::moveToPoint(-34.4, 75, 1000, false); // score
+     kw::moveToPoint(-33, 75, 1000, false); // score
      kw::turnToAngle(0, 1000);
      kw::move_raw(-5000, -5000);
      intakeMacro("R1");
+    kw::set_odom_position(0, 0, 0);
+     pros::delay(2000);
+     
+    kw::boomerang(44, 36, 90, 0.3, 1000, true, 127);
+    kw::turnToAngle(90, 900);
+    wingPiston.set_value(true);
+    intakeMacro("L1");
+
+    // go into zone
+    loaderPiston.set_value(true);
+    pros::delay(260);
+    kw::move_raw(6000, 6000);
+    pros::delay(280);
+    kw::move_raw(8000, 8000);
+    pros::delay(200);
+    kw::move_raw(4000, 4000);
+    pros::delay(600);
+    loaderPiston.set_value(false);
+    pros::delay(200);
+
+    kw::move_raw(6000, 6000);
+    pros::delay(1200);
+    kw::turnToAngle(90, 1000);
+    kw::move_raw(-4000, -4000);
+    wingPiston.set_value(false);
+    pros::delay(1000);
+    kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
+    pros::delay(100);
+    
+    // // reset
+    // reset_x_coord = 0;//(kw::getDistance(bwdDistance));
+    // reset_y_coord = -(kw::getDistance(leftDistance));
+    kw::set_odom_position(0, 0, 0);
 
     
 }
