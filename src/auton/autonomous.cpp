@@ -31,7 +31,7 @@ void testDistReset() {
     double reset_y_coord;
 
     reset_x_coord = kw::getDistance(leftDistance) - 17.4;
-    kw::set_odom_position(reset_x_coord, 0);
+    kw::set_odom_position(0, 0);
 
     kw::boomerang(44, 36, 90, 0.3, 1000, true, 127);
     kw::turnToAngle(90, 900);
@@ -69,8 +69,9 @@ void testDistReset() {
     intakeMacro("R2");
     pros::delay(4000);
     stopIntake();
-    kw::moveToPoint(177, 74, 1000);
+    kw::moveToPoint(175, -68, 1000);
     loaderPiston.set_value(true);
+    intakeMacro("L1");
     kw::turnToAngle(0, 1000);
     kw::moveToPoint(178, -56, 1000);
 
