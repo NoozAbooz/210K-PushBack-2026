@@ -21,58 +21,53 @@ void testPID() {
 }
 
 void testDistReset() {
-    // initial position: bwd 48.5n, right 1.2in
+    double reset_x_coord;
+    double reset_y_coord;
+
+    reset_x_coord = kw::getDistance(leftDistance) - 17.4;
+    kw::set_odom_position(reset_x_coord, 0);
+
+    kw::boomerang(44, 36, 90, 0.3, 1000, true, 127);
+    kw::turnToAngle(90, 900);
     wingPiston.set_value(true);
-    blockerPiston.set_value(true);
-
-	double reset_x_coord;
-	double reset_y_coord;
-	
-    
-    intakeMacro("L1"); // all ts for a park zone clear
-    kw::move_raw(6000, 6000);
-    pros::delay(800);
-
-    kw::move_raw(6000, 6000);
-    pros::delay(700);
-    kw::move_raw(12000, 12000);
-    pros::delay(450);
-    kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
-    pros::delay(200);
-    wingPiston.set_value(false);
-
-    kw::turnToAngle(0, 500); // make sure angle isnt fucked up by our barrier cross
-    // odom reset!!!
-    pros::Task([&reset_x_coord] {
-        reset_x_coord = kw::getDistance(rightDistance) - 1.2;
-    });
-	reset_y_coord = kw::getDistance(bwdDistance) - 48.5;
-	pros::delay(10);
-
-    //kw::set_odom_position(getDistance(rightDistance) - 1.2, getDistance(bwdDistance) - 48.5);
-    kw::set_odom_position(reset_x_coord, reset_y_coord);
-
-    // move bwd to midgoal
-    kw::turnToPoint(-51, 8, 800, false);
-    kw::moveToPoint(-51, 8, 1500, false, 100);
-
-    // align with midgoal
-    kw::swing(140, 800, false);
-
-    // grab 1 blue ball, score all 7
-    kw::driveTo(9, 800);
-    kw::driveTo(-10, 800);
-    intakeMacro("R2");
-    intake_velocity.set_target(500); // sketchy workaround to make velo controller work
-
-    pros::delay(4000);
-    kw::driveTo(5, 800, 127, false);
     intakeMacro("L1");
 
-    //kw::moveToPoint(-27, -28, 2000);
-    kw::driveTo(42, 1500);
-    kw::turnToAngle(90, 1000);
+    // go into zone
     loaderPiston.set_value(true);
+    pros::delay(260);
+    kw::move_raw(6000, 6000);
+    pros::delay(280);
+    kw::move_raw(8000, 8000);
+    pros::delay(200);
+    kw::move_raw(4000, 4000);
+    pros::delay(600);
+    loaderPiston.set_value(false);
+    pros::delay(200);
+
+    kw::move_raw(6000, 6000);
+    pros::delay(1200);
+    kw::turnToAngle(90, 1000);
+    kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
+    wingPiston.set_value(false);
+    pros::delay(400);
+    
+    // reset
+    reset_x_coord = (kw::getDistance(bwdDistance));
+    reset_y_coord = -(kw::getDistance(leftDistance));
+    kw::set_odom_position(reset_x_coord, reset_y_coord);
+    console.printf("Resetting to: (%.2lf, %.2lf)\n", reset_x_coord, reset_y_coord);
+
+    kw::boomerang(132, -107, 45, 0.3, 3000,false);
+    kw::turnToAngle(45, 1000);
+    kw::move_raw(-6000, -6000);
+    intakeMacro("R2");
+    pros::delay(4000);
+    stopIntake();
+    kw::moveToPoint(177, -68, 1000);
+    loaderPiston.set_value(true);
+    intakeMacro("L1");
+    kw::turnToAngle(0, 1000);
+    kw::moveToPoint(178, -56, 1000);
 
 }
 
