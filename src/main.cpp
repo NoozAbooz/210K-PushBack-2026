@@ -26,14 +26,14 @@ void opcontrol() {
 	//intake_velocity.~velocity_controller();
 
 	// run the auton macro
-	inertial1.tare();
-    inertial2.tare();
-    kw::set_odom_position(0, 0, 0);
-    // wait for inertial to calibrate until starting auton
-    int start_time = pros::millis();
-    while ((isnanf(inertial1.get_rotation()) || std::isinf(inertial1.get_rotation())) && start_time < 800) {
-		pros::delay(10);
-	}
+	// inertial1.tare();
+    // inertial2.tare();
+    // kw::set_odom_position(0, 0, 0);
+    // // wait for inertial to calibrate until starting auton
+    // int start_time = pros::millis();
+    // while ((isnanf(inertial1.get_rotation()) || std::isinf(inertial1.get_rotation())) && start_time < 800) {
+	// 	pros::delay(10);
+	// }
 
 	leftDrive.set_brake_mode_all(pros::E_MOTOR_BRAKE_COAST);
 	rightDrive.set_brake_mode_all(pros::E_MOTOR_BRAKE_COAST);

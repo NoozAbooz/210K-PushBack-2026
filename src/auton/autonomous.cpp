@@ -29,10 +29,53 @@ void testPID() {
 void testDistReset() {
     double reset_x_coord;
     double reset_y_coord;
-    reset_x_coord = kw::getDistance(rightDistance) - 65.9;
-	reset_y_coord = kw::getDistance(fwdDistance);
-    console.printf("resetx: %.2f resety: %.2f\n", reset_x_coord, reset_y_coord);
+
+    reset_x_coord = kw::getDistance(leftDistance) - 17.4;
+    kw::set_odom_position(reset_x_coord, 0);
+
+    kw::boomerang(44, 36, 90, 0.3, 1000, true, 127);
+    kw::turnToAngle(90, 900);
+    wingPiston.set_value(true);
+    intakeMacro("L1");
+
+    // go into zone
+    loaderPiston.set_value(true);
+    pros::delay(260);
+    kw::move_raw(6000, 6000);
+    pros::delay(280);
+    kw::move_raw(8000, 8000);
+    pros::delay(200);
+    kw::move_raw(4000, 4000);
+    pros::delay(600);
+    loaderPiston.set_value(false);
+    pros::delay(200);
+
+    kw::move_raw(6000, 6000);
+    pros::delay(1200);
+    kw::turnToAngle(90, 1000);
+    kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
+    wingPiston.set_value(false);
+    pros::delay(400);
+    
+    // reset
+    reset_x_coord = (kw::getDistance(bwdDistance));
+    reset_y_coord = -(kw::getDistance(leftDistance));
     kw::set_odom_position(reset_x_coord, reset_y_coord);
+    console.printf("Resetting to: (%.2lf, %.2lf)\n", reset_x_coord, reset_y_coord);
+
+    kw::boomerang(132, -107, 45, 0.3, 3000,false);
+    kw::turnToAngle(45, 1000);
+    kw::move_raw(-6000, -6000);
+    intakeMacro("R2");
+    pros::delay(4000);
+    stopIntake();
+    kw::moveToPoint(177, 74, 1000);
+    loaderPiston.set_value(true);
+    kw::turnToAngle(0, 1000);
+    kw::moveToPoint(178, -56, 1000);
+
+
+    
 
 }
 void testColourSort() {
