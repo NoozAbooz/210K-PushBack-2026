@@ -1,7 +1,12 @@
+#include "abstractGlobals.hpp"
+#include "deviceGlobals.hpp"
+#include "libKW/drivetrain/chassis.hpp"
+#include "libKW/drivetrain/movements.hpp"
 #include "main.h"
 
 void skills(){
     // libKW MTPoint v0.1
+    blockerPiston.set_value(true);
     intakeMacro("L1"); // Start Same as Left Elims
 
     pros::Task([] {
@@ -16,7 +21,7 @@ void skills(){
 
     intakeMacro("R2");
     intake_velocity.set_target(12000);
-    pros::delay(1200);
+    pros::delay(1000);
     stopIntake();
 
     kw::turnToPoint(-33, 0, 1000); // move to loader 1
@@ -27,6 +32,25 @@ void skills(){
 
     intakeMacro("L1");
     kw::driveTo(12, 900, 60);
+    pros::delay(1000);
+    kw::boomerang(-47, 28, 180, 0.4, 1500, false, 70); // boomerang to alley
+    kw::moveToPoint(-46, 91, 1500, false); // move straight in alley
+    kw::turnToAngle(90, 1000); // turn here keeping loader down
+    kw::moveToPoint(-36, 91, 1500); // align with goal
+    kw::turnToAngle(0, 1000); // turn to goal
+    kw::moveToPoint(-34, 75, 1000, false);
+    kw::move_raw(-5000, -5000);
+    intakeMacro("R1");
+    pros::delay(2000);
+    intakeMacro("L1");
+    kw::moveToPoint(-34.4, 104, 1500, true, 80); // loader
+    kw::move_raw(8000, 8000);
+    pros::delay(1000);
+     kw::moveToPoint(-34.4, 75, 1000, false); // score
+     kw::turnToAngle(0, 1000);
+     kw::move_raw(-5000, -5000);
+     intakeMacro("R1");
+
     
 }
 //     //Intake mid here

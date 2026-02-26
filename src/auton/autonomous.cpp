@@ -63,7 +63,7 @@ void testDistReset() {
     kw::set_odom_position(reset_x_coord, reset_y_coord);
     console.printf("Resetting to: (%.2lf, %.2lf)\n", reset_x_coord, reset_y_coord);
 
-    kw::boomerang(132, -107, 45, 0.3, 3000,false);
+    kw::boomerang(132, -107, 45, 0.3, 3000,false, 70);
     kw::turnToAngle(45, 1000);
     kw::move_raw(-6000, -6000);
     intakeMacro("R2");
@@ -73,8 +73,14 @@ void testDistReset() {
     loaderPiston.set_value(true);
     intakeMacro("L1");
     kw::turnToAngle(0, 1000);
-    kw::moveToPoint(178, -56, 1000);
-
+    kw::moveToPoint(175, -50, 1000);
+    pros::delay(1000);
+    kw::boomerang(191, -92, 0, 0.3, 1500, false, 80);
+    kw::moveToPoint(191, -164, 1000,false);
+    kw::turnToAngle(270, 1000);
+    kw::moveToPoint(172, -164, 1000);
+    kw::turnToAngle(180, 1000);
+    kw::moveToPoint(172, -144, 1000, false);
 
     
 
