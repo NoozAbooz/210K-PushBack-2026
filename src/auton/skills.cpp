@@ -34,21 +34,27 @@ void skills(){
 
     intakeMacro("L1");
     kw::driveTo(12, 900, 60);
+    kw::move_raw(5000, 5000);
     pros::delay(1000);
     kw::boomerang(-47, 28, 180, 0.4, 1500, false, 70); // boomerang to alley
-    kw::moveToPoint(-46, 91, 2000, false); // move straight in alley
+    kw::moveToPoint(-48, 91, 2000, false); // move straight in alley
     kw::turnToAngle(90, 1000); // turn here keeping loader down
-    kw::moveToPoint(-35, 91, 1500); // align with goal
+    kw::moveToPoint(-34, 97, 1500); // align with goal
     kw::turnToAngle(0, 1000); // turn to goal
     kw::moveToPoint(-33.5, 75, 1000, false);
-    kw::move_raw(-5700, -5700); //-8000,-8000
+    kw::turnToAngle(0, 1000);
+    kw::move_raw(-7700, -7700); //-8000,-8000
     intakeMacro("R1");
+     kw::turnToAngle(0, 1000);
+    kw::set_odom_position(0, 0, 0);
     pros::delay(2000);
     intakeMacro("L1");
-    kw::moveToPoint(-33.5, 104, 1500, true, 80); // loader
+    kw::moveToPoint(-1, 28, 1000, true, 80);
+   // kw::moveToPoint(-33.5, 104, 1500, true, 80); // loader
     kw::move_raw(8000, 8000);
     pros::delay(1200);
-     kw::moveToPoint(-33, 75, 1000, false); // score
+    // kw::moveToPoint(-32.8, 75, 1000, false); // score
+    kw::moveToPoint(0, -2, 1000, false, 90);    
      kw::turnToAngle(0, 1000);
      kw::move_raw(-5700, -5700);
      intakeMacro("R1");
@@ -66,14 +72,14 @@ void skills(){
     // go into zone
     
     pros::delay(260);
-    kw::move_raw(6000, 6000);
+    kw::move_raw(6500, 6500);
     pros::delay(280);
-    kw::move_raw(8000, 8000);
+    kw::move_raw(9000, 9000);
     pros::delay(200);
     kw::move_raw(4000, 4000);
     pros::delay(600);
     loaderPiston.set_value(false);
-    pros::delay(200);
+    pros::delay(300);
 
     kw::move_raw(6000, 6000);
     pros::delay(1200);
@@ -106,9 +112,9 @@ void skills(){
     kw::driveTo(15, 2000, 50);
     loaderPiston.set_value(true);
 
-    kw::moveToPoint(16, 31, 1000);
+    kw::moveToPoint(16, 30, 1000);
     kw::turnToAngle(270, 1000);
-    kw::moveToPoint(6, 33, 1000, true, 80);
+    kw::moveToPoint(6, 31, 1000, true, 80);
     kw::move_raw(5000, 5000);
     pros::delay(1000);
     kw::boomerang(45, 47, 270, 0.4, 2000, false, 80);
@@ -124,17 +130,21 @@ void skills(){
     intakeMacro("R1");
     intake_velocity.set_target(480);
     pros::delay(3500);
-    intakeMacro("L1");
-    kw::moveToPoint(121, 33, 1500, true, 80);
-    kw::move_raw(5000, 5000);
-    pros::delay(1200);
-    kw::moveToPoint(91, 33, 1000, false);
-    loaderPiston.set_value(false);
-    kw::move_raw(-8000, -8000);
-    intakeMacro("R1");
-    intake_velocity.set_target(550);
-    kw::set_odom_position(0, 0, 0);
+   kw::set_odom_position(0, 0, 0);
     pros::delay(2000);
+    intakeMacro("L1");
+    kw::moveToPoint(-2, 30, 1000, true, 80);
+   // kw::moveToPoint(-33.5, 104, 1500, true, 80); // loader
+    kw::move_raw(8000, 8000);
+    pros::delay(1200);
+    // kw::moveToPoint(-32.8, 75, 1000, false); // score
+    kw::moveToPoint(0, -2, 1000, false, 90);    
+     kw::turnToAngle(0, 1000);
+     kw::move_raw(-5700, -5700);
+     intakeMacro("R1");
+     intake_velocity.set_target(550);
+     loaderPiston.set_value(false);
+    kw::set_odom_position(0, 0, 0);
 
     kw::boomerang(43, 35, 90, 0.3, 1000, true, 127);
     kw::turnToAngle(90, 900);
