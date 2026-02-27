@@ -54,15 +54,18 @@ void left_elim() {
         loaderPiston.set_value(false);
     });
     kw::moveToPoint(-6.0, 21.67, 1000, true, 80, false); // Loader #1
-    kw::boomerang(-35, 39.20, 270, 0.4, 2500, true, 50);
+    kw::boomerang(-33, 40.20, 270, 0.4, 2500, true, 50);
+    loaderPiston.set_value(true);
     pros::delay(500);
     kw::moveToPoint(-17, 21.67, 1000, false, 127, false);
+    loaderPiston.set_value(false);
     kw::boomerang(-37, 9, 180, 0.5, 2000, false, 70);
     pros::Task([]{
         pros::delay(450);
             intakeMacro("R1");
             pros::delay(1500);
             intakeMacro("L1");
+
     });
     kw::moveToPoint(-37.8, 18, 1000, false);
     loaderPiston.set_value(true);
@@ -82,9 +85,9 @@ void left_elim() {
     kw::boomerang(-1.5, 34 , 215, 0.3, 2000 , false, 127);
     kw::move_raw(-4000, -4000);
     pros::delay(600);
-    kw::moveToPoint(-27.7, 17, 1000);
+    kw::moveToPoint(-25.7, 17, 1000);
     kw::turnToAngle(180, 700);
-    kw::moveToPoint(-30, 37, 1000, false);
+    kw::moveToPoint(-28, 37, 1000, false);
 
 
 
