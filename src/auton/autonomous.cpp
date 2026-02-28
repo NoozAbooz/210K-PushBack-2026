@@ -1,10 +1,4 @@
-#include "libKW/config.hpp"
-#include "libKW/drivetrain/chassis.hpp"
-#include "libKW/drivetrain/movements.hpp"
-#include "libKW/drivetrain/odom.hpp"
 #include "main.h"
-#include "libKW/api.hpp"
-#include "pros/motors.h"
 
 /**
  * Runs the user autonomous code. This function will be started in its own task
@@ -27,35 +21,30 @@ void testPID() {
 }
 
 void testDistReset() {
-    double reset_x_coord;
-    double reset_y_coord;
-
-    //reset_x_coord = kw::getDistance(leftDistance) - 17.4;
-    //kw::set_odom_position(0, 0, 0);
-
-    kw::boomerang(44, 36, 90, 0.3, 1000, true, 127);
+   kw::boomerang(31, 35.5, 90, 0.35, 2000, true, 90);
     kw::turnToAngle(90, 900);
+    loaderPiston.set_value(true);
     wingPiston.set_value(true);
     intakeMacro("L1");
 
     // go into zone
-    loaderPiston.set_value(true);
+    
     pros::delay(260);
     kw::move_raw(6000, 6000);
     pros::delay(280);
     kw::move_raw(8000, 8000);
-    pros::delay(200);
+    pros::delay(230);
     kw::move_raw(4000, 4000);
-    pros::delay(600);
-    loaderPiston.set_value(false);
     pros::delay(200);
+    loaderPiston.set_value(false);
+    pros::delay(700);
 
     kw::move_raw(6000, 6000);
     pros::delay(1200);
     kw::turnToAngle(90, 1000);
     kw::move_raw(-4000, -4000);
     wingPiston.set_value(false);
-    pros::delay(1000);
+    pros::delay(1400);
     kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
     pros::delay(100);
     
@@ -63,30 +52,18 @@ void testDistReset() {
     // reset_x_coord = 0;//(kw::getDistance(bwdDistance));
     // reset_y_coord = -(kw::getDistance(leftDistance));
     kw::set_odom_position(0, 0, 0);
-    // console.printf("Resetting to: (%.2lf, %.2lf)\n", reset_x_coord, reset_y_coord);
-
-    // kw::boomerang(132, -107, 45, 0.3, 3000,false, 70);
-    // kw::turnToAngle(45, 1000);
-    // kw::move_raw(-6000, -6000);
-    // intakeMacro("R2");
-    // pros::delay(4000);
-    // stopIntake();
-    // kw::moveToPoint(175, -68, 1000);
-    // loaderPiston.set_value(true);
-    // intakeMacro("L1");
-    // kw::turnToAngle(0, 1000);
-    // kw::moveToPoint(175, -50, 1000);
-    // pros::delay(1000);
-    // kw::boomerang(191, -92, 0, 0.3, 1500, false, 80);
-    // kw::moveToPoint(191, -164, 1000,false);
-    // kw::turnToAngle(270, 1000);
-    // kw::moveToPoint(172, -164, 1000);
-    // kw::turnToAngle(180, 1000);
-    // kw::moveToPoint(172, -144, 1000, false);
-
-    
-
+    kw::turnToAngle(270,1000);
+    kw::moveToPoint(30, -6, 1000, false);
+    kw::turnToAngle(270,1000);
+    intakeMacro("stop");
+    intake_velocity.set_target(0);
+    kw::boomerang(54, -5, 315, 0.3, 2000, false, 60);
+    kw::move_raw(-4000, -4000);
+    pros::delay(200);
+    intakeMacro("R2");
+     intake_velocity.set_target(490);
 }
+
 void testColourSort() {
     alliance = "red"; // set alliance to red for testing
     toggleColourSort = true;
@@ -104,11 +81,11 @@ void measureOdomOffsets() {
         std::pair<double, double> prev = {0,0};
 
         if (i % 2 == 0) {
-            //kw::move_raw(6000, -6000);
-            kw::turnToAngle(175, 1500);
+            kw::move_raw(6000, -6000);
+            // kw::turnToAngle(175, 1500);
         } else {
-            //kw::move_raw(-6000, 6000);
-            kw::turnToAngle(185, 1500);
+            kw::move_raw(-6000, 6000);
+            // kw::turnToAngle(185, 1500);
         }
         int start_time = pros::millis();
 
@@ -123,9 +100,9 @@ void measureOdomOffsets() {
             prev.second = currHoriz;
             pros::delay(10);
             
-            // if (pros::millis() - start_time > 1000) {
-            //     kw::stop_chassis(pros::E_MOTOR_BRAKE_BRAKE);
-            // }
+            if (pros::millis() - start_time > 1000) {
+                kw::stop_chassis(pros::E_MOTOR_BRAKE_BRAKE);
+            }
         }
         double delta = kw::to_rad(fabs(kw::get_imu_rotation() - imuStart));
         // std::cout << delta << std::endl;
@@ -143,19 +120,23 @@ void driveForward() {
 
 rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
     {"SAWP", sawp, "", 0},
+    {"True SAWP", true_sawp, "", 0},
     {"Left Awp", left_half, "", 0},
     {"Right Awp", right_half, "", 0},
 
     {"7 Right", right_7, "", 0},
+    {"6+3", left_elim, "", 0},
     {"7 Left", left_7, "", 0},
 
     {"Skills", skills, "", 100},
 
     {"Move forward", testPID, "", 0},
+    { "Measure Odom Offsets", measureOdomOffsets, "", 220},
     // { "Test PID", testPID, "", 220},
     { "Test DistReset", testDistReset, "", 220},
     // { "Test Colour Sort", testColourSort, "", 220},
     // {"Legacy SAWP", legacy_sawp, "", 0},
+    {"97 skills", skills, "", 0},
     {"Legacy Skills", Legacy_skills, "", 0}
 });
 
@@ -173,5 +154,6 @@ void autonomous() {
 		pros::delay(10);
 	}
     console.println("Running auton...");
+    rd_view_focus(sensorview);
     gui_selector.run_auton();
 }

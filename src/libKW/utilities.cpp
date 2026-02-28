@@ -11,16 +11,15 @@ double kw::getDistance(pros::Distance& sensor) {
     double weights = 0; // weighted average distance from keej https://github.com/8pxl/keejLib/blob/main/lib/src/keejLib/odom.cpp
     double weightedDist = 0;
 
-    for (int i=0; i<5; i++) {
+    for (int i=0; i<3; i++) {
         double distReading = kw::mm_to_in(sensor.get_distance());
         double confidence = sensor.get_confidence();
         if (confidence <= 20) confidence = 2;
         weights += confidence;
         weightedDist += distReading * confidence;
-        pros::delay(30);
-        //console.printf("Dist: %.2f inches, Confid: %.2f\n", distReading, confidence);
+        pros::delay(10);
     }
-    return (double)(weightedDist / weights);
+    return weightedDist / weights;
 }
 
 double kw::vector_average(const std::vector<double>& v) {

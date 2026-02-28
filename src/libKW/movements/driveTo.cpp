@@ -10,7 +10,7 @@ using namespace kw;
  * - exit: If true, stops the robot at the end; if false, allows chaining.
  * - async: If true, runs the drive in a separate task and returns immediately.
  */
-void kw::driveTo(double distance_in, double time_limit_msec, double max_output, bool exit, bool async, double minimum_speed) {
+void kw::driveTo(double distance_in, double time_limit_msec, double max_output, bool exit, bool async) {
   if(async) {
     pros::Task task([&]() { 
       kw::driveTo(distance_in, time_limit_msec, max_output, exit);
@@ -90,7 +90,6 @@ void kw::driveTo(double distance_in, double time_limit_msec, double max_output, 
     if(min_speed) {
       scale_to_min(left_output, right_output, min_output);
     }
-    
     if(!exit) {
       left_output = 24 * drive_direction;
       right_output = 24 * drive_direction;
@@ -117,10 +116,6 @@ void kw::driveTo(double distance_in, double time_limit_msec, double max_output, 
     }
     prev_left_output = left_output;
     prev_right_output = right_output;
-
-    if (minimum_speed > 0.0) {
-      left_output = (left_output > 0.0) ? std::max((float)left_output, (float)minimum_speed) : std::min((float)left_output, -(float)minimum_speed);
-    }
 
 	left_output = kw::volt_to_milivolt(left_output); // convert PID output from [-12, 12] decivolt to to [-12000, 12000] millivolts
 	right_output = kw::volt_to_milivolt(right_output);
