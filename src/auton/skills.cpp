@@ -100,7 +100,7 @@ void skills(){
     kw::move_raw(-4000, -4000);
     pros::delay(200);
     intakeMacro("R2");
-     intake_velocity.set_target(490);
+    intake_velocity.set_target(560); // those who midgoal for control
     pros::delay(4500);
     pros::Task([] {
         pros::delay(200);

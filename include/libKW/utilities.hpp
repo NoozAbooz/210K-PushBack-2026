@@ -52,7 +52,7 @@ namespace kw {
 
 			// Get the current velocity
 			double get_velocity();
-			double total_voltage;
+			float total_voltage;
 
 			double target;
 

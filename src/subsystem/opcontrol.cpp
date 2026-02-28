@@ -9,8 +9,8 @@ kw::lookup_table intake_lut({
     {400, 8000}, {460, 9000}, {520, 10000}, {560, 11000}, {600, 12000}
 });
 
-kw::PID vel_pid(20, 5, 0);
-kw::velocity_controller intake_velocity(&intake, intake_lut, vel_pid, 12000);
+kw::PID vel_pid(20, 10, 5);
+kw::velocity_controller intake_velocity(&intake, intake_lut, vel_pid, 11000);
 
 std::string intakeMacroStatus = "";
 void intakeMacro(std::string str) {
@@ -20,7 +20,7 @@ void intakeMacro(std::string str) {
 		intake_velocity.set_target(12000);
 	} else if (str == "R2") { // score on mid goal
 		intakePullDownPiston.set_value(true); // pull down intake band
-		intake_velocity.set_target(520);
+		intake_velocity.set_target(550);
 		
 	} else if (str == "L1") { // intake up to long goal scoring
 		trapdoorPiston.set_value(false); // close trapdoor
