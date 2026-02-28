@@ -7,10 +7,10 @@ void true_sawp(){
 		//loaderPiston.set_value(true);
 	});
 	kw::driveTo(8, 1000, 127); // push
-	kw::moveToPoint(-2, -40.52, 1800, false, 127); //loader
+	kw::moveToPoint(-2, -39.52, 1800, false, 127); //loader
 	loaderPiston.set_value(true);
 	kw::turnToAngle(270, 700); // turn to face loader
-	kw::moveToPoint(-11.01, -42.27, 800, true, 60); // Loader #1
+	kw::moveToPoint(-11.01, -41.27, 800, true, 60); // Loader #1
 	kw::move_raw(8000, 8000);
 	pros::delay(120);
 	pros::Task([] {
@@ -21,7 +21,7 @@ void true_sawp(){
 		loaderPiston.set_value(false);
 	
 	});
-	kw::moveToPoint(21, -43, 1000, false, 127); // long Goal #1
+	kw::moveToPoint(21, -42, 1000, false, 127); // long Goal #1
 	kw::move_raw(-6000, -6000);
 	pros::delay(1200);
 	kw::turnToAngle(25, 800);
