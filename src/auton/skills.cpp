@@ -23,7 +23,7 @@ void skills(){
 
     kw::turnToPoint(-32, 0, 1000); // move to loader 1
     loaderPiston.set_value(true);
-    kw::moveToPoint(-30.5, 0, 1500);
+    kw::moveToPoint(-31, 0, 1500);
     kw::turnToAngle(180, 1000);
     pros::delay(200);
 
@@ -32,6 +32,7 @@ void skills(){
     kw::move_raw(5000, 5000);
     pros::delay(1000);
     kw::boomerang(-47, 28, 180, 0.4, 1500, false, 70); // boomerang to alley
+    intakeMacro("stop");
     kw::moveToPoint(-50, 91, 3000, false, 100); // move straight in alley
     kw::turnToAngle(90, 1000); // turn here keeping loader down
     kw::moveToPoint(-36, 94, 1500); // align with goal

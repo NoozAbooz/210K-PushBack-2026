@@ -28,6 +28,10 @@ void intakeMacro(std::string str) {
 		intake_velocity.set_target(12000);
 	} else if (str == "L2") { // outtake out of intake
 		intake_velocity.set_target(-12000);
+	} else if (str == "stop") {
+		intakePullDownPiston.set_value(false); // pull down intake band
+		intake_velocity.set_target(0);
+		trapdoorPiston.set_value(false); // close trapdoor
 	}
 }
 
@@ -42,10 +46,7 @@ void refreshSubsys1() { // intake
 		} else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
 			intakeMacro("L2");
 		} else {
-			intakePullDownPiston.set_value(false); // pull down intake band
-			//intake.move_voltage(0);
-			intake_velocity.set_target(0);
-			trapdoorPiston.set_value(false); // close trapdoor
+			intakeMacro("stop");
 		}
 	}
 }
