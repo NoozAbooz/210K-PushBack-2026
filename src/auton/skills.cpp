@@ -102,6 +102,7 @@ void skills(){
     pros::delay(200);
     intakeMacro("R2");
     intake_velocity.set_target(560); // those who midgoal for control
+    loaderPiston.set_value(true);
     pros::delay(4500);
     pros::Task([] {
         pros::delay(200);
@@ -109,11 +110,12 @@ void skills(){
         //stopIntake();
     });
     kw::driveTo(15, 2000, 50);
-    loaderPiston.set_value(true);
+    //loaderPiston.set_value(true);
 
     kw::moveToPoint(16, 30, 1000);
-        intakeMacro("L1");
+
     kw::turnToAngle(270, 1000);
+    intakeMacro("L1");
     kw::moveToPoint(6, 31, 1000, true, 80);
     kw::move_raw(5000, 5000);
     pros::delay(1200);
