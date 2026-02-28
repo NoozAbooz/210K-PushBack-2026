@@ -52,12 +52,14 @@ namespace kw {
 
 			// Get the current velocity
 			double get_velocity();
+			double total_voltage;
+
+			double target;
 
 		private:
 			pros::MotorGroup* motor_group;           // Motor group to control
 			lookup_table voltage_lut;      // Feedforward lookup table
 			PID velocity_pid;             // PID controller
-			double target;                // Target velocity
 			double max_voltage;           // Maximum voltage
 			double last_commanded_velocity; // Last commanded velocity
 			bool running;                 // Task loop control
