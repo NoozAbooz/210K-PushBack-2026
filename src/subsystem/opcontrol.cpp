@@ -20,7 +20,7 @@ void intakeMacro(std::string str) {
 		intake_velocity.set_target(12000);
 	} else if (str == "R2") { // score on mid goal
 		intakePullDownPiston.set_value(true); // pull down intake band
-		intake_velocity.set_target(550);
+		intake_velocity.set_target(480);
 		
 	} else if (str == "L1") { // intake up to long goal scoring
 		trapdoorPiston.set_value(false); // close trapdoor
