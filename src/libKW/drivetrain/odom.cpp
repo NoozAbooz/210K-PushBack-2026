@@ -93,7 +93,7 @@ void kw::initialize_odom() {
 	}
 
 	double start_time = pros::millis();
-	while (isnanf(inertial1.get_rotation()) || std::isinf(inertial1.get_rotation())) {
+	while ((isnanf(inertial1.get_rotation()) || std::isinf(inertial1.get_rotation())) && pros::millis() - start_time < 1000) {
 		pros::delay(10);
 	}
 
