@@ -79,6 +79,8 @@ void kw::moveToPoint(double x, double y, double time_limit_msec, bool forwards, 
 
   // Main PID loop for moving to point
   while (pros::millis() - start_time <= time_limit_msec) {
+    pid_distance.setCoefficient(kw::distance_kp, kw::distance_ki, kw::distance_kd);
+    pid_heading.setCoefficient(kw::heading_correction_kp, kw::heading_correction_ki, kw::heading_correction_kd);
     // Continuously update targets as robot moves
     //kw::odom_mutex.take();
 

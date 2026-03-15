@@ -30,6 +30,8 @@ void kw::boomerang(double x, double y, double a, double dlead, double time_limit
   bool final_heading_phase = false;  
 
   while (pros::millis() - start_time <= time_limit_msec) {
+    pid_distance.setCoefficient(kw::distance_kp, kw::distance_ki, kw::distance_kd);
+    pid_heading.setCoefficient(kw::heading_correction_kp, kw::heading_correction_ki, kw::heading_correction_kd);
 
     hypotenuse = hypot(x_pos - x, y_pos - y);
     current_angle = kw::get_imu_rotation();
@@ -43,7 +45,7 @@ void kw::boomerang(double x, double y, double a, double dlead, double time_limit
     pid_distance.setIntegralMax(0);
     pid_distance.setTarget(0);
 
-// Neutralize heading PID memory
+    // Neutralize heading PID memory
     pid_heading.setIntegralMax(0);
     pid_heading.setTarget(current_angle);
     }

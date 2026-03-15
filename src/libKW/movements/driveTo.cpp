@@ -75,6 +75,8 @@ void kw::driveTo(double distance_in, double time_limit_msec, double max_output, 
 
   // Main PID loop for driving straight
   while (((!pid_distance.targetArrived()) && pros::millis() - start_time <= time_limit_msec && exit) || (exit == false && current_distance < distance_in && pros::millis() - start_time <= time_limit_msec)) {
+    pid_distance.setCoefficient(kw::distance_kp, kw::distance_ki, kw::distance_kd);
+    pid_heading.setCoefficient(kw::heading_correction_kp, kw::heading_correction_ki, kw::heading_correction_kd);
     // Calculate current distance and heading
     kw::encoder_mutex.take();
     current_distance = fabs(get_vertical_distance_traveled() - start_vertical_pos);

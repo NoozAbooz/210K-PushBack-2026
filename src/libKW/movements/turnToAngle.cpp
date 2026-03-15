@@ -43,6 +43,7 @@ void kw::turnToAngle(double turn_angle, double time_limit_msec, double max_outpu
   double current_heading = kw::get_imu_rotation();
   double previous_heading = 0;
   if(exit == false && correct_angle < turn_angle) {
+    pid.setCoefficient(kw::turn_kp, kw::turn_ki, kw::turn_kd);
     // Turn right without stopping at end
     while (kw::get_imu_rotation() < turn_angle && pros::millis() - start_time <= time_limit_msec) {
       current_heading = kw::get_imu_rotation();

@@ -37,7 +37,7 @@ void kw::turnToPoint(double x, double y, double time_limit_msec, bool forwards, 
   pid.setIntegralRange(3);
 
   pid.setSmallBigErrorTolerance(threshold, threshold * 3);
-  pid.setSmallBigErrorDuration(100, 500);
+  pid.setSmallBigErrorDuration(50, 150);
   pid.setDerivativeTolerance(threshold * 4.5);
 
   // Start the PID loop
@@ -47,6 +47,7 @@ void kw::turnToPoint(double x, double y, double time_limit_msec, bool forwards, 
   double previous_heading = 0;
   int index = 1;
   while (!pid.targetArrived() && pros::millis() - start_time <= time_limit_msec) {
+    pid.setCoefficient(kw::turn_kp, kw::turn_ki, kw::turn_kd);
     // Continuously update target as robot moves
     pid.setTarget(kw::normalize_target(kw::to_deg(atan2(x - x_pos, y - y_pos))) + add);
     current_heading = kw::get_imu_rotation();
