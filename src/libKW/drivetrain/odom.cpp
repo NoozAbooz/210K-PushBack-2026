@@ -80,8 +80,9 @@ void kw::reset_chassis() {
 void kw::initialize_odom() {
 	kw::reset_chassis();
 	
-	if (inertial1.reset() != PROS_ERR) {	
-	  	while( inertial1.is_calibrating() ) {
+	if (inertial1.reset() != PROS_ERR) {
+		int start_time = pros::millis();
+	  	while( inertial1.is_calibrating() && pros::millis() - start_time < 1000 ) {
 			pros::delay(10);
 	  	}
 	  	console.println("Passed Primary IMU calibration check"); 
