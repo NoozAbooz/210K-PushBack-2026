@@ -13,7 +13,7 @@ using namespace kw;
  * - overturn: If true, allows overturning for sharp turns.
  * - async: If true, runs the drive in a separate task and returns immediately.
  */
-void kw::moveToPoint(double x, double y, double time_limit_msec, bool forwards, double max_output, bool exit, bool overturn, bool async, double minimum_speed) {
+void kw::moveToPoint(double x, double y, double time_limit_msec, bool forwards, double max_output, bool exit, bool overturn, bool async) {
   if(async) {
     pros::Task task([&]() { 
       kw::moveToPoint(x, y, time_limit_msec, forwards, max_output, exit, overturn);
@@ -25,7 +25,7 @@ void kw::moveToPoint(double x, double y, double time_limit_msec, bool forwards, 
   max_output = max_output * (12.0 / 127.0); // convert from [-127, 127] decivolts to [-12, 12] volts
   kw::stop_chassis(pros::E_MOTOR_BRAKE_COAST); // Stop chassis before moving
   is_turning = true;                  // Set turning state
-  double threshold = 1.5;
+  double threshold = 0.5;
   int add = forwards ? 0 : 180; // if driving backwards, add 180 degrees to heading
   double max_slew_fwd = forwards ? max_slew_accel_fwd : max_slew_decel_rev; // switch slew rate used based on direction
   double max_slew_rev = forwards ? max_slew_decel_fwd : max_slew_accel_rev;
@@ -56,8 +56,12 @@ void kw::moveToPoint(double x, double y, double time_limit_msec, bool forwards, 
   pid_distance.setIntegralMax(0);  
   pid_distance.setIntegralRange(3);
   pid_distance.setSmallBigErrorTolerance(threshold, threshold * 3);
-  pid_distance.setSmallBigErrorDuration(60, 200);
+  pid_distance.setSmallBigErrorDuration(50, 250);
   pid_distance.setDerivativeTolerance(5);
+  
+  pid_heading.setTarget(normalize_target(kw::to_deg(atan2(x - x_pos, y - y_pos)) + add));
+  pid_heading.setIntegralMax(0);  
+  pid_heading.setIntegralRange(1);
   
   pid_heading.setSmallBigErrorTolerance(0, 0);
   pid_heading.setSmallBigErrorDuration(0, 0);
@@ -80,7 +84,6 @@ void kw::moveToPoint(double x, double y, double time_limit_msec, bool forwards, 
 
     pid_heading.setTarget(normalize_target(kw::to_deg(atan2(x - x_pos, y - y_pos)) + add));
     pid_distance.setTarget(hypot(x - x_pos, y - y_pos));
-    current_movement_error = hypot(x, y) - hypot(x - x_pos, y - y_pos);
     current_angle = kw::get_imu_rotation();
     // Calculate drive output based on heading and distance
     left_output = pid_distance.update(0) * cos(kw::to_rad(atan2(x - x_pos, y - y_pos) * 180 / M_PI + add - current_angle)) * (forwards ? 1 : -1); // multiply by -1 if driving backwards
@@ -138,10 +141,6 @@ void kw::moveToPoint(double x, double y, double time_limit_msec, bool forwards, 
     }
     prev_left_output = left_output;
     prev_right_output = right_output;
-
-    if (minimum_speed > 0.0) {
-      left_output = (left_output > 0.0) ? std::max((float)left_output, (float)minimum_speed) : std::min((float)left_output, -(float)minimum_speed);
-    }
 
     left_output = kw::volt_to_milivolt(left_output); // convert PID output from [-12, 12] decivolt to to [-12000, 12000] millivolts
 	  right_output = kw::volt_to_milivolt(right_output);

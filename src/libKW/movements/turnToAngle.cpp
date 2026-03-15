@@ -25,7 +25,7 @@ void kw::turnToAngle(double turn_angle, double time_limit_msec, double max_outpu
   min_speed = min_speed * (12.0 / 127.0); // convert from [0, 127] decivolts to [0, 12] volts
   kw::stop_chassis(pros::E_MOTOR_BRAKE_COAST);
   is_turning = true;
-  double threshold = 3;
+  double threshold = 1;
   kw::PID pid = kw::PID(kw::turn_kp, kw::turn_ki, kw::turn_kd);
 
   // Normalize and set PID target
@@ -35,7 +35,7 @@ void kw::turnToAngle(double turn_angle, double time_limit_msec, double max_outpu
   pid.setIntegralRange(3);
   pid.setSmallBigErrorTolerance(threshold, threshold * 3);
   pid.setSmallBigErrorDuration(50, 150);
-  pid.setDerivativeTolerance(threshold * 4.5);
+  pid.setDerivativeTolerance(threshold * 5);
 
   // PID loop for turning
   double start_time = pros::millis();

@@ -26,7 +26,7 @@ void initColourSort() { // intended to be called in auton
 					}
 				}
 			}
-			pros::delay(10);
+			pros::delay(20);
 		}
 	});
 }

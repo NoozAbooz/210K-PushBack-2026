@@ -25,6 +25,7 @@ void initTelemetry() {
 			// if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
 			// 	alliance = (alliance == "red") ? "blue" : "red"; // toggle alliance
 			// }
+			printf("Target RPM: %.0lf, Actual: %.0lf | Target Volt: %.0lf, Actual: %.0lf\n", intake_velocity.target, kw::vector_average(intake.get_actual_velocity_all()), intake_velocity.total_voltage, (double)intake.get_voltage(0));
 
 			if(telemState == 0) {
 				double drivetrainAvgTemp = kw::vector_average(leftDrive.get_temperature_all());

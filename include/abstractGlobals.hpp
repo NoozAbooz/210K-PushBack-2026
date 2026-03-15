@@ -1,9 +1,8 @@
 #pragma once
 
 // 3rd party libraries
-#include "robodash/api.h"
 #include "libKW/api.hpp"
-
+#include "robodash/api.h"
 extern rd::Console console;
 extern rd_view_t *gifview;
 extern rd_view_t *allianceview;
@@ -11,12 +10,15 @@ extern rd::Selector gui_selector;
 extern rd_view_t *sensorview;
 extern void rdconfig_init();
 
+// libKW
 extern std::string alliance;
 extern std::string field_status;
 
 extern void competitionTelemtryRefresh();
 extern void initTelemetry();
 extern std::string rumble_pattern;
+
+extern kw::velocity_controller intake_velocity;
 
 /* Functions */
 extern void drive_arcade();
@@ -28,7 +30,6 @@ extern void refreshSubsys4();
 extern bool loaderStatus;
 extern bool blockerStatus;
 extern bool wingStatus;
-extern kw::velocity_controller intake_velocity;
 
 /* Macros (mainly intended to be called in auton)*/
 extern bool intakeLock; // true = disabled intaking, false = normal
@@ -37,11 +38,12 @@ extern std::string intakeMacroStatus;
 extern void stopIntake(); // stops all intake motors
 extern void initColourSort();
 extern bool toggleColourSort; // true = enabled colour sorting, false = disabled
-extern void driver_skills_macro();	
 
 /* Autons */
 // AWP Routines
+extern void true_sawp();
 extern void sawp();
+
 extern void legacy_sawp();
 extern void left_half();
 extern void right_half();

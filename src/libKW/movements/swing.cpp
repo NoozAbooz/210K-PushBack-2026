@@ -6,7 +6,7 @@ void kw::swing(double swing_angle, double time_limit_msec, bool forwards, double
   max_output = max_output * (12.0 / 127.0); // convert from [-127, 127] decivolts to [-12, 12] volts
   kw::stop_chassis(pros::E_MOTOR_BRAKE_COAST); // Stop chassis before moving
   is_turning = true;                  // Set turning state
-  double threshold = 5;              // in degrees
+  double threshold = 1;
   PID pid = PID(turn_kp, turn_ki, turn_kd); // Initialize PID for turning
 
   swing_angle = normalize_target(swing_angle); // Normalize target angle
@@ -16,7 +16,7 @@ void kw::swing(double swing_angle, double time_limit_msec, bool forwards, double
 
   pid.setSmallBigErrorTolerance(threshold, threshold * 3);
   pid.setSmallBigErrorDuration(50, 250);
-  pid.setDerivativeTolerance(threshold * 1.5);
+  pid.setDerivativeTolerance(threshold * 4.5);
 
   // Start the PID loop
   double start_time = pros::millis();

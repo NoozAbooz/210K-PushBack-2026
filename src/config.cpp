@@ -20,7 +20,7 @@ double kw::heading_correction_kp = 0.6, kw::heading_correction_ki = 0, kw::headi
 
 // Enable or disable the use of tracking wheels
 bool kw::using_horizontal_tracker = true;  // Set to true if a horizontal tracking wheel is installed and used for odometry
-bool kw::using_vertical_tracker = true;   // Set to true if a vertical tracking wheel is installed and used for odometry
+bool kw::using_vertical_tracker = true;  // Set to true if a vertical tracking wheel is installed and used for odometry
 
 // IGNORE THESE IF YOU ARE NOT USING TRACKING WHEELS
 // These comments are in the perspective of a top down view of the robot when the robot is facing upwards on your view

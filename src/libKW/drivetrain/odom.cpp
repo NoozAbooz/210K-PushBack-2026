@@ -103,6 +103,12 @@ void kw::initialize_odom() {
 
 void kw::set_odom_position(double x_new, double y_new, double theta_new) {
 	kw::update_odom = false; // stop odom task loop
+	//kw::odom_mutex.take();
+	x_pos = x_new;
+	y_pos = y_new;
+
+	verticalEncoder.reset_position();
+	horizontalEncoder.reset_position();
 
 	prev_vertical_pos = 0;
 	prev_horizontal_pos = 0;
@@ -112,8 +118,7 @@ void kw::set_odom_position(double x_new, double y_new, double theta_new) {
 		inertial1.set_rotation(theta_new);
 		inertial2.set_rotation(theta_new);
 	}
-	x_pos = x_new;
-	y_pos = y_new;
+	//kw::odom_mutex.give();
 	kw::update_odom = true; // resume odom task loop
 }
 /* // pos reset - do not run async
