@@ -116,6 +116,7 @@ void measureOdomOffsets() {
         offsets.first += ((deltaEnc.first / 360) * M_PI * kw::vertical_tracker_diameter) / delta;
         offsets.second += ((deltaEnc.second / 360) * M_PI * kw::horizontal_tracker_diameter) / delta;
     }
+    console.focus();
     console.printf("Vert Pod Offset: %.2lf\n", offsets.first / 2);
     console.printf("Horiz Pod Offset: %.2lf\n", offsets.second / 2);
 }
