@@ -234,7 +234,8 @@ void kw::velocity_controller::set_target(double new_target) {
 double kw::velocity_controller::update() {
   if (motor_group == nullptr) return 0.0;
   if (target == 0.0) {
-    motor_group->move_voltage(0);
+    intakeMain.move_voltage(0);
+    intakeSub.move_voltage(0);
     intakeCounterRoller.move_voltage(0);
     last_commanded_velocity = 0.0;
     return 0.0;

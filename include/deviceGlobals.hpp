@@ -14,7 +14,7 @@ inline pros::MotorGroup rightDrive({11, 3, -2});
 inline pros::Motor intakeCounterRoller(-2); // middle counter roller
 inline pros::Motor intakeMain(-12); // 11w
 inline pros::Motor intakeSub(20); // 5.5w
-inline pros::MotorGroup intake({20, -12}, pros::v5::MotorGears::ratio_6_to_1); //main 16.5W system
+inline pros::MotorGroup intake({0, 0}, pros::v5::MotorGears::ratio_6_to_1); //main 16.5W system
 
 // Pneumatics
 inline pros::adi::Pneumatics loaderPiston('F', false); // matchloader
