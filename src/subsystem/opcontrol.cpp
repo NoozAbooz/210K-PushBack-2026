@@ -10,7 +10,7 @@ kw::lookup_table intake_lut({
 });
 
 kw::PID vel_pid(20, 5, 0);
-kw::velocity_controller intake_velocity(&intake, intake_lut, vel_pid, 12000);
+kw::velocity_controller intake_velocity(&intake, intake_lut, vel_pid, 11000);
 
 std::string intakeMacroStatus = "";
 void intakeMacro(std::string str) {

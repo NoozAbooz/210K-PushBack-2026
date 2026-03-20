@@ -235,12 +235,14 @@ double kw::velocity_controller::update() {
   if (motor_group == nullptr) return 0.0;
   if (target == 0.0) {
     motor_group->move_voltage(0);
+    intakeCounterRoller.move_voltage(0);
     last_commanded_velocity = 0.0;
     return 0.0;
   }
   if (fabs(target) == 12000) {
     int sign = (target > 0) ? 1 : -1;
     motor_group->move_voltage(sign * 12000);
+    intakeCounterRoller.move_voltage(sign * 12000);
     last_commanded_velocity = motor_group->get_actual_velocity();
     return motor_group->get_actual_velocity();
   }
@@ -257,6 +259,7 @@ double kw::velocity_controller::update() {
   
   // Apply voltage to motor
   motor_group->move_voltage(static_cast<int>(total_voltage));
+  intakeCounterRoller.move_voltage(static_cast<int>(total_voltage));
   last_commanded_velocity = target;
 
   //printf("Target: %.2f, CurrentVel: %.2f, FF: %.2f, PID: %.2f, Output: %.2f\n", target, kw::vector_average(motor_group -> get_actual_velocity_all()), ff, pid_output, total_voltage);
