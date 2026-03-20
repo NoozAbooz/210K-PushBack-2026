@@ -245,7 +245,7 @@ double kw::velocity_controller::update() {
     
     intakeMain.move_voltage(sign * 12000);
     intakeSub.move_voltage(sign * 8/12 * 12000);
-    intakeCounterRoller.move_voltage(sign * 12000);
+    intakeCounterRoller.move_voltage(sign * 8/12 * 12000 * (intakeMacroStatus == "R2" ? -1 : 1));
 
     last_commanded_velocity = motor_group->get_actual_velocity();
     return motor_group->get_actual_velocity();
@@ -264,7 +264,7 @@ double kw::velocity_controller::update() {
   // Apply voltage to motor
   intakeMain.move_voltage(static_cast<int>(total_voltage));
   intakeSub.move_voltage(static_cast<int>(8.0/12.0 * (total_voltage)));
-  intakeCounterRoller.move_voltage(static_cast<int>(total_voltage));
+  intakeCounterRoller.move_voltage(static_cast<int>(8.0/12.0 * (total_voltage)) * (intakeMacroStatus == "R2" ? -1 : 1));
   last_commanded_velocity = target;
 
   //printf("Target: %.2f, CurrentVel: %.2f, FF: %.2f, PID: %.2f, Output: %.2f\n", target, kw::vector_average(motor_group -> get_actual_velocity_all()), ff, pid_output, total_voltage);
