@@ -241,8 +241,11 @@ double kw::velocity_controller::update() {
   }
   if (fabs(target) == 12000) {
     int sign = (target > 0) ? 1 : -1;
-    motor_group->move_voltage(sign * 12000);
+    
+    intakeMain.move_voltage(sign * 12000);
+    intakeSub.move_voltage(sign * 8/12 * 12000);
     intakeCounterRoller.move_voltage(sign * 12000);
+
     last_commanded_velocity = motor_group->get_actual_velocity();
     return motor_group->get_actual_velocity();
   }
@@ -258,7 +261,8 @@ double kw::velocity_controller::update() {
   total_voltage = clamp(total_voltage, -max_voltage, max_voltage);
   
   // Apply voltage to motor
-  motor_group->move_voltage(static_cast<int>(total_voltage));
+  intakeMain.move_voltage(static_cast<int>(total_voltage));
+  intakeSub.move_voltage(static_cast<int>(8.0/12.0 * (total_voltage)));
   intakeCounterRoller.move_voltage(static_cast<int>(total_voltage));
   last_commanded_velocity = target;
 
