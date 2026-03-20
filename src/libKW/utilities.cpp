@@ -196,9 +196,9 @@ double kw::lookup_table::get_value(double velocity) {
  * - velocity_pid: PID controller for velocity error correction
  * - max_voltage: Maximum voltage to apply to the motor
  */
-kw::velocity_controller::velocity_controller(pros::MotorGroup* motor_group, lookup_table voltage_lut, 
+kw::velocity_controller::velocity_controller(lookup_table voltage_lut, 
                                            kw::PID velocity_pid, double max_voltage) 
-  : motor_group(motor_group), voltage_lut(voltage_lut), velocity_pid(velocity_pid), 
+  : voltage_lut(voltage_lut), velocity_pid(velocity_pid), 
     target(0.0), max_voltage(max_voltage), last_commanded_velocity(0.0), running(true) {
   task = new pros::Task([this] {
     while (running) {
@@ -232,7 +232,6 @@ void kw::velocity_controller::set_target(double new_target) {
  * Returns: The current velocity after the update
  */
 double kw::velocity_controller::update() {
-  if (motor_group == nullptr) return 0.0;
   if (target == 0.0) {
     intakeMain.move_voltage(0);
     intakeSub.move_voltage(0);
@@ -276,6 +275,5 @@ double kw::velocity_controller::update() {
  * Get the target velocity
  */
 double kw::velocity_controller::get_velocity() {
-  if (motor_group == nullptr) return 0.0;
   return last_commanded_velocity;
 }

@@ -38,7 +38,7 @@ namespace kw {
 	class velocity_controller {
 		public:
 			// Constructor
-			velocity_controller(pros::MotorGroup* motor_group, lookup_table voltage_lut, kw::PID velocity_pid, double max_voltage);
+			velocity_controller(lookup_table voltage_lut, kw::PID velocity_pid, double max_voltage);
 
 			// Destructor
 			~velocity_controller();
@@ -54,7 +54,6 @@ namespace kw {
 			double get_velocity();
 
 		private:
-			pros::MotorGroup* motor_group;           // Motor group to control
 			lookup_table voltage_lut;      // Feedforward lookup table
 			PID velocity_pid;             // PID controller
 			double target;                // Target velocity
