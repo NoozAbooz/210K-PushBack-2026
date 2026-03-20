@@ -247,15 +247,15 @@ double kw::velocity_controller::update() {
     intakeSub.move_voltage(sign * 8/12 * 12000);
     intakeCounterRoller.move_voltage(sign * 8/12 * 12000 * (intakeMacroStatus == "R2" ? -1 : 1));
 
-    last_commanded_velocity = motor_group->get_actual_velocity();
-    return motor_group->get_actual_velocity();
+    last_commanded_velocity = intakeMain.get_actual_velocity();
+    return intakeMain.get_actual_velocity();
   }
   
   // Feedforward from lookup table
   float ff = voltage_lut.get_value(target);
     
   // PID control based on velocity error
-  float pid_output = velocity_pid.update(kw::vector_average(motor_group -> get_actual_velocity_all()));
+  float pid_output = velocity_pid.update(intakeMain.get_actual_velocity());
   
   // Combine feedforward and PID
   float total_voltage = ff + pid_output;
@@ -269,7 +269,7 @@ double kw::velocity_controller::update() {
 
   //printf("Target: %.2f, CurrentVel: %.2f, FF: %.2f, PID: %.2f, Output: %.2f\n", target, kw::vector_average(motor_group -> get_actual_velocity_all()), ff, pid_output, total_voltage);
   
-  return motor_group->get_actual_velocity();
+  return intakeMain.get_actual_velocity();
 }
 
 /*
