@@ -11,7 +11,7 @@ void kw::swing(double swing_angle, double time_limit_msec, bool forwards, double
 
   swing_angle = normalize_target(swing_angle); // Normalize target angle
   pid.setTarget(swing_angle);                 // Set PID target
-  pid.setIntegralMax(0);  
+  pid.setIntegralMax(0);
   pid.setIntegralRange(5);
 
   pid.setSmallBigErrorTolerance(threshold, threshold * 3);

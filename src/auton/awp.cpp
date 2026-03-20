@@ -226,7 +226,6 @@ void legacy_sawp() {
 	// 	loaderStatus = true;
 }
 
-
 void left_half() { // Left Side Half Solo AWP
 	toggleColourSort = false;
 	pros::Task([] {
