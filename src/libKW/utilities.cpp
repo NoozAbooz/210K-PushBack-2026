@@ -244,12 +244,12 @@ double kw::velocity_controller::update() {
     
     intakeMain.move_voltage(sign * 12000);
     intakeSub.move_voltage(sign * 8.0/12.0 * 12000);
-    intakeCounterRoller.move_voltage(sign * 8.0/12.0 * 12000 * (intakeMacroStatus == "R2" ? -1 : 1) * (intakeMacroStatus == "L1" ? 0 : 1) + (intakeMacroStatus == "L1" ? 3000 : 0));
+    intakeCounterRoller.move_voltage(sign * 8.0/12.0 * 12000 * (intakeMacroStatus == "R2" ? -1 : 1) * (intakeMacroStatus == "L1" ? 0 : 1) + (intakeMacroStatus == "L1" ? 500 : 0));
 
     last_commanded_velocity = intakeMain.get_actual_velocity();
     return intakeMain.get_actual_velocity();
   }
-  
+
   // Feedforward from lookup table
   float ff = voltage_lut.get_value(target);
     
