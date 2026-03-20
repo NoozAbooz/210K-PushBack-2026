@@ -11,11 +11,11 @@ inline pros::MotorGroup leftDrive({-8, -9, 10});
 inline pros::MotorGroup rightDrive({11, 3, -2});
 
 // Intake
-inline pros::Motor intakeMiddleLower(-0); // very top roller
-inline pros::Motor intakeMiddleUpper(0); // yes
-inline pros::Motor intakeTop(-0); // 11w flexwheel for goal height
-inline pros::Motor intakeBottom(-0); // preroller
-inline pros::MotorGroup intake({20, -12}, pros::v5::MotorGears::ratio_6_to_1);
+inline pros::Motor intakeCounterRoller(-2); // middle counter roller
+inline pros::Motor intakeMiddleUpper(0); // not used
+inline pros::Motor intakeTop(-0); // not used
+inline pros::Motor intakeBottom(-0); // not used
+inline pros::MotorGroup intake({20, -12}, pros::v5::MotorGears::ratio_6_to_1); //main 16.5W system
 
 // Pneumatics
 inline pros::adi::Pneumatics loaderPiston('F', false); // matchloader
