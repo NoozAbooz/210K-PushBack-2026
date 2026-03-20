@@ -243,8 +243,8 @@ double kw::velocity_controller::update() {
     int sign = (target > 0) ? 1 : -1;
     
     intakeMain.move_voltage(sign * 12000);
-    intakeSub.move_voltage(sign * 8/12 * 12000);
-    intakeCounterRoller.move_voltage(sign * 8/12 * 12000 * (intakeMacroStatus == "R2" ? -1 : 1));
+    intakeSub.move_voltage(sign * 8.0/12.0 * 12000);
+    intakeCounterRoller.move_voltage(sign * 8.0/12.0 * 12000 * (intakeMacroStatus == "R2" ? -1 : 1));
 
     last_commanded_velocity = intakeMain.get_actual_velocity();
     return intakeMain.get_actual_velocity();
