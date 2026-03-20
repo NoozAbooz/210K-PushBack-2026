@@ -11,7 +11,7 @@ inline pros::MotorGroup leftDrive({-8, -9, 10});
 inline pros::MotorGroup rightDrive({11, 3, -2});
 
 // Intake
-inline pros::MotorGroup intakeCounterRoller({-2}); // middle counter roller
+inline pros::MotorGroup intakeCounterRoller({-5}); // middle counter roller
 inline pros::MotorGroup intakeMain({12}, pros::v5::MotorGears::ratio_6_to_1); // 11w
 inline pros::MotorGroup intakeSub({20}); // 5.5w
 inline pros::MotorGroup intake({0, 0}); //main 16.5W system
