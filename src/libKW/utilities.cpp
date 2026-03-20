@@ -247,7 +247,7 @@ double kw::velocity_controller::update() {
     intakeSub.move_voltage(sign * 8.0/12.0 * 12000);
 
     if (intakeMacroStatus != "L1"){
-      intakeCounterRoller.move_voltage(sign * 8.0/12.0 * 12000 * (intakeMacroStatus == "R2" ? -1 : 1) * (intakeMacroStatus == "L1" ? 0 : 1));
+      intakeCounterRoller.move_voltage(sign * 8.0/12.0 * 12000 * (intakeMacroStatus == "R2" ? -1 : 1));
     }
     else if (intakeMacroStatus == "L1"){
       intakeCounterRoller.move_voltage(1000);
