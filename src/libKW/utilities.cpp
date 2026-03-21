@@ -250,7 +250,7 @@ double kw::velocity_controller::update() {
       intakeCounterRoller.move_voltage(sign * 8.0/12.0 * 12000 * (intakeMacroStatus == "R2" ? -1 : 1));
     }
     else if (intakeMacroStatus == "L1"){
-      intakeCounterRoller.move_voltage(1000);
+      intakeCounterRoller.move_voltage(2500); //index doesnt need velocity controller for counterroller
     }
 
     last_commanded_velocity = intakeMain.get_actual_velocity();
