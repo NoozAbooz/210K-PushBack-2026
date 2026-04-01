@@ -11,10 +11,10 @@ inline pros::MotorGroup leftDrive({-13, 12, -11});
 inline pros::MotorGroup rightDrive({18, -19, 20});
 
 // Intake
-inline pros::MotorGroup intakeCounterRoller({3}); // middle counter roller
-inline pros::MotorGroup intakeMain({-2}, pros::v5::MotorGears::ratio_6_to_1); // 11w
-inline pros::MotorGroup intakeSub({0}); // 5.5w
-inline pros::MotorGroup intake({-0, 0}); //main 16.5W system
+inline pros::MotorGroup intakeCounterRoller({-2}); // middle counter roller
+inline pros::MotorGroup intakeMain({3}, pros::v5::MotorGears::ratio_6_to_1); // 11w
+inline pros::MotorGroup intakeSub({10}); // 5.5w
+inline pros::MotorGroup intake({0, 0}); //main 16.5W system
 
 // Pneumatics
 inline pros::adi::Pneumatics loaderPiston('F', false); // matchloader

@@ -1,3 +1,4 @@
+#include "abstractGlobals.hpp"
 #include "deviceGlobals.hpp"
 #include "main.h"
 #include "libKW/api.hpp"
@@ -244,13 +245,16 @@ double kw::velocity_controller::update() {
     int sign = (target > 0) ? 1 : -1;
     
     intakeMain.move_voltage(sign * 12000);
-    intakeSub.move_voltage(sign * 8.0/12.0 * 12000);
+    intakeSub.move_voltage(sign * 12000);
 
-    if (intakeMacroStatus != "L1"){
+    if (intakeMacroStatus != "L1" and intakeMacroStatus != "L2") {
       intakeCounterRoller.move_voltage(sign * 8.0/12.0 * 12000 * (intakeMacroStatus == "R2" ? -1 : 1));
     }
-    else if (intakeMacroStatus == "L1"){
-      intakeCounterRoller.move_voltage(2500); //index doesnt need velocity controller for counterroller
+    else if (intakeMacroStatus == "L1") {
+      intakeCounterRoller.move_voltage(0); //index doesnt need velocity controller for counterroller
+    }
+    else if (intakeMacroStatus == "L2") {
+      intakeCounterRoller.move_voltage(0);
     }
 
     last_commanded_velocity = intakeMain.get_actual_velocity();
