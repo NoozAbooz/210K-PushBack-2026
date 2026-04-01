@@ -43,12 +43,12 @@ void true_sawp(){
 	kw::moveToPoint(24.5, 28, 1700, true, 127);
 	kw::turnToAngle(315, 700);
 	pros::Task([] {
-		intake_velocity.set_target(0);
+		//intake_velocity.set_target(0);
 		pros::delay(750);
 		intakeMacro("R2");
 		pros::delay(800);
 		//intake.move_voltage(0); // im pretty sure we have to we have to use the velocity controller to stop the intake
-		intake_velocity.set_target(0); // -> bro i forgot i made velo controller aurghhh
+		//intake_velocity.set_target(0); // -> bro i forgot i made velo controller aurghhh
 		pros::delay(200);
 		// intakePullDownPiston.set_value(false); // balls were getting caught in the bot after we finish midgoal, i relocated this code a bit after -MZ
 		// intakeMacro("L1"); // -> it is expected balls will fall out of the bot as we go to loader cuz midgoal isnt closed.... but we cant risk it getting stuck

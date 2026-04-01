@@ -120,7 +120,7 @@ void left_7() {
     pros::delay(1600);
     kw::moveToPoint(-22.3, 16.94, 1000, true, 127); //align for wing
     kw::turnToAngle(180, 700);
-    intake_velocity.set_target(0);
+    //intake_velocity.set_target(0);
     loaderPiston.set_value(false);
     kw::moveToPoint(-23.803, 34.84, 8000, false, 80); //wing
     // kw::turnToAngle(180, 700);
@@ -191,7 +191,7 @@ pros::Task([] {
     pros::delay(1600);
     kw::moveToPoint(47, 12.94, 1000, true, 127);
     kw::turnToAngle(180, 700);
-    intake_velocity.set_target(0);
+    //intake_velocity.set_target(0);
     kw::moveToPoint(46, 32, 8000, false, 100);
     kw::boomerang(44, 32, 226, 0.3, 1000, true, 100);
     kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);

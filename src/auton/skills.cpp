@@ -22,7 +22,7 @@ void skills(){
     kw::moveToPoint(4, 38, 900, false); // mid goal
 
     intakeMacro("R2");
-    intake_velocity.set_target(12000);
+    //intake_velocity.set_target(12000);
     pros::delay(1500);
     stopIntake();
 
@@ -58,7 +58,7 @@ void skills(){
      kw::turnToAngle(0, 1000);
      kw::move_raw(-5700, -5700);
      intakeMacro("R1");
-     intake_velocity.set_target(550);
+     //intake_velocity.set_target(550);
      loaderPiston.set_value(false);
     kw::set_odom_position(0, 0, 0);
      pros::delay(2200);
@@ -98,11 +98,11 @@ void skills(){
     kw::moveToPoint(30, -6, 1000, false);
     kw::turnToAngle(270,1000);
     intakeMacro("stop");
-    intake_velocity.set_target(0);
+    //intake_velocity.set_target(0);
     kw::boomerang(55, -5, 315, 0.3, 2000, false, 60);
     kw::move_raw(-4000, -4000);
     intakeMacro("R2");
-     intake_velocity.set_target(450);
+    // intake_velocity.set_target(450);
     pros::delay(6000);
     pros::Task([] {
         pros::delay(200);
@@ -128,7 +128,7 @@ void skills(){
     intakeMacro("L2");
     pros::delay(300);
     intakeMacro("R1");
-    intake_velocity.set_target(480);
+   // intake_velocity.set_target(480);
     pros::delay(3500);
    kw::set_odom_position(0, 0, 0);
     pros::delay(2000);
@@ -142,7 +142,7 @@ void skills(){
      kw::turnToAngle(0, 1000);
      kw::move_raw(-5700, -5700);
      intakeMacro("R1");
-     intake_velocity.set_target(550);
+     //intake_velocity.set_target(550);
      loaderPiston.set_value(false);
     kw::set_odom_position(0, 0, 0);
 
