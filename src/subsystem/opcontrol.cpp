@@ -14,20 +14,36 @@ using namespace kw;
 // kw::velocity_controller intake_velocity(intake_lut, vel_pid, 11000);
 
 std::string intakeMacroStatus = "";
+bool midShift = 0; //0 is normal, 1 is fast -> THERE WILL BE A SLOW MODE FOR SKILLS
 void intakeMacro(std::string str) {
+	if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) && controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)){ //midshift toggle
+		midShift = 1;
+	} else {
+		midShift = 0;
+	}
+
 	intakeMacroStatus = str;
 	if(str == "R1") { // score on long goal
 		//intake_velocity.set_target(12000);
+		trapdoorPiston.set_value(true);
 		intakeMain.move_voltage(12000);
 		intakeSub.move_voltage(12000);
 		intakeCounterRoller.move_voltage(12000);
-	} else if (str == "R2") { // score on mid goal
+	} else if (str == "R2" && midShift == 0) { // score on mid goal NORMAL
 		//intake_velocity.set_target(12000);
+		trapdoorPiston.set_value(false);
+		intakeMain.move_voltage(6000);
+		intakeSub.move_voltage(6000);
+		intakeCounterRoller.move_voltage(-4000);
+	} else if (str == "R2" && midShift == 1) { // score on mid goal FAST
+		//intake_velocity.set_target(12000);
+		trapdoorPiston.set_value(false);
 		intakeMain.move_voltage(12000);
 		intakeSub.move_voltage(12000);
 		intakeCounterRoller.move_voltage(-12000);
 	} else if (str == "L1") { // intake up to long goal scoring
 		//intake_velocity.set_target(12000);
+		trapdoorPiston.set_value(false);
 		intakeMain.move_voltage(12000);
 		intakeSub.move_voltage(12000);
 		intakeCounterRoller.move_voltage(12000);
@@ -62,7 +78,7 @@ void refreshSubsys1() { // intake
 
 bool loaderStatus = false; // matchloader frame/tongue mech
 void refreshSubsys2() {
-	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
+	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y) && midShift == 0) {
 		loaderStatus = !loaderStatus;
 		loaderPiston.set_value(loaderStatus);
 	}
