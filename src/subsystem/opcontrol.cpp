@@ -16,10 +16,10 @@ using namespace kw;
 std::string intakeMacroStatus = "";
 bool midShift = 0; //0 is normal, 1 is fast -> THERE WILL BE A SLOW MODE FOR SKILLS
 void intakeMacro(std::string str) {
-	if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) && controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)){ //midshift toggle
-		midShift = 1;
-	} else {
+	if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) && controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)){ //midshift hold
 		midShift = 0;
+	} else {
+		midShift = 1;
 	}
 
 	intakeMacroStatus = str;
@@ -32,9 +32,9 @@ void intakeMacro(std::string str) {
 	} else if (str == "R2" && midShift == 0) { // score on mid goal NORMAL
 		//intake_velocity.set_target(12000);
 		trapdoorPiston.set_value(false);
-		intakeMain.move_voltage(6000);
-		intakeSub.move_voltage(6000);
-		intakeCounterRoller.move_voltage(-4000);
+		intakeMain.move_voltage(6500);
+		intakeSub.move_voltage(6500);
+		intakeCounterRoller.move_voltage(-5100);
 	} else if (str == "R2" && midShift == 1) { // score on mid goal FAST
 		//intake_velocity.set_target(12000);
 		trapdoorPiston.set_value(false);
@@ -77,12 +77,13 @@ void refreshSubsys1() { // intake
 }
 
 bool loaderStatus = false; // matchloader frame/tongue mech
-void refreshSubsys2() {
+void refreshSubsys2() { //TOGGLE
 	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y) && midShift == 0) {
 		loaderStatus = !loaderStatus;
 		loaderPiston.set_value(loaderStatus);
 	}
 }
+
 bool blockerStatus = false; // blocker piston
 void refreshSubsys3() {
 	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
