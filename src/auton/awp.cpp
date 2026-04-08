@@ -3,8 +3,8 @@
 void true_sawp(){
 	pros::Task([] {
 		intakeMacro("L1");
-		blockerPiston.set_value(true);
-		//loaderPiston.set_value(true);
+		//blockerPiston.set_value(true);
+		loaderPiston.set_value(true);
 	});
 	kw::driveTo(8, 1000, 127); // push
 	kw::moveToPoint(-2, -39.52, 2500, false, 127); //loader
@@ -15,7 +15,7 @@ void true_sawp(){
 	pros::delay(120);
 	pros::Task([] {
 		pros::delay(300);
-		stopIntake();
+		stopIntake();//prob dont need this delay anymore
 		pros::delay(500);
 		intakeMacro("R1");
 		loaderPiston.set_value(false);

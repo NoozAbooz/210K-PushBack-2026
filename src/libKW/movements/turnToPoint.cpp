@@ -58,8 +58,8 @@ void kw::turnToPoint(double x, double y, double time_limit_msec, bool forwards, 
     pros::delay(10);
   }
   if(exit == true) {
-	prev_left_output = 0;
-	prev_right_output = 0;
+	  prev_left_output = 0;
+	  prev_right_output = 0;
     stop_chassis(pros::E_MOTOR_BRAKE_HOLD); // Stop at end
   }
   correct_angle = kw::get_imu_rotation(); // Update global heading

@@ -14,7 +14,7 @@ using namespace kw;
 // kw::velocity_controller intake_velocity(intake_lut, vel_pid, 11000);
 
 std::string intakeMacroStatus = "";
-bool midShift = 0; //0 is normal, 1 is fast -> THERE WILL BE A SLOW MODE FOR SKILLS
+bool midShift = 0; // 0 is normal, 1 is fast -> THERE WILL BE A SLOW MODE FOR SKILLS
 void intakeMacro(std::string str) {
 	if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) && controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)){ //midshift hold
 		midShift = 0;

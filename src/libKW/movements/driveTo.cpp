@@ -10,6 +10,7 @@ using namespace kw;
  * - exit: If true, stops the robot at the end; if false, allows chaining.
  * - async: If true, runs the drive in a separate task and returns immediately.
  */
+
 void kw::driveTo(double distance_in, double time_limit_msec, double max_output, bool exit, bool async) {
   if(async) {
     pros::Task task([&]() { 
@@ -20,6 +21,7 @@ void kw::driveTo(double distance_in, double time_limit_msec, double max_output, 
   }
 
   max_output = max_output * (12.0 / 127.0); // convert from [-127, 127] decivolts to [-12, 12] volts
+
   // Store initial dist travelled (function comes from odom.cpp)
   kw::encoder_mutex.take();
   double start_vertical_pos = kw::get_vertical_distance_traveled();
