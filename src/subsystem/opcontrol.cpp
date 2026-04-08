@@ -32,8 +32,8 @@ void intakeMacro(std::string str) {
 	} else if (str == "R2" && midShift == 0) { // score on mid goal NORMAL
 		//intake_velocity.set_target(12000);
 		trapdoorPiston.set_value(false);
-		intakeMain.move_voltage(6500);
-		intakeSub.move_voltage(6500);
+		intakeMain.move_voltage(7000);
+		intakeSub.move_voltage(7000);
 		intakeCounterRoller.move_voltage(-5100);
 	} else if (str == "R2" && midShift == 1) { // score on mid goal FAST
 		//intake_velocity.set_target(12000);
