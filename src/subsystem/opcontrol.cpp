@@ -23,7 +23,7 @@ void intakeMacro(std::string str) {
 	}
 
 	intakeMacroStatus = str;
-	if(str == "R1") { // score on long goal
+	if(str == "R2") { // score on long goal
 		//intake_velocity.set_target(12000);
 		trapdoorPiston.set_value(true);
 		intakeMain.move_voltage(12000);
