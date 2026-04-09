@@ -1,3 +1,4 @@
+#include "deviceGlobals.hpp"
 #include "main.h"
 #include "libKW/api.hpp"
 
@@ -14,8 +15,8 @@ double kw::wheel_distance_in = (36.0 / 48.0) * 3.17 * M_PI;
 // distance_* : Linear PID for straight driving
 // turn_*     : PID for turning in place
 // heading_correction_* : PID for heading correction during linear movement
-double kw::distance_kp = 1.05, kw::distance_ki = 0.0, kw::distance_kd = 7;
-double kw::turn_kp = 0.3, kw::turn_ki = 0.0, kw::turn_kd = 2.4;
+double kw::distance_kp = 1.07, kw::distance_ki = 0.0, kw::distance_kd = 7.2;
+double kw::turn_kp = 0.31, kw::turn_ki = 0.0, kw::turn_kd = 2.4;
 double kw::heading_correction_kp = 0.6, kw::heading_correction_ki = 0, kw::heading_correction_kd = 4;
 
 // Enable or disable the use of tracking wheels
@@ -24,14 +25,16 @@ bool kw::using_vertical_tracker = true;  // Set to true if a vertical tracking w
 
 // IGNORE THESE IF YOU ARE NOT USING TRACKING WHEELS
 // These comments are in the perspective of a top down view of the robot when the robot is facing upwards on your view
+// 2" wheels are actually 2.125
+// 2.75" and onwards are accurate
 
 // Horizontal distance from the center of the bot to the vertical tracking wheel (in inches, positive is when the wheel is behind the center of the robot)
-double kw::horizontal_tracker_dist_from_center = 1.81; // must change to 3.44, the actual offset
+double kw::horizontal_tracker_dist_from_center = 0.00; // must change to 3.44, the actual offset
 double kw::horizontal_tracker_diameter = 2.125; // Diameter of the horizontal tracker wheel (in inches)
 
 // Vertical distance from the center of the bot to the horizontal tracking wheel (in inches, positive is when the wheel is to the right of the center)
-double kw::vertical_tracker_dist_from_center = 0.05;
-double kw::vertical_tracker_diameter = 2.75; // Diameter of the vertical tracker wheel (in inches)
+double kw::vertical_tracker_dist_from_center = 0.00;
+double kw::vertical_tracker_diameter = 2.125; // Diameter of the vertical tracker wheel (in inches)
 
 // ============================================================================
 // ADVANCED TUNING (OPTIONAL)

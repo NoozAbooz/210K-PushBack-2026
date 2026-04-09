@@ -25,7 +25,7 @@ inline pros::adi::Pneumatics blockerPiston('H', false);
 
 /* Declare sensors */
 inline pros::Imu inertial1(16); // should always be the less scuffed one
-inline pros::Imu inertial2(14); // less scuffed one
+inline pros::Imu inertial2(15); // less scuffed one
 inline pros::Optical optical(0);
 inline pros::Optical parkColour(13);
 
@@ -34,6 +34,6 @@ inline pros::Distance leftDistance(18);
 inline pros::Distance rightDistance(5);
 inline pros::Distance fwdDistance(19);
 
-inline pros::Rotation verticalEncoder(7);
-inline pros::Rotation horizontalEncoder(4);
+inline pros::Rotation verticalEncoder(-17);
+inline pros::Rotation horizontalEncoder(14);
 //hello world it is 210K secret note iykyk :D

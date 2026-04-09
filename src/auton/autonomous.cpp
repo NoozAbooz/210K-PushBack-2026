@@ -15,10 +15,10 @@
 
 void testPID() {
     //kw::driveTo(24, 3000, 127);
-    //kw::moveToPoint(0, 24, 1000)  ; 
-    //kw::turnToAngle(180, 1500);
-    //kw::driveTo(24, 3000, 127);
-   // kw::driveTo(5, 1000);
+    kw::moveToPoint(0, 24, 1000)  ; 
+    kw::turnToAngle(180, 1500);
+    kw::driveTo(24, 3000, 127);
+  // kw::driveTo(5, 1000);
 
 }
 
@@ -142,7 +142,7 @@ rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
 
     {"Move forward", testPID, "", 0},
     { "Measure Odom Offsets", measureOdomOffsets, "", 220},
-    // { "Test PID", testPID, "", 220},
+    { "Test PID", testPID, "", 220},
     { "Test DistReset", testDistReset, "", 220},
     // { "Test Colour Sort", testColourSort, "", 220},
     // {"Legacy SAWP", legacy_sawp, "", 0},
