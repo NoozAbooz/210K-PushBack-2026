@@ -78,7 +78,7 @@ void refreshSubsys1() { // intake
 
 bool loaderStatus = false; // matchloader frame/tongue mech
 void refreshSubsys2() { //TOGGLE
-	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y) && midShift == 0) {
+	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y) && midShift == 1) {
 		loaderStatus = !loaderStatus;
 		loaderPiston.set_value(loaderStatus);
 	}
