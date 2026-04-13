@@ -52,6 +52,12 @@ void intakeMacro(std::string str) {
 		intakeMain.move_voltage(-12000);
 		intakeSub.move_voltage(-12000);
 		intakeCounterRoller.move_voltage(-12000);
+	} else if (str == "stop") {
+		//intake_velocity.set_target(0);
+		intakeMain.move_voltage(0);
+		intakeSub.move_voltage(0);
+		intakeCounterRoller.move_voltage(0);
+		trapdoorPiston.set_value(false);
 	}
 }
 
