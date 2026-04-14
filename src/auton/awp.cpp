@@ -23,10 +23,10 @@ void true_sawp(){
 	pros::delay(200);
 	kw::turnToAngle(270, 500);
 	kw::set_odom_position(0, 0, 0);
-	kw::turnToAngle(111, 800); // turn to face cluster
+	kw::turnToAngle(111, 800, 127, 0, false); // turn to face cluster
 	intakeMacro("L1");
 	kw::moveToPoint(24.4, -7.0, 1000, true, 90); // Mid Cluster 1
-	kw::turnToAngle(88, 500);
+	kw::turnToAngle(88, 500, 127, 0, false);
 	kw::moveToPoint(66, -6.2, 1000, true, 127, false); // Mid Cluster 1
 	kw::boomerang(100.5, 23, 0, 0.03, 2000, true, 85); // Mid Cluster 2
 	pros::Task([] {
