@@ -20,7 +20,7 @@ void true_sawp(){
 	});
 	kw::moveToPoint(21, -44.75, 1000, false, 127); // long Goal #1
 	kw::move_raw(-6000, -6000);
-	pros::delay(300);
+	pros::delay(200);
 	kw::turnToAngle(270, 500);
 	kw::set_odom_position(0, 0, 0);
 	kw::turnToAngle(111, 800); // turn to face cluster
@@ -36,7 +36,7 @@ void true_sawp(){
 	kw::moveToPoint(101, 0, 1000, false); // Mid Cluster 2
 	loaderPiston.set_value(true);
 	kw::move_raw(-6000, -6000);
-	pros::delay(350);
+	pros::delay(450);
 	kw::turnToAngle(0, 500);
 	intakeMacro("L1");
 	kw::set_odom_position(0, 0, 0);
