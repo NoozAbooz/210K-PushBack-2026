@@ -62,7 +62,7 @@ void sawp() {
 	toggleColourSort = false;
 	pros::Task([] {
 		intakeMacro("L1");
-		blockerPiston.set_value(true);
+		//blockerPiston.set_value(true);
 		loaderPiston.set_value(true);
 	});
 	kw::moveToPoint(0, 30.75, 1000, true, 127);

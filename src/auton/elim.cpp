@@ -49,7 +49,7 @@ void left_elim() {
         intakeMacro("L1");
         pros::delay(610);
         loaderPiston.set_value(true);
-        blockerPiston.set_value(true);
+       // blockerPiston.set_value(true);
         pros::delay(300);
         loaderPiston.set_value(false);
         pros::delay(1300);
@@ -100,7 +100,7 @@ void left_7() {
         intakeMacro("L1");
         pros::delay(650);
         loaderPiston.set_value(true);
-        blockerPiston.set_value(true);
+        //blockerPiston.set_value(true);
     });
     kw::moveToPoint(-5.8, 21.67, 1000, true, 80, false); // group of three
     kw::turnToAngle(233, 700);
@@ -169,7 +169,7 @@ pros::Task([] {
         intakeMacro("L1");
         pros::delay(680);
         loaderPiston.set_value(true);
-        blockerPiston.set_value(true);
+        //blockerPiston.set_value(true);
     });
     kw::moveToPoint(6, 21.67, 1000, true, 70, false); // Loader #1
     kw::turnToAngle(127, 700);
