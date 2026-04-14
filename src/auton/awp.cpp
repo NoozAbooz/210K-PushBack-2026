@@ -46,15 +46,15 @@ void true_sawp(){
 		kw::driveTo(-5, 1000, 127); // Mid to Loader
 	kw::turnToAngle(45, 1000);
 	pros::Task([] {
-		pros::delay(550);
+		pros::delay(650);
 		intakeMacro("L2");
-		pros::delay(200);
+		pros::delay(300);
 	intakeMacro("R2");
 	intakeCounterRoller.move_voltage(-1200);
 	});
 	kw::moveToPoint(-40.2, -24, 2000, false, 127); // Loader #
 
-	kw::move_raw(-4000, -4000);
+	//kw::move_raw(-4000, -4000);
 	loaderPiston.set_value(false);
 }
 
