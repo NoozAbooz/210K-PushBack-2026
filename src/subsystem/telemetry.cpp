@@ -1,3 +1,4 @@
+#include "deviceGlobals.hpp"
 #include "main.h"
 #include "libKW/api.hpp"
 
@@ -28,8 +29,11 @@ void initTelemetry() {
 
 			if(telemState == 0) {
 				double drivetrainAvgTemp = kw::vector_average(leftDrive.get_temperature_all());
-				double intakeAvgTemp = kw::vector_average(intake.get_temperature_all());
-				controller.print(0, 0, "DT%.0lf|INT%.0lf|T%.0lf  ", drivetrainAvgTemp, intakeAvgTemp, kw::theta);
+				double intakeMainTemp = kw::vector_average(intakeMain.get_temperature_all());
+				double intakeSubTemp = kw::vector_average(intakeSub.get_temperature_all());
+				double intakeCounterTemp = kw::vector_average(intakeCounterRoller.get_temperature_all());
+				double intakeTemp = (intakeMainTemp + intakeSubTemp + intakeCounterTemp) / 3;
+				controller.print(0, 0, "DT%.0lf|INT%.0lf|T%.0lf  ", drivetrainAvgTemp, intakeTemp, kw::theta);
 			} else if (telemState == 1) {
 				controller.print(0, 0, "X:%.0lf Y:%.0lf T:%.0lf   ", kw::x_pos, kw::y_pos, kw::theta);
 			} else if (telemState == 2) {
