@@ -1,7 +1,61 @@
+#include "deviceGlobals.hpp"
+#include "libKW/drivetrain/chassis.hpp"
+#include "libKW/drivetrain/odom.hpp"
 #include "main.h"
+#include "pros/rtos.hpp"
 
 void true_sawp(){
-	
+	intakeMacro("L1");
+	kw::moveToPoint(0, 9.75, 300, true, 127);
+	kw::moveToPoint(0, -42.75, 2000, false, 127);
+	loaderPiston.set_value(true);
+	kw::turnToAngle(270, 700); // turn to face loader
+	kw::moveToPoint(-10, -44.75, 700, true,127); // Loader #1
+	kw::move_raw(5000, 5000);
+	pros::delay(270);
+		pros::Task([] {
+		pros::delay(700);
+		intakeMacro("R1");
+		loaderPiston.set_value(false);
+	});
+	kw::moveToPoint(21, -44.75, 1000, false, 127); // long Goal #1
+	kw::move_raw(-6000, -6000);
+	pros::delay(300);
+	kw::turnToAngle(270, 500);
+	kw::set_odom_position(0, 0, 0);
+	kw::turnToAngle(111, 800); // turn to face cluster
+	intakeMacro("L1");
+	kw::moveToPoint(24.4, -7.0, 1000, true, 90); // Mid Cluster 1
+	kw::turnToAngle(88, 500);
+	kw::moveToPoint(66, -6.2, 1000, true, 127, false); // Mid Cluster 1
+	kw::boomerang(100.5, 23, 0, 0.03, 2000, true, 85); // Mid Cluster 2
+	pros::Task([] {
+		pros::delay(450);
+		intakeMacro("R1");
+	});
+	kw::moveToPoint(101, 0, 1000, false); // Mid Cluster 2
+	loaderPiston.set_value(true);
+	kw::move_raw(-6000, -6000);
+	pros::delay(350);
+	kw::turnToAngle(0, 500);
+	intakeMacro("L1");
+	kw::set_odom_position(0, 0, 0);
+	kw::moveToPoint(-4, 30, 1000, true, 127); // Mid Goal
+	kw::move_raw(5000, 5000);
+	pros::delay(200);
+		kw::driveTo(-5, 1000, 127); // Mid to Loader
+	kw::turnToAngle(45, 1000);
+	pros::Task([] {
+		pros::delay(550);
+		intakeMacro("L2");
+		pros::delay(200);
+	intakeMacro("R2");
+	intakeCounterRoller.move_voltage(-1200);
+	});
+	kw::moveToPoint(-40.2, -24, 2000, false, 127); // Loader #
+
+	kw::move_raw(-4000, -4000);
+	loaderPiston.set_value(false);
 }
 
 void sawp() {

@@ -15,7 +15,7 @@ double kw::wheel_distance_in = (36.0 / 48.0) * 3.17 * M_PI;
 // distance_* : Linear PID for straight driving
 // turn_*     : PID for turning in place
 // heading_correction_* : PID for heading correction during linear movement
-double kw::distance_kp = 1.07, kw::distance_ki = 0.0, kw::distance_kd = 7.2;
+double kw::distance_kp = 1.05, kw::distance_ki = 0.0, kw::distance_kd = 7.2;
 double kw::turn_kp = 0.31, kw::turn_ki = 0.0, kw::turn_kd = 2.4;
 double kw::heading_correction_kp = 0.6, kw::heading_correction_ki = 0, kw::heading_correction_kd = 4;
 
