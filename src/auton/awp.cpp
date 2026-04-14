@@ -38,8 +38,11 @@ void true_sawp(){
 	kw::move_raw(-6000, -6000);
 	pros::delay(450);
 	kw::turnToAngle(0, 500);
-	intakeMacro("L1");
 	kw::set_odom_position(0, 0, 0);
+	pros::Task([] {
+		pros::delay(450);
+		intakeMacro("L1");
+	});
 	kw::moveToPoint(-4, 30, 1000, true, 127); // Mid Goal
 	kw::move_raw(5000, 5000);
 	pros::delay(200);
