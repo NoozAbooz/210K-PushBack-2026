@@ -13,7 +13,7 @@ void initTelemetry() {
 			if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
 				telemState++; // Toggle telemetry display
 			}
-			if (telemState > 2) {
+			if (telemState > 3) {
 				telemState = 0;
 			}
 
@@ -35,8 +35,13 @@ void initTelemetry() {
 				double intakeTemp = (intakeMainTemp + intakeSubTemp + intakeCounterTemp) / 3;
 				controller.print(0, 0, "DT%.0lf|INT%.0lf|T%.0lf  ", drivetrainAvgTemp, intakeTemp, kw::theta);
 			} else if (telemState == 1) {
-				controller.print(0, 0, "X:%.0lf Y:%.0lf T:%.0lf   ", kw::x_pos, kw::y_pos, kw::theta);
+				double intakeMainTemp = kw::vector_average(intakeMain.get_temperature_all());
+				double intakeSubTemp = kw::vector_average(intakeSub.get_temperature_all());
+				double intakeCounterTemp = kw::vector_average(intakeCounterRoller.get_temperature_all());
+				controller.print(0, 0, "MAIN:%.0lf SUB:%.0lf COUNTER:%.0lf", intakeMainTemp, intakeSubTemp, intakeCounterTemp);
 			} else if (telemState == 2) {
+				controller.print(0, 0, "X:%.0lf Y:%.0lf T:%.0lf   ", kw::x_pos, kw::y_pos, kw::theta);
+			} else if (telemState == 3) {
 				auto auton = gui_selector.get_auton();
 				const char* auton_name = auton->name.c_str();
 				controller.print(0, 0, "%s|%s      ", alliance.c_str(), auton_name);
