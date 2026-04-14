@@ -27,7 +27,7 @@ void true_sawp(){
 	intakeMacro("L1");
 	kw::moveToPoint(24.4, -7.0, 1000, true, 90); // Mid Cluster 1
 	kw::turnToAngle(88, 500, 127, 0, false);
-	kw::moveToPoint(66, -6.2, 1000, true, 127, false); // Mid Cluster 1
+	kw::moveToPoint(68, -6.2, 1000, true, 127, false); // Mid Cluster 1
 	kw::boomerang(100.5, 23, 0, 0.05, 2000, true, 85); // Mid Cluster 2
 	pros::Task([] {
 		pros::delay(450);
