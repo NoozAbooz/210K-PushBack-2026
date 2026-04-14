@@ -27,12 +27,12 @@ inline pros::adi::Pneumatics blockerPiston('H', false);
 inline pros::Imu inertial1(16); // should always be the less scuffed one
 inline pros::Imu inertial2(15); // less scuffed one
 inline pros::Optical optical(0);
-inline pros::Optical parkColour(13);
+inline pros::Optical parkColour(0);
 
-inline pros::Distance bwdDistance(6);
-inline pros::Distance leftDistance(18);
-inline pros::Distance rightDistance(5);
-inline pros::Distance fwdDistance(19);
+inline pros::Distance bwdDistance(0);
+inline pros::Distance leftDistance(0);
+inline pros::Distance rightDistance(0);
+inline pros::Distance fwdDistance(0);
 
 inline pros::Rotation verticalEncoder(-17);
 inline pros::Rotation horizontalEncoder(14);
