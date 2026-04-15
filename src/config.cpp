@@ -25,6 +25,7 @@ bool kw::using_vertical_tracker = true;  // Set to true if a vertical tracking w
 
 // IGNORE THESE IF YOU ARE NOT USING TRACKING WHEELS
 // These comments are in the perspective of a top down view of the robot when the robot is facing upwards on your view
+// Ideally your wheels are zero offset, or a 3" or greater offset
 // 2" wheels are actually 2.125
 // 2.75" and onwards are accurate
 
