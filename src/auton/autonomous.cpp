@@ -129,13 +129,13 @@ void driveForward() {
 }
 
 rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
-    {"SAWP", sawp, "", 0},
+//    {"SAWP", sawp, "", 0},
     {"True SAWP", true_sawp, "", 0},
     {"Left Awp", left_half, "", 0},
     {"Right Awp", right_half, "", 0},
-
+    {"R 6+3", right_elim, "", 0},
     {"7 Right", right_7, "", 0},
-    {"6+3", left_elim, "", 0},
+    {"L 6+3", left_elim, "", 0},
     {"7 Left", left_7, "", 0},
 
     {"Skills", skills, "", 100},

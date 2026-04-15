@@ -7,41 +7,29 @@
 #include "pros/motors.h"
 
 void right_elim() {
-    intakeMacro("L1");
-    wingPiston.set_value(true);
-    kw::driveTo(28.5, 2000, 50);
-    kw::moveToPoint(14, 48, 1000);
-    pros::delay(400);
-    kw::moveToPoint(0, 22, 1000, false);
-    kw::turnToAngle(124, 1000);
-    kw::moveToPoint(31, 17, 2000);
-    loaderPiston.set_value(true);
-    kw::turnToAngle(160, 1000);    
-    kw::driveTo(20, 1000, 70);
-    //kw::moveToPoint(35.0, 2.7, 1500, true, 60);
-    kw::move_raw(3000, 3000);
-    pros::delay(150);
-    //kw::driveTo(-33, 1000);
-    kw::moveToPoint(25.9, 33.3, 1000, false);
-    stopIntake();
-    kw::move_raw(-8000, -8000);
-    stopIntake();
-    pros::delay(100);
-        intakeMacro("L2");
-        pros::delay(100);
-        intakeMacro("R1");
-    pros::delay(1500);
+      pros::Task([] {
+        intakeMacro("L1");
+        pros::delay(610);
+        loaderPiston.set_value(true);
+       // blockerPiston.set_value(true);
+        pros::delay(300);
+        loaderPiston.set_value(false);
+        pros::delay(1300);
+        loaderPiston.set_value(true);
+    });
+    kw::moveToPoint(6, 21.67, 1000, true, 80, false); // Group of 3
+    kw::boomerang(33, 39.20, 90, 0.4, 2500, true, 50); // Under Bar
+    pros::delay(200);
+    kw::moveToPoint(17, 21.67, 1000, false, 127, false); // Backing Out
     loaderPiston.set_value(false);
-    kw::move_raw(0,0);
-    pros::delay(2000);
-    stopIntake();
-    wingPiston.set_value(false);
-    kw::moveToPoint(+37, 30, 1000);
-    kw::turnToAngle(167, 1000);
-    //kw::moveToPoint(+28.0, 57, 8000, false, 70);
-    kw::driveTo(-30, 3000, 80);
-    kw::turnToAngle(161, 1000);
+    kw::boomerang(36.6, 9, 180, 0.5, 2000, false, 70); // moving to long goal
+    pros::Task([]{
+        pros::delay(450);
+            intakeMacro("R1");
+            pros::delay(1500);
+            intakeMacro("L1");
 
+    });
 }
 
 void left_elim() {
