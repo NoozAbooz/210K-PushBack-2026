@@ -53,7 +53,10 @@ void true_sawp(){
 		intakeMacro("L2");
 		pros::delay(400);
 	intakeMacro("R2");
-	intakeCounterRoller.move_voltage(-1300);
+	//intakeCounterRoller.move_voltage(-1300);
+	intakeMain.move_voltage(7000);
+		intakeSub.move_voltage(7000);
+		intakeCounterRoller.move_voltage(-5100);
 	});
 	kw::moveToPoint(-40.1, -24.4, 2000, false, 127); // Loader #
 
