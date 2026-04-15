@@ -1,3 +1,4 @@
+#include "abstractGlobals.hpp"
 #include "deviceGlobals.hpp"
 #include "libKW/drivetrain/chassis.hpp"
 #include "libKW/drivetrain/odom.hpp"
@@ -51,7 +52,9 @@ void true_sawp(){
 	pros::Task([] {
 		pros::delay(600);
 		intakeMacro("L2");
-		pros::delay(400);
+		pros::delay(200);
+		intakeMacro("stop");
+		pros::delay(200);
 	intakeMacro("R2");
 	//intakeCounterRoller.move_voltage(-1300);
 	intakeMain.move_voltage(7000);

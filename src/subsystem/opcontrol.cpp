@@ -76,6 +76,7 @@ void refreshSubsys1() { // intake
 			intakeMain.move_voltage(0);
 			intakeCounterRoller.move_voltage(0);
 			intakeSub.move_voltage(0);
+			midShift = 1;
 			//intake_velocity.set_target(0);
 			// trapdoorPiston.set_value(false); // close trapdoor
 		}
