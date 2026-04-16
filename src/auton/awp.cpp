@@ -57,14 +57,15 @@ void true_sawp(){
 		intakeMacro("stop");
 		pros::delay(200);
 	intakeMacro("R2");
-	intakeCounterRoller.move_voltage(-1300);
-	// intakeMain.move_voltage(7000);
-	// 	intakeSub.move_voltage(7000);
-	// 	intakeCounterRoller.move_voltage(-5100);
+	// intakeCounterRoller.move_voltage(-1300);
+	intakeMain.move_voltage(5000);
+		intakeSub.move_voltage(5000);
+		intakeCounterRoller.move_voltage(-3000);
 	});
 	kw::moveToPoint(-40.1, -24.4, 2000, false, 127); // Loader #
-
-	kw::move_raw(-3000, -3000);
+	leftDrive.set_brake_mode_all(pros::E_MOTOR_BRAKE_COAST);
+	rightDrive.set_brake_mode_all(pros::E_MOTOR_BRAKE_COAST);
+	//kw::move_raw(-3000, -3000);
 	loaderPiston.set_value(false);
 }
 
