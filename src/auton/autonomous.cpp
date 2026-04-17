@@ -131,23 +131,23 @@ void driveForward() {
 rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
 //    {"SAWP", sawp, "", 0},
     {"True SAWP", true_sawp, "", 0},
-    {"Left Awp", left_half, "", 0},
-    {"Right Awp", right_half, "", 0},
-    {"R 6+3", right_elim, "", 0},
+   // {"Left Awp", left_half, "", 0},
+    //{"Right Awp", right_half, "", 0},
+    {"R 5+4", right_elim, "", 0},
     {"7 Right", right_7, "", 0},
     {"L 6+3", left_elim, "", 0},
     {"7 Left", left_7, "", 0},
 
-    {"Skills", skills, "", 100},
+    //{"Skills", skills, "", 100},
 
     {"Move forward", testPID, "", 0},
-    { "Measure Odom Offsets", measureOdomOffsets, "", 220},
-    { "Test PID", testPID, "", 220},
-    { "Test DistReset", testDistReset, "", 220},
+   // { "Measure Odom Offsets", measureOdomOffsets, "", 220},
+  //  { "Test PID", testPID, "", 220},
+   // { "Test DistReset", testDistReset, "", 220},
     // { "Test Colour Sort", testColourSort, "", 220},
     // {"Legacy SAWP", legacy_sawp, "", 0},
     {"97 skills", skills, "", 0},
-    {"Legacy Skills", Legacy_skills, "", 0}
+   // {"Legacy Skills", Legacy_skills, "", 0}
 });
 
 void autonomous() {
