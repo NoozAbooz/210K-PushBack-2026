@@ -25,7 +25,7 @@ void true_sawp(){
 	kw::moveToPoint(21, -45, 1000, false, 127); // long Goal #1
 	kw::move_raw(-8000, -8000);
 	pros::delay(350);
-	kw::turnToAngle(270, 500);
+	kw::turnToAngle(270, 200);
 	kw::set_odom_position(0, 0, 0);
 	pros::delay(200);
 	kw::turnToAngle(111, 800, 127, 0); // turn to face cluster
