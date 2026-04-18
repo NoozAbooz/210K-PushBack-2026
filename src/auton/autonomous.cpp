@@ -133,6 +133,7 @@ rd::Selector gui_selector({ // SAWP (Solo AWP), HAWP (Half AWP)
     {"True SAWP", true_sawp, "", 0},
    // {"Left Awp", left_half, "", 0},
     //{"Right Awp", right_half, "", 0},
+    //{"R 6+3", R_6and3, "", 0},
     {"R 5+4", right_elim, "", 0},
     {"R 7W", right_7, "", 0},
    // {"R 4W", right_4, "", 0},

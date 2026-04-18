@@ -61,3 +61,4 @@ extern void L_5and4();
 extern void left_7();
 extern void right_7();
 extern void right_4();
+extern void R_6and3();

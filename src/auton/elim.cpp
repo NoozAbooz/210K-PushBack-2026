@@ -127,6 +127,44 @@ void left_elim() {
 
 }
 
+void R_6and3() {
+    pros::Task([] {
+        intakeMacro("L1");
+        pros::delay(390);
+        loaderPiston.set_value(true);
+       // blockerPiston.set_value(true);
+        pros::delay(300);
+        loaderPiston.set_value(false);
+        pros::delay(1100);
+        loaderPiston.set_value(true);
+    });
+    kw::moveToPoint(6, 21.67, 1000, true, 127, false); // Group of 3
+    kw::boomerang(31.2, 39.00, 90, 0.4, 1300, true, 75); // Under Bar
+    pros::delay(150);
+    kw::moveToPoint(18, 21.67, 1000, false, 127, false); // Backing Out
+    kw::boomerang(38, 10, 180, 0.5, 2000, false, 90); // moving to long goal
+     pros::Task([]{
+        pros::delay(750);
+            intakeMacro("R1");
+            pros::delay(1000);
+            intakeMacro("stop");
+    });
+    kw::moveToPoint(38.4, 19, 1000, false);  //at long goal
+    kw::move_raw(-7000, -7000);
+    pros::delay(1000);
+     kw::moveToPoint(38, -15, 700, true, 70, false); // drive to loader
+    kw::move_raw(6000, 6000);
+    pros::delay(250);
+    kw::driveTo(-10, 1000);
+     kw::turnToAngle(315, 1000);
+    loaderPiston.set_value(false);
+    kw::boomerang(1.8, 38.5, 315, 0.3, 2000 , true, 80);  // mid goal
+    intakeMacro("L2");
+    intakeMain.move_voltage(-5000);
+    intakeSub.move_voltage(-5000);
+    kw::driveTo(1, 1000, 80);
+}
+
 void L_5and4() {
       pros::Task([] {
         intakeMacro("L1");
