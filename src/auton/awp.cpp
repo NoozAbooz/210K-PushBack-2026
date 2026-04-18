@@ -51,7 +51,7 @@ void true_sawp(){
 		intakeMacro("L1");
 	});
 
-	kw::moveToPoint(-1.4, 31, 1000, true, 127); // Mid Goal
+	kw::moveToPoint(-1.4, 31.5, 1000, true, 100); // Mid Goal
 	kw::move_raw(5000, 5000);
 	pros::delay(130);
 	kw::driveTo(-12, 1000, 127); // Mid to Loader
