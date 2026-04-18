@@ -21,6 +21,7 @@ inline pros::adi::Pneumatics loaderPiston('F', false); // matchloader
 inline pros::adi::Pneumatics trapdoorPiston('A', false);
 inline pros::adi::Pneumatics intakePullDownPiston('B', false); // midgoal
 inline pros::adi::Pneumatics wingPiston('G', false);
+inline pros::adi::Pneumatics wing2Piston('E', false);
 inline pros::adi::Pneumatics blockerPiston('H', false);
 
 /* Declare sensors */

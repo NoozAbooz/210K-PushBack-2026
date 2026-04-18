@@ -38,7 +38,7 @@ void opcontrol() {
 		refreshSubsys2(); // loader
 		refreshSubsys3(); // blocker
 		refreshSubsys4(); // wing
-
+		refreshSubsys5(); // wing 2
 		pros::delay(10); // Delay to save resources on brain
 	}
 }

@@ -8,6 +8,7 @@
 void true_sawp(){
 	intakeMacro("L1");
 	wingPiston.set_value(true);
+	wing2Piston.set_value(true);
 	kw::moveToPoint(0, 8.75, 500, true, 127);
 	kw::moveToPoint(0, -44, 2000, false, 127);
 	loaderPiston.set_value(true);

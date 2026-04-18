@@ -85,7 +85,7 @@ void refreshSubsys1() { // intake
 
 bool loaderStatus = false; // matchloader frame/tongue mech
 void refreshSubsys2() { //TOGGLE
-	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y) && midShift == 1) {
+	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
 		loaderStatus = !loaderStatus;
 		loaderPiston.set_value(loaderStatus);
 	}
@@ -101,7 +101,7 @@ void refreshSubsys3() {
 
 bool wingStatus = false; // wing
 void refreshSubsys4() {
-	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT) && midShift == 1) {
 		wingStatus = !wingStatus;
 		wingPiston.set_value(wingStatus);
 	}
@@ -110,4 +110,12 @@ void refreshSubsys4() {
 	// } else {
 	// 	wingPiston.set_value(true);
 	// }
+}
+
+bool wing2status = false; // wing 2
+void refreshSubsys5() {
+	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
+		wing2status = !wing2status;
+		wing2Piston.set_value(wing2status);
+	}
 }

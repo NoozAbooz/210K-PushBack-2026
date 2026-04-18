@@ -27,9 +27,11 @@ extern void refreshSubsys1();
 extern void refreshSubsys2();
 extern void refreshSubsys3();
 extern void refreshSubsys4();
+extern void refreshSubsys5();
 extern bool loaderStatus;
 extern bool blockerStatus;
 extern bool wingStatus;
+extern bool wing2status;
 
 /* Macros (mainly intended to be called in auton)*/
 extern bool intakeLock; // true = disabled intaking, false = normal
@@ -55,5 +57,7 @@ extern void Legacy_skills();
 // Elim Routines
 extern void right_elim();
 extern void left_elim();
+extern void L_5and4();
 extern void left_7();
 extern void right_7();
+extern void right_4();
