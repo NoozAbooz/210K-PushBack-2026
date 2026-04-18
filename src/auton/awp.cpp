@@ -76,6 +76,9 @@ void true_sawp(){
 	loaderPiston.set_value(false);
 	//kw::driveTo(1.8, 1000); // Mid to Loader
 	// kw::turnToAngle(45, 500);
+
+	wingStatus = true;
+	wing2status = true;
 }
 
 void sawp() {

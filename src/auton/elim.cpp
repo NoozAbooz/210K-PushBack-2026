@@ -56,7 +56,9 @@ void right_elim() {
     intakeMain.move_voltage(-5000);
     intakeSub.move_voltage(-5000);
     kw::driveTo(1, 1000, 80);
-   // kw::move_raw(1000, 1000); 
+    wingStatus = true;
+    wing2status = true;
+    // kw::move_raw(1000, 1000); 
     // pros::delay(300);
     // pros::Task([]{
     //     pros::delay(400);
@@ -125,7 +127,8 @@ void left_elim() {
     kw::turnToAngle(180, 700);
     kw::moveToPoint(-27, 37, 1000, false); // WIng
 
-
+wing2status = false;
+wingStatus = false;
 
 }
 
@@ -218,6 +221,9 @@ void L_5and4() {
 		intakeCounterRoller.move_voltage(-2500);
 	});
     kw::boomerang(4, 41, 225, 0.4, 2000 , false, 80);  // mid goal
+    wing2status = false;
+wingStatus = false;
+
 };
 
 void left_7() {
@@ -255,6 +261,9 @@ pros::Task([] {
    
     kw::boomerang(-25, 31, 226, 0.3, 1000, true, 100); //turn into post
     kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
+
+    wing2status = false;
+wingStatus = false;
 
     
    // **old Stuff below**
@@ -352,6 +361,9 @@ pros::Task([] {
     kw::moveToPoint(46, 32, 8000, false, 100);
     kw::boomerang(44, 32, 226, 0.3, 1000, true, 100);
     kw::stop_chassis(pros::E_MOTOR_BRAKE_HOLD);
+    wing2status = false;
+wingStatus = false;
+
     //old stuff below
 
 //     toggleColourSort = false;
