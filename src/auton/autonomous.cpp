@@ -14,10 +14,11 @@
  */
 
 void testPID() {
+    kw::driveTo(6, 1000, 127);
     //kw::driveTo(24, 3000, 127);
-    kw::moveToPoint(0, 24, 1000)  ; 
-    kw::turnToAngle(180, 1500);
-    kw::driveTo(24, 3000, 127);
+    // kw::moveToPoint(0, 24, 1000)  ; 
+    // kw::turnToAngle(180, 1500);
+    // kw::driveTo(24, 3000, 127);
   // kw::driveTo(5, 1000);
 
 }

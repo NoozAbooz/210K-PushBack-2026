@@ -9,6 +9,8 @@
 void right_elim() {
       pros::Task([] {
         intakeMacro("L1");
+        wingPiston.set_value(true);
+        wing2Piston.set_value(true);
         pros::delay(390);
         loaderPiston.set_value(true);
        // blockerPiston.set_value(true);
@@ -18,7 +20,7 @@ void right_elim() {
         loaderPiston.set_value(true);
     });
     kw::moveToPoint(6, 21.67, 1000, true, 127, false); // Group of 3
-    kw::boomerang(31, 39.00, 90, 0.4, 1300, true, 75); // Under Bar
+    kw::boomerang(31, 39.70, 90, 0.4, 1300, true, 75); // Under Bar
     pros::delay(150);
     kw::moveToPoint(18, 21.67, 1000, false, 127, false); // Backing Out
     kw::boomerang(38, 6, 180, 0.5, 2000, false, 90); // moving to long goal
