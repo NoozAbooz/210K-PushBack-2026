@@ -25,8 +25,8 @@ inline pros::adi::Pneumatics wing2Piston('E', false);
 inline pros::adi::Pneumatics blockerPiston('H', false);
 
 /* Declare sensors */
-inline pros::Imu inertial1(16); // should always be the less scuffed one
-inline pros::Imu inertial2(15); // less scuffed one
+inline pros::Imu inertial1(15); // should always be the less scuffed one
+inline pros::Imu inertial2(16); // less scuffed one
 inline pros::Optical optical(0);
 inline pros::Optical parkColour(0);
 

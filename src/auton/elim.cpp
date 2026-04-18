@@ -20,10 +20,10 @@ void right_elim() {
         loaderPiston.set_value(true);
     });
     kw::moveToPoint(6, 21.67, 1000, true, 127, false); // Group of 3
-    kw::boomerang(31, 39.70, 90, 0.4, 1300, true, 75); // Under Bar
+    kw::boomerang(31, 38.50, 90, 0.4, 1300, true, 75); // Under Bar
     pros::delay(150);
     kw::moveToPoint(18, 21.67, 1000, false, 127, false); // Backing Out
-    kw::boomerang(38, 6, 180, 0.5, 2000, false, 90); // moving to long goal
+    kw::boomerang(39, 6, 180, 0.5, 2000, false, 90); // moving to long goal
     // pros::Task([]{
     //     pros::delay(450);
     //         intakeMacro("R1");
@@ -35,20 +35,20 @@ void right_elim() {
     // kw::move_raw(-7000, -7000);
     // loaderPiston.set_value(true);
     // pros::delay(700);
-    kw::moveToPoint(38, -14, 700, true, 70, false); // drive to loader
+    kw::moveToPoint(39, -14, 700, true, 70, false); // drive to loader
     kw::move_raw(6000, 6000);
     pros::delay(250);
          pros::Task([]{
         pros::delay(650);
             intakeMacro("R1");
-            pros::delay(850);
+            pros::delay(2500);
             intakeMacro("L2");
             pros::delay(150);
             intakeMacro("stop");
     });
-    kw::moveToPoint(38.4, 19, 1000, false);  //at long goal
+    kw::moveToPoint(39, 19, 1000, false);  //at long goal
     kw::move_raw(-7000, -7000);
-    pros::delay(1100);
+    pros::delay(2000);
     kw::turnToAngle(315, 1000);
     loaderPiston.set_value(false);
     kw::boomerang(2.3, 38.5, 315, 0.3, 2000 , true, 80);  // mid goal
@@ -56,8 +56,13 @@ void right_elim() {
     intakeMain.move_voltage(-5000);
     intakeSub.move_voltage(-5000);
     kw::driveTo(1, 1000, 80);
+    pros::delay(2000);
+    kw::moveToPoint(29, 12, 1000, false); // move to Wing
+    wing2Piston.set_value(false);
+    kw::turnToAngle(0, 700);
+    kw::moveToPoint(29, 33, 8000, true);
     wingStatus = true;
-    wing2status = true;
+    wing2status = false;
     // kw::move_raw(1000, 1000); 
     // pros::delay(300);
     // pros::Task([]{
