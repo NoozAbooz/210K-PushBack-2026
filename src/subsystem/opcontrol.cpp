@@ -101,9 +101,11 @@ void refreshSubsys3() {
 
 bool wingStatus = false; // wing
 void refreshSubsys4() {
-	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT) && midShift == 1) {
+	if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT) && midShift == 1) {
 		wingStatus = !wingStatus;
-		wingPiston.set_value(wingStatus);
+		wingPiston.set_value(false);
+	} else {
+		wingPiston.set_value(true);
 	}
 	// if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
 	// 	wingPiston.set_value(false);
@@ -114,8 +116,10 @@ void refreshSubsys4() {
 
 bool wing2status = false; // wing 2
 void refreshSubsys5() {
-	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
+	if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) {
 		wing2status = !wing2status;
-		wing2Piston.set_value(wing2status);
+		wing2Piston.set_value(false);
+	} else  {
+		wing2Piston.set_value(true);
 	}
 }
