@@ -28,10 +28,14 @@ void opcontrol() {
 	intakeMain.set_brake_mode_all(pros::E_MOTOR_BRAKE_HOLD);
 	intakeSub.set_brake_mode_all(pros::E_MOTOR_BRAKE_HOLD);
 	toggleColourSort = false;
+	wingPiston.set_value(true);
+	wing2Piston.set_value(true);
+	wingStatus = true;
+	wing2status = true;
 
 	while (true) { // Main continuous loop
 		/* Drive */
-		kw::drive_arcade(0, 0, 0.9);
+		kw::drive_arcade(0, 0, 0.87);
 
 		/* Subsystem Listeners */
 		refreshSubsys1(); // intake
