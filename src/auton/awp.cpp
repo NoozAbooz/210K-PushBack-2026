@@ -14,7 +14,7 @@ void true_sawp(){
 	kw::moveToPoint(0, -45.8, 2000, false, 127);
 	loaderPiston.set_value(true);
 	kw::turnToAngle(270, 700); // turn to face loader
-	kw::moveToPoint(-10, -46.5, 700, true, 70); // Loader #1
+	kw::moveToPoint(-10, -45.5, 700, true, 70); // Loader #1
 	kw::move_raw(5000, 5000);
 	pros::delay(300);
 		pros::Task([] {
@@ -25,9 +25,9 @@ void true_sawp(){
 	
 	kw::moveToPoint(21, -46, 1000, false, 127); // long Goal #1
 	kw::move_raw(-8000, -8000);
-	pros::delay(350);
+	pros::delay(500);
 	kw::turnToAngle(270, 200);
-	pros::delay(200);
+	pros::delay(50);
 	kw::set_odom_position(0, 0, 0);
 	kw::turnToAngle(111, 800, 127, 0); // turn to face cluster
 	intakeMacro("L1");
@@ -38,12 +38,12 @@ void true_sawp(){
 		loaderPiston.set_value(false);
 		pros::delay(1200);
 		loaderPiston.set_value(true);
-		pros::delay(200);
+		pros::delay(400);
 		loaderPiston.set_value(false);
 	});
 	
 //kw::moveToPoint(24.4, -7.0, 1000, true, 100, false); // Mid Cluster 1
-kw::boomerang(24.4, -7, 88, 0.1, 1100, true, 100);
+kw::boomerang(24.4, -7, 88, 0.1, 1100, true, 95);
 
 //	kw::turnToAngle(88, 500, 127);
 	kw::moveToPoint(66, -7, 1000, true, 127, false); // Mid Cluster 1
@@ -57,7 +57,7 @@ kw::boomerang(24.4, -7, 88, 0.1, 1100, true, 100);
 	loaderPiston.set_value(true);
 	kw::turnToAngle(355, 500);
 	kw::move_raw(-8000, -8000);
-	pros::delay(270);
+	pros::delay(420);
 	kw::set_odom_position(0, 0, 0);
 	pros::delay(50);
 	pros::Task([] {
@@ -85,8 +85,8 @@ kw::boomerang(24.4, -7, 88, 0.1, 1100, true, 100);
 		intakeCounterRoller.move_voltage(-2500);
 	});
 //kw::driveTo(-57, 1500); // Mid to Loader
-	kw::moveToPoint(-41.7, -21.7, 2000, false, 127); // Loader #
-	//kw::move_raw(-2000, -2000);
+	kw::moveToPoint(-41.8, -22, 2000, false, 127); // Loader #
+	kw::move_raw(-1000, -1000);
 	loaderPiston.set_value(false);
 	//kw::driveTo(1.8, 1000); // Mid to Loader
 	// kw::turnToAngle(45, 500);
@@ -301,9 +301,9 @@ toggleColourSort = false;
 	});
 	kw::moveToPoint(0, 32.0, 1000, true, 127);
 	kw::turnToAngle(90, 700); // turn to face loader
-	kw::moveToPoint(13.81, 34, 800, true,80); // Loader #1
+	kw::moveToPoint(13.81, 34, 800, true,60); // Loader #1
 	kw::move_raw(5000, 5000);
-	pros::delay(150);
+	pros::delay(250);
 	pros::Task([] {
 		pros::delay(300);
 		stopIntake();
@@ -325,7 +325,7 @@ toggleColourSort = false;
 		intakeMacro("stop");
 	});
 	kw::boomerang(-25.95, 11.37, 180, 0.2, 1500, true, 70); // Mid Cluster 1
-	kw::moveToPoint(-33.48, 4.53, 1000, true, 90); // Mid Cluster 1
+	kw::moveToPoint(-34.28, 4.53, 1000, true, 90); // Mid Cluster 1
 	kw::turnToAngle(225, 800);
 	kw::driveTo(6, 1000, 127);
 	pros::delay(100);
@@ -341,6 +341,16 @@ toggleColourSort = false;
 }
 
 /* LEGACY */
+//raw pid
+// kw::driveTo(32, 1000);
+// loaderPiston.set_value(true);
+// intakeMacro("L1");
+// kw::turnToAngle(270, 700);
+// kw::driveTo(14, 1000, 127, true);
+// kw::move_raw(5000, 5000);
+// pros::delay(1000);
+// kw::driveTo(-24, 1000, 127, false);
+// intakeMacro("R1");
 
 // void nooz_sawp() {
 // 	intakeMacro("L1");

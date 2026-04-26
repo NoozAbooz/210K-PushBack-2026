@@ -217,13 +217,13 @@ void Legacy_skills() {
 	toggleColourSort = false;
 	pros::Task([] {
 		intakeMacro("L1");
-		blockerPiston.set_value(true);
+		//blockerPiston.set_value(true);
 		loaderPiston.set_value(true);
         //wingPiston.set_value(true);
 	});
-	kw::moveToPoint(0, 30.75, 1000, true, 127);
+	kw::moveToPoint(0, 32.75, 1000, true, 127);
 	kw::turnToAngle(270, 700); // turn to face loader
-	kw::moveToPoint(-13.81, 33.4, 1000, true,50); // Loader #1
+	kw::moveToPoint(-13.81, 35.4, 1000, true,50); // Loader #1
 	kw::move_raw(5000, 5000);
     // pros::delay(50);
     // kw::move_raw(-6000, -6000);
@@ -237,13 +237,13 @@ void Legacy_skills() {
 	kw::driveTo(-10, 1000, 80); // slowly drive back from loader
     loaderPiston.set_value(false);
     kw::turnToAngle(235, 1500);
-	kw::moveToPoint(18, 46, 1000, false); // drive backwards into alley
+	kw::moveToPoint(18, 48, 1000, false); // drive backwards into alley
     kw::turnToAngle(270, 1000);
     stopIntake();
-    kw::driveTo(-70, 3000);
+    kw::driveTo(-78, 3000);
 
     kw::turnToAngle(0, 1000); // face the wall for reset
-    kw::driveTo(-10.0, 1000);
+    kw::driveTo(-12.5, 1000);
     kw::turnToAngle(90, 1000);
     kw::driveTo(-15,1000, 60); // drive into loader
     pros::delay(200);
@@ -266,7 +266,7 @@ void Legacy_skills() {
      kw::move_raw(-8000, -8000);
     pros::delay(3000);
 
-    stopIntake();
+   // stopIntake();
     // kw::driveTo(5, 1000);
     // //knockerPiston.set_value(true);
     // pros::delay(200);
@@ -280,7 +280,7 @@ void Legacy_skills() {
     kw::driveTo(12, 1000);
     kw::turnToAngle(90, 1000);
     //loaderPiston.set_value(true);
-    kw::moveToPoint(95, 14, 3500, true, 90); // limit speed
+    kw::moveToPoint(97, 14, 3500, true, 90); // limit speed
     kw::turnToAngle(0, 1000);
 
     // get from loader #3
@@ -292,11 +292,11 @@ void Legacy_skills() {
     // move to loader 4
     kw::driveTo(-10, 1000);
     loaderPiston.set_value(false);
-    kw::moveToPoint(111, 5, 2000, false, 90);
+    kw::moveToPoint(113, 5, 2000, false, 90);
     kw::turnToAngle(0, 1000);
     stopIntake();
     //knockerPiston.set_value(false);
-    kw::driveTo(-74, 3000);
+    kw::driveTo(-86, 3000);
     kw::turnToAngle(90, 1000);
     // wall reset location
     kw::driveTo(-10.0, 1000);
@@ -309,6 +309,7 @@ void Legacy_skills() {
 
     pros::delay(3000);
     loaderPiston.set_value(true);
+    kw::turnToAngle(180, 800);
     kw::set_odom_position(0, 0, 0);
 
     // get from loader #2
@@ -330,17 +331,18 @@ void Legacy_skills() {
     // kw::driveTo(-5.5, 2000, 60);
     // pros::delay(200);
    // kw::set_odom_position(0, 0, 0);
+   loaderPiston.set_value(false);
     kw::driveTo(15, 1000);
-    kw::boomerang(34, 34, 270, 0.4, 1500, false, 70);
-    kw::turnToAngle(270, 1000);
+    kw::boomerang(38, 34, 90, 0.4, 1500, true, 70);
+    kw::turnToAngle(90, 1000);
 //     kw::turnToAngle(235, 1000);
 //     kw::moveToPoint(30, 35.4, 1000, false); // drive backwards into alley
 //     kw::swing(90, 1000, false);
-loaderPiston.set_value(false);
+
 wingPiston.set_value(true);
-kw::driveTo(10, 1000);
-kw::moveToPoint(44, 37, 5000, false, 127, true, false, false);
-kw::driveTo(-8, 5000, 127, true, 127);
+kw::driveTo(-10, 1000);
+kw::moveToPoint(44, 37, 5000, true, 127, true, false, false);
+kw::driveTo(8, 5000, 127, true, 127);
 //    intakeMacro("L1");
     // kw::move_raw(-9000, -9000);
     // pros::delay(1300);
