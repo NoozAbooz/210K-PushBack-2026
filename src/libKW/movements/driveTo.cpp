@@ -12,7 +12,8 @@ using namespace kw;
  */
 
 void kw::driveTo(double distance_in, double time_limit_msec, double max_output, bool exit, bool async) {
-  if(async) {
+  	// simple async recursion based on keejlib: https://github.com/8pxl/keejLib/blob/main/lib/src/keejLib/movement/1dpid.cpp#L8-L12
+	if(async) {
     pros::Task task([&]() { 
       kw::driveTo(distance_in, time_limit_msec, max_output, exit);
     });
