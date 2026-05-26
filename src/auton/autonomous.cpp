@@ -80,6 +80,7 @@ void testColourSort() {
     intakeMacro("R1");
 }
 
+// based on keejlib implementation: https://github.com/8pxl/keejLib/blob/ca1b13773240c20622d1c2b98f0356038b7a5036/lib/src/keejLib/chassis.cpp#L106
 void measureOdomOffsets() {
     std::pair<double, double> offsets = {0,0};
     for (int i = 0; i < 2; i++) {
